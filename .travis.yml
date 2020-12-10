@@ -9,6 +9,8 @@ python:
   - "nightly"  # nightly build
 
 # Pycodestyle part
+# needed to work correctly with Python 3 shebang
+env: SKIP_INTERPRETER=true
 before_install:
   - git clone https://github.com/TravisToolbox/pycodestyle-travis.git
 install:
