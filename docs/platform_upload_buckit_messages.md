@@ -66,11 +66,11 @@ object is important as it contains `org_id` (also stored as a string).
 
 ## Required attributes
 
-* identity (object)
+* `identity` (object)
 
 ## Optional attributes
 
-* entitlements (object)
+* `entitlements` (object)
 
 ## Examples
 
