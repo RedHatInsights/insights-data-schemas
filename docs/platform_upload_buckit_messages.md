@@ -6,9 +6,6 @@ The records (messages) received from `platform.upload.buckit` uses JSON format. 
 
 There are several required attributes stored in this object:
 
-* `account` (unsigned integer)
-* `principal` (unsigned integer)
-* `size` (unsigned integer)
 * `url` (string with custom format)
 * `b64_identity` (JSON encoded by BASE64 encoding)
 * `timestamp` (timestamp with TZ info)
@@ -17,6 +14,9 @@ There are several required attributes stored in this object:
 
 Some attributes are optional:
 
+* `account` (unsigned integer)
+* `principal` (unsigned integer)
+* `size` (unsigned integer)
 * `category` (string)
 * `metadata` (object)
 * `request_id` (string[32])
@@ -28,9 +28,6 @@ Some attributes are optional:
 
 ```json5
 {
-  "account": 123456,
-  "principal": 9,
-  "size": 55099,
   "url": "https://hostname.s3.amazonaws.com/first-part?X-Amz-Algorithm=algorithm&X-Amz-Credential=credential-info&X-Amz-Date=creation-date&X-Amz-Expires=expiration-time&X-Amz-SignedHeaders=host&X-Amz-Signature=signature",
   "b64_identity": "encoded-identity-info",
   "timestamp": "2020-01-23T16:15:59.478901889Z"
@@ -172,4 +169,3 @@ object is important as it contains `org_id` (also stored as a string).
     }
 }
 ```
-
