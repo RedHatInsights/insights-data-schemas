@@ -1,4 +1,5 @@
 #!/usr/bin/env python3
+# vim: set fileencoding=utf-8
 
 # Copyright © 2020 Pavel Tisnovsky
 #
@@ -20,6 +21,47 @@ import json
 import sys
 from os import popen
 from argparse import ArgumentParser
+
+from voluptuous import Schema
+from voluptuous import Invalid
+from voluptuous import Required
+from voluptuous import ALLOW_EXTRA
+
+from validators import *
+
+
+identitySchema = Schema(
+        {Required("identity"): Schema(
+            {Required("internal"): Schema(
+                {Required("org_id"): intInStringValidator,
+                 "auth_time": int
+                 }),
+             Required("account_number"): intInStringValidator,
+             "auth_type": str,
+             "system": Schema(
+                 {"cn": uuidValidator,
+                  "cert_type": str
+                  }),
+             "type": str,
+             }, extra=ALLOW_EXTRA)}, extra=ALLOW_EXTRA)
+
+
+# Schema for messages consumed from platform_upload_buckit Kafka topic
+schema = Schema(
+        {Required("account"): intInStringValidator,
+         Required("category"): notEmptyStringValidator,
+         Required("request_id"): hexaString32Validator,
+         Required("principal"): intInStringValidator,
+         Required("service"): notEmptyStringValidator,
+         Required("size"): posIntValidator,
+         Required("metadata"): Schema(
+             {Required("reporter"): str,
+              Required("stale_timestamp"): timestampValidator
+              }),
+         Required("url"): urlToAWSValidator,
+         Required("b64_identity"): lambda value: b64IdentityValidator(identitySchema, value),
+         Required("timestamp"): timestampValidatorMs,
+         })
 
 
 def read_control_code(operation):
@@ -55,13 +97,14 @@ def load_json_from_file(filename, verbose):
         return json.load(fin)
 
 
-def validate(payload, verbose):
+def validate(schema, payload, verbose):
     """Try to validate the payload against known schema."""
     if payload is None:
         raise ValueError("Empty payload")
+    schema(payload)
 
 
-def validate_single_message(input_file, verbose):
+def validate_single_message(schema, input_file, verbose):
     """Validate single message stored in input file."""
     processed = 0
     valid = 0
@@ -70,12 +113,12 @@ def validate_single_message(input_file, verbose):
     try:
         payload = load_json_from_file(input_file, verbose)
         processed = 1
-        validate(payload, verbose)
+        validate(schema, payload, verbose)
         valid = 1
-    except ValueError as ve:
-        print(ve)
+    except (ValueError, Invalid) as ve:
+        print("Validation error: " + str(ve))
     except Exception as e:
-        print(e)
+        print("Other problem: " + str(e))
         error = 1
 
     return {"processed": processed,
@@ -83,17 +126,17 @@ def validate_single_message(input_file, verbose):
             "error": error}
 
 
-def try_to_validate_message(line, processed, verbose):
+def try_to_validate_message(schema, line, processed, verbose):
     """Try to validate one message represented by string."""
     if verbose:
         print("Reading message #{}".format(processed))
     # load the payload from string
     payload = json.loads(line)
     # and try to validate it
-    validate(payload, verbose)
+    validate(schema, payload, verbose)
 
 
-def validate_multiple_messages(input_file, verbose):
+def validate_multiple_messages(schema, input_file, verbose):
     """Validate multiple messages stored in input file."""
     processed = 0
     valid = 0
@@ -104,12 +147,12 @@ def validate_multiple_messages(input_file, verbose):
         for line in fin:
             processed += 1
             try:
-                try_to_validate_message(line, processed, verbose)
+                try_to_validate_message(schema, line, processed, verbose)
                 valid += 1
-            except ValueError as ve:
-                print(ve)
+            except (ValueError, Invalid) as ve:
+                print("Validation error: " + str(ve))
             except Exception as e:
-                print(e)
+                print("Other problem: " + str(e))
                 error += 1
 
     return {"processed": processed,
@@ -161,9 +204,9 @@ def main():
     input_file = args.input
 
     if multiple:
-        report = validate_multiple_messages(input_file, verbose)
+        report = validate_multiple_messages(schema, input_file, verbose)
     else:
-        report = validate_single_message(input_file, verbose)
+        report = validate_single_message(schema, input_file, verbose)
 
     print_report(report, args.nocolors)
 
