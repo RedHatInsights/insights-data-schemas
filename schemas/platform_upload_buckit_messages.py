@@ -18,8 +18,13 @@
 
 import json
 import sys
-import os
+from os import popen
 from argparse import ArgumentParser
+
+
+def read_control_code(operation):
+    """Try to execute tput to read control code for selected operation."""
+    return popen("tput " + operation, "r").readline()
 
 
 def cli_arguments():
@@ -32,6 +37,8 @@ def cli_arguments():
     parser.add_argument("-m", "--multiple", dest="multiple",
                         help="Input file should containg more messages, each message on one line",
                         action="store_true", default=False, required=False)
+    parser.add_argument("-n", "--no-colors", dest="nocolors", help="disable color output",
+                        action="store_true", default=None)
     parser.add_argument("-v", "--verbose", dest="verbose", help="make it verbose",
                         action="store_true", default=None, required=False)
 
@@ -50,34 +57,40 @@ def load_json_from_file(filename, verbose):
 
 def validate(payload, verbose):
     """Try to validate the payload against known schema."""
-    pass
+    if payload is None:
+        raise ValueError("Empty payload")
 
 
 def validate_single_message(input_file, verbose):
     """Validate single message stored in input file."""
+    processed = 0
+    valid = 0
+    error = 0
+
     try:
         payload = load_json_from_file(input_file, verbose)
-        valid = validate(payload, verbose)
-        return {"processed": 1,
-                "valid": 1 if valid else 0,
-                "error": 0}
+        processed = 1
+        validate(payload, verbose)
+        valid = 1
+    except ValueError as ve:
+        print(ve)
     except Exception as e:
         print(e)
-        return {"processed": 1,
-                "valid": 0,
-                "error": 1}
+        error = 1
+
+    return {"processed": processed,
+            "valid": valid,
+            "error": error}
 
 
 def try_to_validate_message(line, processed, verbose):
     """Try to validate one message represented by string."""
     if verbose:
         print("Reading message #{}".format(processed))
-    try:
-        payload = json.loads(line)
-        return validate(payload, verbose), False
-    except Exception as e:
-        print(e)
-        return False, True
+    # load the payload from string
+    payload = json.loads(line)
+    # and try to validate it
+    validate(payload, verbose)
 
 
 def validate_multiple_messages(input_file, verbose):
@@ -90,15 +103,53 @@ def validate_multiple_messages(input_file, verbose):
         # iterate over all lines in the message file
         for line in fin:
             processed += 1
-            v, e = try_to_validate_message(line, processed, verbose)
-            if v:
+            try:
+                try_to_validate_message(line, processed, verbose)
                 valid += 1
-            if e:
+            except ValueError as ve:
+                print(ve)
+            except Exception as e:
+                print(e)
                 error += 1
 
     return {"processed": processed,
             "valid": valid,
             "error": error}
+
+
+def print_report(report, nocolors):
+    """Display report about number of passes and failures."""
+    # First of all, we need to setup colors to be displayed on terminal. Colors
+    # are displayed by using terminal escape control codes. When color output
+    # are not enabled on command line, we can simply use empty strings in
+    # output instead of real color escape codes.
+    red_background = green_background = magenta_background = red_foreground = \
+        green_foreground = blue_foreground = no_color = ""
+
+    # If colors are enabled by command line parameter, use control sequence
+    # returned by `tput` command.
+    if not nocolors:
+        red_background = read_control_code("setab 1")
+        green_background = read_control_code("setab 2")
+        magenta_background = read_control_code("setab 5")
+        red_foreground = read_control_code("setaf 1")
+        blue_foreground = read_control_code("setaf 4")
+        green_foreground = read_control_code("setaf 2")
+        no_color = read_control_code("sgr0")
+
+    print("\nStatus:")
+    print("Processed messages: {}{}{}".format(green_foreground, report["processed"], no_color))
+    print("Valid messages:     {}{}{}".format(blue_foreground, report["valid"], no_color))
+    print("Errors detected:    {}{}{}".format(red_foreground, report["error"], no_color))
+    print("\nSummary:")
+
+    if report["error"] == 0:
+        if report["processed"] == report["valid"]:
+            print("{}[OK]{}: all messages have proper format".format(green_background, no_color))
+        else:
+            print("{}[WARN]{}: invalid messages detected".format(magenta_background, no_color))
+    else:
+        print("{}[FAIL]{}: invalid JSON(s) detected".format(red_background, no_color))
 
 
 def main():
@@ -113,7 +164,8 @@ def main():
         report = validate_multiple_messages(input_file, verbose)
     else:
         report = validate_single_message(input_file, verbose)
-    print(report)
+
+    print_report(report, args.nocolors)
 
 
 if __name__ == "__main__":
