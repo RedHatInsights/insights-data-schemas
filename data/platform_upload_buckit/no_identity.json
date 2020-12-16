@@ -1,0 +1,14 @@
+{
+  "account": "12345678",
+  "category": "test",
+  "metadata": {
+    "reporter": "",
+    "stale_timestamp": "0001-01-01T00:00:00Z"
+  },
+  "request_id": "1234567890abcdef1234567890abcdef",
+  "principal": "87654321",
+  "service": "openshift",
+  "size": 123456,
+  "url": "https://hostname.s3.amazonaws.com/first-part?X-Amz-Algorithm=algorithm&X-Amz-Credential=credential-info&X-Amz-Date=creation-date&X-Amz-Expires=expiration-time&X-Amz-SignedHeaders=host&X-Amz-Signature=signature",
+  "timestamp": "2020-12-09T16:17:42.822020204Z"
+}
