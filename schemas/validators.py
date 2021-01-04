@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 # vim: set fileencoding=utf-8
 
-# Copyright © 2020 Pavel Tisnovsky
+# Copyright © 2020, 2021  Pavel Tisnovsky
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -15,13 +15,14 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-"""Set of custom validators used in data schemes."""
+"""Set of custom validators (predicates) used in data schemes."""
 
 import datetime
 import string
 import re
 import json
 import base64
+import math
 from uuid import UUID
 
 from voluptuous import Schema
@@ -31,12 +32,97 @@ from voluptuous import Required
 
 def posIntValidator(value):
     """Validate value for positive integers."""
-    if type(value) is not int or value <= 0:
+    # check if the given value is integer greater than zero
+    if type(value) is not int:
+        raise Invalid("integer expected, but invalid value type {v}".format(v=value))
+    if value <= 0:
         raise Invalid("positive integer value expected, but got {v} instead".format(v=value))
+
+
+def posIntOrZeroValidator(value):
+    """Validate value for positive integers or zeroes."""
+    # check if the given value is integer greater than or equal to zero
+    if type(value) is not int:
+        raise Invalid("integer expected, but invalid value type {v}".format(v=value))
+    if value < 0:
+        raise Invalid("positive integer or 0 value expected, but got {v} instead".format(v=value))
+
+
+def negIntValidator(value):
+    """Validate value for negative integers."""
+    # check if the given value is integer less than zero
+    if type(value) is not int:
+        raise Invalid("integer expected, but invalid value type {v}".format(v=value))
+    if value >= 0:
+        raise Invalid("negative integer value expected, but got {v} instead".format(v=value))
+
+
+def negIntOrZeroValidator(value):
+    """Validate value for negative integers or zeroes."""
+    # check if the given value is integer less than or equal zero
+    if type(value) is not int:
+        raise Invalid("integer expected, but invalid value type {v}".format(v=value))
+    if value > 0:
+        raise Invalid("negative integer or 0 value expected, but got {v} instead".format(v=value))
+
+
+def posFloatValidator(value):
+    """Predicate that checks if the given value is positive float."""
+    # check if the value has the expected type
+    if type(value) is not float:
+        raise Invalid("invalid value type {value}".format(value=value))
+    if value <= 0.0:
+        raise Invalid("invalid value {value}, positive float expected".format(value=value))
+
+
+def posFloatOrZeroValidator(value):
+    """Predicate that checks if the given value is positive float or zero."""
+    # check if the value has the expected type
+    if type(value) is not float:
+        raise Invalid("invalid value type {value}".format(value=value))
+    if value < 0.0:
+        raise Invalid("invalid value {value}, positive float or zero expected".format(value=value))
+
+
+def negFloatValidator(value):
+    """Predicate that checks if the given value is positive float."""
+    # check if the value has the expected type
+    if type(value) is not float:
+        raise Invalid("invalid value type {value}".format(value=value))
+    if value >= 0.0:
+        raise Invalid("invalid value {value}, negative float expected".format(value=value))
+
+
+def negFloatOrZeroValidator(value):
+    """Predicate that checks if the given value is positive float or zero."""
+    # check if the value has the expected type
+    if type(value) is not float:
+        raise Invalid("invalid value type {value}".format(value=value))
+    if value > 0.0:
+        raise Invalid("invalid value {value}, negative float or zero expected".format(value=value))
+
+
+def isNaNValidator(value):
+    """Predicate that checks if the given value is NaN."""
+    # check if the value has the expected type
+    if type(value) is not float:
+        raise Invalid("invalid value type {value}".format(value=value))
+    if not math.isnan(value):
+        raise Invalid("invalid value {value}, NaN expected".format(value=value))
+
+
+def isNotNaNValidator(value):
+    """Predicate that checks if the given value is not NaN."""
+    # check if the value has the expected type
+    if type(value) is not float:
+        raise Invalid("invalid value type {value}".format(value=value))
+    if math.isnan(value):
+        raise Invalid("invalid value {value}, NaN is not expected".format(value=value))
 
 
 def stringValidator(value):
     """Validate value for string type."""
+    # check if the given value is a string
     if type(value) is not str:
         raise Invalid("string value expected, but got {t} type instead".format(t=type(value)))
 
