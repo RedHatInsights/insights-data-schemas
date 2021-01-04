@@ -71,6 +71,10 @@ def posFloatValidator(value):
     # check if the value has the expected type
     if type(value) is not float:
         raise Invalid("invalid value type {value}".format(value=value))
+
+    # check for NaN
+    isNotNaNValidator(value)
+
     if value <= 0.0:
         raise Invalid("invalid value {value}, positive float expected".format(value=value))
 
@@ -80,6 +84,10 @@ def posFloatOrZeroValidator(value):
     # check if the value has the expected type
     if type(value) is not float:
         raise Invalid("invalid value type {value}".format(value=value))
+
+    # check for NaN
+    isNotNaNValidator(value)
+
     if value < 0.0:
         raise Invalid("invalid value {value}, positive float or zero expected".format(value=value))
 
@@ -89,6 +97,10 @@ def negFloatValidator(value):
     # check if the value has the expected type
     if type(value) is not float:
         raise Invalid("invalid value type {value}".format(value=value))
+
+    # check for NaN
+    isNotNaNValidator(value)
+
     if value >= 0.0:
         raise Invalid("invalid value {value}, negative float expected".format(value=value))
 
@@ -98,6 +110,10 @@ def negFloatOrZeroValidator(value):
     # check if the value has the expected type
     if type(value) is not float:
         raise Invalid("invalid value type {value}".format(value=value))
+
+    # check for NaN
+    isNotNaNValidator(value)
+
     if value > 0.0:
         raise Invalid("invalid value {value}, negative float or zero expected".format(value=value))
 
