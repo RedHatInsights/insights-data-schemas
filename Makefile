@@ -10,6 +10,9 @@ tests: unit_tests cli_tests
 unit_tests:
 	pytest -v -p no:cacheprovider
 
+coverage:
+	pytest -v -p no:cacheprovider --cov schemas/
+
 cli_tests:	platform_upload_buckit_messages_tests
 
 platform_upload_buckit_messages_tests:
