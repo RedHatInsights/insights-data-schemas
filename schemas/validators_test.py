@@ -69,11 +69,26 @@ negative_float_values_and_zero = negative_float_values + (0.0, )
 not_float_type = ("", "0", "1", "-1", True, False)
 
 
-@pytest.mark.parametrize("value", positive_int_values)
-def test_posIntValidator_correct_values(value):
-    """Check if proper positive integer values are validated."""
+@pytest.mark.parametrize("value", positive_int_values+negative_int_values_and_zero)
+def test_intTypeValidator_correct_values(value):
+    """Check if proper integer values are validated."""
     # no exception is expected
-    posIntValidator(value)
+    intTypeValidator(value)
+
+
+@pytest.mark.parametrize("value", positive_int_values+negative_int_values_and_zero)
+def test_intTypeValidator_incorrect_values(value):
+    """Check if proper integer values are validated."""
+    # no exception is expected
+    intTypeValidator(value)
+
+
+@pytest.mark.parametrize("value", not_integer_type)
+def test_posIntValidator_correct_values(value):
+    """Check if inproper positive integer values are validated."""
+    # exception is expected
+    with pytest.raises(Invalid) as excinfo:
+        intTypeValidator(value)
 
 
 @pytest.mark.parametrize("value", not_positive_int_values)
@@ -159,6 +174,21 @@ def test_negIntOrZeroValidator_wrong_types(value):
     # exception is expected
     with pytest.raises(Invalid) as excinfo:
         negIntOrZeroValidator(value)
+
+
+@pytest.mark.parametrize("value", positive_float_values+negative_float_values_and_zero)
+def test_floatTypeValidator_correct_values(value):
+    """Check if proper float values are validated."""
+    # no exception is expected
+    floatTypeValidator(value)
+
+
+@pytest.mark.parametrize("value", not_float_type)
+def test_floatTypeValidator_incorrect_values(value):
+    """Check if improper float values are validated."""
+    # exception is expected
+    with pytest.raises(Invalid) as excinfo:
+        floatTypeValidator(value)
 
 
 @pytest.mark.parametrize("value", positive_float_values)
