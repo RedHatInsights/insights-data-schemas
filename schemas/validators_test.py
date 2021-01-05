@@ -68,6 +68,53 @@ negative_float_values_and_zero = negative_float_values + (0.0, )
 # improper floats
 not_float_type = ("", "0", "1", "-1", True, False)
 
+# proper string values
+string_values = ("", " ", "non-empty", "ěščř")
+
+# proper string values
+non_empty_string_values = (" ", "non-empty", "ěščř")
+
+# improper string values
+not_string_type = (0, 3.14, True, False, None)
+
+# proper positive integers stored in string
+positive_int_values_in_string = ("1", "2", "3", "65535", "65536", "4294967295", "4294967296",
+                                 "18446744073709551615", "18446744073709551616")
+
+# proper positive integers and a zero stored in string
+positive_int_values_and_zero_in_string = positive_int_values_in_string + ("0", )
+
+# improper positive integers stored in string
+not_positive_int_values_in_string = ("0", "-1", "-65535")
+
+# proper negative integers stored in string
+negative_int_values_in_string = ("-1", "-2", "-3", "-65535", "-65536", "-4294967295", "-4294967296",
+                                 "-18446744073709551615", "-18446744073709551616")
+
+# proper negative integers and a zero stored in string
+negative_int_values_and_zero_in_string = negative_int_values_in_string + ("0", )
+
+# improper negative integers stored in string
+not_negative_int_values_in_string = ("0", "1", "65535")
+
+# positive float values stored in string
+positive_float_values_in_string = ("1.0", "3.14", "1e10", "1e100", "1e-10", "1e-100")
+
+# not positive float values stored in string
+not_positive_float_values_in_string = ("0.0", "-3.14", "-1e10", "-1e100", "-1e-10", "-1e-100")
+
+# positive float values and zero stored in string
+positive_float_values_and_zero_in_string = positive_float_values_in_string + ("0.0", )
+
+# negative float values stored in string
+negative_float_values_in_string = ("-1.0", "-3.14", "-1e10", "-1e100", "-1e-10", "-1e-100")
+
+# not negative float values stored in string
+not_negative_float_values_in_string = ("0.0", "1.0", "3.14", "1e10", "1e100", "1e-10", "1e-100")
+
+# negative float values and zero stored in string
+negative_float_values_and_zero_in_string = negative_float_values_in_string + ("0.0", )
+
 
 @pytest.mark.parametrize("value", positive_int_values+negative_int_values_and_zero)
 def test_intTypeValidator_correct_values(value):
@@ -360,3 +407,181 @@ def test_isNotNaNValidator_wrong_types(value):
     # exception is expected
     with pytest.raises(Invalid) as excinfo:
         isNotNaNValidator(value)
+
+
+@pytest.mark.parametrize("value", string_values)
+def test_stringTypeValidator_correct_values(value):
+    """Check if proper string values are validated."""
+    # no exception is expected
+    stringTypeValidator(value)
+
+
+@pytest.mark.parametrize("value", not_string_type)
+def test_stringTypeValidator_incorrect_values(value):
+    """Check if improper values (with wrong type) are validated."""
+    # exception is expected
+    with pytest.raises(Invalid) as excinfo:
+        stringTypeValidator(value)
+
+
+def test_emptyStringValidator_correct_value():
+    """Check if proper empty string value is validated."""
+    # no exception is expected
+    emptyStringValidator("")
+
+
+@pytest.mark.parametrize("value", non_empty_string_values)
+def test_emptyStringValidator_correct_values(value):
+    """Check if improper empty string values are validated."""
+    # exception is expected
+    with pytest.raises(Invalid) as excinfo:
+        emptyStringValidator(value)
+
+
+@pytest.mark.parametrize("value", non_empty_string_values)
+def test_notEmptyStringValidator_correct_values(value):
+    """Check if proper non empty string values are validated."""
+    # no exception is expected
+    notEmptyStringValidator(value)
+
+
+def test_notEmptyStringValidator_incorrect_value():
+    """Check if improper non empty string values are validated."""
+    # exception is expected
+    with pytest.raises(Invalid) as excinfo:
+        notEmptyStringValidator("")
+
+
+@pytest.mark.parametrize("value", positive_int_values_in_string + negative_int_values_in_string)
+def test_intInStringValidator_correct_values(value):
+    """Check the parsing and validating integers stored in string."""
+    # no exception is expected
+    intInStringValidator(value)
+
+
+@pytest.mark.parametrize("value", positive_float_values_in_string)
+def test_intInStringValidator_incorrect_values(value):
+    """Check the parsing and validating integers stored in string."""
+    # exception is expected
+    with pytest.raises(ValueError) as excinfo:
+        intInStringValidator(value)
+
+
+@pytest.mark.parametrize("value", positive_int_values_in_string)
+def test_posIntInStringValidator_correct_values(value):
+    """Check the parsing and validating positive integers stored in string."""
+    # no exception is expected
+    posIntInStringValidator(value)
+
+
+@pytest.mark.parametrize("value", negative_int_values_and_zero_in_string)
+def test_posIntInStringValidator_incorrect_values(value):
+    """Check the parsing and validating positive integers stored in string."""
+    # exception is expected
+    with pytest.raises(Invalid) as excinfo:
+        posIntInStringValidator(value)
+
+
+@pytest.mark.parametrize("value", positive_int_values_and_zero_in_string)
+def test_posIntOrZeroInStringValidator_correct_values(value):
+    """Check the parsing and validating positive integers or a zero stored in string."""
+    # no exception is expected
+    posIntOrZeroInStringValidator(value)
+
+
+@pytest.mark.parametrize("value", negative_int_values_in_string)
+def test_posIntOrZeroInStringValidator_incorrect_values(value):
+    """Check the parsing and validating positive integers or a zero stored in string."""
+    # exception is expected
+    with pytest.raises(Invalid) as excinfo:
+        posIntInStringValidator(value)
+
+
+@pytest.mark.parametrize("value", negative_int_values_in_string)
+def test_negIntInStringValidator_correct_values(value):
+    """Check the parsing and validating negative integers stored in string."""
+    # no exception is expected
+    negIntInStringValidator(value)
+
+
+@pytest.mark.parametrize("value", positive_int_values_and_zero_in_string)
+def test_negIntInStringValidator_incorrect_values(value):
+    """Check the parsing and validating negative integers stored in string."""
+    # exception is expected
+    with pytest.raises(Invalid) as excinfo:
+        negIntInStringValidator(value)
+
+
+@pytest.mark.parametrize("value", negative_int_values_and_zero_in_string)
+def test_negIntOrZeroInStringValidator_correct_values(value):
+    """Check the parsing and validating negative integers or a zero stored in string."""
+    # no exception is expected
+    negIntOrZeroInStringValidator(value)
+
+
+@pytest.mark.parametrize("value", positive_int_values_in_string)
+def test_negIntOrZeroInStringValidator_incorrect_values(value):
+    """Check the parsing and validating negative integers or a zero stored in string."""
+    # exception is expected
+    with pytest.raises(Invalid) as excinfo:
+        negIntInStringValidator(value)
+
+
+@pytest.mark.parametrize("value", positive_float_values_in_string)
+def test_posFloatInStringValidator_correct_values(value):
+    """Check the parsing and validating positive floats stored in string."""
+    # no exception is expected
+    posFloatInStringValidator(value)
+
+
+@pytest.mark.parametrize("value", negative_float_values_and_zero_in_string)
+def test_posFloatInStringValidator_incorrect_values(value):
+    """Check the parsing and validating positive floats stored in string."""
+    # exception is expected
+    with pytest.raises(Invalid) as excinfo:
+        posFloatInStringValidator(value)
+
+
+@pytest.mark.parametrize("value", positive_float_values_and_zero_in_string)
+def test_posFloatOrZeroInStringValidator_correct_values(value):
+    """Check the parsing and validating positive floats or a zero stored in string."""
+    # no exception is expected
+    posFloatOrZeroInStringValidator(value)
+
+
+@pytest.mark.parametrize("value", negative_float_values_in_string)
+def test_posFloatOrZeroInStringValidator_incorrect_values(value):
+    """Check the parsing and validating positive floats or a zero stored in string."""
+    # exception is expected
+    with pytest.raises(Invalid) as excinfo:
+        posFloatInStringValidator(value)
+
+
+@pytest.mark.parametrize("value", negative_float_values_in_string)
+def test_negFloatInStringValidator_correct_values(value):
+    """Check the parsing and validating negative floats stored in string."""
+    # no exception is expected
+    negFloatInStringValidator(value)
+
+
+@pytest.mark.parametrize("value", positive_float_values_and_zero_in_string)
+def test_negFloatInStringValidator_incorrect_values(value):
+    """Check the parsing and validating negative floats stored in string."""
+    # exception is expected
+    with pytest.raises(Invalid) as excinfo:
+        negFloatInStringValidator(value)
+
+
+@pytest.mark.parametrize("value", negative_float_values_and_zero_in_string)
+def test_negFloatOrZeroInStringValidator_correct_values(value):
+    """Check the parsing and validating negative floats or a zero stored in string."""
+    # no exception is expected
+    negFloatOrZeroInStringValidator(value)
+
+
+@pytest.mark.parametrize("value", positive_float_values_in_string)
+def test_negFloatOrZeroInStringValidator_incorrect_values(value):
+    """Check the parsing and validating negative floats or a zero stored in string."""
+    # exception is expected
+    with pytest.raises(Invalid) as excinfo:
+        negFloatInStringValidator(value)
