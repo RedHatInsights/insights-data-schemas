@@ -115,6 +115,40 @@ not_negative_float_values_in_string = ("0.0", "1.0", "3.14", "1e10", "1e100", "1
 # negative float values and zero stored in string
 negative_float_values_and_zero_in_string = negative_float_values_in_string + ("0.0", )
 
+# strings with exactly 32 hexadecimal digits
+hexa32_strings = (
+        "00000000000000000000000000000000",
+        "ffffffffffffffffffffffffffffffff",
+        "FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF",
+        "0f0f0f0f0f0f0f0f0f0f0f0f0f0f0f0f",
+        "0123456789abcdef0123456789abcdef",
+        "0123456789ABCDEF0123456789ABCDEF",
+        )
+
+
+# strings that have not exactly 32 hexadecimal digits
+not_hexa32_strings = (
+        "",
+        "0",
+        # not hexa chars
+        "zzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzz",
+        "ZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZ",
+        "0000000000000000000000000000000",
+        # shorter by one character
+        "fffffffffffffffffffffffffffffff",
+        "FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF",
+        "0f0f0f0f0f0f0f0f0f0f0f0f0f0f0f0",
+        "0123456789abcdef0123456789abcde",
+        "0123456789ABCDEF0123456789ABCDE",
+        # longer by one character
+        "000000000000000000000000000000000",
+        "fffffffffffffffffffffffffffffffff",
+        "FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF",
+        "0f0f0f0f0f0f0f0f0f0f0f0f0f0f0f000",
+        "0123456789abcdef0123456789abcdeee",
+        "0123456789ABCDEF0123456789ABCDEEE",
+        )
+
 
 @pytest.mark.parametrize("value", positive_int_values+negative_int_values_and_zero)
 def test_intTypeValidator_correct_values(value):
@@ -585,3 +619,18 @@ def test_negFloatOrZeroInStringValidator_incorrect_values(value):
     # exception is expected
     with pytest.raises(Invalid) as excinfo:
         negFloatInStringValidator(value)
+
+
+@pytest.mark.parametrize("value", hexa32_strings)
+def test_hexaString32Validator_correct_values(value):
+    """Check the parsing and validating strings with 32 hexa characters."""
+    # no exception is expected
+    hexaString32Validator(value)
+
+
+@pytest.mark.parametrize("value", not_hexa32_strings)
+def test_hexaString32Validator_incorrect_values(value):
+    """Check the parsing and validating strings with 32 hexa characters."""
+    # exception is expected
+    with pytest.raises(Invalid) as excinfo:
+        hexaString32Validator(value)
