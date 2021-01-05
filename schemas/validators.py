@@ -17,6 +17,7 @@
 
 """Set of custom validators (predicates) used in data schemes."""
 
+
 import datetime
 import string
 import re
@@ -30,11 +31,17 @@ from voluptuous import Invalid
 from voluptuous import Required
 
 
+def intTypeValidator(value):
+    """Validate value for any integer."""
+    # check if the given value is an integer
+    if type(value) is not int:
+        raise Invalid("integer expected, but invalid value type {v}".format(v=value))
+
+
 def posIntValidator(value):
     """Validate value for positive integers."""
     # check if the given value is integer greater than zero
-    if type(value) is not int:
-        raise Invalid("integer expected, but invalid value type {v}".format(v=value))
+    intTypeValidator(value)
     if value <= 0:
         raise Invalid("positive integer value expected, but got {v} instead".format(v=value))
 
@@ -42,8 +49,7 @@ def posIntValidator(value):
 def posIntOrZeroValidator(value):
     """Validate value for positive integers or zeroes."""
     # check if the given value is integer greater than or equal to zero
-    if type(value) is not int:
-        raise Invalid("integer expected, but invalid value type {v}".format(v=value))
+    intTypeValidator(value)
     if value < 0:
         raise Invalid("positive integer or 0 value expected, but got {v} instead".format(v=value))
 
@@ -51,8 +57,7 @@ def posIntOrZeroValidator(value):
 def negIntValidator(value):
     """Validate value for negative integers."""
     # check if the given value is integer less than zero
-    if type(value) is not int:
-        raise Invalid("integer expected, but invalid value type {v}".format(v=value))
+    intTypeValidator(value)
     if value >= 0:
         raise Invalid("negative integer value expected, but got {v} instead".format(v=value))
 
@@ -60,17 +65,22 @@ def negIntValidator(value):
 def negIntOrZeroValidator(value):
     """Validate value for negative integers or zeroes."""
     # check if the given value is integer less than or equal zero
-    if type(value) is not int:
-        raise Invalid("integer expected, but invalid value type {v}".format(v=value))
+    intTypeValidator(value)
     if value > 0:
         raise Invalid("negative integer or 0 value expected, but got {v} instead".format(v=value))
+
+
+def floatTypeValidator(value):
+    """Validate value for any float."""
+    # check if the given value is a float
+    if type(value) is not float:
+        raise Invalid("invalid value type {value}".format(value=value))
 
 
 def posFloatValidator(value):
     """Predicate that checks if the given value is positive float."""
     # check if the value has the expected type
-    if type(value) is not float:
-        raise Invalid("invalid value type {value}".format(value=value))
+    floatTypeValidator(value)
 
     # check for NaN
     isNotNaNValidator(value)
@@ -82,8 +92,7 @@ def posFloatValidator(value):
 def posFloatOrZeroValidator(value):
     """Predicate that checks if the given value is positive float or zero."""
     # check if the value has the expected type
-    if type(value) is not float:
-        raise Invalid("invalid value type {value}".format(value=value))
+    floatTypeValidator(value)
 
     # check for NaN
     isNotNaNValidator(value)
@@ -95,8 +104,7 @@ def posFloatOrZeroValidator(value):
 def negFloatValidator(value):
     """Predicate that checks if the given value is positive float."""
     # check if the value has the expected type
-    if type(value) is not float:
-        raise Invalid("invalid value type {value}".format(value=value))
+    floatTypeValidator(value)
 
     # check for NaN
     isNotNaNValidator(value)
@@ -108,8 +116,7 @@ def negFloatValidator(value):
 def negFloatOrZeroValidator(value):
     """Predicate that checks if the given value is positive float or zero."""
     # check if the value has the expected type
-    if type(value) is not float:
-        raise Invalid("invalid value type {value}".format(value=value))
+    floatTypeValidator(value)
 
     # check for NaN
     isNotNaNValidator(value)
@@ -121,8 +128,8 @@ def negFloatOrZeroValidator(value):
 def isNaNValidator(value):
     """Predicate that checks if the given value is NaN."""
     # check if the value has the expected type
-    if type(value) is not float:
-        raise Invalid("invalid value type {value}".format(value=value))
+    floatTypeValidator(value)
+
     if not math.isnan(value):
         raise Invalid("invalid value {value}, NaN expected".format(value=value))
 
@@ -130,13 +137,13 @@ def isNaNValidator(value):
 def isNotNaNValidator(value):
     """Predicate that checks if the given value is not NaN."""
     # check if the value has the expected type
-    if type(value) is not float:
-        raise Invalid("invalid value type {value}".format(value=value))
+    floatTypeValidator(value)
+
     if math.isnan(value):
         raise Invalid("invalid value {value}, NaN is not expected".format(value=value))
 
 
-def stringValidator(value):
+def stringTypeValidator(value):
     """Validate value for string type."""
     # check if the given value is a string
     if type(value) is not str:
@@ -145,14 +152,16 @@ def stringValidator(value):
 
 def intInStringValidator(value):
     """Validate value for an int value stored as a string."""
-    stringValidator(value)
+    stringTypeValidator(value)
+
     # try to parse the string
     x = int(value)
 
 
 def posIntInStringValidator(value):
     """Validate value for a positive int value stored as a string."""
-    stringValidator(value)
+    stringTypeValidator(value)
+
     # try to parse the string
     x = int(value)
     posIntInStringValidator(x)
@@ -160,7 +169,8 @@ def posIntInStringValidator(value):
 
 def notEmptyStringValidator(value):
     """Validate value for a non-empty string."""
-    stringValidator(value)
+    stringTypeValidator(value)
+
     # check for empty string
     if not value:
         raise Invalid("empty string should not be used there")
@@ -168,7 +178,8 @@ def notEmptyStringValidator(value):
 
 def hexaString32Validator(value):
     """Validate value for string containign exactly 32 hexadecimal digits."""
-    stringValidator(value)
+    stringTypeValidator(value)
+
     if len(value) != 32:
         raise Invalid("wrong number of digits: {}".format(len(value)))
     if not all(c in string.hexdigits for c in value):
@@ -177,7 +188,8 @@ def hexaString32Validator(value):
 
 def timestampValidator(value):
     """Validate value for timestamps."""
-    stringValidator(value)
+    stringTypeValidator(value)
+
     timeformat = '%Y-%m-%dT%H:%M:%SZ'
     try:
         # try to parse the input value
@@ -188,7 +200,8 @@ def timestampValidator(value):
 
 def timestampValidatorMs(value):
     """Validate value for timestamps without ms part, but with TZ info."""
-    stringValidator(value)
+    stringTypeValidator(value)
+
     timeformat = '%Y-%m-%dT%H:%M:%S.%f'
     try:
         # the following timestamp can't be parsed directly by Python
@@ -203,7 +216,8 @@ def timestampValidatorMs(value):
 
 def urlToAWSValidator(value):
     """Validate if value conformns to AWS S3 URL."""
-    stringValidator(value)
+    stringTypeValidator(value)
+
     # https://<hostname>/service_id/file_id?<credentials and other params>
     HTTP_RE = re.compile(
         r"^(?:https://[^/]+\.s3\.amazonaws\.com/[0-9a-zA-Z/\-]+|"
@@ -218,7 +232,7 @@ def urlToAWSValidator(value):
 def uuidValidator(value, version=4):
     """Check if value conforms to UUID."""
     # check if the value has the expected type
-    stringValidator(value)
+    stringTypeValidator(value)
 
     # UUID version 4 is the most common version, but it is possible to specify
     # other version as well
@@ -228,7 +242,7 @@ def uuidValidator(value, version=4):
 def md5Validator(value):
     """Predicate that checks if the given value seems to be MD5 hash."""
     # check if the value has the expected type
-    stringValidator(value)
+    stringTypeValidator(value)
 
     # MD5 hash has 32 hexadecimal characters
     if not re.fullmatch(r"^[a-f0-9]{32}$", value):
@@ -238,7 +252,7 @@ def md5Validator(value):
 def sha1Validator(value):
     """Predicate that checks if the given value seems to be SHA1 hash."""
     # check if the value has the expected type
-    stringValidator(value)
+    stringTypeValidator(value)
 
     # SHA-1 hash has 40 hexadecimal characters
     if not re.fullmatch(r"^[a-f0-9]{40}$", value):
@@ -248,7 +262,7 @@ def sha1Validator(value):
 def sha256Validator(value):
     """Predicate that checks if the given value seems to be SHA256 hash."""
     # check if the value has the expected type
-    stringValidator(value)
+    stringTypeValidator(value)
 
     # SHA-256 hash has 64 hexadecimal characters
     if not re.fullmatch(r"^[a-fA-F0-9]{64}$", value):
@@ -258,7 +272,7 @@ def sha256Validator(value):
 def b64IdentityValidator(identitySchema, value):
     """Validate identity encoded by base64 encoding."""
     # input must be a string
-    stringValidator(value)
+    stringTypeValidator(value)
 
     # decode from BASE64 encoding
     value = base64.b64decode(value).decode('utf-8')
