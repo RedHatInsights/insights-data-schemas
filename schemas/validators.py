@@ -150,6 +150,24 @@ def stringTypeValidator(value):
         raise Invalid("string value expected, but got {t} type instead".format(t=type(value)))
 
 
+def emptyStringValidator(value):
+    """Validate value for an empty string."""
+    stringTypeValidator(value)
+
+    # check for non-empty string
+    if value:
+        raise Invalid("Empty string value expected")
+
+
+def notEmptyStringValidator(value):
+    """Validate value for a non-empty string."""
+    stringTypeValidator(value)
+
+    # check for empty string
+    if not value:
+        raise Invalid("empty string should not be used there")
+
+
 def intInStringValidator(value):
     """Validate value for an int value stored as a string."""
     stringTypeValidator(value)
@@ -164,16 +182,70 @@ def posIntInStringValidator(value):
 
     # try to parse the string
     x = int(value)
-    posIntInStringValidator(x)
+    posIntValidator(x)
 
 
-def notEmptyStringValidator(value):
-    """Validate value for a non-empty string."""
+def posIntOrZeroInStringValidator(value):
+    """Validate value for a positive int value or zero stored as a string."""
     stringTypeValidator(value)
 
-    # check for empty string
-    if not value:
-        raise Invalid("empty string should not be used there")
+    # try to parse the string
+    x = int(value)
+    posIntOrZeroValidator(x)
+
+
+def negIntInStringValidator(value):
+    """Validate value for a negative int value stored as a string."""
+    stringTypeValidator(value)
+
+    # try to parse the string
+    x = int(value)
+    negIntValidator(x)
+
+
+def negIntOrZeroInStringValidator(value):
+    """Validate value for a negative int value or zero stored as a string."""
+    stringTypeValidator(value)
+
+    # try to parse the string
+    x = int(value)
+    negIntOrZeroValidator(x)
+
+
+def posFloatInStringValidator(value):
+    """Validate value for a positive float value stored as a string."""
+    stringTypeValidator(value)
+
+    # try to parse the string
+    x = float(value)
+    posFloatValidator(x)
+
+
+def posFloatOrZeroInStringValidator(value):
+    """Validate value for a positive float value or zero stored as a string."""
+    stringTypeValidator(value)
+
+    # try to parse the string
+    x = float(value)
+    posFloatOrZeroValidator(x)
+
+
+def negFloatInStringValidator(value):
+    """Validate value for a negative float value stored as a string."""
+    stringTypeValidator(value)
+
+    # try to parse the string
+    x = float(value)
+    negFloatValidator(x)
+
+
+def negFloatOrZeroInStringValidator(value):
+    """Validate value for a negative float value or zero stored as a string."""
+    stringTypeValidator(value)
+
+    # try to parse the string
+    x = float(value)
+    negFloatOrZeroValidator(x)
 
 
 def hexaString32Validator(value):
