@@ -331,6 +331,16 @@ def sha1Validator(value):
         raise Invalid("the value '{value}' does not seem to be SHA1 hash".format(value=value))
 
 
+def sha224Validator(value):
+    """Predicate that checks if the given value seems to be SHA224 hash."""
+    # check if the value has the expected type
+    stringTypeValidator(value)
+
+    # SHA-224 hash has 56 hexadecimal characters
+    if not re.fullmatch(r"^[a-fA-F0-9]{56}$", value):
+        raise Invalid("the value '{value}' does not seem to be SHA224 hash".format(value=value))
+
+
 def sha256Validator(value):
     """Predicate that checks if the given value seems to be SHA256 hash."""
     # check if the value has the expected type
