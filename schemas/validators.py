@@ -361,6 +361,16 @@ def sha384Validator(value):
         raise Invalid("the value '{value}' does not seem to be SHA384 hash".format(value=value))
 
 
+def sha512Validator(value):
+    """Predicate that checks if the given value seems to be SHA512 hash."""
+    # check if the value has the expected type
+    stringTypeValidator(value)
+
+    # SHA-512 hash has 128 hexadecimal characters
+    if not re.fullmatch(r"^[a-fA-F0-9]{128}$", value):
+        raise Invalid("the value '{value}' does not seem to be SHA512 hash".format(value=value))
+
+
 def b64IdentityValidator(identitySchema, value):
     """Validate identity encoded by base64 encoding."""
     # input must be a string
