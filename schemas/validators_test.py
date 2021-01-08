@@ -149,6 +149,32 @@ not_hexa32_strings = (
         "0123456789ABCDEF0123456789ABCDEEE",
         )
 
+# correct SHA1 sum values
+sha1sum_correct_values = (
+        "da39a3ee5e6b4b0d3255bfef95601890afd80709",  # ""
+        "b858cb282617fb0956d960215c8e84d1ccf909c6",  # " "
+        "ac9231da4082430afe8f4d40127814c613648d8e",  # "<Tab>"
+        "0beec7b5ea3f0fdbc95d0dd47f3c5bc275da8a33",  # "foo"
+        "62cdb7020ff920e5aa642c3d4066950dd1f01f4d",  # "bar"
+        "bbe960a25ea311d21d40669e93df2003ba9b90a2",  # "baz"
+        "01b307acba4f54f55aafc33bb06bbbf6ca803e9a",  # "1234567890"
+        "feab40e1fca77c7360ccca1481bb8ba5f919ce3a",  # "FOO"
+        "a5d5c1bba91fdb6c669e1ae0413820885bbfc455",  # "BAR"
+        "8324feb44eda347289ca80c2cbf964a214ccd719",  # "BAZ"
+        "3a52ce780950d4d969792a2559cd519d7ee8c727",  # "."
+        "5bab61eb53176449e25c2c82f172b82cb13ffb9d",  # "?"
+        "c0a0e1c81318f3d91f6b7b7b8dc12fc1220ed187",  # "ěščřžýáíé"
+        "edc52dfb9088c992c272f2ec05226c6b3b57f87b",  # "АБВГДЕЖЛПРСТОУ"
+        )
+
+# incorrect SHA1 sum values
+sha1sum_incorrect_values = (
+        "da39a3ee5e6b4b0d3255bfef95601890afd8070",    # shorter
+        "b858cb282617fb0956d960215c8e84d1ccf909c6f",  # longer
+        "ac9231da4082430afe8f4d40127814c613648d8Z",   # invalid character
+        ""                                            # empty (obviously)
+        )
+
 
 @pytest.mark.parametrize("value", positive_int_values+negative_int_values_and_zero)
 def test_intTypeValidator_correct_values(value):
@@ -634,3 +660,18 @@ def test_hexaString32Validator_incorrect_values(value):
     # exception is expected
     with pytest.raises(Invalid) as excinfo:
         hexaString32Validator(value)
+
+
+@pytest.mark.parametrize("value", sha1sum_correct_values)
+def test_sha1Validator_correct_values(value):
+    """Check the parsing and validating SHA1 sums."""
+    # exception is not expected
+    sha1Validator(value)
+
+
+@pytest.mark.parametrize("value", sha1sum_incorrect_values)
+def test_sha1Validator_incorrect_values(value):
+    """Check the parsing and validating SHA1 sums."""
+    # exception is expected
+    with pytest.raises(Invalid) as excinfo:
+        sha1Validator(value)
