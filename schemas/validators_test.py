@@ -253,6 +253,32 @@ sha384sum_incorrect_values = (
         ""                                                                                                    # noqa: E501  empty (obviously)
         )
 
+# correct SHA512 sum values
+sha512sum_correct_values = (
+        "cf83e1357eefb8bdf1542850d66d8007d620e4050b5715dc83f4a921d36ce9ce47d0d13c5d85f2b0ff8318d2877eec2f63b931bd47417a81a538327af927da3e",  # noqa: E501  ""
+        "f90ddd77e400dfe6a3fcf479b00b1ee29e7015c5bb8cd70f5f15b4886cc339275ff553fc8a053f8ddc7324f45168cffaf81f8c3ac93996f6536eef38e5e40768",  # noqa: E501  " "
+        "f27b5bf8d35ea2bbbb6c0f9fef89d883415b5adbd6a84030cb1f35e6a6c026e65c60fb99f562f7eb9f77f3dec5001473441d2c5586b54d9b999cf4bd790e4c56",  # noqa: E501  "<Tab>"
+        "f7fbba6e0636f890e56fbbf3283e524c6fa3204ae298382d624741d0dc6638326e282c41be5e4254d8820772c5518a2c5a8c0c7f7eda19594a7eb539453e1ed7",  # noqa: E501  "foo"
+        "d82c4eb5261cb9c8aa9855edd67d1bd10482f41529858d925094d173fa662aa91ff39bc5b188615273484021dfb16fd8284cf684ccf0fc795be3aa2fc1e6c181",  # noqa: E501  "bar"
+        "22b41602570746d784cef124fa6713eec180f93af02a1bfee05528e94a1b053e4136b446015161d04e9900849575bd8f95f857773868a205dbed42413cd054f1",  # noqa: E501  "baz"
+        "12b03226a6d8be9c6e8cd5e55dc6c7920caaa39df14aab92d5e3ea9340d1c8a4d3d0b8e4314f1f6ef131ba4bf1ceb9186ab87c801af0d5c95b1befb8cedae2b9",  # noqa: E501  "1234567890"
+        "9840f9826bba3ddfc3c4872884f51dcbe915a2d42c6a4d0d59ce564e7fe541f15b9a4271554065379709932bc99a71d85f05aacd62457fce5fd131f847de99ec",  # noqa: E501  "FOO"
+        "d28acbb746e0b2b703739edc8b93602aa7d50d864e350248c520f895213207b25182c913892024a3de0b6306898911ff3b526fa8ad16c4f0565bd4bfa614ca06",  # noqa: E501  "BAR"
+        "649e8d185da5490ebc0f78364f000dd31a2f2a18e8eb3d938148193b36101f2952e69bbbea78b3ebdb19c0b458ada878b1f047f0e3536136d581d6e857ae0d41",  # noqa: E501  "BAZ"
+        "0b61241d7c17bcbb1baee7094d14b7c451efecc7ffcbd92598a0f13d313cc9ebc2a07e61f007baf58fbf94ff9a8695bdd5cae7ce03bbf1e94e93613a00f25f21",  # noqa: E501  "."
+        "ca63c07ad35d8c9fb0c92d6146759b122d4ec5d3f67ebe2f30ddb69f9e6c9fd3bf31a5e408b08f1d4d9cd68120cced9e57f010bef3cde97653fed5470da7d1a0",  # noqa: E501  "?"
+        "961933f57beedb78ae8984118bbca4919961a7ae324e554fd476de3f3e0676f1611adaebc5082cec3a8d47c9c7339d1f2c6a28fe92310b2726443da4a8ecb3bc",  # noqa: E501  "ěščřžýáíé"
+        "2e3589a4eaa0187b35aa67b00c4f8744aa08f531d33816a630791de09075f1653dd2e58d439489fd2fbe3fcbf65297f552621e6137143eee2fb7993f723acc29",  # noqa: E501  "АБВГДЕЖЛПРСТОУ"
+        )
+
+# incorrect SHA512 sum values
+sha512sum_incorrect_values = (
+        "cf83e1357eefb8bdf1542850d66d8007d620e4050b5715dc83f4a921d36ce9ce47d0d13c5d85f2b0ff8318d2877eec2f63b931bd47417a81a538327af927da3",    # noqa: E501  shorter
+        "cf83e1357eefb8bdf1542850d66d8007d620e4050b5715dc83f4a921d36ce9ce47d0d13c5d85f2b0ff8318d2877eec2f63b931bd47417a81a538327af927da3ee",  # noqa: E501  longer
+        "cf83e1357eefb8bdf1542850d66d8007d620e4050b5715dc83f4a921d36ce9ce47d0d13c5d85f2b0ff8318d2877eec2f63b931bd47417a81a538327af927da3Z",   # noqa: E501  invalid character
+        ""                                                                                                                                    # noqa: E501  empty (obviously)
+        )
+
 
 @pytest.mark.parametrize("value", positive_int_values+negative_int_values_and_zero)
 def test_intTypeValidator_correct_values(value):
@@ -798,3 +824,18 @@ def test_sha384Validator_incorrect_values(value):
     # exception is expected
     with pytest.raises(Invalid) as excinfo:
         sha384Validator(value)
+
+
+@pytest.mark.parametrize("value", sha512sum_correct_values)
+def test_sha512Validator_correct_values(value):
+    """Check the parsing and validating SHA512 sums."""
+    # exception is not expected
+    sha512Validator(value)
+
+
+@pytest.mark.parametrize("value", sha512sum_incorrect_values)
+def test_sha512Validator_incorrect_values(value):
+    """Check the parsing and validating SHA512 sums."""
+    # exception is expected
+    with pytest.raises(Invalid) as excinfo:
+        sha512Validator(value)
