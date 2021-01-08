@@ -201,6 +201,32 @@ sha224sum_incorrect_values = (
         ""                                                            # empty (obviously)
         )
 
+# correct SHA256 sum values
+sha256sum_correct_values = (
+        "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",  # ""
+        "36a9e7f1c95b82ffb99743e0c5c4ce95d83c9a430aac59f84ef3cbfab6145068",  # " "
+        "2b4c342f5433ebe591a1da77e013d1b72475562d48578dca8b84bac6651c3cb9",  # "<Tab>"
+        "2c26b46b68ffc68ff99b453c1d30413413422d706483bfa0f98a5e886266e7ae",  # "foo"
+        "fcde2b2edba56bf408601fb721fe9b5c338d10ee429ea04fae5511b68fbf8fb9",  # "bar"
+        "baa5a0964d3320fbc0c6a922140453c8513ea24ab8fd0577034804a967248096",  # "baz"
+        "c775e7b757ede630cd0aa1113bd102661ab38829ca52a6422ab782862f268646",  # "1234567890"
+        "9520437ce8902eb379a7d8aaa98fc4c94eeb07b6684854868fa6f72bf34b0fd3",  # "FOO"
+        "81f5f5515e670645c30c6340fe397157bbd2d42caa6968fd296a725ec9fac4ed",  # "BAR"
+        "9773f3684f996b2775eb5b05819b54674a6de538e1193c8c0db784f74ae14e63",  # "BAZ"
+        "cdb4ee2aea69cc6a83331bbe96dc2caa9a299d21329efb0336fc02a82e1839a8",  # "."
+        "8a8de823d5ed3e12746a62ef169bcf372be0ca44f0a1236abc35df05d96928e1",  # "?"
+        "a05e42c7e14de716cd501e135f3f5e49545f71069de316a1e9f7bb153f9a7356",  # "ěščřžýáíé"
+        "ee3b5d221780c973eb9a43805d696b7a201dbd159900acff9988a9ee41d54125",  # "АБВГДЕЖЛПРСТОУ"
+        )
+
+# incorrect SHA256 sum values
+sha256sum_incorrect_values = (
+        "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b85",    # shorter
+        "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b8555",  # longer
+        "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b85Z",   # invalid character
+        ""                                                                    # empty (obviously)
+        )
+
 
 @pytest.mark.parametrize("value", positive_int_values+negative_int_values_and_zero)
 def test_intTypeValidator_correct_values(value):
@@ -716,3 +742,18 @@ def test_sha224Validator_incorrect_values(value):
     # exception is expected
     with pytest.raises(Invalid) as excinfo:
         sha224Validator(value)
+
+
+@pytest.mark.parametrize("value", sha256sum_correct_values)
+def test_sha256Validator_correct_values(value):
+    """Check the parsing and validating SHA256 sums."""
+    # exception is not expected
+    sha256Validator(value)
+
+
+@pytest.mark.parametrize("value", sha256sum_incorrect_values)
+def test_sha256Validator_incorrect_values(value):
+    """Check the parsing and validating SHA256 sums."""
+    # exception is expected
+    with pytest.raises(Invalid) as excinfo:
+        sha256Validator(value)
