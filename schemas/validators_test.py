@@ -279,6 +279,32 @@ sha512sum_incorrect_values = (
         ""                                                                                                                                    # noqa: E501  empty (obviously)
         )
 
+# correct MD5 sum values
+md5sum_correct_values = (
+        "d41d8cd98f00b204e9800998ecf8427e",  # ""
+        "7215ee9c7d9dc229d2921a40e899ec5f",  # " "
+        "5e732a1878be2342dbfeff5fe3ca5aa3",  # "<Tab>"
+        "acbd18db4cc2f85cedef654fccc4a4d8",  # "foo"
+        "37b51d194a7513e45b56f6524f2d51f2",  # "bar"
+        "73feffa4b7f6bb68e44cf984c85f6e88",  # "baz"
+        "e807f1fcf82d132f9bb018ca6738a19f",  # "1234567890"
+        "901890a8e9c8cf6d5a1a542b229febff",  # "FOO"
+        "3d75eec709b70a350e143492192a1736",  # "BAR"
+        "f5aedf92178e1396cd4181962c8a9979",  # "BAZ"
+        "5058f1af8388633f609cadb75a75dc9d",  # "."
+        "d1457b72c3fb323a2671125aef3eab5d",  # "?"
+        "b7feb6f62750ba2ea364c72d8b58a53e",  # "ěščřžýáíé"
+        "b3307c094d02020507dea2960a293d90",  # "АБВГДЕЖЛПРСТОУ"
+        )
+
+# incorrect MD5 sum values
+md5sum_incorrect_values = (
+        "d41d8cd98f00b204e9800998ecf8427",    # shorter
+        "d41d8cd98f00b204e9800998ecf8427ef",  # longer
+        "d41d8cd98f00b204e9800998ecf8427Z",   # "invalid character"
+        ""                                    # noqa: E501  empty (obviously)
+        )
+
 
 @pytest.mark.parametrize("value", positive_int_values+negative_int_values_and_zero)
 def test_intTypeValidator_correct_values(value):
@@ -839,3 +865,18 @@ def test_sha512Validator_incorrect_values(value):
     # exception is expected
     with pytest.raises(Invalid) as excinfo:
         sha512Validator(value)
+
+
+@pytest.mark.parametrize("value", md5sum_correct_values)
+def test_md5Validator_correct_values(value):
+    """Check the parsing and validating MD5 sums."""
+    # exception is not expected
+    md5Validator(value)
+
+
+@pytest.mark.parametrize("value", md5sum_incorrect_values)
+def test_md5Validator_incorrect_values(value):
+    """Check the parsing and validating MD5 sums."""
+    # exception is expected
+    with pytest.raises(Invalid) as excinfo:
+        md5Validator(value)
