@@ -24,7 +24,7 @@ for i in range(30):
     unix_time = random.randint(0, 2**32-1)
 
     dt = datetime.datetime.fromtimestamp(unix_time)
-    dt_as_string = str(dt).replace(" ", "T")
+    dt_as_string = str(dt).replace(" ", "T")+"Z"
 
     # generate output
     print('    "{}",  # UNIX time: {}'.format(dt_as_string, unix_time))
