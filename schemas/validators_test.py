@@ -444,6 +444,41 @@ invalid_timestamps_ms = (
         "1984-12-30T14:25:99.000000",   # wrong second
         )
 
+# valid URLs to AWS
+valid_aws_urls = (
+        "https://zzzzzzzzzzzzzzzzzzzzzzzz.s3.amazonaws.com/aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+        "?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential="
+        "ZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZ&X-Amz-Date=19700101T000000Z"
+        "&X-Amz-Expires=86400&X-Amz-SignedHeaders=host&X-Amz-Signature="
+        "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+        "https://foo.s3.amazonaws.com/upload-service-1-abcdefghijklmnop-000144/"
+        "Z0ThU1Jyxc-000004?X-Amz-Algorithm=AWS4-HMAC-SHA256&"
+        "X-Amz-Credential=BAQ2GEXO117FVBVXWDMK%2F20200520%2Fus-east-1%2Fs3%2Faws4_request&",
+        "http://minio:9000/insights-upload-perma/hpe.hpe2.foo.bar.com/"
+        "Z0ThU1Jyxc-000004?X-Amz-Algorithm=AWS4-HMAC-SHA256&"
+        "X-Amz-Credential=BAQ2GEXO117FVBVXWDMK%2F20200520%2Fus-east-1%2Fs3%2Faws4_request&"
+        "X-Amz-Date=20200520T140918Z&X-Amz-Expires=86400&X-Amz-SignedHeaders=host&"
+        "X-Amz-Signature=1234567890abcdef1234567890abcdef1234567890abcdef1234567890abcdef",
+        "https://s3.us-east-1.amazonaws.com/insights-ingress-prod/aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+        "?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential="
+        "ZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZ&X-Amz-Date=20201201T210535Z&"
+        "X-Amz-Expires=86400&X-Amz-SignedHeaders=host&X-Amz-Signature="
+        "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+        )
+
+
+# invalid URLs to AWS
+invalid_aws_urls = (
+        "https://foo.s3.NOT-AMAZON.com/upload-service-1-abcdefghijklmnop-000144/"
+        "Z0ThU1Jyxc-000004?X-Amz-Algorithm=AWS4-HMAC-SHA256&"
+        "X-Amz-Credential=BAQ2GEXO117FVBVXWDMK%2F20200520%2Fus-east-1%2Fs3%2Faws4_request&",
+        "https://foo.s3.amazonaws.com/upload-service-1-abcdefghijklmnop-000144/",
+        "https://foo.s3.NOT-AMAZON.com/upload-service-1-abcdefghijklmnop-000144/"
+        "X-Amz-Credential=BAQ2GEXO117FVBVXWDMK%2F20200520%2Fus-east-1%2Fs3%2Faws4_request&",
+        "https://foo.s3.NOT-AMAZON.com/upload-service-1-abcdefghijklmnop-000144/"
+        "Z0ThU1Jyxc-000004?X-Amz-Algorithm=AWS4-HMAC-SHA256&"
+        )
+
 
 @pytest.mark.parametrize("value", positive_int_values+negative_int_values_and_zero)
 def test_intTypeValidator_correct_values(value):
@@ -1064,3 +1099,18 @@ def test_timestampMsValidator_incorrect_values(value):
     # exception is expected
     with pytest.raises(Invalid) as excinfo:
         timestampValidatorMs(value)
+
+
+@pytest.mark.parametrize("value", valid_aws_urls)
+def test_urlToAWSValidator_correct_values(value):
+    """Check the parsing and validating URLs to AWS with milliseconds part."""
+    # exception is not expected
+    urlToAWSValidator(value)
+
+
+@pytest.mark.parametrize("value", invalid_aws_urls)
+def test_urlToAWSValidator_incorrect_values(value):
+    """Check the parsing and validating URLs to AWS with milliseconds part."""
+    # exception is expected
+    with pytest.raises(Invalid) as excinfo:
+        urlToAWSValidator(value)
