@@ -342,6 +342,57 @@ uuid_incorrect_values = (
         )
 
 
+# valid timestamps
+valid_timestamps = (
+        "2022-08-11T10:09:21Z",  # UNIX time: 1660205361
+        "2004-08-20T15:53:38Z",  # UNIX time: 1093010018
+        "2031-01-06T04:30:45Z",  # UNIX time: 1925436645
+        "2011-08-02T13:28:26Z",  # UNIX time: 1312284506
+        "1988-03-17T21:36:02Z",  # UNIX time: 574634162
+        "2000-04-27T13:06:50Z",  # UNIX time: 956833610
+        "2042-11-19T15:57:19Z",  # UNIX time: 2300021839
+        "2013-01-09T14:42:55Z",  # UNIX time: 1357738975
+        "2049-06-30T16:45:37Z",  # UNIX time: 2508680737
+        "2099-01-26T15:21:12Z",  # UNIX time: 4073120472
+        "1986-03-25T02:45:21Z",  # UNIX time: 512099121
+        "2071-04-23T07:35:16Z",  # UNIX time: 3196996516
+        "1973-07-23T14:10:16Z",  # UNIX time: 112281016
+        "2018-10-17T16:08:10Z",  # UNIX time: 1539785290
+        "2049-12-04T01:00:07Z",  # UNIX time: 2522188807
+        "2044-02-21T03:39:34Z",  # UNIX time: 2339635174
+        "2047-06-04T02:52:34Z",  # UNIX time: 2443225954
+        "2104-12-18T08:43:41Z",  # UNIX time: 4259029421
+        "2029-06-27T18:32:34Z",  # UNIX time: 1877272354
+        "2083-06-25T19:56:38Z",  # UNIX time: 3581175398
+        "2080-11-12T18:59:35Z",  # UNIX time: 3498659975
+        "2046-10-02T01:00:31Z",  # UNIX time: 2422051231
+        "2045-11-03T03:28:21Z",  # UNIX time: 2393288901
+        "2035-07-29T01:20:52Z",  # UNIX time: 2069277652
+        "1984-02-09T14:13:16Z",  # UNIX time: 445180396
+        "2061-08-07T05:42:26Z",  # UNIX time: 2890615346
+        "2056-01-24T00:54:51Z",  # UNIX time: 2715897291
+        "1994-08-24T04:39:19Z",  # UNIX time: 777695959
+        "2063-07-18T08:44:44Z",  # UNIX time: 2951970284
+        "2026-03-31T09:43:43Z",  # UNIX time: 1774943023
+        )
+
+# invalid timestamps
+invalid_timestamps = (
+        "",                       # empty
+        "2022-08-11",             # just date
+        "10:09:21",               # just time
+        "2022-08-11 10:09:21Z",   # no TZ separator
+        "2022-08-11T10:09:21",    # no Z at the end
+        "2022-08-11 10:09:21",    # no TZ separator, no Z at the end
+        "99999-03-31T09:43:43Z",  # wrong year
+        "2026-999-31T09:43:43Z",  # wrong month
+        "2026-99-391T09:43:43Z",  # wrong day
+        "2026-03-31T99:43:43Z",   # wrong hour
+        "2026-03-31T09:99:43Z",   # wrong minute
+        "2026-03-31T09:43:99Z",   # wrong second
+        )
+
+
 @pytest.mark.parametrize("value", positive_int_values+negative_int_values_and_zero)
 def test_intTypeValidator_correct_values(value):
     """Check if proper integer values are validated."""
@@ -931,3 +982,18 @@ def test_UUIDValidator_incorrect_values(value):
     # exception is expected
     with pytest.raises(ValueError) as excinfo:
         uuidValidator(value)
+
+
+@pytest.mark.parametrize("value", valid_timestamps)
+def test_timestampValidator_correct_values(value):
+    """Check the parsing and validating timestamps."""
+    # exception is not expected
+    timestampValidator(value)
+
+
+@pytest.mark.parametrize("value", invalid_timestamps)
+def test_timestampValidator_incorrect_values(value):
+    """Check the parsing and validating timestamps."""
+    # exception is expected
+    with pytest.raises(Invalid) as excinfo:
+        timestampValidator(value)
