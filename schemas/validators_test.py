@@ -392,6 +392,58 @@ invalid_timestamps = (
         "2026-03-31T09:43:99Z",   # wrong second
         )
 
+# valid timestamps with millisecond part
+valid_timestamps_ms = (
+        "1984-12-30T14:25:20.000000",  # UNIX time: 473261120
+        "1996-12-16T22:31:16.000000",  # UNIX time: 850771876
+        "1978-01-06T07:40:52.000000",  # UNIX time: 252916852
+        "2100-11-10T08:33:25.000000",  # UNIX time: 4129515205
+        "2078-04-07T09:06:33.000000",  # UNIX time: 3416544393
+        "2068-06-20T18:16:09.000000",  # UNIX time: 3107438169
+        "2033-02-20T22:52:28.000000",  # UNIX time: 1992549148
+        "2042-10-05T21:08:33.000000",  # UNIX time: 2296152513
+        "2066-08-12T15:38:23.000000",  # UNIX time: 3048849503
+        "2053-04-28T06:20:58.000000",  # UNIX time: 2629430458
+        "2098-03-30T10:53:09.000000",  # UNIX time: 4047011589
+        "2038-08-14T07:19:02.000000",  # UNIX time: 2165375942
+        "1976-11-12T08:45:42.000000",  # UNIX time: 216632742
+        "2089-02-22T21:32:02.000000",  # UNIX time: 3759942722
+        "2065-10-22T19:40:59.000000",  # UNIX time: 3023462459
+        "2091-11-24T10:00:05.000000",  # UNIX time: 3846733205
+        "2062-08-08T15:40:04.000000",  # UNIX time: 2922273604
+        "2102-02-14T17:50:30.000000",  # UNIX time: 4169379030
+        "2069-11-07T18:03:41.000000",  # UNIX time: 3151069421
+        "1999-09-29T14:24:30.000000",  # UNIX time: 938607870
+        "2043-10-03T02:57:39.000000",  # UNIX time: 2327450259
+        "2042-08-03T00:26:33.000000",  # UNIX time: 2290634793
+        "1995-04-15T06:48:08.000000",  # UNIX time: 797921288
+        "2096-03-13T04:10:53.000000",  # UNIX time: 3982446653
+        "2058-02-24T02:02:49.000000",  # UNIX time: 2781738169
+        "2091-08-13T23:53:56.000000",  # UNIX time: 3837884036
+        "2042-01-07T23:58:07.000000",  # UNIX time: 2272748287
+        "2007-03-12T09:31:21.000000",  # UNIX time: 1173688281
+        "2003-05-08T18:07:30.000000",  # UNIX time: 1052410050
+        "2059-07-25T11:00:54.000000",  # UNIX time: 2826352854
+        )
+
+# invalid timestamps with millisecond part
+invalid_timestamps_ms = (
+        "",                             # empty
+        "2022-08-11",                   # just date
+        "10:09:21",                     # just time
+        "10:09:21.000000",              # just time + milliseconds
+        "1984-12-30 14:25:20.000000",   # no TZ separator
+        "1984-12-30T14:25:20",          # no milliseconds
+        "-12-30T14:25:20",              # no year
+        "1984-12-30 14:25:20",          # no TZ separator, no milliseconds
+        "99999-12-30T14:25:20.000000",  # wrong year
+        "1984-99-30T14:25:20.000000",   # wrong month
+        "1984-12-99T14:25:20.000000",   # wrong day
+        "1984-12-30T99:25:20.000000",   # wrong hour
+        "1984-12-30T14:99:20.000000",   # wrong minute
+        "1984-12-30T14:25:99.000000",   # wrong second
+        )
+
 
 @pytest.mark.parametrize("value", positive_int_values+negative_int_values_and_zero)
 def test_intTypeValidator_correct_values(value):
@@ -997,3 +1049,18 @@ def test_timestampValidator_incorrect_values(value):
     # exception is expected
     with pytest.raises(Invalid) as excinfo:
         timestampValidator(value)
+
+
+@pytest.mark.parametrize("value", valid_timestamps_ms)
+def test_timestampMsValidator_correct_values(value):
+    """Check the parsing and validating timestamps with milliseconds part."""
+    # exception is not expected
+    timestampValidatorMs(value)
+
+
+@pytest.mark.parametrize("value", invalid_timestamps_ms)
+def test_timestampMsValidator_incorrect_values(value):
+    """Check the parsing and validating timestamps with milliseconds part."""
+    # exception is expected
+    with pytest.raises(Invalid) as excinfo:
+        timestampValidatorMs(value)
