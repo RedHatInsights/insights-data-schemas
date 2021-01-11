@@ -305,6 +305,42 @@ md5sum_incorrect_values = (
         ""                                    # noqa: E501  empty (obviously)
         )
 
+# correct UUID values
+uuid_correct_values = (
+        "90e1013c-a2f6-433b-af13-f7373dafa5ed",
+        "74fbc0e8-2948-401f-bc6f-830ae9f73e22",
+        "8089b58b-1803-40e1-9998-616c3ee91db7",
+        "b584365b-9a62-4879-aec1-893d0fb5ba3b",
+        "b87c7f88-87c4-4f7b-98b4-9f7fdc5ce8b1",
+        "060e525a-209f-48ca-8b34-ef70f7d4d7ee",
+        "dcaf8faf-cfd5-40d7-898e-25c5c904314a",
+        "f695231a-f48f-4f06-a771-ba357bd672ec",
+        "0293be3a-7a45-4e2d-9fa8-a64f43988257",
+        "79588e77-3db9-4599-88c3-a8be8657012b",
+        "c2068ad5-86cb-4871-b3ae-d31e038a8ce4",
+        "07328b51-c9c8-4a7c-b575-01594078d217",
+        "79a3f026-461c-4b5c-a31e-05656b4e45e6",
+        "c9540851-e036-4534-a82c-020f19ea2eb5",
+        "ac5c1ff4-53b4-4475-8645-01e0bca6ef56",
+        "732413c4-710f-41b0-b19b-5a82e231b333",
+        "dd371a0c-a640-49b3-8c6f-9e3dca257350",
+        "990331cb-a29e-4475-9549-79f0c9b681c3",
+        "aeb69680-e0a2-4793-ae53-fec76478efd3",
+        "6b77193c-abee-4dd0-8f1f-654f667a4e9f",
+        )
+
+# incorrect UUID values
+uuid_incorrect_values = (
+        "90e1013c-a2f6-433b-af13-f7373dafa5e",    # shorter
+        "90e1013c-a2f6-433b-af13-f7373dafa5edf",  # longer
+        "90e1013c-a2f6-433b-af13-f7373dafa5eZ",   # invalid character
+        "90e1013ca-2f6-433b-af13-f7373dafa5e",    # wrong structure
+        "90e1013c-a2f-6433b-af13-f7373dafa5e",    # wrong structure
+        "90e1013c-a2f6-433-baf13-f7373dafa5e",    # wrong structure
+        "90e1013c-a2f6-43-3baf1-3f7373dafa5e",    # wrong structure
+        "",  # empty
+        )
+
 
 @pytest.mark.parametrize("value", positive_int_values+negative_int_values_and_zero)
 def test_intTypeValidator_correct_values(value):
@@ -880,3 +916,18 @@ def test_md5Validator_incorrect_values(value):
     # exception is expected
     with pytest.raises(Invalid) as excinfo:
         md5Validator(value)
+
+
+@pytest.mark.parametrize("value", uuid_correct_values)
+def test_UUIDValidator_correct_values(value):
+    """Check the parsing and validating UUID values."""
+    # exception is not expected
+    uuidValidator(value)
+
+
+@pytest.mark.parametrize("value", uuid_incorrect_values)
+def test_UUIDValidator_incorrect_values(value):
+    """Check the parsing and validating UUID values."""
+    # exception is expected
+    with pytest.raises(ValueError) as excinfo:
+        uuidValidator(value)
