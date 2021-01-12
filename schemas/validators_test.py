@@ -1238,6 +1238,14 @@ def test_timestampValidator_incorrect_values(value):
         timestampValidator(value)
 
 
+@pytest.mark.parametrize("value", not_string_type)
+def test_timestampValidator_incorrect_types(value):
+    """Check if improper values (with wrong type) are validated."""
+    # exception is expected
+    with pytest.raises(Invalid) as excinfo:
+        timestampValidator(value)
+
+
 @pytest.mark.parametrize("value", valid_timestamps_ms)
 def test_timestampMsValidator_correct_values(value):
     """Check the parsing and validating timestamps with milliseconds part."""
@@ -1253,6 +1261,14 @@ def test_timestampMsValidator_incorrect_values(value):
         timestampValidatorMs(value)
 
 
+@pytest.mark.parametrize("value", not_string_type)
+def test_timestampMsValidator_incorrect_types(value):
+    """Check if improper values (with wrong type) are validated."""
+    # exception is expected
+    with pytest.raises(Invalid) as excinfo:
+        timestampValidatorMs(value)
+
+
 @pytest.mark.parametrize("value", valid_aws_urls)
 def test_urlToAWSValidator_correct_values(value):
     """Check the parsing and validating URLs to AWS with milliseconds part."""
@@ -1263,6 +1279,14 @@ def test_urlToAWSValidator_correct_values(value):
 @pytest.mark.parametrize("value", invalid_aws_urls)
 def test_urlToAWSValidator_incorrect_values(value):
     """Check the parsing and validating URLs to AWS with milliseconds part."""
+    # exception is expected
+    with pytest.raises(Invalid) as excinfo:
+        urlToAWSValidator(value)
+
+
+@pytest.mark.parametrize("value", not_string_type)
+def test_urlToAWSValidator_incorrect_types(value):
+    """Check if improper values (with wrong type) are validated."""
     # exception is expected
     with pytest.raises(Invalid) as excinfo:
         urlToAWSValidator(value)
