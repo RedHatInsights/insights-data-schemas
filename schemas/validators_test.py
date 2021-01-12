@@ -25,7 +25,8 @@ from validators import *
 
 
 # proper positive integers
-positive_int_values = (1, 2, 3, 65535, 65536, 4294967295, 4294967296,
+positive_int_values = (1, 2, 3, 127, 128, 255, 256,
+                       65535, 65536, 4294967295, 4294967296,
                        18446744073709551615, 18446744073709551616)
 
 # proper positive integers and a zero
@@ -35,7 +36,8 @@ positive_int_values_and_zero = positive_int_values + (0, )
 not_positive_int_values = (0, -1, -65535)
 
 # proper negative integers
-negative_int_values = (-1, -2, -3, -65535, -65536, -4294967295, -4294967296,
+negative_int_values = (-1, -2, -3, -127, -128, -255, -256,
+                       -65535, -65536, -4294967295, -4294967296,
                        -18446744073709551615, -18446744073709551616)
 
 # proper negative integers and a zero
@@ -78,7 +80,8 @@ non_empty_string_values = (" ", "non-empty", "ěščř")
 not_string_type = (0, 3.14, True, False, None, 1+2j)
 
 # proper positive integers stored in string
-positive_int_values_in_string = ("1", "2", "3", "65535", "65536", "4294967295", "4294967296",
+positive_int_values_in_string = ("1", "2", "3", "127", "128", "255", "256",
+                                 "65535", "65536", "4294967295", "4294967296",
                                  "18446744073709551615", "18446744073709551616")
 
 # proper positive integers and a zero stored in string
@@ -88,14 +91,15 @@ positive_int_values_and_zero_in_string = positive_int_values_in_string + ("0", )
 not_positive_int_values_in_string = ("0", "-1", "-65535")
 
 # proper negative integers stored in string
-negative_int_values_in_string = ("-1", "-2", "-3", "-65535", "-65536", "-4294967295", "-4294967296",
+negative_int_values_in_string = ("-1", "-2", "-3", "-127", "-128", "-255", "-256",
+                                 "-65535", "-65536", "-4294967295", "-4294967296",
                                  "-18446744073709551615", "-18446744073709551616")
 
 # proper negative integers and a zero stored in string
 negative_int_values_and_zero_in_string = negative_int_values_in_string + ("0", )
 
 # improper negative integers stored in string
-not_negative_int_values_in_string = ("0", "1", "65535")
+not_negative_int_values_in_string = ("0", "1", "127", "128", "255", "256", "65535")
 
 # positive float values stored in string
 positive_float_values_in_string = ("1.0", "3.14", "1e10", "1e100", "1e-10", "1e-100")
@@ -118,9 +122,29 @@ negative_float_values_and_zero_in_string = negative_float_values_in_string + ("0
 # strings with exactly 32 hexadecimal digits
 hexa32_strings = (
         "00000000000000000000000000000000",
+        "11111111111111111111111111111111",
+        "22222222222222222222222222222222",
+        "33333333333333333333333333333333",
+        "44444444444444444444444444444444",
+        "55555555555555555555555555555555",
+        "66666666666666666666666666666666",
+        "77777777777777777777777777777777",
+        "88888888888888888888888888888888",
+        "99999999999999999999999999999999",
+        "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+        "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+        "cccccccccccccccccccccccccccccccc",
+        "dddddddddddddddddddddddddddddddd",
+        "eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee",
         "ffffffffffffffffffffffffffffffff",
+        "AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+        "BBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBB",
+        "CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC",
+        "DDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDD",
+        "EEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEE",
         "FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF",
         "0f0f0f0f0f0f0f0f0f0f0f0f0f0f0f0f",
+        "0F0F0F0F0F0F0F0F0F0F0F0F0F0F0F0F",
         "0123456789abcdef0123456789abcdef",
         "0123456789ABCDEF0123456789ABCDEF",
         )
@@ -138,6 +162,7 @@ not_hexa32_strings = (
         "fffffffffffffffffffffffffffffff",
         "FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF",
         "0f0f0f0f0f0f0f0f0f0f0f0f0f0f0f0",
+        "0F0F0F0F0F0F0F0F0F0F0F0F0F0F0F0",
         "0123456789abcdef0123456789abcde",
         "0123456789ABCDEF0123456789ABCDE",
         # longer by one character
@@ -145,6 +170,7 @@ not_hexa32_strings = (
         "fffffffffffffffffffffffffffffffff",
         "FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF",
         "0f0f0f0f0f0f0f0f0f0f0f0f0f0f0f000",
+        "0F0F0F0F0F0F0F0F0F0F0F0F0F0F0F000",
         "0123456789abcdef0123456789abcdeee",
         "0123456789ABCDEF0123456789ABCDEEE",
         )
@@ -173,6 +199,20 @@ sha1sum_incorrect_values = (
         "b858cb282617fb0956d960215c8e84d1ccf909c6f",  # longer
         "ac9231da4082430afe8f4d40127814c613648d8Z",   # invalid character
         ""                                            # empty (obviously)
+        "DA39A3EE5E6B4B0D3255BFEF95601890AFD80709",   # changed to uppercase: ""
+        "B858CB282617FB0956D960215C8E84D1CCF909C6",   # changed to uppercase: " "
+        "AC9231DA4082430AFE8F4D40127814C613648D8E",   # changed to uppercase: "<TAB>"
+        "0BEEC7B5EA3F0FDBC95D0DD47F3C5BC275DA8A33",   # changed to uppercase: "FOO"
+        "62CDB7020FF920E5AA642C3D4066950DD1F01F4D",   # changed to uppercase: "BAR"
+        "BBE960A25EA311D21D40669E93DF2003BA9B90A2",   # changed to uppercase: "BAZ"
+        "01B307ACBA4F54F55AAFC33BB06BBBF6CA803E9A",   # changed to uppercase: "1234567890"
+        "FEAB40E1FCA77C7360CCCA1481BB8BA5F919CE3A",   # changed to uppercase: "FOO"
+        "A5D5C1BBA91FDB6C669E1AE0413820885BBFC455",   # changed to uppercase: "BAR"
+        "8324FEB44EDA347289CA80C2CBF964A214CCD719",   # changed to uppercase: "BAZ"
+        "3A52CE780950D4D969792A2559CD519D7EE8C727",   # changed to uppercase: "."
+        "5BAB61EB53176449E25C2C82F172B82CB13FFB9D",   # changed to uppercase: "?"
+        "C0A0E1C81318F3D91F6B7B7B8DC12FC1220ED187",   # changed to uppercase: "ĚŠČŘŽÝÁÍÉ"
+        "EDC52DFB9088C992C272F2EC05226C6B3B57F87B",   # changed to uppercase: "АБВГДЕЖЛПРСТОУ"
         )
 
 # correct SHA224 sum values
@@ -477,6 +517,38 @@ invalid_aws_urls = (
         "X-Amz-Credential=BAQ2GEXO117FVBVXWDMK%2F20200520%2Fus-east-1%2Fs3%2Faws4_request&",
         "https://foo.s3.NOT-AMAZON.com/upload-service-1-abcdefghijklmnop-000144/"
         "Z0ThU1Jyxc-000004?X-Amz-Algorithm=AWS4-HMAC-SHA256&"
+        )
+
+# not a proper BASE64 values
+not_base64_values = (
+        " ",
+        "A",
+        "ěščřžýáíé"
+        )
+
+# proper BASE64 values that don't contain JSONs
+base64_values_not_json = (
+        "Zm9v",  # "foo"
+        "YmFy",  # "bar"
+        "YmF6",  # "baz"
+        "Rk9P",  # "FOO"
+        "QkFS",  # "BAR"
+        "QkFa",  # "BAZ"
+        "Lg==",  # "."
+        "Pw==",  # "?"
+        "xJvFocSNxZnFvsO9w6HDrcOp",  # "ěščřžýáíé"
+        "0JDQkdCS0JPQlNCV0JbQm9Cf0KDQodCi0J7Qow==",  # "АБВГДЕЖЛПРСТОУ"
+        )
+
+# proper BASE64 values that contain JSONs
+base64_values_json = (
+        "IA==",                      # " "
+        "CQ==",                      # "<Tab>"
+        "MTIzNDU2Nzg5MA==",          # "1234567890"
+        "W10K",                      # []
+        "e30K",                      # {}
+        "WzEsIDIsIDNdCg==",          # [1, 2, 3]
+        "eyJmb28iOjEsImJhcjoyfQo=",  # {"foo":1,"bar:2}
         )
 
 
@@ -1290,3 +1362,39 @@ def test_urlToAWSValidator_incorrect_types(value):
     # exception is expected
     with pytest.raises(Invalid) as excinfo:
         urlToAWSValidator(value)
+
+
+@pytest.mark.parametrize("value", not_base64_values)
+def test_b64IdentityValidator_incorrect_base64values(value):
+    """Check if improper values (not base64-based) are validated."""
+    schema = None  # not needed right now
+    # exception is expected
+    with pytest.raises(Exception) as excinfo:
+        b64IdentityValidator(schema, value)
+
+
+@pytest.mark.parametrize("value", base64_values_not_json)
+def test_b64IdentityValidator_not_JSON(value):
+    """Check if improper values (not JSON) are validated."""
+    schema = None  # not needed right now
+    # exception is expected
+    with pytest.raises(Exception) as excinfo:
+        b64IdentityValidator(schema, value)
+
+
+@pytest.mark.parametrize("value", base64_values_json)
+def test_b64IdentityValidator_proper_JSON(value):
+    """Check if proper values are validated."""
+    schema = None  # not needed right now
+    # exception is expected
+    with pytest.raises(Exception) as excinfo:
+        b64IdentityValidator(schema, value)
+
+
+@pytest.mark.parametrize("value", not_string_type)
+def test_b64IdentityValidator_incorrect_types(value):
+    """Check if improper values (with wrong type) are validated."""
+    schema = None  # not needed right now
+    # exception is expected
+    with pytest.raises(Invalid) as excinfo:
+        b64IdentityValidator(schema, value)
