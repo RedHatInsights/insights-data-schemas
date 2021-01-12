@@ -1054,6 +1054,14 @@ def test_hexaString32Validator_incorrect_values(value):
         hexaString32Validator(value)
 
 
+@pytest.mark.parametrize("value", not_string_type)
+def test_hexaString32Validator_incorrect_types(value):
+    """Check if improper values (with wrong type) are validated."""
+    # exception is expected
+    with pytest.raises(Invalid) as excinfo:
+        hexaString32Validator(value)
+
+
 @pytest.mark.parametrize("value", sha1sum_correct_values)
 def test_sha1Validator_correct_values(value):
     """Check the parsing and validating SHA1 sums."""
@@ -1064,6 +1072,14 @@ def test_sha1Validator_correct_values(value):
 @pytest.mark.parametrize("value", sha1sum_incorrect_values)
 def test_sha1Validator_incorrect_values(value):
     """Check the parsing and validating SHA1 sums."""
+    # exception is expected
+    with pytest.raises(Invalid) as excinfo:
+        sha1Validator(value)
+
+
+@pytest.mark.parametrize("value", not_string_type)
+def test_sha1ValidatorValidator_incorrect_types(value):
+    """Check if improper values (with wrong type) are validated."""
     # exception is expected
     with pytest.raises(Invalid) as excinfo:
         sha1Validator(value)
@@ -1084,6 +1100,14 @@ def test_sha224Validator_incorrect_values(value):
         sha224Validator(value)
 
 
+@pytest.mark.parametrize("value", not_string_type)
+def test_sha224ValidatorValidator_incorrect_types(value):
+    """Check if improper values (with wrong type) are validated."""
+    # exception is expected
+    with pytest.raises(Invalid) as excinfo:
+        sha224Validator(value)
+
+
 @pytest.mark.parametrize("value", sha256sum_correct_values)
 def test_sha256Validator_correct_values(value):
     """Check the parsing and validating SHA256 sums."""
@@ -1094,6 +1118,14 @@ def test_sha256Validator_correct_values(value):
 @pytest.mark.parametrize("value", sha256sum_incorrect_values)
 def test_sha256Validator_incorrect_values(value):
     """Check the parsing and validating SHA256 sums."""
+    # exception is expected
+    with pytest.raises(Invalid) as excinfo:
+        sha256Validator(value)
+
+
+@pytest.mark.parametrize("value", not_string_type)
+def test_sha256ValidatorValidator_incorrect_types(value):
+    """Check if improper values (with wrong type) are validated."""
     # exception is expected
     with pytest.raises(Invalid) as excinfo:
         sha256Validator(value)
@@ -1114,6 +1146,14 @@ def test_sha384Validator_incorrect_values(value):
         sha384Validator(value)
 
 
+@pytest.mark.parametrize("value", not_string_type)
+def test_sha384ValidatorValidator_incorrect_types(value):
+    """Check if improper values (with wrong type) are validated."""
+    # exception is expected
+    with pytest.raises(Invalid) as excinfo:
+        sha384Validator(value)
+
+
 @pytest.mark.parametrize("value", sha512sum_correct_values)
 def test_sha512Validator_correct_values(value):
     """Check the parsing and validating SHA512 sums."""
@@ -1124,6 +1164,14 @@ def test_sha512Validator_correct_values(value):
 @pytest.mark.parametrize("value", sha512sum_incorrect_values)
 def test_sha512Validator_incorrect_values(value):
     """Check the parsing and validating SHA512 sums."""
+    # exception is expected
+    with pytest.raises(Invalid) as excinfo:
+        sha512Validator(value)
+
+
+@pytest.mark.parametrize("value", not_string_type)
+def test_sha512ValidatorValidator_incorrect_types(value):
+    """Check if improper values (with wrong type) are validated."""
     # exception is expected
     with pytest.raises(Invalid) as excinfo:
         sha512Validator(value)
@@ -1144,6 +1192,14 @@ def test_md5Validator_incorrect_values(value):
         md5Validator(value)
 
 
+@pytest.mark.parametrize("value", not_string_type)
+def test_md5ValidatorValidator_incorrect_types(value):
+    """Check if improper values (with wrong type) are validated."""
+    # exception is expected
+    with pytest.raises(Invalid) as excinfo:
+        md5Validator(value)
+
+
 @pytest.mark.parametrize("value", uuid_correct_values)
 def test_UUIDValidator_correct_values(value):
     """Check the parsing and validating UUID values."""
@@ -1156,6 +1212,14 @@ def test_UUIDValidator_incorrect_values(value):
     """Check the parsing and validating UUID values."""
     # exception is expected
     with pytest.raises(ValueError) as excinfo:
+        uuidValidator(value)
+
+
+@pytest.mark.parametrize("value", not_string_type)
+def test_UUIDValidatorValidator_incorrect_types(value):
+    """Check if improper values (with wrong type) are validated."""
+    # exception is expected
+    with pytest.raises(Invalid) as excinfo:
         uuidValidator(value)
 
 
