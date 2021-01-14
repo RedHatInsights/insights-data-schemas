@@ -381,6 +381,16 @@ def sha3_224Validator(value):
         raise Invalid("the value '{value}' does not seem to be SHA-3 224 hash".format(value=value))
 
 
+def sha3_256Validator(value):
+    """Predicate that checks if the given value seems to be SHA-3 256 hash."""
+    # check if the value has the expected type
+    stringTypeValidator(value)
+
+    # SHA-3 256 hash has 64 hexadecimal characters
+    if not re.fullmatch(r"^[a-fA-F0-9]{64}$", value):
+        raise Invalid("the value '{value}' does not seem to be SHA-3 256 hash".format(value=value))
+
+
 def b64IdentityValidator(identitySchema, value):
     """Validate identity encoded by base64 encoding."""
     # input must be a string
