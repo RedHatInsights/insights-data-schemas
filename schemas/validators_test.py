@@ -345,6 +345,32 @@ sha3_224sum_incorrect_values = (
         ""                                                            # empty (obviously)
         )
 
+# correct SHA-3 256 sum values
+sha3_256sum_correct_values = (
+    "a7ffc6f8bf1ed76651c14756a061d662f580ff4de43b49fa82d80a4b80f8434a",  # ""
+    "60e893e6d54d8526e55a81f98bfac5da236bb203e84ed5967a8f527d5bf3d4a4",  # " "
+    "8bf02b8b238233453488311be9b316e58ab7e1356ce948cb90dfef1af56992eb",  # "<Tab>"
+    "76d3bc41c9f588f7fcd0d5bf4718f8f84b1c41b20882703100b9eb9413807c01",  # "foo"
+    "cceefd7e0545bcf8b6d19f3b5750c8a3ee8350418877bc6fb12e32de28137355",  # "bar"
+    "9713fc828dd6313c2975127f77e1681499b9d80c0bef9645837ed6555f24fb76",  # "baz"
+    "01da8843e976913aa5c15a62d45f1c9267391dcbd0a76ad411919043f374a163",  # "1234567890"
+    "841674cfd27cf225b4cb2cf79b8f6d4065cb374e17d0cf04ca160f1c8836d7ba",  # "FOO"
+    "237aed288cafaada0fde7b2fcecf0c26b9638947a504ce8a20a78047e9fab294",  # "BAR"
+    "3e2499206cc0d2643bbe9b301dc51e1f384f309cdb58aef05589d19cdaad7849",  # "BAZ"
+    "6890427a1f51a3e7e1dfb1f57449c5f2a24a9bed6b5d82973df1d78e765ea227",  # "."
+    "d827feb7bdb2df079c4d896ee5fdabad3b6258ad2049919bf822317e91d89bbf",  # "?"
+    "fc5c5dc05616b236c008719e17e542977ad862d2db0c97c2ec3692ae557485ce",  # "ěščřžýáíé"
+    "6a4ec5d268f3f04651e788a97a17708c428d062fb200b1de88fa0fe8cb574d94",  # "АБВГДЕЖЛПРСТОУ"
+        )
+
+# incorrect SHA-3 256 sum values
+sha3_256sum_incorrect_values = (
+        "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b85",    # shorter
+        "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b8555",  # longer
+        "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b85Z",   # invalid character
+        ""                                                                    # empty (obviously)
+        )
+
 # correct MD5 sum values
 md5sum_correct_values = (
         "d41d8cd98f00b204e9800998ecf8427e",  # ""
@@ -1296,6 +1322,29 @@ def test_sha3_224ValidatorValidator_incorrect_types(value):
     # exception is expected
     with pytest.raises(Invalid) as excinfo:
         sha3_224Validator(value)
+
+
+@pytest.mark.parametrize("value", sha3_256sum_correct_values)
+def test_sha3_256Validator_correct_values(value):
+    """Check the parsing and validating SHA-3 256 sums."""
+    # exception is not expected
+    sha3_256Validator(value)
+
+
+@pytest.mark.parametrize("value", sha3_256sum_incorrect_values)
+def test_sha3_256Validator_incorrect_values(value):
+    """Check the parsing and validating SHA-3 256 sums."""
+    # exception is expected
+    with pytest.raises(Invalid) as excinfo:
+        sha3_256Validator(value)
+
+
+@pytest.mark.parametrize("value", not_string_type)
+def test_sha3_256ValidatorValidator_incorrect_types(value):
+    """Check if improper values (with wrong type) are validated."""
+    # exception is expected
+    with pytest.raises(Invalid) as excinfo:
+        sha3_256Validator(value)
 
 
 @pytest.mark.parametrize("value", md5sum_correct_values)
