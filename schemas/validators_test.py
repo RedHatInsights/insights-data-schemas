@@ -347,20 +347,20 @@ sha3_224sum_incorrect_values = (
 
 # correct SHA-3 256 sum values
 sha3_256sum_correct_values = (
-    "a7ffc6f8bf1ed76651c14756a061d662f580ff4de43b49fa82d80a4b80f8434a",  # ""
-    "60e893e6d54d8526e55a81f98bfac5da236bb203e84ed5967a8f527d5bf3d4a4",  # " "
-    "8bf02b8b238233453488311be9b316e58ab7e1356ce948cb90dfef1af56992eb",  # "<Tab>"
-    "76d3bc41c9f588f7fcd0d5bf4718f8f84b1c41b20882703100b9eb9413807c01",  # "foo"
-    "cceefd7e0545bcf8b6d19f3b5750c8a3ee8350418877bc6fb12e32de28137355",  # "bar"
-    "9713fc828dd6313c2975127f77e1681499b9d80c0bef9645837ed6555f24fb76",  # "baz"
-    "01da8843e976913aa5c15a62d45f1c9267391dcbd0a76ad411919043f374a163",  # "1234567890"
-    "841674cfd27cf225b4cb2cf79b8f6d4065cb374e17d0cf04ca160f1c8836d7ba",  # "FOO"
-    "237aed288cafaada0fde7b2fcecf0c26b9638947a504ce8a20a78047e9fab294",  # "BAR"
-    "3e2499206cc0d2643bbe9b301dc51e1f384f309cdb58aef05589d19cdaad7849",  # "BAZ"
-    "6890427a1f51a3e7e1dfb1f57449c5f2a24a9bed6b5d82973df1d78e765ea227",  # "."
-    "d827feb7bdb2df079c4d896ee5fdabad3b6258ad2049919bf822317e91d89bbf",  # "?"
-    "fc5c5dc05616b236c008719e17e542977ad862d2db0c97c2ec3692ae557485ce",  # "ěščřžýáíé"
-    "6a4ec5d268f3f04651e788a97a17708c428d062fb200b1de88fa0fe8cb574d94",  # "АБВГДЕЖЛПРСТОУ"
+        "a7ffc6f8bf1ed76651c14756a061d662f580ff4de43b49fa82d80a4b80f8434a",  # ""
+        "60e893e6d54d8526e55a81f98bfac5da236bb203e84ed5967a8f527d5bf3d4a4",  # " "
+        "8bf02b8b238233453488311be9b316e58ab7e1356ce948cb90dfef1af56992eb",  # "<Tab>"
+        "76d3bc41c9f588f7fcd0d5bf4718f8f84b1c41b20882703100b9eb9413807c01",  # "foo"
+        "cceefd7e0545bcf8b6d19f3b5750c8a3ee8350418877bc6fb12e32de28137355",  # "bar"
+        "9713fc828dd6313c2975127f77e1681499b9d80c0bef9645837ed6555f24fb76",  # "baz"
+        "01da8843e976913aa5c15a62d45f1c9267391dcbd0a76ad411919043f374a163",  # "1234567890"
+        "841674cfd27cf225b4cb2cf79b8f6d4065cb374e17d0cf04ca160f1c8836d7ba",  # "FOO"
+        "237aed288cafaada0fde7b2fcecf0c26b9638947a504ce8a20a78047e9fab294",  # "BAR"
+        "3e2499206cc0d2643bbe9b301dc51e1f384f309cdb58aef05589d19cdaad7849",  # "BAZ"
+        "6890427a1f51a3e7e1dfb1f57449c5f2a24a9bed6b5d82973df1d78e765ea227",  # "."
+        "d827feb7bdb2df079c4d896ee5fdabad3b6258ad2049919bf822317e91d89bbf",  # "?"
+        "fc5c5dc05616b236c008719e17e542977ad862d2db0c97c2ec3692ae557485ce",  # "ěščřžýáíé"
+        "6a4ec5d268f3f04651e788a97a17708c428d062fb200b1de88fa0fe8cb574d94",  # "АБВГДЕЖЛПРСТОУ"
         )
 
 # incorrect SHA-3 256 sum values
@@ -369,6 +369,32 @@ sha3_256sum_incorrect_values = (
         "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b8555",  # longer
         "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b85Z",   # invalid character
         ""                                                                    # empty (obviously)
+        )
+
+# correct SHA-3 384 sum values
+sha3_384sum_correct_values = (
+        "0c63a75b845e4f7d01107d852e4c2485c51a50aaaa94fc61995e71bbee983a2ac3713831264adb47fb6bd1e058d5f004",  # noqa: E501  ""
+        "56cd53d48102c914e48813b23c82e168faac72ea78df8f9d88b6d7c4a20c0b9d42c67c9647560cc91031a2bd559a1a2b",  # noqa: E501  " "
+        "634da3ecea77f875a073de435e5cf12b3c77ab55dbd95cde81d556af64abaaa68e91c221481793ba3b378b6e137fd61c",  # noqa: E501  "<Tab>"
+        "665551928d13b7d84ee02734502b018d896a0fb87eed5adb4c87ba91bbd6489410e11b0fbcc06ed7d0ebad559e5d3bb5",  # noqa: E501  "foo"
+        "11cfca1618a8cfad41c77c8e4af303d6c98de7424116e87b5cd533920a17c96b4948e83a9b509a70aa6440e3a7ccc5cb",  # noqa: E501  "bar"
+        "043a768f02f081a34a99c561becad6306082d726ff2c758f96cb9c6c12f60bd92d152918ee93404e1cbabee14992402e",  # noqa: E501  "baz"
+        "6fdddab7d670f202629531c1a51b32ca30696d0af4dd5b0fbb5f82c0aba5e505110455f37d7ef73950c2bb0495a38f56",  # noqa: E501  "1234567890"
+        "1dfd2dad0a7e71f42743680b96e122faea17559a1da31b1404efbc665fc88e64ebfd3ba1542512169f01b10808855dc2",  # noqa: E501  "FOO"
+        "458952226b5919c8a366fdb2d545e919888787baca3af383e493c34e27eb212611bce0351cdd99f40ba3350abdb20207",  # noqa: E501  "BAR"
+        "243e51586cbf1c3df1e138b18a6196503a01a7ca69f5bc7e520497e22c2c3ca9562033de7d1f9bc02f403cdbb33dfdd3",  # noqa: E501  "BAZ"
+        "ba4729848e50f0c964d716e7d39d0bc4cb28eaa66a9c5e696de904d55317faf187d4a6964fa2f9364458b2b237cdf57d",  # noqa: E501  "."
+        "ce7a9f02603364934950707f03fb9af51afedd23941ce8bb97201dfe88b61102685aee236602370813cfa4a3cfb31773",  # noqa: E501  "?"
+        "45f08e3dfd537c58c5e18d169cc7b0a3ab981f5108ffb85a9436207a83d5848a9e4eb09a6b0f9b0b2af5ae599db9a062",  # noqa: E501  "ěščřžýáíé"
+        "3cd09bb3353f5a5d75bfd5944943ef66a7da489614cf9ab1abe4c83146d1d3042d7cc64779b4cf2868dea8f61a7f0bc3",  # noqa: E501  "АБВГДЕЖЛПРСТОУ"
+        )
+
+# incorrect SHA-3 384 sum values
+sha3_384sum_incorrect_values = (
+        "38b060a751ac96384cd9327eb1b1e36a21fdb71114be07434c0cc7bf63f6e1da274edebfe76f65fbd51ad2f14898b95",    # noqa: E501  shorter
+        "38b060a751ac96384cd9327eb1b1e36a21fdb71114be07434c0cc7bf63f6e1da274edebfe76f65fbd51ad2f14898b95bb",  # noqa: E501  longer
+        "38b060a751ac96384cd9327eb1b1e36a21fdb71114be07434c0cc7bf63f6e1da274edebfe76f65fbd51ad2f14898b95Z",   # noqa: E501  invalid character
+        ""                                                                                                    # noqa: E501  empty (obviously)
         )
 
 # correct MD5 sum values
@@ -1345,6 +1371,29 @@ def test_sha3_256ValidatorValidator_incorrect_types(value):
     # exception is expected
     with pytest.raises(Invalid) as excinfo:
         sha3_256Validator(value)
+
+
+@pytest.mark.parametrize("value", sha3_384sum_correct_values)
+def test_sha3_384Validator_correct_values(value):
+    """Check the parsing and validating SHA-3 384 sums."""
+    # exception is not expected
+    sha3_384Validator(value)
+
+
+@pytest.mark.parametrize("value", sha3_384sum_incorrect_values)
+def test_sha3_384Validator_incorrect_values(value):
+    """Check the parsing and validating SHA-3 384 sums."""
+    # exception is expected
+    with pytest.raises(Invalid) as excinfo:
+        sha3_384Validator(value)
+
+
+@pytest.mark.parametrize("value", not_string_type)
+def test_sha3_384ValidatorValidator_incorrect_types(value):
+    """Check if improper values (with wrong type) are validated."""
+    # exception is expected
+    with pytest.raises(Invalid) as excinfo:
+        sha3_384Validator(value)
 
 
 @pytest.mark.parametrize("value", md5sum_correct_values)
