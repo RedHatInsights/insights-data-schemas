@@ -5,6 +5,8 @@ layout: default
 
 ## External data pipeline
 
+![External data pipeline](images/external-data-pipeline.png)
+
 [Incoming messages in `platform.upload.buckit`](platform_upload_buckit_messages.md)
 
 ## Internal data pipeline
