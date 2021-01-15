@@ -423,6 +423,32 @@ sha3_512sum_incorrect_values = (
         ""                                                                                                                                    # noqa: E501  empty (obviously)
         )
 
+# correct SHAKE128 sum values
+shake128_correct_values = (
+        "7f9c2ba4e88f827d616045507605853ed73b8093f6efbc88eb1a6eacfa66ef26",  # ""
+        "893f6542dcc9ccf5dbffbf6c3c28df39d30c39d74cd2d5a94aecdf343244f9a2",  # " "
+        "19f62d035f07eafd9c46acec60fbeda2217a2d73259282e6d358afd58e12277d",  # "<Tab>"
+        "f84e95cb5fbd2038863ab27d3cdeac295ad2d4ab96ad1f4b070c0bf36078ef08",  # "foo"
+        "049d3001a053583fb27efab27ea80ffd934c478b9a0a7e12b0af4851bb7a0579",  # "bar"
+        "2d069fa43c3abb23f6f2d8cc3e9ec4516e431858cb3cda33473785a3ecbd4131",  # "baz"
+        "1cd2c71a52e3f2a620173e915f17648dcc43443ef78754302c6b44cf47daf527",  # "1234567890"
+        "1bffd674ac82e428e0f9b5227bc9aa176835e5afbdf1570fe91fdd767fa9d102",  # "FOO"
+        "138c82dec7955304190baa7193690eafbb70c45c2c8868955ae9912e8f2562f6",  # "BAR"
+        "0b262c9fdac0fc5f02ad028716ea06b4a13b5e05fbe9739eadad317b7b35caff",  # "BAZ"
+        "8419336160ea01d7d9b4955f270ec9d22d10f6bebdbd630e467cf443bc276c96",  # "."
+        "543014bd654ac036b5bbb944bbefc15a87752e0bca766cbfa7eb2cd03dfce549",  # "?"
+        "94377a69efd35308c636b8ac887ec6b34d9a9f26f1256f9ffbee65607e829586",  # "ěščřžýáíé"
+        "b685d90be5f2bed25463ff13d8b7c8bb3756c2a15b52fac6526498040c80415c",  # "АБВГДЕЖЛПРСТОУ"
+        )
+
+# incorrect SHAKE128 sum values
+shake128_incorrect_values = (
+        "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b85",    # shorter
+        "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b8555",  # longer
+        "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b85Z",   # invalid character
+        ""                                                                    # empty (obviously)
+        )
+
 # correct BLAKE2 sum values
 blake2_correct_values = (
         "786a02f742015903c6c6fd852552d272912f4740e15847618a86e217f71f5419d25e1031afee585313896444934eb04b903a685b1448b755d56f701afe9be2ce",  # noqa: E501  ""
@@ -1469,6 +1495,29 @@ def test_sha3_512ValidatorValidator_incorrect_types(value):
     # exception is expected
     with pytest.raises(Invalid) as excinfo:
         sha3_512Validator(value)
+
+
+@pytest.mark.parametrize("value", shake128_correct_values)
+def test_shake128Validator_correct_values(value):
+    """Check the parsing and validating shake128 sums."""
+    # exception is not expected
+    shake128Validator(value)
+
+
+@pytest.mark.parametrize("value", shake128_incorrect_values)
+def test_shake128Validator_incorrect_values(value):
+    """Check the parsing and validating shake128 sums."""
+    # exception is expected
+    with pytest.raises(Invalid) as excinfo:
+        shake128Validator(value)
+
+
+@pytest.mark.parametrize("value", not_string_type)
+def test_shake128ValidatorValidator_incorrect_types(value):
+    """Check if improper values (with wrong type) are validated."""
+    # exception is expected
+    with pytest.raises(Invalid) as excinfo:
+        shake128Validator(value)
 
 
 @pytest.mark.parametrize("value", blake2_correct_values)
