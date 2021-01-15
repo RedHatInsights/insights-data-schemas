@@ -411,6 +411,16 @@ def sha3_512Validator(value):
         raise Invalid("the value '{value}' does not seem to be SHA-3 512 hash".format(value=value))
 
 
+def shake128Validator(value):
+    """Predicate that checks if the given value seems to be SHAKE128 256-bit hash."""
+    # check if the value has the expected type
+    stringTypeValidator(value)
+
+    # SHAKE128 256-bit hash has 64 hexadecimal characters
+    if not re.fullmatch(r"^[a-fA-F0-9]{64}$", value):
+        raise Invalid("the value '{v}' does not seem to be SHAKE128 256-bit hash".format(v=value))
+
+
 def BLAKE2Validator(value):
     """Predicate that checks if the given value seems to be BLAKE2 256-bit hash."""
     # check if the value has the expected type
