@@ -3,7 +3,7 @@
 ## `BLAKE2Validator(value)`
 Predicate that checks if the given value seems to be BLAKE2 256-bit hash.
     
-## `b64IdentityValidator(identitySchema,` value)
+## `b64IdentityValidator(identitySchema, value)`
 Validate identity encoded by base64 encoding.
     
 ## `emptyStringValidator(value)`
