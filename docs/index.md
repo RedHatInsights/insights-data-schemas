@@ -13,6 +13,10 @@ layout: default
 
 [Incoming messages from SQS](incoming_sqs_messages.md)
 
+## Implemented validators
+
+[validators.md](validators.md)
+
 ## Documentation for Python packages
 
 [validators.py](packages/validators.html)
