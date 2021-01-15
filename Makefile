@@ -13,6 +13,9 @@ unit_tests:
 coverage:
 	pytest -v -p no:cacheprovider --cov schemas/
 
+documentation:
+	pydoc3 schemas/validators.py > docs/validators.txt
+
 cli_tests:	platform_upload_buckit_messages_tests
 
 platform_upload_buckit_messages_tests:
