@@ -423,6 +423,32 @@ sha3_512sum_incorrect_values = (
         ""                                                                                                                                    # noqa: E501  empty (obviously)
         )
 
+# correct BLAKE2 sum values
+blake2_correct_values = (
+        "786a02f742015903c6c6fd852552d272912f4740e15847618a86e217f71f5419d25e1031afee585313896444934eb04b903a685b1448b755d56f701afe9be2ce",  # noqa: E501  ""
+        "ae3aa4b26b87ab60e8ef52430e992ad8c360d0a486153401b46a21096c96e2341dcc2ee584e36b2222016d1f120edc8944d5ab1022678466883fe9e8c0761a53",  # noqa: E501  " "
+        "a508bcade5c56acb606817f39eb8dbf948728e6b34d643039fc3a529b7b1553065b62e8f68efb3542679e8d114acaa5545cf080e331c0e92db0276e942900651",  # noqa: E501  "<Tab>"
+        "ca002330e69d3e6b84a46a56a6533fd79d51d97a3bb7cad6c2ff43b354185d6dc1e723fb3db4ae0737e120378424c714bb982d9dc5bbd7a0ab318240ddd18f8d",  # noqa: E501  "foo"
+        "76aafe37ce69887569c3c1a51f14b639191fb2180cb0c87b566529496636712868556a9adf069d59769bf7e2393d215f195d8e7694f26fc7e20d92195973add8",  # noqa: E501  "bar"
+        "2305476f21a28dd31ba7aaa4bcbd92780ff6c3ee77d45ea025dfec737e6bc725ce391585326dc22208f77c2643ca4afa34334042858a6f250e9094c8f77c82f6",  # noqa: E501  "baz"
+        "68d6ef20266276f163541b9db63db73bc5e6351755b741dbf59c3dcdf6678951a65e0844e238d6d25ae7e4293fcf29f913d02cd68ba1925615865d1aaa50fe8e",  # noqa: E501  "1234567890"
+        "5749fce80b4fef1325d6c20d5513cfe1674ccc111e9c15825f9bf4af814ccf74245518b521e304cbe171e54708011eebd247d87c1133efad77a344472ddc8500",  # noqa: E501  "FOO"
+        "4bd9a4705508ce7655ef4fe2cf36497d18ff257a9e87d0668a4729da138c8b1283e122d044cc249f7339ddf943804315c1cf6b19a921ed8c15779b71fa4e7a51",  # noqa: E501  "BAR"
+        "de2fbe60ad329d1820c88ccd573c0fbeafe025b0dc1ea848fdb1ce88f39aa200927acbf9525c2bd73eb51666282c794ad0ad8b1e2d285eae66aa9d8a51760ecb",  # noqa: E501  "BAZ"
+        "6d242967e4c0285b237a3c6dafab0400719b4289ec97efb8afafc16351fb45b217e2a4443c860386870e552715f380eb8a8e6c93f75d067f4fdc109dca413c7e",  # noqa: E501  "."
+        "6f80090eabe674fad334bd97352b7baea71ba8b3046fd1466e1b2e0c1ee7322780165de984b6688f5254064f5068e3e4f25e9ca502b6faf91cafdea474536dc4",  # noqa: E501  "?"
+        "152e4b14b79f13114cd45ccec724a93e8f88e7c16185fa6e9da45f4eb5e3b0f66197a6030541733fbfb80e0cd0593d6b9be230975ad10a0314c3fc26cc2a45cc",  # noqa: E501  "ěščřžýáíé"
+        "355e9791bd30d0e7e19f8738bd04faa679ce172915fcdfdb2264d39f2174436b04d870d25ffac28e23662bc79fb971c7c37e8f1c56fcf23132d42f914e22231b",  # noqa: E501  "АБВГДЕЖЛПРСТОУ"
+        )
+
+# incorrect BLAKE2 sum values
+blake2_incorrect_values = (
+        "cf83e1357eefb8bdf1542850d66d8007d620e4050b5715dc83f4a921d36ce9ce47d0d13c5d85f2b0ff8318d2877eec2f63b931bd47417a81a538327af927da3",    # noqa: E501  shorter
+        "cf83e1357eefb8bdf1542850d66d8007d620e4050b5715dc83f4a921d36ce9ce47d0d13c5d85f2b0ff8318d2877eec2f63b931bd47417a81a538327af927da3ee",  # noqa: E501  longer
+        "cf83e1357eefb8bdf1542850d66d8007d620e4050b5715dc83f4a921d36ce9ce47d0d13c5d85f2b0ff8318d2877eec2f63b931bd47417a81a538327af927da3Z",   # noqa: E501  invalid character
+        ""                                                                                                                                    # noqa: E501  empty (obviously)
+        )
+
 # correct MD5 sum values
 md5sum_correct_values = (
         "d41d8cd98f00b204e9800998ecf8427e",  # ""
@@ -1443,6 +1469,29 @@ def test_sha3_512ValidatorValidator_incorrect_types(value):
     # exception is expected
     with pytest.raises(Invalid) as excinfo:
         sha3_512Validator(value)
+
+
+@pytest.mark.parametrize("value", blake2_correct_values)
+def test_BLAKE2Validator_correct_values(value):
+    """Check the parsing and validating BLAKE2 sums."""
+    # exception is not expected
+    BLAKE2Validator(value)
+
+
+@pytest.mark.parametrize("value", blake2_incorrect_values)
+def test_BLAKE2Validator_incorrect_values(value):
+    """Check the parsing and validating BLAKE2 sums."""
+    # exception is expected
+    with pytest.raises(Invalid) as excinfo:
+        BLAKE2Validator(value)
+
+
+@pytest.mark.parametrize("value", not_string_type)
+def test_BLAKE2ValidatorValidator_incorrect_types(value):
+    """Check if improper values (with wrong type) are validated."""
+    # exception is expected
+    with pytest.raises(Invalid) as excinfo:
+        BLAKE2Validator(value)
 
 
 @pytest.mark.parametrize("value", md5sum_correct_values)
