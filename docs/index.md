@@ -15,12 +15,12 @@ layout: default
     <area shape="rect" coords="127, 418, 212, 475" title="Rule content produced by Content Service" alt="Rule content produced by Content Servic" href="content_service.html">
 </map>
 
-[Incoming messages in `platform.upload.buckit`](platform_upload_buckit_messages.md)
-[Raw data stored in S3 bucket](raw_data_S3_bucket.md)
-[Data produced by OCP rules engine](ccx_data_pipeline.md)
-[Messages consumed from `ccx.ocp.results` topic](ccx_ocp_results_topic.md)
-[OCP results written into RDS](results_in_rds.md)
-[Rule content produced by Content Service](content_service.md)
+1. [Incoming messages in `platform.upload.buckit`](platform_upload_buckit_messages.md)
+1. [Raw data stored in S3 bucket](raw_data_S3_bucket.md)
+1. [Data produced by OCP rules engine](ccx_data_pipeline.md)
+1. [Messages consumed from `ccx.ocp.results` topic](ccx_ocp_results_topic.md)
+1. [OCP results written into RDS](results_in_rds.md)
+1. [Rule content produced by Content Service](content_service.md)
 
 ## Internal data pipeline
 
