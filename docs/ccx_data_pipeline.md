@@ -56,8 +56,6 @@ groups separated by hyphens, in the form 8-4-4-4-12 for a total of 36
 characters (32 hexadecimal characters and 4 hyphens)
 
 ---
-
----
 **NOTE**
 
 The `LastChecked` attribute is a timestamp containing the zone designator Z
@@ -83,14 +81,98 @@ The `LastChecked` attribute is a timestamp containing the zone designator Z
 
 ## Format of `Report` node
 
+The generated cluster reports from Insights results contain three lists of
+rules that were either __skipped__ (because of missing requirements, etc.),
+__passed__ (the rule got executed but no issue was found), or __hit__ (the rule
+got executed and found the issue it was looking for) by the cluster, where each
+rule is represented as a dictionary containing identifying information about
+the rule itself (actually __hit__ rules are stored in `reports` attribute).
+
 `Report` node is represented as a JSON dictionary with following four required attributes:
 
 * `system`: additional information about the cluster
 * `reports`: list of rules that detect any problem on given cluster
-* `skips`: list of rules that have been skip because not all required information was available on checked cluster
-* `pass`: list of rules that passes all conditions (i.e. rules without any problem detected)
+* `skips`: list of rules that have been skipped because not all required information was available on checked cluster
+* `pass`: list of rules that passes all conditions (i.e. rules without any problem/issue detected)
 * `info`: list of rules that return info messages only 
 * `fingerprints`: ?
+
+### Format of `system` attribute in `Report` node
+
+TBD
+
+### Format of `reports` attribute in `Report` node
+
+This attribute contains list of rules that detect any problem on given cluster.
+Each element in the list is represented as a node with seven attributes:
+
+* `rule_id`: rule name + a key
+* `component`: fully-qualified name of the rule (unique)
+* `type`: information that issue has been detected by this rule
+* `key`: a key that selects the variant of issue (one rule can detect more different issues)
+* `tags`: tags assigned to the rule
+* `links`: links to documentation, Knowledge Base article etc.
+
+An example:
+
+```json
+        "reports": [
+            {
+                "rule_id": "tutorial_rule|TUTORIAL_ERROR",
+                "component": "ccx_rules_ocp.external.tutorial_rule.report",
+                "type": "rule",
+                "key": "TUTORIAL_ERROR",
+                "details": {
+                    "type": "rule",
+                    "error_key": "TUTORIAL_ERROR"
+                },
+                "tags": [],
+                "links": {}
+            }
+        ],
+```
+
+### Format of `skips` attribute in `Report` node
+
+This attribute contains list of rules that have been skipped because not all
+required information was available on checked cluster. Each element in the list
+is represented as a node with four attributes:
+
+* `rule_fqdn`: fully-qualified name of the rule (unique)
+* `reason`: reason why the rule was skipped
+* `details`: detailed information about the rule and the condition to skip it
+* `type`: information that this rule was skipped
+
+An example:
+
+```json
+        "skips": [
+            {
+                "rule_fqdn": "ccx_rules_ocp.ocs.check_ocs_version.report",
+                "reason": "MISSING_REQUIREMENTS",
+                "details": "All: ['ccx_ocp_core.specs.must_gather_ocs.OperatorsOcsMGOCS'] Any: ",
+                "type": "skip"
+            },
+            {
+                "rule_fqdn": "ccx_rules_ocp.ocs.check_pods_scc.report",
+                "reason": "MISSING_REQUIREMENTS",
+                "details": "All: ['ccx_ocp_core.specs.must_gather_ocs.PodsMGOCS'] Any: ",
+                "type": "skip"
+            }
+        ],
+```
+
+### Format of `pass` attribute in `Report` node
+
+This attribute contains list of rules that passes all conditions (i.e. rules without any problem/issue detected)
+
+### Format of `info` attribute in `Report` node
+
+TBD
+
+### Format of `fingerprints` attribute in `Report` node
+
+TBD
 
 ### Minimal structure of `Report` node
 
