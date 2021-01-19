@@ -26,7 +26,7 @@ Some attributes are optional:
 
 ### Message without optional attributes
 
-```json5
+```json
 {
   "url": "https://hostname.s3.amazonaws.com/first-part?X-Amz-Algorithm=algorithm&X-Amz-Credential=credential-info&X-Amz-Date=creation-date&X-Amz-Expires=expiration-time&X-Amz-SignedHeaders=host&X-Amz-Signature=signature",
   "b64_identity": "encoded-identity-info",
@@ -36,7 +36,7 @@ Some attributes are optional:
 
 ### Message with optional attributes
 
-```json5
+```json
 {
   "account": 123456,
   "category": "test",
@@ -73,7 +73,7 @@ object is important as it contains `org_id` (also stored as a string).
 
 ### Identity based on `basic-auth`
 
-```json5
+```json
 {
     "identity": {
         "account_number": "1234567",
@@ -98,7 +98,7 @@ object is important as it contains `org_id` (also stored as a string).
 
 ### Identity based on `cert-auth` with system info
 
-```json5
+```json
 {
     "identity": {
         "account_number": "1234567",
@@ -128,7 +128,7 @@ object is important as it contains `org_id` (also stored as a string).
 
 ### Identity based on `cert-auth` with entitlements info
 
-```json5
+```json
 {
     "identity": {
         "account_number": "1234567",
