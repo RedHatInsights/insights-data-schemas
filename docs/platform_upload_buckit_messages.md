@@ -1,14 +1,38 @@
 # Format of the received Kafka records from `platform.upload.buckit` topic
 
-The records (messages) received from `platform.upload.buckit` uses JSON format. It consists of an object with various attributes.
+## Schema version
+
+1 (unofficial)
+
+## Description
+
+The records (messages) received from `platform.upload.buckit` that are encoded
+using JSON format. It consists of an object with various attributes.
+
+Every time a new record is sent by Kafka to the subscribed topic, the
+`ccx_data_pipeline.consumer.Consumer` class will handle and process it, storing
+the needed information from the record and returning the URL to the archive in
+the corresponding S3 bucket.
+
+Other relevant information about `ccx_data_pipeline` can be found on address
+[https://redhatinsights.github.io/ccx-data-pipeline/](https://redhatinsights.github.io/ccx-data-pipeline/).
 
 ## Required attributes
 
-There are several required attributes stored in this object:
+Consumed messages is in JSON format with the following three top-level required
+attributes:
 
 * `url` (string with custom format)
 * `b64_identity` (JSON encoded by BASE64 encoding)
-* `timestamp` (timestamp with TZ info)
+* `timestamp` (timestamp with TZ info stored as a string)
+
+---
+**NOTE**
+
+All required attributes are described in more details below, including the
+`b64_identity` internal structure.
+
+---
 
 ## Optional attributes
 
@@ -22,9 +46,20 @@ Some attributes are optional:
 * `request_id` (string[32])
 * `service` (string)
 
-## Examples
+## Possible enhancements
+
+Version (positive integer) should be included in the message so the schema
+change will be possible w/o breaking other services and tools.
+
+## Basic format
+
+Consumed messages can contain optional attributes, but in fact only `url`,
+`b64_identity`, and `timestamp` attributes are really required and used by
+external data pipeline.
 
 ### Message without optional attributes
+
+The minimal message content that is fully usable by the external data pipeline:
 
 ```json
 {
@@ -35,6 +70,9 @@ Some attributes are optional:
 ```
 
 ### Message with optional attributes
+
+Message that contains all optional attributes, that are not strictly required
+by the external data pipeline:
 
 ```json
 {
@@ -65,9 +103,41 @@ object is important as it contains `org_id` (also stored as a string).
 
 * `identity` (object)
 
+Nested JSON structure (sub-node) that contain more details about user or system
+who stored data into S3 bucket. That JSON structure usually contains several
+attributes, especially:
+
+* `account_number` (integer stored in string)
+* `auth_type` (type represented as a string)
+* `internal` (JSON sub-node with organization ID etc.)
+* `type` (object type - user, system etc.)
+* `user` (optional, JSON sub-node with user-related attributes)
+* `system` (optional, JSON sub-node with system-related attributes)
+
+Please note that `account_number` and `org_id` attributes are stored as
+strings, but currently its content can be represented as a positive integer.
+This might change in future, but it is unlikely.
+
 ## Optional attributes
 
 * `entitlements` (object)
+
+Optional JSON structure with additional flags with entitlements:
+
+```json
+"first_entitlement": {
+  "is_entitled": true,
+  "is_trial": false
+},
+"second_entitlement": {
+  "is_entitled": true,
+  "is_trial": true
+},
+"third_entitlement": {
+  "is_entitled": false,
+  "is_trial": false
+}
+```
 
 ## Examples
 
@@ -169,3 +239,19 @@ object is important as it contains `org_id` (also stored as a string).
     }
 }
 ```
+
+---
+**NOTE**
+
+`cn` uses its canonical textual representation: the 16 octets of a
+UUID are represented as 32 hexadecimal (base-16) digits, displayed in five
+groups separated by hyphens, in the form 8-4-4-4-12 for a total of 36
+characters (32 hexadecimal characters and 4 hyphens).
+
+An example of UUID:
+
+```
+3ba9b042-b8b8-4714-98e9-17915c2eeb95
+```
+
+---
