@@ -5,6 +5,17 @@ layout: default
 
 ## External data pipeline
 
+### Whole data flow
+
+1. Event about new data from insights operator is consumed from Kafka. That event contains (among
+other things) URL to S3 Bucket
+2. Insights operator data is read from S3 Bucket and Insights rules are applied to that data
+3. Results (basically organization ID + cluster name + insights results JSON) are stored back into
+Kafka, but into different topic
+4. That results are consumed by Insights rules aggregator service that caches them
+5. The service provides such data via REST API to other tools, like OpenShift Cluster Manager web
+UI, OpenShift console, etc.
+
 <img src="images/external-data-pipeline.png" alt="External data pipeline" usemap="#external-data-pipeline">
 <map name="external-data-pipeline">
     <area shape="rect" coords="249, 155, 334, 212" title="Incoming messages in platform.upload.buckit" alt="Incoming messages in platform.upload.buckit" href="platform_upload_buckit_messages.html">
