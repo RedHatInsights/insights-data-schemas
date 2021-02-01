@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 # vim: set fileencoding=utf-8
 
-# Copyright © 2020 Pavel Tisnovsky
+# Copyright © 2020, 2021 Pavel Tisnovsky
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -15,14 +15,14 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-"""Unit tests fof platform_upload_buckit_messages module."""
+"""Unit tests for platform_upload_buckit_messages module."""
 
 import pytest
 
 from voluptuous import Invalid
 
 from platform_upload_buckit_messages import schema
-from platform_upload_buckit_messages import validate
+from common import validate
 
 
 @pytest.fixture
