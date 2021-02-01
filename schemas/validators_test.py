@@ -733,6 +733,23 @@ base64_values_json = (
         "eyJmb28iOjEsImJhcjoyfQo=",  # {"foo":1,"bar:2}
         )
 
+# proper key values
+key_values = (
+        "A_B",
+        "AB_CD",
+        "ABC_DEF")
+
+
+# improper key values
+not_key_values = (
+        "",
+        "a_b",
+        "ab_cd",
+        "abc_def",
+        "AB_",
+        "_BC",
+        "_")
+
 
 @pytest.mark.parametrize("value", positive_int_values+negative_int_values_and_zero)
 def test_intTypeValidator_correct_values(value):
@@ -1741,3 +1758,26 @@ def test_b64IdentityValidator_incorrect_types(value):
     # exception is expected
     with pytest.raises(Invalid) as excinfo:
         b64IdentityValidator(schema, value)
+
+
+@pytest.mark.parametrize("value", key_values)
+def test_keyValueValidator_proper_values(value):
+    """Check if proper values are validated."""
+    # exception is not expected
+    keyValueValidator(value)
+
+
+@pytest.mark.parametrize("value", not_key_values)
+def test_keyValueValidator_proper_values(value):
+    """Check if impproper values are validated."""
+    # exception is expected
+    with pytest.raises(Invalid) as excinfo:
+        keyValueValidator(value)
+
+
+@pytest.mark.parametrize("value", not_string_type)
+def test_keyValueValidator_incorrect_types(value):
+    """Check if improper values (with wrong type) are validated."""
+    # exception is expected
+    with pytest.raises(Invalid) as excinfo:
+        keyValueValidator(value)
