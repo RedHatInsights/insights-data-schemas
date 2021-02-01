@@ -286,6 +286,15 @@ def timestampValidatorMs(value):
         raise Invalid("invalid datetime value {value}".format(value=value))
 
 
+def keyValueValidator(value):
+    """Validate if value conformns to a key used in Insights Results."""
+    stringTypeValidator(value)
+
+    KEY_VALUE_RE = re.compile(r"[A-Z]+[_][A-Z]+")
+    if not KEY_VALUE_RE.fullmatch(value):
+        raise Invalid("wrong key value")
+
+
 def urlToAWSValidator(value):
     """Validate if value conformns to AWS S3 URL."""
     stringTypeValidator(value)
