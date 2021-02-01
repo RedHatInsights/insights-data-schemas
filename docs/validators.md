@@ -128,3 +128,6 @@ Validate if value conformns to AWS S3 URL.
     
 ## `uuidValidator(value, version=4)`
 Check if value conforms to UUID.
+
+## `keyValueValidator(value)`
+Validate if value conformns to a key used in Insights Results.
