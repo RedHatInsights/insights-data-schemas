@@ -994,10 +994,10 @@ Set of custom validators (predicates) used in data schemes.</p>
       <div class='octowrap'>
         <a class='octothorpe' href='#section-75'>#</a>
       </div>
-      <p>Validate if value conformns to AWS S3 URL.</p>
+      <p>Validate if value conformns to a key used in Insights Results.</p>
     </div>
     <div class='code'>
-      <div class="highlight"><pre><span class="k">def</span> <span class="nf">urlToAWSValidator</span><span class="p">(</span><span class="n">value</span><span class="p">):</span></pre></div>
+      <div class="highlight"><pre><span class="k">def</span> <span class="nf">keyValueValidator</span><span class="p">(</span><span class="n">value</span><span class="p">):</span></pre></div>
     </div>
   </div>
   <div class='clearall'></div>
@@ -1009,7 +1009,11 @@ Set of custom validators (predicates) used in data schemes.</p>
       
     </div>
     <div class='code'>
-      <div class="highlight"><pre>    <span class="n">stringTypeValidator</span><span class="p">(</span><span class="n">value</span><span class="p">)</span></pre></div>
+      <div class="highlight"><pre>    <span class="n">stringTypeValidator</span><span class="p">(</span><span class="n">value</span><span class="p">)</span>
+
+    <span class="n">KEY_VALUE_RE</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;[A-Z]+([_][A-Z0-9]+)+&quot;</span><span class="p">)</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">KEY_VALUE_RE</span><span class="o">.</span><span class="n">fullmatch</span><span class="p">(</span><span class="n">value</span><span class="p">):</span>
+        <span class="k">raise</span> <span class="n">Invalid</span><span class="p">(</span><span class="s2">&quot;wrong key value &#39;{}&#39;&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">value</span><span class="p">))</span></pre></div>
     </div>
   </div>
   <div class='clearall'></div>
@@ -1017,6 +1021,86 @@ Set of custom validators (predicates) used in data schemes.</p>
     <div class='docs'>
       <div class='octowrap'>
         <a class='octothorpe' href='#section-77'>#</a>
+      </div>
+      <p>Validate if value contains FQDN (fully-qualified name).</p>
+    </div>
+    <div class='code'>
+      <div class="highlight"><pre><span class="k">def</span> <span class="nf">ruleFQDNValidator</span><span class="p">(</span><span class="n">value</span><span class="p">):</span></pre></div>
+    </div>
+  </div>
+  <div class='clearall'></div>
+  <div class='section' id='section-78'>
+    <div class='docs'>
+      <div class='octowrap'>
+        <a class='octothorpe' href='#section-78'>#</a>
+      </div>
+      
+    </div>
+    <div class='code'>
+      <div class="highlight"><pre>    <span class="n">stringTypeValidator</span><span class="p">(</span><span class="n">value</span><span class="p">)</span>
+
+    <span class="n">FQDN_VALUE_RE</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;([a-z0-9_]+[.])+[a-z0-9_]+&quot;</span><span class="p">)</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">FQDN_VALUE_RE</span><span class="o">.</span><span class="n">fullmatch</span><span class="p">(</span><span class="n">value</span><span class="p">):</span>
+        <span class="k">raise</span> <span class="n">Invalid</span><span class="p">(</span><span class="s2">&quot;wrong FQDN &#39;{}&#39;&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">value</span><span class="p">))</span></pre></div>
+    </div>
+  </div>
+  <div class='clearall'></div>
+  <div class='section' id='section-79'>
+    <div class='docs'>
+      <div class='octowrap'>
+        <a class='octothorpe' href='#section-79'>#</a>
+      </div>
+      <p>Validate if value contains rule ID.</p>
+    </div>
+    <div class='code'>
+      <div class="highlight"><pre><span class="k">def</span> <span class="nf">ruleIDValidator</span><span class="p">(</span><span class="n">value</span><span class="p">):</span></pre></div>
+    </div>
+  </div>
+  <div class='clearall'></div>
+  <div class='section' id='section-80'>
+    <div class='docs'>
+      <div class='octowrap'>
+        <a class='octothorpe' href='#section-80'>#</a>
+      </div>
+      
+    </div>
+    <div class='code'>
+      <div class="highlight"><pre>    <span class="n">stringTypeValidator</span><span class="p">(</span><span class="n">value</span><span class="p">)</span>
+
+    <span class="n">FQDN_VALUE_RE</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;[a-z0-9_]+([_][a-z0-9_]+)+\|[A-Z0-9_]+([_][A-Z0-9_]+)+&quot;</span><span class="p">)</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">FQDN_VALUE_RE</span><span class="o">.</span><span class="n">fullmatch</span><span class="p">(</span><span class="n">value</span><span class="p">):</span>
+        <span class="k">raise</span> <span class="n">Invalid</span><span class="p">(</span><span class="s2">&quot;wrong FQDN &#39;{}&#39;&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">value</span><span class="p">))</span></pre></div>
+    </div>
+  </div>
+  <div class='clearall'></div>
+  <div class='section' id='section-81'>
+    <div class='docs'>
+      <div class='octowrap'>
+        <a class='octothorpe' href='#section-81'>#</a>
+      </div>
+      <p>Validate if value conformns to AWS S3 URL.</p>
+    </div>
+    <div class='code'>
+      <div class="highlight"><pre><span class="k">def</span> <span class="nf">urlToAWSValidator</span><span class="p">(</span><span class="n">value</span><span class="p">):</span></pre></div>
+    </div>
+  </div>
+  <div class='clearall'></div>
+  <div class='section' id='section-82'>
+    <div class='docs'>
+      <div class='octowrap'>
+        <a class='octothorpe' href='#section-82'>#</a>
+      </div>
+      
+    </div>
+    <div class='code'>
+      <div class="highlight"><pre>    <span class="n">stringTypeValidator</span><span class="p">(</span><span class="n">value</span><span class="p">)</span></pre></div>
+    </div>
+  </div>
+  <div class='clearall'></div>
+  <div class='section' id='section-83'>
+    <div class='docs'>
+      <div class='octowrap'>
+        <a class='octothorpe' href='#section-83'>#</a>
       </div>
       <p>https://<hostname>/service_id/file_id?<credentials and other params></p>
     </div>
@@ -1032,89 +1116,15 @@ Set of custom validators (predicates) used in data schemes.</p>
     </div>
   </div>
   <div class='clearall'></div>
-  <div class='section' id='section-78'>
-    <div class='docs'>
-      <div class='octowrap'>
-        <a class='octothorpe' href='#section-78'>#</a>
-      </div>
-      <p>Check if value conforms to UUID.</p>
-    </div>
-    <div class='code'>
-      <div class="highlight"><pre><span class="k">def</span> <span class="nf">uuidValidator</span><span class="p">(</span><span class="n">value</span><span class="p">,</span> <span class="n">version</span><span class="o">=</span><span class="mi">4</span><span class="p">):</span></pre></div>
-    </div>
-  </div>
-  <div class='clearall'></div>
-  <div class='section' id='section-79'>
-    <div class='docs'>
-      <div class='octowrap'>
-        <a class='octothorpe' href='#section-79'>#</a>
-      </div>
-      <p>check if the value has the expected type</p>
-    </div>
-    <div class='code'>
-      <div class="highlight"><pre>    <span class="n">stringTypeValidator</span><span class="p">(</span><span class="n">value</span><span class="p">)</span></pre></div>
-    </div>
-  </div>
-  <div class='clearall'></div>
-  <div class='section' id='section-80'>
-    <div class='docs'>
-      <div class='octowrap'>
-        <a class='octothorpe' href='#section-80'>#</a>
-      </div>
-      <p>UUID version 4 is the most common version, but it is possible to specify
-other version as well</p>
-    </div>
-    <div class='code'>
-      <div class="highlight"><pre>    <span class="n">UUID</span><span class="p">(</span><span class="n">value</span><span class="p">,</span> <span class="n">version</span><span class="o">=</span><span class="n">version</span><span class="p">)</span></pre></div>
-    </div>
-  </div>
-  <div class='clearall'></div>
-  <div class='section' id='section-81'>
-    <div class='docs'>
-      <div class='octowrap'>
-        <a class='octothorpe' href='#section-81'>#</a>
-      </div>
-      <p>Predicate that checks if the given value seems to be MD5 hash.</p>
-    </div>
-    <div class='code'>
-      <div class="highlight"><pre><span class="k">def</span> <span class="nf">md5Validator</span><span class="p">(</span><span class="n">value</span><span class="p">):</span></pre></div>
-    </div>
-  </div>
-  <div class='clearall'></div>
-  <div class='section' id='section-82'>
-    <div class='docs'>
-      <div class='octowrap'>
-        <a class='octothorpe' href='#section-82'>#</a>
-      </div>
-      <p>check if the value has the expected type</p>
-    </div>
-    <div class='code'>
-      <div class="highlight"><pre>    <span class="n">stringTypeValidator</span><span class="p">(</span><span class="n">value</span><span class="p">)</span></pre></div>
-    </div>
-  </div>
-  <div class='clearall'></div>
-  <div class='section' id='section-83'>
-    <div class='docs'>
-      <div class='octowrap'>
-        <a class='octothorpe' href='#section-83'>#</a>
-      </div>
-      <p>MD5 hash has 32 hexadecimal characters</p>
-    </div>
-    <div class='code'>
-      <div class="highlight"><pre>    <span class="k">if</span> <span class="ow">not</span> <span class="n">re</span><span class="o">.</span><span class="n">fullmatch</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;^[a-f0-9]{32}$&quot;</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
-        <span class="k">raise</span> <span class="n">Invalid</span><span class="p">(</span><span class="s2">&quot;the value &#39;{value}&#39; does not seem to be MD5 hash&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">value</span><span class="o">=</span><span class="n">value</span><span class="p">))</span></pre></div>
-    </div>
-  </div>
-  <div class='clearall'></div>
   <div class='section' id='section-84'>
     <div class='docs'>
       <div class='octowrap'>
         <a class='octothorpe' href='#section-84'>#</a>
       </div>
-      <p>Predicate that checks if the given value seems to be SHA1 hash.</p>
+      <p>Check if value conforms to UUID.</p>
     </div>
     <div class='code'>
-      <div class="highlight"><pre><span class="k">def</span> <span class="nf">sha1Validator</span><span class="p">(</span><span class="n">value</span><span class="p">):</span></pre></div>
+      <div class="highlight"><pre><span class="k">def</span> <span class="nf">uuidValidator</span><span class="p">(</span><span class="n">value</span><span class="p">,</span> <span class="n">version</span><span class="o">=</span><span class="mi">4</span><span class="p">):</span></pre></div>
     </div>
   </div>
   <div class='clearall'></div>
@@ -1135,11 +1145,11 @@ other version as well</p>
       <div class='octowrap'>
         <a class='octothorpe' href='#section-86'>#</a>
       </div>
-      <p>SHA-1 hash has 40 hexadecimal characters</p>
+      <p>UUID version 4 is the most common version, but it is possible to specify
+other version as well</p>
     </div>
     <div class='code'>
-      <div class="highlight"><pre>    <span class="k">if</span> <span class="ow">not</span> <span class="n">re</span><span class="o">.</span><span class="n">fullmatch</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;^[a-f0-9]{40}$&quot;</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
-        <span class="k">raise</span> <span class="n">Invalid</span><span class="p">(</span><span class="s2">&quot;the value &#39;{value}&#39; does not seem to be SHA1 hash&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">value</span><span class="o">=</span><span class="n">value</span><span class="p">))</span></pre></div>
+      <div class="highlight"><pre>    <span class="n">UUID</span><span class="p">(</span><span class="n">value</span><span class="p">,</span> <span class="n">version</span><span class="o">=</span><span class="n">version</span><span class="p">)</span></pre></div>
     </div>
   </div>
   <div class='clearall'></div>
@@ -1148,10 +1158,10 @@ other version as well</p>
       <div class='octowrap'>
         <a class='octothorpe' href='#section-87'>#</a>
       </div>
-      <p>Predicate that checks if the given value seems to be SHA224 hash.</p>
+      <p>Predicate that checks if the given value seems to be MD5 hash.</p>
     </div>
     <div class='code'>
-      <div class="highlight"><pre><span class="k">def</span> <span class="nf">sha224Validator</span><span class="p">(</span><span class="n">value</span><span class="p">):</span></pre></div>
+      <div class="highlight"><pre><span class="k">def</span> <span class="nf">md5Validator</span><span class="p">(</span><span class="n">value</span><span class="p">):</span></pre></div>
     </div>
   </div>
   <div class='clearall'></div>
@@ -1172,11 +1182,11 @@ other version as well</p>
       <div class='octowrap'>
         <a class='octothorpe' href='#section-89'>#</a>
       </div>
-      <p>SHA-224 hash has 56 hexadecimal characters</p>
+      <p>MD5 hash has 32 hexadecimal characters</p>
     </div>
     <div class='code'>
-      <div class="highlight"><pre>    <span class="k">if</span> <span class="ow">not</span> <span class="n">re</span><span class="o">.</span><span class="n">fullmatch</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;^[a-fA-F0-9]{56}$&quot;</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
-        <span class="k">raise</span> <span class="n">Invalid</span><span class="p">(</span><span class="s2">&quot;the value &#39;{value}&#39; does not seem to be SHA224 hash&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">value</span><span class="o">=</span><span class="n">value</span><span class="p">))</span></pre></div>
+      <div class="highlight"><pre>    <span class="k">if</span> <span class="ow">not</span> <span class="n">re</span><span class="o">.</span><span class="n">fullmatch</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;^[a-f0-9]{32}$&quot;</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
+        <span class="k">raise</span> <span class="n">Invalid</span><span class="p">(</span><span class="s2">&quot;the value &#39;{value}&#39; does not seem to be MD5 hash&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">value</span><span class="o">=</span><span class="n">value</span><span class="p">))</span></pre></div>
     </div>
   </div>
   <div class='clearall'></div>
@@ -1185,10 +1195,10 @@ other version as well</p>
       <div class='octowrap'>
         <a class='octothorpe' href='#section-90'>#</a>
       </div>
-      <p>Predicate that checks if the given value seems to be SHA256 hash.</p>
+      <p>Predicate that checks if the given value seems to be SHA1 hash.</p>
     </div>
     <div class='code'>
-      <div class="highlight"><pre><span class="k">def</span> <span class="nf">sha256Validator</span><span class="p">(</span><span class="n">value</span><span class="p">):</span></pre></div>
+      <div class="highlight"><pre><span class="k">def</span> <span class="nf">sha1Validator</span><span class="p">(</span><span class="n">value</span><span class="p">):</span></pre></div>
     </div>
   </div>
   <div class='clearall'></div>
@@ -1209,11 +1219,11 @@ other version as well</p>
       <div class='octowrap'>
         <a class='octothorpe' href='#section-92'>#</a>
       </div>
-      <p>SHA-256 hash has 64 hexadecimal characters</p>
+      <p>SHA-1 hash has 40 hexadecimal characters</p>
     </div>
     <div class='code'>
-      <div class="highlight"><pre>    <span class="k">if</span> <span class="ow">not</span> <span class="n">re</span><span class="o">.</span><span class="n">fullmatch</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;^[a-fA-F0-9]{64}$&quot;</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
-        <span class="k">raise</span> <span class="n">Invalid</span><span class="p">(</span><span class="s2">&quot;the value &#39;{value}&#39; does not seem to be SHA256 hash&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">value</span><span class="o">=</span><span class="n">value</span><span class="p">))</span></pre></div>
+      <div class="highlight"><pre>    <span class="k">if</span> <span class="ow">not</span> <span class="n">re</span><span class="o">.</span><span class="n">fullmatch</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;^[a-f0-9]{40}$&quot;</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
+        <span class="k">raise</span> <span class="n">Invalid</span><span class="p">(</span><span class="s2">&quot;the value &#39;{value}&#39; does not seem to be SHA1 hash&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">value</span><span class="o">=</span><span class="n">value</span><span class="p">))</span></pre></div>
     </div>
   </div>
   <div class='clearall'></div>
@@ -1222,10 +1232,10 @@ other version as well</p>
       <div class='octowrap'>
         <a class='octothorpe' href='#section-93'>#</a>
       </div>
-      <p>Predicate that checks if the given value seems to be SHA384 hash.</p>
+      <p>Predicate that checks if the given value seems to be SHA224 hash.</p>
     </div>
     <div class='code'>
-      <div class="highlight"><pre><span class="k">def</span> <span class="nf">sha384Validator</span><span class="p">(</span><span class="n">value</span><span class="p">):</span></pre></div>
+      <div class="highlight"><pre><span class="k">def</span> <span class="nf">sha224Validator</span><span class="p">(</span><span class="n">value</span><span class="p">):</span></pre></div>
     </div>
   </div>
   <div class='clearall'></div>
@@ -1246,11 +1256,11 @@ other version as well</p>
       <div class='octowrap'>
         <a class='octothorpe' href='#section-95'>#</a>
       </div>
-      <p>SHA-384 hash has 64 hexadecimal characters</p>
+      <p>SHA-224 hash has 56 hexadecimal characters</p>
     </div>
     <div class='code'>
-      <div class="highlight"><pre>    <span class="k">if</span> <span class="ow">not</span> <span class="n">re</span><span class="o">.</span><span class="n">fullmatch</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;^[a-fA-F0-9]{96}$&quot;</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
-        <span class="k">raise</span> <span class="n">Invalid</span><span class="p">(</span><span class="s2">&quot;the value &#39;{value}&#39; does not seem to be SHA384 hash&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">value</span><span class="o">=</span><span class="n">value</span><span class="p">))</span></pre></div>
+      <div class="highlight"><pre>    <span class="k">if</span> <span class="ow">not</span> <span class="n">re</span><span class="o">.</span><span class="n">fullmatch</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;^[a-fA-F0-9]{56}$&quot;</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
+        <span class="k">raise</span> <span class="n">Invalid</span><span class="p">(</span><span class="s2">&quot;the value &#39;{value}&#39; does not seem to be SHA224 hash&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">value</span><span class="o">=</span><span class="n">value</span><span class="p">))</span></pre></div>
     </div>
   </div>
   <div class='clearall'></div>
@@ -1259,10 +1269,10 @@ other version as well</p>
       <div class='octowrap'>
         <a class='octothorpe' href='#section-96'>#</a>
       </div>
-      <p>Predicate that checks if the given value seems to be SHA512 hash.</p>
+      <p>Predicate that checks if the given value seems to be SHA256 hash.</p>
     </div>
     <div class='code'>
-      <div class="highlight"><pre><span class="k">def</span> <span class="nf">sha512Validator</span><span class="p">(</span><span class="n">value</span><span class="p">):</span></pre></div>
+      <div class="highlight"><pre><span class="k">def</span> <span class="nf">sha256Validator</span><span class="p">(</span><span class="n">value</span><span class="p">):</span></pre></div>
     </div>
   </div>
   <div class='clearall'></div>
@@ -1283,11 +1293,11 @@ other version as well</p>
       <div class='octowrap'>
         <a class='octothorpe' href='#section-98'>#</a>
       </div>
-      <p>SHA-512 hash has 128 hexadecimal characters</p>
+      <p>SHA-256 hash has 64 hexadecimal characters</p>
     </div>
     <div class='code'>
-      <div class="highlight"><pre>    <span class="k">if</span> <span class="ow">not</span> <span class="n">re</span><span class="o">.</span><span class="n">fullmatch</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;^[a-fA-F0-9]{128}$&quot;</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
-        <span class="k">raise</span> <span class="n">Invalid</span><span class="p">(</span><span class="s2">&quot;the value &#39;{value}&#39; does not seem to be SHA512 hash&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">value</span><span class="o">=</span><span class="n">value</span><span class="p">))</span></pre></div>
+      <div class="highlight"><pre>    <span class="k">if</span> <span class="ow">not</span> <span class="n">re</span><span class="o">.</span><span class="n">fullmatch</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;^[a-fA-F0-9]{64}$&quot;</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
+        <span class="k">raise</span> <span class="n">Invalid</span><span class="p">(</span><span class="s2">&quot;the value &#39;{value}&#39; does not seem to be SHA256 hash&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">value</span><span class="o">=</span><span class="n">value</span><span class="p">))</span></pre></div>
     </div>
   </div>
   <div class='clearall'></div>
@@ -1296,10 +1306,10 @@ other version as well</p>
       <div class='octowrap'>
         <a class='octothorpe' href='#section-99'>#</a>
       </div>
-      <p>Predicate that checks if the given value seems to be SHA-3 224 hash.</p>
+      <p>Predicate that checks if the given value seems to be SHA384 hash.</p>
     </div>
     <div class='code'>
-      <div class="highlight"><pre><span class="k">def</span> <span class="nf">sha3_224Validator</span><span class="p">(</span><span class="n">value</span><span class="p">):</span></pre></div>
+      <div class="highlight"><pre><span class="k">def</span> <span class="nf">sha384Validator</span><span class="p">(</span><span class="n">value</span><span class="p">):</span></pre></div>
     </div>
   </div>
   <div class='clearall'></div>
@@ -1320,11 +1330,11 @@ other version as well</p>
       <div class='octowrap'>
         <a class='octothorpe' href='#section-101'>#</a>
       </div>
-      <p>SHA-3 224 hash has 56 hexadecimal characters</p>
+      <p>SHA-384 hash has 64 hexadecimal characters</p>
     </div>
     <div class='code'>
-      <div class="highlight"><pre>    <span class="k">if</span> <span class="ow">not</span> <span class="n">re</span><span class="o">.</span><span class="n">fullmatch</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;^[a-fA-F0-9]{56}$&quot;</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
-        <span class="k">raise</span> <span class="n">Invalid</span><span class="p">(</span><span class="s2">&quot;the value &#39;{value}&#39; does not seem to be SHA-3 224 hash&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">value</span><span class="o">=</span><span class="n">value</span><span class="p">))</span></pre></div>
+      <div class="highlight"><pre>    <span class="k">if</span> <span class="ow">not</span> <span class="n">re</span><span class="o">.</span><span class="n">fullmatch</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;^[a-fA-F0-9]{96}$&quot;</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
+        <span class="k">raise</span> <span class="n">Invalid</span><span class="p">(</span><span class="s2">&quot;the value &#39;{value}&#39; does not seem to be SHA384 hash&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">value</span><span class="o">=</span><span class="n">value</span><span class="p">))</span></pre></div>
     </div>
   </div>
   <div class='clearall'></div>
@@ -1333,10 +1343,10 @@ other version as well</p>
       <div class='octowrap'>
         <a class='octothorpe' href='#section-102'>#</a>
       </div>
-      <p>Predicate that checks if the given value seems to be SHA-3 256 hash.</p>
+      <p>Predicate that checks if the given value seems to be SHA512 hash.</p>
     </div>
     <div class='code'>
-      <div class="highlight"><pre><span class="k">def</span> <span class="nf">sha3_256Validator</span><span class="p">(</span><span class="n">value</span><span class="p">):</span></pre></div>
+      <div class="highlight"><pre><span class="k">def</span> <span class="nf">sha512Validator</span><span class="p">(</span><span class="n">value</span><span class="p">):</span></pre></div>
     </div>
   </div>
   <div class='clearall'></div>
@@ -1357,11 +1367,11 @@ other version as well</p>
       <div class='octowrap'>
         <a class='octothorpe' href='#section-104'>#</a>
       </div>
-      <p>SHA-3 256 hash has 64 hexadecimal characters</p>
+      <p>SHA-512 hash has 128 hexadecimal characters</p>
     </div>
     <div class='code'>
-      <div class="highlight"><pre>    <span class="k">if</span> <span class="ow">not</span> <span class="n">re</span><span class="o">.</span><span class="n">fullmatch</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;^[a-fA-F0-9]{64}$&quot;</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
-        <span class="k">raise</span> <span class="n">Invalid</span><span class="p">(</span><span class="s2">&quot;the value &#39;{value}&#39; does not seem to be SHA-3 256 hash&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">value</span><span class="o">=</span><span class="n">value</span><span class="p">))</span></pre></div>
+      <div class="highlight"><pre>    <span class="k">if</span> <span class="ow">not</span> <span class="n">re</span><span class="o">.</span><span class="n">fullmatch</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;^[a-fA-F0-9]{128}$&quot;</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
+        <span class="k">raise</span> <span class="n">Invalid</span><span class="p">(</span><span class="s2">&quot;the value &#39;{value}&#39; does not seem to be SHA512 hash&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">value</span><span class="o">=</span><span class="n">value</span><span class="p">))</span></pre></div>
     </div>
   </div>
   <div class='clearall'></div>
@@ -1370,10 +1380,10 @@ other version as well</p>
       <div class='octowrap'>
         <a class='octothorpe' href='#section-105'>#</a>
       </div>
-      <p>Predicate that checks if the given value seems to be SHA-3 384 hash.</p>
+      <p>Predicate that checks if the given value seems to be SHA-3 224 hash.</p>
     </div>
     <div class='code'>
-      <div class="highlight"><pre><span class="k">def</span> <span class="nf">sha3_384Validator</span><span class="p">(</span><span class="n">value</span><span class="p">):</span></pre></div>
+      <div class="highlight"><pre><span class="k">def</span> <span class="nf">sha3_224Validator</span><span class="p">(</span><span class="n">value</span><span class="p">):</span></pre></div>
     </div>
   </div>
   <div class='clearall'></div>
@@ -1394,11 +1404,11 @@ other version as well</p>
       <div class='octowrap'>
         <a class='octothorpe' href='#section-107'>#</a>
       </div>
-      <p>SHA-3 384 hash has 64 hexadecimal characters</p>
+      <p>SHA-3 224 hash has 56 hexadecimal characters</p>
     </div>
     <div class='code'>
-      <div class="highlight"><pre>    <span class="k">if</span> <span class="ow">not</span> <span class="n">re</span><span class="o">.</span><span class="n">fullmatch</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;^[a-fA-F0-9]{96}$&quot;</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
-        <span class="k">raise</span> <span class="n">Invalid</span><span class="p">(</span><span class="s2">&quot;the value &#39;{value}&#39; does not seem to be SHA-3 384 hash&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">value</span><span class="o">=</span><span class="n">value</span><span class="p">))</span></pre></div>
+      <div class="highlight"><pre>    <span class="k">if</span> <span class="ow">not</span> <span class="n">re</span><span class="o">.</span><span class="n">fullmatch</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;^[a-fA-F0-9]{56}$&quot;</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
+        <span class="k">raise</span> <span class="n">Invalid</span><span class="p">(</span><span class="s2">&quot;the value &#39;{value}&#39; does not seem to be SHA-3 224 hash&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">value</span><span class="o">=</span><span class="n">value</span><span class="p">))</span></pre></div>
     </div>
   </div>
   <div class='clearall'></div>
@@ -1407,10 +1417,10 @@ other version as well</p>
       <div class='octowrap'>
         <a class='octothorpe' href='#section-108'>#</a>
       </div>
-      <p>Predicate that checks if the given value seems to be SHA-3 512 hash.</p>
+      <p>Predicate that checks if the given value seems to be SHA-3 256 hash.</p>
     </div>
     <div class='code'>
-      <div class="highlight"><pre><span class="k">def</span> <span class="nf">sha3_512Validator</span><span class="p">(</span><span class="n">value</span><span class="p">):</span></pre></div>
+      <div class="highlight"><pre><span class="k">def</span> <span class="nf">sha3_256Validator</span><span class="p">(</span><span class="n">value</span><span class="p">):</span></pre></div>
     </div>
   </div>
   <div class='clearall'></div>
@@ -1431,11 +1441,11 @@ other version as well</p>
       <div class='octowrap'>
         <a class='octothorpe' href='#section-110'>#</a>
       </div>
-      <p>SHA-3 512 hash has 128 hexadecimal characters</p>
+      <p>SHA-3 256 hash has 64 hexadecimal characters</p>
     </div>
     <div class='code'>
-      <div class="highlight"><pre>    <span class="k">if</span> <span class="ow">not</span> <span class="n">re</span><span class="o">.</span><span class="n">fullmatch</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;^[a-fA-F0-9]{128}$&quot;</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
-        <span class="k">raise</span> <span class="n">Invalid</span><span class="p">(</span><span class="s2">&quot;the value &#39;{value}&#39; does not seem to be SHA-3 512 hash&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">value</span><span class="o">=</span><span class="n">value</span><span class="p">))</span></pre></div>
+      <div class="highlight"><pre>    <span class="k">if</span> <span class="ow">not</span> <span class="n">re</span><span class="o">.</span><span class="n">fullmatch</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;^[a-fA-F0-9]{64}$&quot;</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
+        <span class="k">raise</span> <span class="n">Invalid</span><span class="p">(</span><span class="s2">&quot;the value &#39;{value}&#39; does not seem to be SHA-3 256 hash&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">value</span><span class="o">=</span><span class="n">value</span><span class="p">))</span></pre></div>
     </div>
   </div>
   <div class='clearall'></div>
@@ -1444,10 +1454,10 @@ other version as well</p>
       <div class='octowrap'>
         <a class='octothorpe' href='#section-111'>#</a>
       </div>
-      <p>Predicate that checks if the given value seems to be SHAKE128 256-bit hash.</p>
+      <p>Predicate that checks if the given value seems to be SHA-3 384 hash.</p>
     </div>
     <div class='code'>
-      <div class="highlight"><pre><span class="k">def</span> <span class="nf">shake128Validator</span><span class="p">(</span><span class="n">value</span><span class="p">):</span></pre></div>
+      <div class="highlight"><pre><span class="k">def</span> <span class="nf">sha3_384Validator</span><span class="p">(</span><span class="n">value</span><span class="p">):</span></pre></div>
     </div>
   </div>
   <div class='clearall'></div>
@@ -1468,11 +1478,11 @@ other version as well</p>
       <div class='octowrap'>
         <a class='octothorpe' href='#section-113'>#</a>
       </div>
-      <p>SHAKE128 256-bit hash has 64 hexadecimal characters</p>
+      <p>SHA-3 384 hash has 64 hexadecimal characters</p>
     </div>
     <div class='code'>
-      <div class="highlight"><pre>    <span class="k">if</span> <span class="ow">not</span> <span class="n">re</span><span class="o">.</span><span class="n">fullmatch</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;^[a-fA-F0-9]{64}$&quot;</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
-        <span class="k">raise</span> <span class="n">Invalid</span><span class="p">(</span><span class="s2">&quot;the value &#39;{v}&#39; does not seem to be SHAKE128 256-bit hash&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">v</span><span class="o">=</span><span class="n">value</span><span class="p">))</span></pre></div>
+      <div class="highlight"><pre>    <span class="k">if</span> <span class="ow">not</span> <span class="n">re</span><span class="o">.</span><span class="n">fullmatch</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;^[a-fA-F0-9]{96}$&quot;</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
+        <span class="k">raise</span> <span class="n">Invalid</span><span class="p">(</span><span class="s2">&quot;the value &#39;{value}&#39; does not seem to be SHA-3 384 hash&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">value</span><span class="o">=</span><span class="n">value</span><span class="p">))</span></pre></div>
     </div>
   </div>
   <div class='clearall'></div>
@@ -1481,10 +1491,10 @@ other version as well</p>
       <div class='octowrap'>
         <a class='octothorpe' href='#section-114'>#</a>
       </div>
-      <p>Predicate that checks if the given value seems to be SHAKE256 256-bit hash.</p>
+      <p>Predicate that checks if the given value seems to be SHA-3 512 hash.</p>
     </div>
     <div class='code'>
-      <div class="highlight"><pre><span class="k">def</span> <span class="nf">shake256Validator</span><span class="p">(</span><span class="n">value</span><span class="p">):</span></pre></div>
+      <div class="highlight"><pre><span class="k">def</span> <span class="nf">sha3_512Validator</span><span class="p">(</span><span class="n">value</span><span class="p">):</span></pre></div>
     </div>
   </div>
   <div class='clearall'></div>
@@ -1505,11 +1515,11 @@ other version as well</p>
       <div class='octowrap'>
         <a class='octothorpe' href='#section-116'>#</a>
       </div>
-      <p>SHAKE256 256-bit hash has 64 hexadecimal characters</p>
+      <p>SHA-3 512 hash has 128 hexadecimal characters</p>
     </div>
     <div class='code'>
-      <div class="highlight"><pre>    <span class="k">if</span> <span class="ow">not</span> <span class="n">re</span><span class="o">.</span><span class="n">fullmatch</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;^[a-fA-F0-9]{64}$&quot;</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
-        <span class="k">raise</span> <span class="n">Invalid</span><span class="p">(</span><span class="s2">&quot;the value &#39;{v}&#39; does not seem to be SHAKE256 256-bit hash&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">v</span><span class="o">=</span><span class="n">value</span><span class="p">))</span></pre></div>
+      <div class="highlight"><pre>    <span class="k">if</span> <span class="ow">not</span> <span class="n">re</span><span class="o">.</span><span class="n">fullmatch</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;^[a-fA-F0-9]{128}$&quot;</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
+        <span class="k">raise</span> <span class="n">Invalid</span><span class="p">(</span><span class="s2">&quot;the value &#39;{value}&#39; does not seem to be SHA-3 512 hash&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">value</span><span class="o">=</span><span class="n">value</span><span class="p">))</span></pre></div>
     </div>
   </div>
   <div class='clearall'></div>
@@ -1518,10 +1528,10 @@ other version as well</p>
       <div class='octowrap'>
         <a class='octothorpe' href='#section-117'>#</a>
       </div>
-      <p>Predicate that checks if the given value seems to be BLAKE2 256-bit hash.</p>
+      <p>Predicate that checks if the given value seems to be SHAKE128 256-bit hash.</p>
     </div>
     <div class='code'>
-      <div class="highlight"><pre><span class="k">def</span> <span class="nf">BLAKE2Validator</span><span class="p">(</span><span class="n">value</span><span class="p">):</span></pre></div>
+      <div class="highlight"><pre><span class="k">def</span> <span class="nf">shake128Validator</span><span class="p">(</span><span class="n">value</span><span class="p">):</span></pre></div>
     </div>
   </div>
   <div class='clearall'></div>
@@ -1542,11 +1552,11 @@ other version as well</p>
       <div class='octowrap'>
         <a class='octothorpe' href='#section-119'>#</a>
       </div>
-      <p>BLAKE2 256-bit hash has 128 hexadecimal characters</p>
+      <p>SHAKE128 256-bit hash has 64 hexadecimal characters</p>
     </div>
     <div class='code'>
-      <div class="highlight"><pre>    <span class="k">if</span> <span class="ow">not</span> <span class="n">re</span><span class="o">.</span><span class="n">fullmatch</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;^[a-fA-F0-9]{128}$&quot;</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
-        <span class="k">raise</span> <span class="n">Invalid</span><span class="p">(</span><span class="s2">&quot;the value &#39;{v}&#39; does not seem to be BLAKE2 256-bit hash&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">v</span><span class="o">=</span><span class="n">value</span><span class="p">))</span></pre></div>
+      <div class="highlight"><pre>    <span class="k">if</span> <span class="ow">not</span> <span class="n">re</span><span class="o">.</span><span class="n">fullmatch</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;^[a-fA-F0-9]{64}$&quot;</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
+        <span class="k">raise</span> <span class="n">Invalid</span><span class="p">(</span><span class="s2">&quot;the value &#39;{v}&#39; does not seem to be SHAKE128 256-bit hash&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">v</span><span class="o">=</span><span class="n">value</span><span class="p">))</span></pre></div>
     </div>
   </div>
   <div class='clearall'></div>
@@ -1555,10 +1565,10 @@ other version as well</p>
       <div class='octowrap'>
         <a class='octothorpe' href='#section-120'>#</a>
       </div>
-      <p>Validate identity encoded by base64 encoding.</p>
+      <p>Predicate that checks if the given value seems to be SHAKE256 256-bit hash.</p>
     </div>
     <div class='code'>
-      <div class="highlight"><pre><span class="k">def</span> <span class="nf">b64IdentityValidator</span><span class="p">(</span><span class="n">identitySchema</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span></pre></div>
+      <div class="highlight"><pre><span class="k">def</span> <span class="nf">shake256Validator</span><span class="p">(</span><span class="n">value</span><span class="p">):</span></pre></div>
     </div>
   </div>
   <div class='clearall'></div>
@@ -1567,7 +1577,7 @@ other version as well</p>
       <div class='octowrap'>
         <a class='octothorpe' href='#section-121'>#</a>
       </div>
-      <p>input must be a string</p>
+      <p>check if the value has the expected type</p>
     </div>
     <div class='code'>
       <div class="highlight"><pre>    <span class="n">stringTypeValidator</span><span class="p">(</span><span class="n">value</span><span class="p">)</span></pre></div>
@@ -1579,10 +1589,11 @@ other version as well</p>
       <div class='octowrap'>
         <a class='octothorpe' href='#section-122'>#</a>
       </div>
-      <p>decode from BASE64 encoding</p>
+      <p>SHAKE256 256-bit hash has 64 hexadecimal characters</p>
     </div>
     <div class='code'>
-      <div class="highlight"><pre>    <span class="n">value</span> <span class="o">=</span> <span class="n">base64</span><span class="o">.</span><span class="n">b64decode</span><span class="p">(</span><span class="n">value</span><span class="p">)</span><span class="o">.</span><span class="n">decode</span><span class="p">(</span><span class="s1">&#39;utf-8&#39;</span><span class="p">)</span></pre></div>
+      <div class="highlight"><pre>    <span class="k">if</span> <span class="ow">not</span> <span class="n">re</span><span class="o">.</span><span class="n">fullmatch</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;^[a-fA-F0-9]{64}$&quot;</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
+        <span class="k">raise</span> <span class="n">Invalid</span><span class="p">(</span><span class="s2">&quot;the value &#39;{v}&#39; does not seem to be SHAKE256 256-bit hash&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">v</span><span class="o">=</span><span class="n">value</span><span class="p">))</span></pre></div>
     </div>
   </div>
   <div class='clearall'></div>
@@ -1591,10 +1602,10 @@ other version as well</p>
       <div class='octowrap'>
         <a class='octothorpe' href='#section-123'>#</a>
       </div>
-      <p>parse JSON</p>
+      <p>Predicate that checks if the given value seems to be BLAKE2 256-bit hash.</p>
     </div>
     <div class='code'>
-      <div class="highlight"><pre>    <span class="n">identity</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">loads</span><span class="p">(</span><span class="n">value</span><span class="p">)</span></pre></div>
+      <div class="highlight"><pre><span class="k">def</span> <span class="nf">BLAKE2Validator</span><span class="p">(</span><span class="n">value</span><span class="p">):</span></pre></div>
     </div>
   </div>
   <div class='clearall'></div>
@@ -1602,6 +1613,79 @@ other version as well</p>
     <div class='docs'>
       <div class='octowrap'>
         <a class='octothorpe' href='#section-124'>#</a>
+      </div>
+      <p>check if the value has the expected type</p>
+    </div>
+    <div class='code'>
+      <div class="highlight"><pre>    <span class="n">stringTypeValidator</span><span class="p">(</span><span class="n">value</span><span class="p">)</span></pre></div>
+    </div>
+  </div>
+  <div class='clearall'></div>
+  <div class='section' id='section-125'>
+    <div class='docs'>
+      <div class='octowrap'>
+        <a class='octothorpe' href='#section-125'>#</a>
+      </div>
+      <p>BLAKE2 256-bit hash has 128 hexadecimal characters</p>
+    </div>
+    <div class='code'>
+      <div class="highlight"><pre>    <span class="k">if</span> <span class="ow">not</span> <span class="n">re</span><span class="o">.</span><span class="n">fullmatch</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;^[a-fA-F0-9]{128}$&quot;</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
+        <span class="k">raise</span> <span class="n">Invalid</span><span class="p">(</span><span class="s2">&quot;the value &#39;{v}&#39; does not seem to be BLAKE2 256-bit hash&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">v</span><span class="o">=</span><span class="n">value</span><span class="p">))</span></pre></div>
+    </div>
+  </div>
+  <div class='clearall'></div>
+  <div class='section' id='section-126'>
+    <div class='docs'>
+      <div class='octowrap'>
+        <a class='octothorpe' href='#section-126'>#</a>
+      </div>
+      <p>Validate identity encoded by base64 encoding.</p>
+    </div>
+    <div class='code'>
+      <div class="highlight"><pre><span class="k">def</span> <span class="nf">b64IdentityValidator</span><span class="p">(</span><span class="n">identitySchema</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span></pre></div>
+    </div>
+  </div>
+  <div class='clearall'></div>
+  <div class='section' id='section-127'>
+    <div class='docs'>
+      <div class='octowrap'>
+        <a class='octothorpe' href='#section-127'>#</a>
+      </div>
+      <p>input must be a string</p>
+    </div>
+    <div class='code'>
+      <div class="highlight"><pre>    <span class="n">stringTypeValidator</span><span class="p">(</span><span class="n">value</span><span class="p">)</span></pre></div>
+    </div>
+  </div>
+  <div class='clearall'></div>
+  <div class='section' id='section-128'>
+    <div class='docs'>
+      <div class='octowrap'>
+        <a class='octothorpe' href='#section-128'>#</a>
+      </div>
+      <p>decode from BASE64 encoding</p>
+    </div>
+    <div class='code'>
+      <div class="highlight"><pre>    <span class="n">value</span> <span class="o">=</span> <span class="n">base64</span><span class="o">.</span><span class="n">b64decode</span><span class="p">(</span><span class="n">value</span><span class="p">)</span><span class="o">.</span><span class="n">decode</span><span class="p">(</span><span class="s1">&#39;utf-8&#39;</span><span class="p">)</span></pre></div>
+    </div>
+  </div>
+  <div class='clearall'></div>
+  <div class='section' id='section-129'>
+    <div class='docs'>
+      <div class='octowrap'>
+        <a class='octothorpe' href='#section-129'>#</a>
+      </div>
+      <p>parse JSON</p>
+    </div>
+    <div class='code'>
+      <div class="highlight"><pre>    <span class="n">identity</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">loads</span><span class="p">(</span><span class="n">value</span><span class="p">)</span></pre></div>
+    </div>
+  </div>
+  <div class='clearall'></div>
+  <div class='section' id='section-130'>
+    <div class='docs'>
+      <div class='octowrap'>
+        <a class='octothorpe' href='#section-130'>#</a>
       </div>
       <p>validate schema</p>
     </div>
