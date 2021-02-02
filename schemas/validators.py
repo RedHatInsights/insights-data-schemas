@@ -304,6 +304,15 @@ def ruleFQDNValidator(value):
         raise Invalid("wrong FQDN '{}'".format(value))
 
 
+def ruleIDValidator(value):
+    """Validate if value contains rule ID."""
+    stringTypeValidator(value)
+
+    FQDN_VALUE_RE = re.compile(r"[a-z0-9_]+([_][a-z0-9_]+)+\|[A-Z0-9_]+([_][A-Z0-9_]+)+")
+    if not FQDN_VALUE_RE.fullmatch(value):
+        raise Invalid("wrong FQDN '{}'".format(value))
+
+
 def urlToAWSValidator(value):
     """Validate if value conformns to AWS S3 URL."""
     stringTypeValidator(value)
