@@ -774,7 +774,6 @@ improper_fqdn_values = (
         ".bb")
 
 
-
 @pytest.mark.parametrize("value", positive_int_values+negative_int_values_and_zero)
 def test_intTypeValidator_correct_values(value):
     """Check if proper integer values are validated."""
