@@ -134,3 +134,6 @@ Validate if value conformns to a key used in Insights Results.
 
 ## `ruleFQDNValidator(value)`
 Validate if value contains FQDN (fully-qualified name).
+
+## `ruleIDValidator(value)`
+Validate if value contains rule ID.
