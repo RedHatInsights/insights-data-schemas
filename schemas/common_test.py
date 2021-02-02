@@ -18,6 +18,8 @@
 """Unit tests for common module."""
 
 import pytest
+import contextlib
+import io
 
 from os import path
 
@@ -28,6 +30,7 @@ from common import read_control_code, load_json_from_file
 from common import validate_single_message
 from common import try_to_validate_message
 from common import validate_multiple_messages
+from common import print_report
 
 
 def test_read_control_code():
@@ -239,3 +242,115 @@ def test_validate_multiple_messages_wrong_file():
     assert result["valid"] == 0
     assert result["invalid"] == 1
     assert result["error"] == 0
+
+
+def test_validate_multiple_nonexistent_file():
+    """Test the function validate_multiple_messages."""
+    schema = Schema({})
+    path_to_payload = "this_does_not_exists"
+
+    # try to validate JSON file without errors
+    result = validate_multiple_messages(schema, path_to_payload, True)
+
+    # validate result
+    assert result is not None
+    assert "processed" in result
+    assert "valid" in result
+    assert "invalid" in result
+    assert "error" in result
+
+    # validate counters
+    assert result["processed"] == 0
+    assert result["valid"] == 0
+    assert result["invalid"] == 0
+    assert result["error"] == 1
+
+
+def test_print_report_in_case_of_no_error():
+    """Test the function print_report."""
+    result = {
+            "processed": 2,
+            "valid": 2,
+            "invalid": 0,
+            "error": 0
+            }
+
+    f = io.StringIO()
+    with contextlib.redirect_stdout(f):
+        print_report(result, True)
+    output = f.getvalue()
+
+    print(output)
+
+    expected = """
+Status:
+Processed messages: 2
+
+Valid messages:     2
+Invalid messages:   0
+Errors detected:    0
+
+Summary:
+[OK]: all messages have proper format
+"""
+    assert output == expected
+
+
+def test_print_report_in_case_of_invalid_data():
+    """Test the function print_report."""
+    result = {
+            "processed": 2,
+            "valid": 1,
+            "invalid": 1,
+            "error": 0
+            }
+
+    f = io.StringIO()
+    with contextlib.redirect_stdout(f):
+        print_report(result, True)
+    output = f.getvalue()
+
+    print(output)
+
+    expected = """
+Status:
+Processed messages: 2
+
+Valid messages:     1
+Invalid messages:   1
+Errors detected:    0
+
+Summary:
+[WARN]: invalid messages detected
+"""
+    assert output == expected
+
+
+def test_print_report_in_case_of_error():
+    """Test the function print_report."""
+    result = {
+            "processed": 1,
+            "valid": 2,
+            "invalid": 3,
+            "error": 4
+            }
+
+    f = io.StringIO()
+    with contextlib.redirect_stdout(f):
+        print_report(result, True)
+    output = f.getvalue()
+
+    print(output)
+
+    expected = """
+Status:
+Processed messages: 1
+
+Valid messages:     2
+Invalid messages:   3
+Errors detected:    4
+
+Summary:
+[FAIL]: invalid JSON(s) detected
+"""
+    assert output == expected

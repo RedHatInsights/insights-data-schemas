@@ -105,19 +105,24 @@ def validate_multiple_messages(schema, input_file, verbose):
     invalid = 0
     error = 0
 
-    with open(input_file, "r") as fin:
-        # iterate over all lines in the message file
-        for line in fin:
-            processed += 1
-            try:
-                try_to_validate_message(schema, line, processed, verbose)
-                valid += 1
-            except (ValueError, Invalid) as ve:
-                invalid += 1
-                print("Validation error: " + str(ve))
-            except Exception as e:
-                print("Other problem: " + str(e))
-                error += 1
+    try:
+        with open(input_file, "r") as fin:
+            # iterate over all lines in the message file
+            for line in fin:
+                processed += 1
+                try:
+                    try_to_validate_message(schema, line, processed, verbose)
+                    valid += 1
+                except (ValueError, Invalid) as ve:
+                    invalid += 1
+                    print("Validation error: " + str(ve))
+                except Exception as e:
+                    print("Other problem: " + str(e))
+                    error += 1
+
+    except IOError as e:
+        print("File-related problem: " + str(e))
+        error += 1
 
     return {"processed": processed,
             "valid": valid,
@@ -132,7 +137,7 @@ def print_report(report, nocolors):
     # are not enabled on command line, we can simply use empty strings in
     # output instead of real color escape codes.
     red_background = green_background = magenta_background = red_foreground = \
-        green_foreground = blue_foreground = no_color = ""
+        green_foreground = blue_foreground = magenta_foreground = no_color = ""
 
     # If colors are enabled by command line parameter, use control sequence
     # returned by `tput` command.
