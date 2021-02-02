@@ -13,6 +13,9 @@ unit_tests:
 coverage:
 	pytest -v -p no:cacheprovider --cov schemas/
 
+coverage-report:
+	pytest -v -p no:cacheprovider --cov schemas/ --cov-report=html
+
 documentation:
 	pydoc3 schemas/validators.py > docs/validators.txt
 
