@@ -1,13 +1,13 @@
 # Format of the received SQS messages consumed by SQS Listener
 
-The messages received from SQS are represented as Python structures provided by
-SQS interface (Boto client).
+The messages received from SQS are represented as Python data structures
+provided by SQS interface (Boto client).
 
 ## Basic format
 
 The response is represented as Python dictionary and contains two parts -
-`ResponseMetadata` and `Messages`.  `ResponseMetadata` sub-structure is
-required and is represented as Python dictionary as well. `Messages` is a
+namely `ResponseMetadata` and `Messages`. `ResponseMetadata` sub-structure is
+required and is represented as a Python dictionary as well. `Messages` is a
 list (of items with format described below) and is optional - when no messages
 are available in SQS, this attribute is missing.
 
@@ -15,7 +15,7 @@ are available in SQS, this attribute is missing.
 **NOTE**
 
 For SQS Listener only the `Messages` attribute is relevant, because
-`ResponseMetatada` is ignored in current version.
+`ResponseMetatada` is ignored in the current version.
 
 ---
 
@@ -24,9 +24,9 @@ For SQS Listener only the `Messages` attribute is relevant, because
 This attribute is basically Python dictionary with following attributes:
 
 * `RequestId` (string) UUID of request
-* `HTTPStatusCode` (string) contains HTTP status code (200 for example) in string form
-* `HttpHeaders` (dictionary) metadata with HTTP headers, uses at least `content-type` and `content-length`
-* `RetryAttempts` (int) number of attempts made to receive the message/messages
+* `HTTPStatusCode` (string) contains HTTP status code in string form. Usually "200" status code is used
+* `HttpHeaders` (dictionary of string:string) metadata with HTTP headers, uses at least `content-type` and `content-length`, but more headers can be provided (`date` etc.)
+* `RetryAttempts` (positive integer or zero) number of attempts made to receive the message/messages
 
 ---
 **NOTE**
@@ -45,9 +45,9 @@ following attributes:
 
 * `MessageId` (string) message UUID
 * `ReceiptHandle` (string) handle, which is basically integer stored as string
-* `MD5OfBody` (string) MD5 hash of message body, string of 32 hexadecimal digits
+* `MD5OfBody` (string) MD5 hash of message body, string consisting of 32 hexadecimal digits
 * `Body` (string) message body in JSON stored into string
-* `Attributes` (dictionary) additional message attributes
+* `Attributes` (dictionary) additional message attributes, these attributes are described below
 
 ---
 **NOTE**
@@ -56,7 +56,6 @@ UUID uses its canonical textual representation: the 16 octets of a UUID are
 represented as 32 hexadecimal (base-16) digits, displayed in five groups
 separated by hyphens, in the form 8-4-4-4-12 for a total of 36 characters (32
 hexadecimal characters and 4 hyphens).
----
 
 ---
 **NOTE**
@@ -86,9 +85,11 @@ This attribute contains string that represents JSON data in following format:
 }
 ```
 
+The most important sub-attribute is `key` that can be used to access data in S3 bucket.
+
 #### Structure of `Attributes` sub-attribute
 
-This is simple dictionary with following attributes:
+This is simple Python dictionary with following attributes:
 
 * `SenderId` (string) ID of message sender
 * `ApproximateFirstReceiveTimestamp` (string) time stamp when the message was first received
