@@ -290,7 +290,7 @@ def keyValueValidator(value):
     """Validate if value conformns to a key used in Insights Results."""
     stringTypeValidator(value)
 
-    KEY_VALUE_RE = re.compile(r"[A-Z]+([_][A-Z]+)+")
+    KEY_VALUE_RE = re.compile(r"[A-Z]+([_][A-Z0-9]+)+")
     if not KEY_VALUE_RE.fullmatch(value):
         raise Invalid("wrong key value '{}'".format(value))
 

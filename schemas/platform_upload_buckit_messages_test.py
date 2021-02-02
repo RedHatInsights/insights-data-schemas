@@ -65,14 +65,14 @@ def test_validate_no_payload(validation_schema, verbose):
 
 @pytest.mark.parametrize("verbose", verbose)
 def test_validate_correct_message(validation_schema, verbose, correct_message):
-    """Test the validation for improper (no) payload."""
+    """Test the validation for correct payload."""
     # it should not fail
     validate(schema, correct_message, verbose)
 
 
 @pytest.mark.parametrize("verbose", verbose)
 def test_validate_message_without_account_attribute(validation_schema, verbose, correct_message):
-    """Test the validation for improper (no) payload."""
+    """Test the validation for improper payload."""
     del correct_message["account"]
     # it should fail
     with pytest.raises(Invalid) as excinfo:
@@ -81,7 +81,7 @@ def test_validate_message_without_account_attribute(validation_schema, verbose, 
 
 @pytest.mark.parametrize("verbose", verbose)
 def test_validate_message_wrong_account_attribute(validation_schema, verbose, correct_message):
-    """Test the validation for improper (no) payload."""
+    """Test the validation for improper payload."""
     # check with string not representing number
     correct_message["account"] = "foobar"
     # it should fail
