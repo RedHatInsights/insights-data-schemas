@@ -53,7 +53,7 @@ def correct_message():
                     {
                         "rule_fqdn": "ccx_rules_ocp.ocs.check_ocs_version.report",
                         "reason": "MISSING_REQUIREMENTS",
-                        "details": "All: ['ccx_ocp_core.specs.must_gather_ocs.OperatorsOcsMGOCS'] Any: ",
+                        "details": "All: ['ccx_ocp_core.specs.must_gather_ocs.OperatorsOcsMGOCS'] Any: ",  # noqa: E501
                         "type": "skip"
                         },
                     {
@@ -65,19 +65,19 @@ def correct_message():
                     {
                         "rule_fqdn": "ccx_rules_ocp.ocs.operator_phase_check.report",
                         "reason": "MISSING_REQUIREMENTS",
-                        "details": "All: ['ccx_ocp_core.specs.must_gather_ocs.OperatorsOcsMGOCS'] Any: ",
+                        "details": "All: ['ccx_ocp_core.specs.must_gather_ocs.OperatorsOcsMGOCS'] Any: ",  # noqa: E501
                         "type": "skip"
                         },
                     {
                         "rule_fqdn": "ccx_rules_ocp.ocs.pvc_phase_check.report",
                         "reason": "MISSING_REQUIREMENTS",
-                        "details": "All: ['ccx_ocp_core.specs.must_gather_ocs.PersistentVolumeClaimsMGOCS'] Any: ",
+                        "details": "All: ['ccx_ocp_core.specs.must_gather_ocs.PersistentVolumeClaimsMGOCS'] Any: ",  # noqa: E501
                         "type": "skip"
                         },
                     {
                         "rule_fqdn": "ccx_rules_ocp.ocs.ceph_check_mon_clock_skew.report",
                         "reason": "MISSING_REQUIREMENTS",
-                        "details": "All: ['ccx_rules_ocp.ocs.ceph_check_mon_clock_skew.get_mon_reporting_clock_skew'] Any: ",
+                        "details": "All: ['ccx_rules_ocp.ocs.ceph_check_mon_clock_skew.get_mon_reporting_clock_skew'] Any: ",  # noqa: E501
                         "type": "skip"
                         },
                     {
@@ -93,27 +93,27 @@ def correct_message():
                         "type": "skip"
                         },
                     {
-                        "rule_fqdn": "ccx_rules_ocp.external.rules.image_registry_pv_no_access.report",
+                        "rule_fqdn": "ccx_rules_ocp.external.rules.image_registry_pv_no_access.report",  # noqa: E501
                         "reason": "MISSING_REQUIREMENTS",
-                        "details": "All: ['ccx_rules_ocp.common.conditions.image_registry.DegradedImageRegistryOperator', 'ccx_rules_ocp.common.conditions.image_registry.ImageRegistryPod', 'ccx_rules_ocp.common.conditions.image_registry.ImageRegistryPersistentVolumeClaim'] Any: ",
+                        "details": "All: ['ccx_rules_ocp.common.conditions.image_registry.DegradedImageRegistryOperator', 'ccx_rules_ocp.common.conditions.image_registry.ImageRegistryPod', 'ccx_rules_ocp.common.conditions.image_registry.ImageRegistryPersistentVolumeClaim'] Any: ",  # noqa: E501
                         "type": "skip"
                         },
                     {
-                        "rule_fqdn": "ccx_rules_ocp.external.rules.image_registry_pv_low_capacity.report",
+                        "rule_fqdn": "ccx_rules_ocp.external.rules.image_registry_pv_low_capacity.report",  # noqa: E501
                         "reason": "MISSING_REQUIREMENTS",
-                        "details": "All: ['ccx_rules_ocp.common.conditions.image_registry.DegradedImageRegistryOperator', 'ccx_rules_ocp.common.conditions.image_registry.ImageRegistryPod', 'ccx_rules_ocp.common.conditions.image_registry.ImageRegistryPersistentVolumeClaim'] Any: ",
+                        "details": "All: ['ccx_rules_ocp.common.conditions.image_registry.DegradedImageRegistryOperator', 'ccx_rules_ocp.common.conditions.image_registry.ImageRegistryPod', 'ccx_rules_ocp.common.conditions.image_registry.ImageRegistryPersistentVolumeClaim'] Any: ",  # noqa: E501
                         "type": "skip"
                         },
                     {
-                            "rule_fqdn": "ccx_rules_ocp.external.rules.image_registry_no_volume_set_check.report",
+                            "rule_fqdn": "ccx_rules_ocp.external.rules.image_registry_no_volume_set_check.report",  # noqa: E501
                             "reason": "MISSING_REQUIREMENTS",
-                            "details": "All: ['ccx_rules_ocp.common.conditions.image_registry.DegradedImageRegistryOperator', 'ccx_rules_ocp.common.conditions.image_registry.ImageRegistryPod', 'ccx_rules_ocp.common.conditions.image_registry.isImageRegistryPodEmptyDirVolume', 'ccx_rules_ocp.common.conditions.image_registry.isImageRegistryPodPersistentVolume'] Any: ",
+                            "details": "All: ['ccx_rules_ocp.common.conditions.image_registry.DegradedImageRegistryOperator', 'ccx_rules_ocp.common.conditions.image_registry.ImageRegistryPod', 'ccx_rules_ocp.common.conditions.image_registry.isImageRegistryPodEmptyDirVolume', 'ccx_rules_ocp.common.conditions.image_registry.isImageRegistryPodPersistentVolume'] Any: ",  # noqa: E501
                             "type": "skip"
                             },
                     {
-                            "rule_fqdn": "ccx_rules_ocp.external.rules.image_registry_pv_not_bound.report",
+                            "rule_fqdn": "ccx_rules_ocp.external.rules.image_registry_pv_not_bound.report",  # noqa: E501
                             "reason": "MISSING_REQUIREMENTS",
-                            "details": "All: ['ccx_rules_ocp.common.conditions.image_registry.DegradedImageRegistryOperator', 'ccx_rules_ocp.common.conditions.image_registry.ImageRegistryPod', 'ccx_rules_ocp.common.conditions.image_registry.ImageRegistryPersistentVolumeClaim'] Any: ",
+                            "details": "All: ['ccx_rules_ocp.common.conditions.image_registry.DegradedImageRegistryOperator', 'ccx_rules_ocp.common.conditions.image_registry.ImageRegistryPod', 'ccx_rules_ocp.common.conditions.image_registry.ImageRegistryPersistentVolumeClaim'] Any: ",  # noqa: E501
                             "type": "skip"
                             }
                     ],
