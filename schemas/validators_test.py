@@ -1827,3 +1827,26 @@ def test_ruleFQDNValueValidator_incorrect_types(value):
     # exception is expected
     with pytest.raises(Invalid) as excinfo:
         ruleFQDNValidator(value)
+
+
+@pytest.mark.parametrize("value", proper_id_values)
+def test_ruleIDValueValidator_proper_values(value):
+    """Check if proper values are validated."""
+    # exception is not expected
+    ruleIDValidator(value)
+
+
+@pytest.mark.parametrize("value", improper_id_values)
+def test_ruleIDValueValidator_proper_values(value):
+    """Check if impproper values are validated."""
+    # exception is expected
+    with pytest.raises(Invalid) as excinfo:
+        ruleIDValidator(value)
+
+
+@pytest.mark.parametrize("value", not_string_type)
+def test_ruleIDValueValidator_incorrect_types(value):
+    """Check if improper values (with wrong type) are validated."""
+    # exception is expected
+    with pytest.raises(Invalid) as excinfo:
+        ruleIDValidator(value)
