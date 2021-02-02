@@ -324,6 +324,8 @@ Summary:
 [WARN]: invalid messages detected
 """
     assert output == expected
+
+
 def test_print_report_in_case_of_error():
     """Test the function print_report."""
     result = {
