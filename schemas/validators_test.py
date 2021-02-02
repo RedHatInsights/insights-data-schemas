@@ -774,6 +774,24 @@ improper_fqdn_values = (
         ".bb")
 
 
+# proper ID values
+proper_id_values = (
+        "a|b",
+        "9|10",
+        "a_b|c",
+        "a_b|c1",
+        "a1_b|c_d1")
+
+# improper ID values
+improper_id_values = (
+        "",
+        "X",
+        "x|Y",
+        "0|Y",
+        "x|Y_x",
+        "x|y_X",
+        " | ")
+
 @pytest.mark.parametrize("value", positive_int_values+negative_int_values_and_zero)
 def test_intTypeValidator_correct_values(value):
     """Check if proper integer values are validated."""
