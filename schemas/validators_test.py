@@ -750,6 +750,30 @@ not_key_values = (
         "_BC",
         "_")
 
+# proper FQDN values
+proper_fqdn_values = (
+        "a.b",
+        "abc.b",
+        "abc.def",
+        "a_b.d_f",
+        "a_b.x")
+
+
+# improper FQDN values
+improper_fqdn_values = (
+        "",
+        "a_b",
+        "ab_cd",
+        "abc_def",
+        "AB_",
+        "_BC",
+        "_",
+        "a.",
+        "aa.",
+        ".b",
+        ".bb")
+
+
 
 @pytest.mark.parametrize("value", positive_int_values+negative_int_values_and_zero)
 def test_intTypeValidator_correct_values(value):
@@ -1781,3 +1805,26 @@ def test_keyValueValidator_incorrect_types(value):
     # exception is expected
     with pytest.raises(Invalid) as excinfo:
         keyValueValidator(value)
+
+
+@pytest.mark.parametrize("value", proper_fqdn_values)
+def test_ruleFQDNValueValidator_proper_values(value):
+    """Check if proper values are validated."""
+    # exception is not expected
+    ruleFQDNValidator(value)
+
+
+@pytest.mark.parametrize("value", improper_fqdn_values)
+def test_ruleFQDNValueValidator_proper_values(value):
+    """Check if impproper values are validated."""
+    # exception is expected
+    with pytest.raises(Invalid) as excinfo:
+        ruleFQDNValidator(value)
+
+
+@pytest.mark.parametrize("value", not_string_type)
+def test_ruleFQDNValueValidator_incorrect_types(value):
+    """Check if improper values (with wrong type) are validated."""
+    # exception is expected
+    with pytest.raises(Invalid) as excinfo:
+        ruleFQDNValidator(value)
