@@ -131,3 +131,6 @@ Check if value conforms to UUID.
 
 ## `keyValueValidator(value)`
 Validate if value conformns to a key used in Insights Results.
+
+## `ruleFQDNValidator(value)`
+Validate if value contains FQDN (fully-qualified name).
