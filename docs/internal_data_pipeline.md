@@ -25,6 +25,12 @@ layout: default
 
 ### Parquet factory
 
+Parquet Factory is a program that can read data from several data sources,
+aggregate the data received from them and generate a set of Parquet files with
+the aggregated data, storing them in a S3 bucket. It is used to generate
+different data aggregations in the CCX Internal Data Pipeline, reading data
+from Kafka topics and Thanos service.
+
 <img src="images/parquet-factory.png" alt="Parquet factory" usemap="#parquet-factory">
 <map name="parquet-factory">
     <area shape="rect" coords="130, 34, 170, 64"   title="Messages consumed from ccx-XXX-insights-operator-archive-rules-results topic" alt="Messages consumed from ccx-XXX-insights-operator-archive-rules-results topic" href="parquet_rules_results.html">
