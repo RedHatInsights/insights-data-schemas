@@ -63,6 +63,4 @@ An example of UUID:
 
 ## Possible enhancements
 
-Version (positive integer) should be included in the message available via REST
-API (in `gob` format) so the schema change will be possible w/o breaking other
-services and tools.
+N/A
