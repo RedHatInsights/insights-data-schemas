@@ -178,3 +178,5 @@ TBD (not used in internal data pipeline)
 
 Version (positive integer) should be included in messages as a new JSON
 attribute.
+
+## Examples
