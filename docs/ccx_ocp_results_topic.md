@@ -20,7 +20,7 @@ consumed from `ccx.ocp.results` Kafka topic.
 Messages are not transformed by any ETL tool in the Kafka topic, so the messages have the same format as described in the following section:
 1. [Data produced by OCP rules engine](ccx_data_pipeline.md)
 
-Please use the document mentioned above.
+Please use the document mentioned above for further information.
 
 ## Possible enhancements
 

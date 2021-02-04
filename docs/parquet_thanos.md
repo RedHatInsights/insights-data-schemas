@@ -64,3 +64,5 @@ An example of UUID:
 ## Possible enhancements
 
 N/A
+
+## Examples
