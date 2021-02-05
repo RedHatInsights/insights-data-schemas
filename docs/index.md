@@ -10,7 +10,7 @@ layout: default
 
 ## Implemented validators
 
-[validators.md](validators.md)
+- [validators.md](validators.md)
 
 ## Documentation for Python packages
 
