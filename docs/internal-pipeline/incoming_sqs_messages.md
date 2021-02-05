@@ -6,32 +6,36 @@ layout: default
 # Format of the received SQS messages consumed by SQS Listener
 
 The messages received from SQS are represented as Python data structures
-provided by SQS interface (Boto client).
+provided by SQS interface (Boto client). More information about Boto client can
+be found on AWS site:
+https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/s3.html
 
 ## Basic format
 
-The response is represented as Python dictionary and contains two parts -
-namely `ResponseMetadata` and `Messages`. `ResponseMetadata` sub-structure is
-required and is represented as a Python dictionary as well. `Messages` is a
-list (of items with format described below) and is optional - when no messages
-are available in SQS, this attribute is missing.
+The response is represented as a standard Python dictionary and contains two
+parts - namely `ResponseMetadata` and `Messages`. `ResponseMetadata`
+sub-structure is required and is represented as a Python dictionary as well.
+`Messages` is represented as a list (of items with format described below) and
+is optional - when no messages are available in SQS, this attribute is missing.
 
 ---
 **NOTE**
 
 For SQS Listener only the `Messages` attribute is relevant, because
-`ResponseMetatada` is ignored in the current version.
+`ResponseMetatada` attribute is ignored in the current version of SQS consumer
+code.
 
 ---
 
 ### `ResponseMetadata` attribute
 
-This attribute is basically Python dictionary with following attributes:
+This attribute is basically a standard Python dictionary with following
+attributes:
 
 * `RequestId` (string) UUID of request
-* `HTTPStatusCode` (string) contains HTTP status code in string form. Usually "200" status code is used
+* `HTTPStatusCode` (string) contains HTTP status code in string form. Usually "200" status code is used in most situations
 * `HttpHeaders` (dictionary of string:string) metadata with HTTP headers, uses at least `content-type` and `content-length`, but more headers can be provided (`date` etc.)
-* `RetryAttempts` (positive integer or zero) number of attempts made to receive the message/messages
+* `RetryAttempts` (positive integer or zero) number of attempts made to receive the message or messages
 
 ---
 **NOTE**
@@ -39,14 +43,15 @@ This attribute is basically Python dictionary with following attributes:
 UUID uses its canonical textual representation: the 16 octets of a UUID are
 represented as 32 hexadecimal (base-16) digits, displayed in five groups
 separated by hyphens, in the form 8-4-4-4-12 for a total of 36 characters (32
-hexadecimal characters and 4 hyphens)
+hexadecimal characters and 4 hyphens). For more information please look at
+https://en.wikipedia.org/wiki/Universally_unique_identifier.
 
 ---
 
 ### `Messages` attribute
 
-This attribute is basically Python list and each item in this list has
-following attributes:
+This attribute is basically represented as a standard Python list and each item
+in this list has following attributes:
 
 * `MessageId` (string) message UUID
 * `ReceiptHandle` (string) handle, which is basically integer stored as string
@@ -60,13 +65,15 @@ following attributes:
 UUID uses its canonical textual representation: the 16 octets of a UUID are
 represented as 32 hexadecimal (base-16) digits, displayed in five groups
 separated by hyphens, in the form 8-4-4-4-12 for a total of 36 characters (32
-hexadecimal characters and 4 hyphens).
+hexadecimal characters and 4 hyphens). For more information please look at
+https://en.wikipedia.org/wiki/Universally_unique_identifier
 
 ---
 **NOTE**
 
 The 128-bit (16-byte) MD5 hashes (also termed message digests) are represented
-as a sequence of 32 hexadecimal digits.
+as a sequence of 32 hexadecimal digits. For more information please look at
+https://en.wikipedia.org/wiki/MD5
 ---
 
 #### Structure of `Body` sub-attribute
@@ -90,18 +97,23 @@ This attribute contains string that represents JSON data in following format:
 }
 ```
 
-The most important sub-attribute is `key` that can be used to access data in S3 bucket.
+The most important sub-attribute is `key` that can be used to access data in S3
+bucket. It is the unique identifier of an object stored in S3.
 
 #### Structure of `Attributes` sub-attribute
 
 This is simple Python dictionary with following attributes:
 
 * `SenderId` (string) ID of message sender
-* `ApproximateFirstReceiveTimestamp` (string) time stamp when the message was first received
+* `ApproximateFirstReceiveTimestamp` (string) time stamp with moment when the message was first received
 * `ApproximateReceiveCount` (string) how many times the message was received (usually 1)
-* `SentTimestamp` (string) time stamp when the message was sent
+* `SentTimestamp` (string) time stamp with moment when the message was sent
 
 ## Examples
+
+The following examples can be used to test the actual code or validators.
+Please note that `RequestId` and other sensitive information are changed
+accordingly so no real info is exposed.
 
 ### Structure returned when the queue is empty
 
@@ -153,3 +165,6 @@ This is simple Python dictionary with following attributes:
 }
 ```
 
+### Possible enhancements
+
+Not possible as the structure is dictated by AWS and Boto client.
