@@ -1,6 +1,8 @@
 ---
 layout: default
 ---
+\[[Front page](index.md)\]
+
 # Insights Data Schemas
 
 ## Internal data pipeline
