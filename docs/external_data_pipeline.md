@@ -18,6 +18,8 @@ Kafka, but into different topic
 5. The service provides such data via REST API to other tools, like OpenShift Cluster Manager web
 UI, OpenShift console, etc.
 
+### Architecture diagram
+
 <img src="images/external-data-pipeline.png" alt="External data pipeline" usemap="#external-data-pipeline">
 <map name="external-data-pipeline">
     <area shape="rect" coords="249, 155, 334, 212" title="Incoming messages in platform.upload.buckit" alt="Incoming messages in platform.upload.buckit" href="external-pipeline/platform_upload_buckit_messages.html">
@@ -27,6 +29,8 @@ UI, OpenShift console, etc.
     <area shape="rect" coords="496, 511, 581, 568" title="OCP results written into RDS" alt="OCP results written into RDS" href="external-pipeline/results_in_rds.html">
     <area shape="rect" coords="127, 418, 212, 475" title="Rule content produced by Content Service" alt="Rule content produced by Content Servic" href="external-pipeline/content_service.html">
 </map>
+
+### Data format descriptions
 
 1. [Incoming messages in `platform.upload.buckit`](external-pipeline/platform_upload_buckit_messages.md)
 1. [Raw data stored in S3 bucket](external-pipeline/raw_data_S3_bucket.md)

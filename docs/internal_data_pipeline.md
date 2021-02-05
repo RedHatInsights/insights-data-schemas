@@ -7,7 +7,13 @@ layout: default
 
 ## Internal data pipeline
 
+### Whole data flow
+
+### Architecture diagram
+
 <img src="images/internal-data-pipeline-architecture.png" alt="Internal data pipeline" usemap="#internal-pipeline">
+
+### Data format descriptions
 
 1. [Incoming messages in `platform.upload.buckit`](internal-pipeline/platform_upload_buckit_messages.md)
 1. [Incoming messages from SQS](internal-pipeline/incoming_sqs_messages.md)
