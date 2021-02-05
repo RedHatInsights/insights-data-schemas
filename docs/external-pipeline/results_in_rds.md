@@ -1,3 +1,8 @@
+---
+layout: default
+---
+\[[Front page](../index.md)\] \[[External data pipeline](../external_data_pipeline.md)\]
+
 # OCP results written into RDS
 
 ## Schema version

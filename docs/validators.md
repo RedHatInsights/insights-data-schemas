@@ -1,6 +1,9 @@
-# validators - Set of custom validators (predicates) used in data schemes.
-
+---
+layout: default
+---
 \[[Front page](index.md)\]
+
+# validators - Set of custom validators (predicates) used in data schemes.
 
 ## `BLAKE2Validator(value)`
 Predicate that checks if the given value seems to be BLAKE2 256-bit hash.

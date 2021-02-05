@@ -1,3 +1,8 @@
+---
+layout: default
+---
+\[[Front page](../index.md)\] \[[Internal data pipeline](../internal_data_pipeline.md)\]
+
 # Format of received Kafka messages from `ccx-XXX-insights-operator-archive-rules-results` topic
 
 Parquet Factory is a program that can read data from several data sources,

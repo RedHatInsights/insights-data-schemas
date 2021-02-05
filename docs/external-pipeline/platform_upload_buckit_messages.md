@@ -1,3 +1,8 @@
+---
+layout: default
+---
+\[[Front page](../index.md)\] \[[External data pipeline](../external_data_pipeline.md)\]
+
 # Format of the received Kafka records from `platform.upload.buckit` topic
 
 ## Schema version

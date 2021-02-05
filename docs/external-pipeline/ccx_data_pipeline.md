@@ -1,3 +1,8 @@
+---
+layout: default
+---
+\[[Front page](../index.md)\] \[[External data pipeline](../external_data_pipeline.md)\]
+
 # Data produced by OCP rules engine
 
 ## Schema version
