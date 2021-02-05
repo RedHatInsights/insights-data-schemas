@@ -1,3 +1,8 @@
+---
+layout: default
+---
+\[[Front page](../index.md)\] \[[External data pipeline](../external_data_pipeline.md)\]
+
 # Raw data stored in S3 bucket
 
 ## Schema version

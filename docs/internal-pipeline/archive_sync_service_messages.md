@@ -1,3 +1,8 @@
+---
+layout: default
+---
+\[[Front page](../index.md)\] \[[Internal data pipeline](../internal_data_pipeline.md)\]
+
 # Messages produced by archive-sync-service
 
 ## Schema version

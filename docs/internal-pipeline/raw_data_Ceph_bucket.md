@@ -1,3 +1,8 @@
+---
+layout: default
+---
+\[[Front page](../index.md)\] \[[Internal data pipeline](../internal_data_pipeline.md)\]
+
 # Raw data stored into Ceph bucket
 
 ## Schema version

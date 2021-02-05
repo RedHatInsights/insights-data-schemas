@@ -1,3 +1,8 @@
+---
+layout: default
+---
+\[[Front page](../index.md)\] \[[Internal data pipeline](../internal_data_pipeline.md)\]
+
 # Format of the received SQS messages consumed by SQS Listener
 
 The messages received from SQS are represented as Python data structures
