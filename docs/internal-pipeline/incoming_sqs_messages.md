@@ -8,7 +8,7 @@ layout: default
 The messages received from SQS are represented as Python data structures
 provided by SQS interface (Boto client). More information about Boto client can
 be found on AWS site:
-https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/s3.html
+[https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/s3.html](https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/s3.html).
 
 ## Basic format
 
@@ -44,7 +44,7 @@ UUID uses its canonical textual representation: the 16 octets of a UUID are
 represented as 32 hexadecimal (base-16) digits, displayed in five groups
 separated by hyphens, in the form 8-4-4-4-12 for a total of 36 characters (32
 hexadecimal characters and 4 hyphens). For more information please look at
-https://en.wikipedia.org/wiki/Universally_unique_identifier.
+[https://en.wikipedia.org/wiki/Universally_unique_identifier](https://en.wikipedia.org/wiki/Universally_unique_identifier).
 
 ---
 
@@ -66,7 +66,7 @@ UUID uses its canonical textual representation: the 16 octets of a UUID are
 represented as 32 hexadecimal (base-16) digits, displayed in five groups
 separated by hyphens, in the form 8-4-4-4-12 for a total of 36 characters (32
 hexadecimal characters and 4 hyphens). For more information please look at
-https://en.wikipedia.org/wiki/Universally_unique_identifier
+[https://en.wikipedia.org/wiki/Universally_unique_identifier](https://en.wikipedia.org/wiki/Universally_unique_identifier).
 
 ---
 **NOTE**
