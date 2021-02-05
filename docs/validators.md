@@ -1,5 +1,7 @@
 # validators - Set of custom validators (predicates) used in data schemes.
 
+\[[Front page](index.md)\]
+
 ## `BLAKE2Validator(value)`
 Predicate that checks if the given value seems to be BLAKE2 256-bit hash.
     
