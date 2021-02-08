@@ -68,6 +68,12 @@ separated by hyphens, in the form 8-4-4-4-12 for a total of 36 characters (32
 hexadecimal characters and 4 hyphens). For more information please look at
 [https://en.wikipedia.org/wiki/Universally_unique_identifier](https://en.wikipedia.org/wiki/Universally_unique_identifier).
 
+An example of UUID:
+
+```
+3ba9b042-b8b8-4714-98e9-17915c2eeb95
+```
+
 ---
 **NOTE**
 
