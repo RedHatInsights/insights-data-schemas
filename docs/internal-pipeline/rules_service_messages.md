@@ -13,6 +13,9 @@ DataHub (Ceph) bucket.
 The result of the applied rules is sent to
 `ccx-XXX-insights-operator-archive-rules-results` Kafka topic.
 
+This service is the same as Features Service but it uses a different
+configuration.
+
 ## Schema version
 
 1 (unofficial)
