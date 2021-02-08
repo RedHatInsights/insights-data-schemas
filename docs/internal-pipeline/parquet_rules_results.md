@@ -18,9 +18,10 @@ from Kafka topics and Thanos service.
 ## Description
 
 Parquet factory reads (among other data) messages from Kafka topic named
-`ccx-XXX-insights-operator-archive-features` where `XXX` needs to be replaced
-by environment (`prod` etc.). These messages are represented as a structured
-JSON format with many attributes that are described in more details below.
+`ccx-XXX-insights-operator-archive-rules-results` where `XXX` needs to be
+replaced by environment (`prod` etc.). These messages are represented as a
+structured JSON format with many attributes that are described in more details
+below.
 
 ## Basic format
 
