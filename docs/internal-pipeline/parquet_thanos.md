@@ -7,9 +7,9 @@ layout: default
 
 Parquet Factory is a program that can read data from several data sources,
 aggregate the data received from them and generate a set of Parquet files with
-the aggregated data, storing them in a S3 bucket. It is used to generate
-different data aggregations in the CCX Internal Data Pipeline, reading data
-from Kafka topics and Thanos service.
+the aggregated data, storing them in a selected S3 bucket. It is used to
+generate different data aggregations in the CCX Internal Data Pipeline, reading
+data from Kafka topics and Thanos service.
 
 ## Schema version
 
@@ -17,7 +17,9 @@ from Kafka topics and Thanos service.
 
 ## Description
 
-Parquet factory reads several metrics from Thanos in order to generate Parquet files. One data source is Thanos, especially the following two metrics:
+Parquet factory reads several metrics from Thanos in order to combine such
+metrics with messages consumed from Kafka topics and generate Parquet files.
+Especially the following two metrics are read:
 
 1. `id_version_ebs_account_internal:cluster_subscribed`
 1. `subscription_labels`
@@ -29,13 +31,17 @@ Parquet factory reads several metrics from Thanos in order to generate Parquet f
 * `cluster_id` (string) contains UUID with cluster name
 * `ebs_account` (string)
 
+An example:
+
 ---
 **NOTE**
 
 `ClusterName` uses its canonical textual representation: the 16 octets of a
 UUID are represented as 32 hexadecimal (base-16) digits, displayed in five
 groups separated by hyphens, in the form 8-4-4-4-12 for a total of 36
-characters (32 hexadecimal characters and 4 hyphens).
+characters (32 hexadecimal characters and 4 hyphens). For more information
+please look at
+[https://en.wikipedia.org/wiki/Universally_unique_identifier](https://en.wikipedia.org/wiki/Universally_unique_identifier).
 
 An example of UUID:
 
@@ -50,13 +56,17 @@ An example of UUID:
 * `email_domain` (string)
 * `managed` (bool)
 
+An example:
+
 ---
 **NOTE**
 
 `ClusterName` uses its canonical textual representation: the 16 octets of a
 UUID are represented as 32 hexadecimal (base-16) digits, displayed in five
 groups separated by hyphens, in the form 8-4-4-4-12 for a total of 36
-characters (32 hexadecimal characters and 4 hyphens).
+characters (32 hexadecimal characters and 4 hyphens). For more information
+please look at
+[https://en.wikipedia.org/wiki/Universally_unique_identifier](https://en.wikipedia.org/wiki/Universally_unique_identifier).
 
 An example of UUID:
 
