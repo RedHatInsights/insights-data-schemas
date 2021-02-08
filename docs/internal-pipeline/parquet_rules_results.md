@@ -18,20 +18,37 @@ from Kafka topics and Thanos service.
 ## Description
 
 Parquet factory reads (among other data) messages from Kafka topic named
-`ccx-XXX-insights-operator-archive-rules-results` where `XXX` needs to be
-replaced by environment (`prod` etc.). These messages are represented as a
-structured JSON format with many attributes described below.
+`ccx-XXX-insights-operator-archive-features` where `XXX` needs to be replaced
+by environment (`prod` etc.). These messages are represented as a structured
+JSON format with many attributes that are described in more details below.
 
 ## Basic format
 
-Data consumed from
-`ccx-XXX-insights-operator-archive-rules-resultsccx_data_pipeline` topic is in
-JSON format with the following three top-level required attributes:
+Data consumed from `ccx-XXX-insights-operator-archive-rules-results` topic is
+in JSON format with the following three top-level required attributes (all of
+them are mandatory):
 
 * `path` (URL)
 * `metadata` (sub-node with two attributes described below)
 * `report` (nested JSON-like structure that contains results of rule execution)
 
+An example (simplified):
+
+```JSON
+{
+  "path": "archives/compressed/aa/aaaaaaaa-bbbb-cccc-dddd-eeeeeeeeeeee/202101/20/031044.tar.gz",
+  "metadata": {
+     ...
+     ...
+     ...
+  },
+  "report": {
+     ...
+     ...
+     ...
+  }
+}
+```
 ## Format of the `path` node
 
 This attribute contains a string that represents path to a gzipped tarball
@@ -39,12 +56,32 @@ stored in Ceph bucket. Usually the path starts by `archives/compressed`
 followed by first two digits of cluster ID, then full cluster ID, and a name
 of gzipped tarball.
 
+An example:
+
+```JSON
+{
+  "path": "archives/compressed/aa/aaaaaaaa-bbbb-cccc-dddd-eeeeeeeeeeee/202101/20/031044.tar.gz",
+  ...
+  ...
+  ...
+}
+```
+
 ## Format of the `metadata` node
 
 This attribute contains two sub-nodes:
 
 * `cluster_id` (string) cluster ID represented as UUID
 * `external_organization` (string) organization ID represented as a string (not integer)
+
+An example:
+
+```JSON
+  "metadata": {
+    "cluster_id": "aaaaaaaa-bbbb-cccc-dddd-eeeeeeeeeeee",
+    "external_organization": "1234567890"
+  }
+```
 
 ---
 **NOTE**
@@ -185,3 +222,53 @@ Version (positive integer) should be included in messages as a new JSON
 attribute.
 
 ## Examples
+
+A typical message for a node "hit" just by so-called tutorial rule.
+Additionally two other rules was skipped:
+
+```json
+{
+    "path": "archives/compressed/aa/aaaaaaaa-bbbb-cccc-dddd-eeeeeeeeeeee/202101/20/031044.tar.gz",
+    "metadata": {
+      "cluster_id": "aaaaaaaa-bbbb-cccc-dddd-eeeeeeeeeeee",
+      "external_organization": "1234567890"
+    },
+    "Report": {
+        "system": {
+            "metadata": {},
+            "hostname": null
+        },
+        "reports": [
+            {
+                "rule_id": "tutorial_rule|TUTORIAL_ERROR",
+                "component": "ccx_rules_ocp.external.tutorial_rule.report",
+                "type": "rule",
+                "key": "TUTORIAL_ERROR",
+                "details": {
+                    "type": "rule",
+                    "error_key": "TUTORIAL_ERROR"
+                },
+                "tags": [],
+                "links": {}
+            }
+        ],
+        "fingerprints": [],
+        "skips": [
+            {
+                "rule_fqdn": "ccx_rules_ocp.ocs.check_ocs_version.report",
+                "reason": "MISSING_REQUIREMENTS",
+                "details": "All: ['ccx_ocp_core.specs.must_gather_ocs.OperatorsOcsMGOCS'] Any: ",
+                "type": "skip"
+            },
+            {
+                "rule_fqdn": "ccx_rules_ocp.ocs.check_pods_scc.report",
+                "reason": "MISSING_REQUIREMENTS",
+                "details": "All: ['ccx_ocp_core.specs.must_gather_ocs.PodsMGOCS'] Any: ",
+                "type": "skip"
+            },
+        ],
+        "info": [],
+        "pass": []
+    }
+}
+```
