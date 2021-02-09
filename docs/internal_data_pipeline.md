@@ -12,6 +12,25 @@ layout: default
 ### Architecture diagram
 
 <img src="images/internal-data-pipeline-architecture.png" alt="Internal data pipeline" usemap="#internal-pipeline">
+<map name="parquet-factory">
+    <area shape="rect" coords="110, 298,  155, 333"   title="Incoming messages in `platform.upload.buckit`" alt="internal-pipeline/platform_upload_buckit_messages.html" href="internal-pipeline/platform_upload_buckit_messages.html">
+    <area shape="rect" coords="110, 430,  155, 465"   title="Incoming messages from SQS" alt="internal-pipeline/incoming_sqs_messages.html" href="internal-pipeline/incoming_sqs_messages.html">
+    <area shape="rect" coords="110, 540,  155, 575"   title="Messages produced by SQS listener" alt="internal-pipeline/sqs_listener_messages.html" href="internal-pipeline/sqs_listener_messages.html">
+    <area shape="rect" coords="139, 579,  184, 614"   title="Messages consumed from `ccx-XXX-insights-operator-archive-new` topic" alt="internal-pipeline/insights_operator_archive_new.html" href="internal-pipeline/insights_operator_archive_new.html">
+    <area shape="rect" coords="223, 399,  268, 434"   title="Raw data stored in S3 bucket" alt="internal-pipeline/raw_data_S3_bucket.html" href="internal-pipeline/raw_data_S3_bucket.html">
+    <area shape="rect" coords="283, 579,  328, 614"   title="Raw data stored into Ceph bucket" alt="internal-pipeline/raw_data_Ceph_bucket.html" href="internal-pipeline/raw_data_Ceph_bucket.html">
+    <area shape="rect" coords="226, 649,  271, 684"   title="Messages produced by archive-sync-service" alt="internal-pipeline/archive_sync_service_messages.html" href="internal-pipeline/archive_sync_service_messages.html">
+    <area shape="rect" coords="136, 698,  181, 733"   title="Messages consumed by Rules service from `ccx-XXX-insights-operator-archive-synced` topic" alt="internal-pipeline/insights_operator_archive_synced.html" href="internal-pipeline/insights_operator_archive_synced.html">
+    <area shape="rect" coords="280, 698,  325, 733"   title="Messages consumed by Features service from `ccx-XXX-insights-operator-archive-synced` topic" alt="internal-pipeline/insights_operator_archive_synced.html" href="internal-pipeline/insights_operator_archive_synced.html">
+    <area shape="rect" coords="110, 877,  155, 912"   title="Messages produced by Rules service" alt="internal-pipeline/rules_service_messages.html" href="internal-pipeline/rules_service_messages.html">
+    <area shape="rect" coords="355, 877,  400, 912"   title="Messages produced by Features service" alt="internal-pipeline/features_service_messages.html" href="internal-pipeline/features_service_messages.html">
+    <area shape="rect" coords="110, 1020, 155, 1055"  title="Messages consumed from `ccx-XXX-insights-operator-archive-rules-results` topic" alt="internal-pipeline/parquet_rules_results.html" href="internal-pipeline/parquet_rules_results.html">
+    <area shape="rect" coords="227, 1008, 272, 1043"  title="Data consumed from Thanos" alt="internal-pipeline/parquet_thanos.html" href="internal-pipeline/parquet_thanos.html">
+    <area shape="rect" coords="355, 1020, 400, 1055"  title="Messages consumed from `ccx-XXX-insights-operator-archive-features` topic" alt="internal-pipeline/parquet_features.html" href="internal-pipeline/parquet_features.html">
+    <area shape="rect" coords="229, 1115, 274, 1150"  title="Generated parquet files" alt="internal-pipeline/parquet_output.html" href="internal-pipeline/parquet_output.html">
+</map>
+
+
 
 ### Data format descriptions
 
