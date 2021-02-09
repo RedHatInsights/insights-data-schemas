@@ -1,7 +1,7 @@
 ---
 layout: default
 ---
-\[[Front page](../index.md)\] \[[External data pipeline](../external_data_pipeline.md)\]
+\[[Front page](../index.md)\] \[[Internal data pipeline](../internal_data_pipeline.md)\]
 
 # Raw data stored in S3 bucket
 
