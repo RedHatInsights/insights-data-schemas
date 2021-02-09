@@ -3,18 +3,17 @@ layout: default
 ---
 \[[Front page](../index.md)\] \[[Internal data pipeline](../internal_data_pipeline.md)\]
 
-# Messages consumed by Features service from `ccx-XXX-insights-operator-archive-synced` topic
+# Messages consumed by Rules service from `ccx-XXX-insights-operator-archive-synced` topic
 
-Features service runs feature extraction for all archives synced in DataHub
-(Ceph) bucket. It reads messages from
-`ccx-XXX-insights-operator-archive-synced` Kafka topic where `XXX` needs to be
-replaced by environment (`prod` etc.) to know about incoming archives in Ceph
-and it will download the archive from DataHub (Ceph) bucket.
+Rules Service runs rules for all archives synced in DataHub (Ceph) bucket. It
+reads messages from `ccx-XXX-insights-operator-archive-synced` Kafka topic to
+know about incoming archives in Ceph and it will download the archive from
+DataHub (Ceph) bucket.
 
-The result of the feature extraction is sent to
-`ccx-XXX-insights-operator-archive-features` Kafka topic.
+The result of the applied rules is sent to
+`ccx-XXX-insights-operator-archive-rules-results` Kafka topic.
 
-This service is the same as Rules Service but it uses a different
+This service is the same as Features Service but it uses a different
 configuration.
 
 ## Schema version
