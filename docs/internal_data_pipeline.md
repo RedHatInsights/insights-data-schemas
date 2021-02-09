@@ -7,12 +7,48 @@ layout: default
 
 ## Internal data pipeline
 
+Internal data pipeline is responsible for processing Insights Operator
+archives, extracting features, transforming data, and aggregating results into
+reports that later will be served by API and UI.
+
 ### Whole data flow
+
+SQS listener service listens to notifications sent to AWS SQS (Simple Queue
+Service) about new files in the S3 bucket. It sends a message with S3 path of
+the file to `ccx-XXX-insights-operator-archive-new` (where `XXX` needs to be
+changed to `prod` etc.) Kafka topic for every new file in S3.
+
+Archive Sync Service synchronizes every new archive by reading the related
+information from `ccx-XXX-insights-operator-archive-new` (where `XXX` needs to
+be replaced by environment, for example `prod`) Kafka topic, downloading the
+archive from AWS S3 and uploading it to DataHub (Ceph) bucket. Information
+about synchronized archive and its metadata are sent to
+`ccx-XXX-insights-operator-archive-synced` Kafka topic.
+
+Rules Service runs rules for all archives synced in DataHub (Ceph) bucket. It
+reads messages from `ccx-XXX-insights-operator-archive-synced` Kafka topic to
+know about incoming archives in Ceph and it will download the archive from
+DataHub (Ceph) bucket. The result of the applied rules is sent to
+`ccx-XXX-insights-operator-archive-rules-results` Kafka topic.
+
+Features service runs feature extraction for all archives synced in DataHub
+(Ceph) bucket. It reads messages from
+`ccx-XXX-insights-operator-archive-synced` Kafka topic where `XXX` needs to be
+replaced by environment (`prod` etc.) to know about incoming archives in Ceph
+and it will download the archive from DataHub (Ceph) bucket. The result of the
+feature extraction is sent to `ccx-XXX-insights-operator-archive-features`
+Kafka topic.
+
+Parquet Factory is a program that can read data from several data sources,
+aggregate the data received from them and generate a set of Parquet files with
+the aggregated data, storing them in a selected S3 or Ceph bucket. It is used
+to generate different data aggregations in the CCX Internal Data Pipeline,
+reading data from Kafka topics and Thanos service.
 
 ### Architecture diagram
 
 <img src="images/internal-data-pipeline-architecture.png" alt="Internal data pipeline" usemap="#internal-pipeline">
-<map name="parquet-factory">
+<map name="internal-pipeline">
     <area shape="rect" coords="110, 298,  155, 333"   title="Incoming messages in `platform.upload.buckit`" alt="internal-pipeline/platform_upload_buckit_messages.html" href="internal-pipeline/platform_upload_buckit_messages.html">
     <area shape="rect" coords="110, 430,  155, 465"   title="Incoming messages from SQS" alt="internal-pipeline/incoming_sqs_messages.html" href="internal-pipeline/incoming_sqs_messages.html">
     <area shape="rect" coords="110, 540,  155, 575"   title="Messages produced by SQS listener" alt="internal-pipeline/sqs_listener_messages.html" href="internal-pipeline/sqs_listener_messages.html">
