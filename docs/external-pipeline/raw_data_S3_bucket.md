@@ -5,6 +5,10 @@ layout: default
 
 # Raw data stored in S3 bucket
 
+Insights Operator installed on a cluster sends its data regularly into Ingress
+Service. This service stores that data into S3 bucket for further processing.
+The retention policy of such data are two days.
+
 ## Schema version
 
 1 (unofficial)
