@@ -31,36 +31,41 @@ from common import print_report
 
 
 identitySchema = Schema(
-        {Required("identity"): Schema(
-            {Required("internal"): Schema(
-                {Required("org_id"): intInStringValidator,
-                 "auth_time": int
-                 }),
-             Required("account_number"): intInStringValidator,
-             "auth_type": str,
-             "system": Schema(
-                 {"cn": uuidValidator,
-                  "cert_type": str
-                  }),
-             "type": str,
-             }, extra=ALLOW_EXTRA)}, extra=ALLOW_EXTRA)
+        {
+            Required("identity"): Schema(
+                {
+                    Required("internal"): Schema(
+                        {
+                            Required("org_id"): intInStringValidator,
+                            "auth_time": int
+                         }),
+                    Required("account_number"): intInStringValidator,
+                    "auth_type": str,
+                    "system": Schema(
+                        {"cn": uuidValidator,
+                         "cert_type": str
+                         }),
+                    "type": str,
+                }, extra=ALLOW_EXTRA)}, extra=ALLOW_EXTRA)
 
 
 # Schema for messages consumed from platform_upload_buckit Kafka topic
 schema = Schema(
-        {Required("account"): intInStringValidator,
-         Required("category"): notEmptyStringValidator,
-         Required("request_id"): hexaString32Validator,
-         Required("principal"): intInStringValidator,
-         Required("service"): notEmptyStringValidator,
-         Required("size"): posIntValidator,
-         Required("metadata"): Schema(
-             {Required("reporter"): str,
-              Required("stale_timestamp"): timestampValidator
-              }),
-         Required("url"): urlToAWSValidator,
-         Required("b64_identity"): lambda value: b64IdentityValidator(identitySchema, value),
-         Required("timestamp"): timestampValidatorMs,
+        {
+            Required("account"): intInStringValidator,
+            Required("category"): notEmptyStringValidator,
+            Required("request_id"): hexaString32Validator,
+            Required("principal"): intInStringValidator,
+            Required("service"): notEmptyStringValidator,
+            Required("size"): posIntValidator,
+            Required("metadata"): Schema(
+                {
+                    Required("reporter"): str,
+                    Required("stale_timestamp"): timestampValidator
+                 }),
+            Required("url"): urlToAWSValidator,
+            Required("b64_identity"): lambda value: b64IdentityValidator(identitySchema, value),
+            Required("timestamp"): timestampValidatorMs,
          })
 
 
@@ -73,10 +78,13 @@ def main():
     input_file = args.input
 
     if multiple:
+        # process multiple messages stored in one input file
         report = validate_multiple_messages(schema, input_file, verbose)
     else:
+        # process single message stored in one input file
         report = validate_single_message(schema, input_file, verbose)
 
+    # print report from schema validation
     print_report(report, args.nocolors)
 
 
