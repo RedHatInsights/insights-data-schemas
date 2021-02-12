@@ -733,6 +733,19 @@ base64_values_json = (
         "eyJmb28iOjEsImJhcjoyfQo=",  # {"foo":1,"bar:2}
         )
 
+# proper JSON values
+json_values = (
+        "{}",
+        "{\"a\":\"b\"}"
+        )
+
+# not a proper JSON values
+not_json_values = (
+        " ",
+        "A",
+        "ěščřžýáíé"
+        )
+
 # proper key values
 key_values = (
         "A_B",
@@ -1869,3 +1882,26 @@ def test_ruleIDValueValidator_incorrect_types(value):
     # exception is expected
     with pytest.raises(Invalid) as excinfo:
         ruleIDValidator(value)
+
+
+@pytest.mark.parametrize("value", json_values)
+def test_jsonInStrValidatorValidator_correct_json_values(value):
+    """Check if proper values JSON are validated."""
+    # exception is expected
+    jsonInStrValidator(value)
+
+
+@pytest.mark.parametrize("value", not_string_type)
+def test_jsonInStrValidatorValidator_not_string_type(value):
+    """Check if improper values (with wrong type) are validated."""
+    # exception is expected
+    with pytest.raises(Invalid) as excinfo:
+        jsonInStrValidator(value)
+
+
+@pytest.mark.parametrize("value", not_json_values)
+def test_jsonInStrValidatorValidator_incorrect_json_values(value):
+    """Check if improper values JSON are validated."""
+    # exception is expected
+    with pytest.raises(Exception) as excinfo:
+        jsonInStrValidator(value)
