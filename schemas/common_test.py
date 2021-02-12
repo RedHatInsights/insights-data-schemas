@@ -354,3 +354,29 @@ Summary:
 [FAIL]: invalid JSON(s) detected
 """
     assert output == expected
+
+
+def test_print_report_use_colors():
+    """Test the function print_report."""
+    result = {
+            "processed": 2,
+            "valid": 2,
+            "invalid": 0,
+            "error": 0
+            }
+
+    f = io.StringIO()
+    with contextlib.redirect_stdout(f):
+        print_report(result, False)
+    output = f.getvalue()
+
+    print(output)
+
+    assert "Status:" in output
+    assert "Processed messages:" in output
+    assert "Valid messages:" in output
+    assert "Invalid messages:" in output
+    assert "Errors detected:" in output
+    assert "Summary:" in output
+    assert "[OK]" in output
+    assert "all messages have proper format" in output
