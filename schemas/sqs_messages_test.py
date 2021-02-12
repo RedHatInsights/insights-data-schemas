@@ -83,7 +83,9 @@ def test_validate_correct_message(validation_schema, verbose, correct_message):
 
 
 @pytest.mark.parametrize("verbose", verbose)
-def test_validate_message_without_response_metadata_attribute(validation_schema, verbose, correct_message):
+def test_validate_message_without_response_metadata_attribute(validation_schema,
+                                                              verbose,
+                                                              correct_message):
     """Test the validation for improper payload."""
     del correct_message["ResponseMetadata"]
     # it should fail
@@ -92,7 +94,9 @@ def test_validate_message_without_response_metadata_attribute(validation_schema,
 
 
 @pytest.mark.parametrize("verbose", verbose)
-def test_validate_message_wrong_response_metadata_attribute(validation_schema, verbose, correct_message):
+def test_validate_message_wrong_response_metadata_attribute(validation_schema,
+                                                            verbose,
+                                                            correct_message):
     """Test the validation for improper payload."""
     # check with string not representing number
     correct_message["ResponseMetadata"] = "foobar"
