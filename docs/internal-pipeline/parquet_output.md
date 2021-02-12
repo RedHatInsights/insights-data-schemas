@@ -7,9 +7,9 @@ layout: default
 
 Parquet Factory is a program that can read data from several data sources,
 aggregate the data received from them and generate a set of Parquet files with
-the aggregated data, storing them in a S3 bucket. It is used to generate
-different data aggregations in the CCX Internal Data Pipeline, reading data
-from Kafka topics and Thanos service.
+the aggregated data, storing them in a selected S3 or Ceph bucket. It is used
+to generate different data aggregations in the CCX Internal Data Pipeline,
+reading data from Kafka topics and Thanos service.
 
 ## Schema version
 
