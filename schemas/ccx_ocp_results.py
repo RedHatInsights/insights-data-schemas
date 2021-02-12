@@ -103,23 +103,24 @@ passSchema = Schema(
 
 # Schema for messages consumed from ccx.ocp.results Kafka topic
 schema = Schema(
-         {Required("OrgID"): posIntValidator,
-          Required("ClusterName"): uuidValidator,
-          Required("LastChecked"): timestampValidatorMs,
-          Required("Report"): Schema(
-              {
-                  Required("system"): Schema(
-                      {
-                          Required("metadata"): dict,
-                          Required("hostname"): Any(None, str),
-                      }, extra=ALLOW_EXTRA),
-                  Required("reports"): [reportsSchema],
-                  Required("fingerprints"): [fingerprintsSchema],
-                  Required("skips"): [skipsSchema],
-                  Required("info"): [infoSchema],
-                  Optional("pass"): [passSchema],
-              })
-          })
+        {
+            Required("OrgID"): posIntValidator,
+            Required("ClusterName"): uuidValidator,
+            Required("LastChecked"): timestampValidatorMs,
+            Required("Report"): Schema(
+                {
+                    Required("system"): Schema(
+                        {
+                            Required("metadata"): dict,
+                            Required("hostname"): Any(None, str),
+                        }, extra=ALLOW_EXTRA),
+                    Required("reports"): [reportsSchema],
+                    Required("fingerprints"): [fingerprintsSchema],
+                    Required("skips"): [skipsSchema],
+                    Required("info"): [infoSchema],
+                    Optional("pass"): [passSchema],
+                 })
+            })
 
 
 def main():
@@ -131,10 +132,13 @@ def main():
     input_file = args.input
 
     if multiple:
+        # process multiple messages stored in one input file
         report = validate_multiple_messages(schema, input_file, verbose)
     else:
+        # process single message stored in one input file
         report = validate_single_message(schema, input_file, verbose)
 
+    # print report from schema validation
     print_report(report, args.nocolors)
 
 
