@@ -14,6 +14,6 @@ env: SKIP_INTERPRETER=true
 before_install:
   - git clone https://github.com/TravisToolbox/pycodestyle.git
 install:
-  - ./pycodestyle-travis/install.sh
+  - ./pycodestyle/install.sh
 script:
-  - ./pycodestyle-travis/scan.sh
+  - ./pycodestyle/scan.sh
