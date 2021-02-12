@@ -38,3 +38,5 @@ UI, OpenShift console, etc.
 1. [Messages consumed from `ccx.ocp.results` topic](external-pipeline/ccx_ocp_results_topic.md)
 1. [OCP results written into RDS](external-pipeline/results_in_rds.md)
 1. [Rule content produced by Content Service](external-pipeline/content_service.md)
+1. [Rule content consumed by Content Service](external-pipeline/content_service_source.md)
+
