@@ -481,3 +481,14 @@ def b64IdentityValidator(identitySchema, value):
 
     # validate schema
     identitySchema(identity)
+
+
+def jsonInStrValidator(value):
+    """Validate if the value is JSON stored in string."""
+    # input must be a string
+    stringTypeValidator(value)
+
+    # try to parse into JSON
+    decoded = json.loads(value)
+
+    assert decoded is not None
