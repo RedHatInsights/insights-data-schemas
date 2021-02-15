@@ -1365,6 +1365,121 @@ def test_negFloatInOrZeroStringValidator_incorrect_types(value):
         negFloatOrZeroInStringValidator(value)
 
 
+@pytest.mark.parametrize("value", positive_int_values_in_string + negative_int_values_in_string)
+def test_intInBytesValidator_correct_values(value):
+    """Check the parsing and validating integers stored in string."""
+    # no exception is expected
+    intInBytesValidator(value.encode("utf-8"))
+
+
+@pytest.mark.parametrize("value", positive_float_values_in_string)
+def test_intInBytesValidator_incorrect_values(value):
+    """Check the parsing and validating integers stored in string."""
+    # exception is expected
+    with pytest.raises(ValueError) as excinfo:
+        intInBytesValidator(value.encode("utf-8"))
+
+
+@pytest.mark.parametrize("value", not_string_type)
+def test_intInBytesValidator_incorrect_types(value):
+    """Check if improper values (with wrong type) are validated."""
+    # exception is expected
+    with pytest.raises(Invalid) as excinfo:
+        intInBytesValidator(value)
+
+
+@pytest.mark.parametrize("value", positive_int_values_in_string)
+def test_posIntInBytesValidator_correct_values(value):
+    """Check the parsing and validating positive integers stored in string."""
+    # no exception is expected
+    posIntInBytesValidator(value.encode("utf-8"))
+
+
+@pytest.mark.parametrize("value", negative_int_values_and_zero_in_string)
+def test_posIntInBytesValidator_incorrect_values(value):
+    """Check the parsing and validating positive integers stored in string."""
+    # exception is expected
+    with pytest.raises(Invalid) as excinfo:
+        posIntInBytesValidator(value.encode("utf-8"))
+
+
+@pytest.mark.parametrize("value", not_string_type)
+def test_posIntInBytesValidator_incorrect_types(value):
+    """Check if improper values (with wrong type) are validated."""
+    # exception is expected
+    with pytest.raises(Invalid) as excinfo:
+        posIntInBytesValidator(value)
+
+
+@pytest.mark.parametrize("value", positive_int_values_and_zero_in_string)
+def test_posIntOrZeroInBytesValidator_correct_values(value):
+    """Check the parsing and validating positive integers or a zero stored in string."""
+    # no exception is expected
+    posIntOrZeroInBytesValidator(value.encode("utf-8"))
+
+
+@pytest.mark.parametrize("value", negative_int_values_in_string)
+def test_posIntOrZeroInBytesValidator_incorrect_values(value):
+    """Check the parsing and validating positive integers or a zero stored in string."""
+    # exception is expected
+    with pytest.raises(Invalid) as excinfo:
+        posIntInBytesValidator(value.encode("utf-8"))
+
+
+@pytest.mark.parametrize("value", not_string_type)
+def test_posIntInOrZeroStringValidator_incorrect_types(value):
+    """Check if improper values (with wrong type) are validated."""
+    # exception is expected
+    with pytest.raises(Invalid) as excinfo:
+        posIntOrZeroInBytesValidator(value)
+
+
+@pytest.mark.parametrize("value", negative_int_values_in_string)
+def test_negIntInBytesValidator_correct_values(value):
+    """Check the parsing and validating negative integers stored in string."""
+    # no exception is expected
+    negIntInBytesValidator(value.encode("utf-8"))
+
+
+@pytest.mark.parametrize("value", positive_int_values_and_zero_in_string)
+def test_negIntInBytesValidator_incorrect_values(value):
+    """Check the parsing and validating negative integers stored in string."""
+    # exception is expected
+    with pytest.raises(Invalid) as excinfo:
+        negIntInBytesValidator(value.encode("utf-8"))
+
+
+@pytest.mark.parametrize("value", not_string_type)
+def test_negIntInBytesValidator_incorrect_types(value):
+    """Check if improper values (with wrong type) are validated."""
+    # exception is expected
+    with pytest.raises(Invalid) as excinfo:
+        negIntInBytesValidator(value)
+
+
+@pytest.mark.parametrize("value", negative_int_values_and_zero_in_string)
+def test_negIntOrZeroInBytesValidator_correct_values(value):
+    """Check the parsing and validating negative integers or a zero stored in string."""
+    # no exception is expected
+    negIntOrZeroInBytesValidator(value.encode("utf-8"))
+
+
+@pytest.mark.parametrize("value", positive_int_values_in_string)
+def test_negIntOrZeroInBytesValidator_incorrect_values(value):
+    """Check the parsing and validating negative integers or a zero stored in string."""
+    # exception is expected
+    with pytest.raises(Invalid) as excinfo:
+        negIntInBytesValidator(value.encode("utf-8"))
+
+
+@pytest.mark.parametrize("value", not_string_type)
+def test_negIntInOrZeroStringValidator_incorrect_types(value):
+    """Check if improper values (with wrong type) are validated."""
+    # exception is expected
+    with pytest.raises(Invalid) as excinfo:
+        negIntOrZeroInBytesValidator(value)
+
+
 @pytest.mark.parametrize("value", hexa32_strings)
 def test_hexaString32Validator_correct_values(value):
     """Check the parsing and validating strings with 32 hexa characters."""
