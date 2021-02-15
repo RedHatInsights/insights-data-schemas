@@ -479,6 +479,19 @@ def uuidValidator(value, version=4):
     UUID(value, version=version)
 
 
+def uuidInBytesValidator(value, version=4):
+    """Check if value conforms to UUID."""
+    # check if the value has the expected type
+    bytesTypeValidator(value)
+
+    # use default encoding
+    value = value.decode("utf-8")
+
+    # UUID version 4 is the most common version, but it is possible to specify
+    # other version as well
+    UUID(value, version=version)
+
+
 def md5Validator(value):
     """Predicate that checks if the given value seems to be MD5 hash."""
     # check if the value has the expected type
