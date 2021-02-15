@@ -646,3 +646,16 @@ def jsonInStrValidator(value):
     decoded = json.loads(value)
 
     assert decoded is not None
+
+
+def versionInBytesValidator(value):
+    """Check if value conforms to version."""
+    # check if the value has the expected type
+    bytesTypeValidator(value)
+
+    # use default encoding
+    value = value.decode("utf-8")
+
+    VERSION_RE = re.compile(r"[0-9]+\.[0-9]+\.[0-9]+.*")
+    if not VERSION_RE.fullmatch(value):
+        raise Invalid("wrong version value '{}'".format(value))
