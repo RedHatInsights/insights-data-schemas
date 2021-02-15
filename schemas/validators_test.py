@@ -1480,6 +1480,98 @@ def test_negIntInOrZeroStringValidator_incorrect_types(value):
         negIntOrZeroInBytesValidator(value)
 
 
+@pytest.mark.parametrize("value", positive_float_values_in_string)
+def test_posFloatInBytesValidator_correct_values(value):
+    """Check the parsing and validating positive floats stored in string."""
+    # no exception is expected
+    posFloatInBytesValidator(value.encode("utf-8"))
+
+
+@pytest.mark.parametrize("value", negative_float_values_and_zero_in_string)
+def test_posFloatInBytesValidator_incorrect_values(value):
+    """Check the parsing and validating positive floats stored in string."""
+    # exception is expected
+    with pytest.raises(Invalid) as excinfo:
+        posFloatInBytesValidator(value.encode("utf-8"))
+
+
+@pytest.mark.parametrize("value", not_string_type)
+def test_posFloatInBytesValidator_incorrect_types(value):
+    """Check if improper values (with wrong type) are validated."""
+    # exception is expected
+    with pytest.raises(Invalid) as excinfo:
+        posFloatInBytesValidator(value)
+
+
+@pytest.mark.parametrize("value", positive_float_values_and_zero_in_string)
+def test_posFloatOrZeroInBytesValidator_correct_values(value):
+    """Check the parsing and validating positive floats or a zero stored in string."""
+    # no exception is expected
+    posFloatOrZeroInBytesValidator(value.encode("utf-8"))
+
+
+@pytest.mark.parametrize("value", negative_float_values_in_string)
+def test_posFloatOrZeroInBytesValidator_incorrect_values(value):
+    """Check the parsing and validating positive floats or a zero stored in string."""
+    # exception is expected
+    with pytest.raises(Invalid) as excinfo:
+        posFloatInBytesValidator(value.encode("utf-8"))
+
+
+@pytest.mark.parametrize("value", not_string_type)
+def test_posFloatInOrZeroStringValidator_incorrect_types(value):
+    """Check if improper values (with wrong type) are validated."""
+    # exception is expected
+    with pytest.raises(Invalid) as excinfo:
+        posFloatOrZeroInBytesValidator(value)
+
+
+@pytest.mark.parametrize("value", negative_float_values_in_string)
+def test_negFloatInBytesValidator_correct_values(value):
+    """Check the parsing and validating negative floats stored in string."""
+    # no exception is expected
+    negFloatInBytesValidator(value.encode("utf-8"))
+
+
+@pytest.mark.parametrize("value", positive_float_values_and_zero_in_string)
+def test_negFloatInBytesValidator_incorrect_values(value):
+    """Check the parsing and validating negative floats stored in string."""
+    # exception is expected
+    with pytest.raises(Invalid) as excinfo:
+        negFloatInBytesValidator(value.encode("utf-8"))
+
+
+@pytest.mark.parametrize("value", not_string_type)
+def test_negFloatInBytesValidator_incorrect_types(value):
+    """Check if improper values (with wrong type) are validated."""
+    # exception is expected
+    with pytest.raises(Invalid) as excinfo:
+        negFloatInBytesValidator(value)
+
+
+@pytest.mark.parametrize("value", negative_float_values_and_zero_in_string)
+def test_negFloatOrZeroInBytesValidator_correct_values(value):
+    """Check the parsing and validating negative floats or a zero stored in string."""
+    # no exception is expected
+    negFloatOrZeroInBytesValidator(value.encode("utf-8"))
+
+
+@pytest.mark.parametrize("value", positive_float_values_in_string)
+def test_negFloatOrZeroInBytesValidator_incorrect_values(value):
+    """Check the parsing and validating negative floats or a zero stored in string."""
+    # exception is expected
+    with pytest.raises(Invalid) as excinfo:
+        negFloatInBytesValidator(value.encode("utf-8"))
+
+
+@pytest.mark.parametrize("value", not_string_type)
+def test_negFloatInOrZeroInBytesValidator_incorrect_types(value):
+    """Check if improper values (with wrong type) are validated."""
+    # exception is expected
+    with pytest.raises(Invalid) as excinfo:
+        negFloatOrZeroInBytesValidator(value)
+
+
 @pytest.mark.parametrize("value", hexa32_strings)
 def test_hexaString32Validator_correct_values(value):
     """Check the parsing and validating strings with 32 hexa characters."""

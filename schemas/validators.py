@@ -329,6 +329,66 @@ def negIntOrZeroInBytesValidator(value):
     negIntOrZeroValidator(x)
 
 
+def posFloatInBytesValidator(value):
+    """Validate value for a positive float value stored as a string."""
+    # check if the value has the expected type
+    bytesTypeValidator(value)
+
+    # use default encoding
+    value = value.decode("utf-8")
+
+    stringTypeValidator(value)
+
+    # try to parse the string
+    x = float(value)
+    posFloatValidator(x)
+
+
+def posFloatOrZeroInBytesValidator(value):
+    """Validate value for a positive float value or zero stored as a string."""
+    # check if the value has the expected type
+    bytesTypeValidator(value)
+
+    # use default encoding
+    value = value.decode("utf-8")
+
+    stringTypeValidator(value)
+
+    # try to parse the string
+    x = float(value)
+    posFloatOrZeroValidator(x)
+
+
+def negFloatInBytesValidator(value):
+    """Validate value for a negative float value stored as a string."""
+    # check if the value has the expected type
+    bytesTypeValidator(value)
+
+    # use default encoding
+    value = value.decode("utf-8")
+
+    stringTypeValidator(value)
+
+    # try to parse the string
+    x = float(value)
+    negFloatValidator(x)
+
+
+def negFloatOrZeroInBytesValidator(value):
+    """Validate value for a negative float value or zero stored as a string."""
+    # check if the value has the expected type
+    bytesTypeValidator(value)
+
+    # use default encoding
+    value = value.decode("utf-8")
+
+    stringTypeValidator(value)
+
+    # try to parse the string
+    x = float(value)
+    negFloatOrZeroValidator(x)
+
+
 def hexaString32Validator(value):
     """Validate value for string containign exactly 32 hexadecimal digits."""
     stringTypeValidator(value)
