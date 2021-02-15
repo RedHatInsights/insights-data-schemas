@@ -169,6 +169,9 @@ Check if value conforms to UUID.
     
 ## `uuidValidator(value, version=4)`
 Check if value conforms to UUID.
+    
+## `versionInBytesValidator(value)`
+Check if value conforms to version.
 
 ## `ruleFQDNValidator(value)`
 Validate if value contains FQDN (fully-qualified name).
