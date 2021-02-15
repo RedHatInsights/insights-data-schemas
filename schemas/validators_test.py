@@ -2135,3 +2135,26 @@ def test_jsonInStrValidatorValidator_incorrect_json_values(value):
     # exception is expected
     with pytest.raises(Exception) as excinfo:
         jsonInStrValidator(value)
+
+
+@pytest.mark.parametrize("value", version_correct_values)
+def test_versionInBytesValidator_correct_values(value):
+    """Check the parsing and validating Version values."""
+    # exception is not expected
+    versionInBytesValidator(value.encode("utf-8"))
+
+
+@pytest.mark.parametrize("value", version_incorrect_values)
+def test_versionInBytesValidator_incorrect_values(value):
+    """Check the parsing and validating Version values."""
+    # exception is expected
+    with pytest.raises(Invalid) as excinfo:
+        versionInBytesValidator(value.encode("utf-8"))
+
+
+@pytest.mark.parametrize("value", not_string_type)
+def test_versionInBytesValidator_incorrect_types(value):
+    """Check if improper values (with wrong type) are validated."""
+    # exception is expected
+    with pytest.raises(Invalid) as excinfo:
+        versionInBytesValidator(value)
