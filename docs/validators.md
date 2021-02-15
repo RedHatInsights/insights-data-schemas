@@ -23,6 +23,9 @@ Validate value for any float.
 ## `hexaString32Validator(value)`
 Validate value for string containign exactly 32 hexadecimal digits.
     
+## `intInBytesValidator(value)`
+Validate value for an int value stored as a string.
+    
 ## `intInStringValidator(value)`
 Validate value for an int value stored as a string.
     
@@ -53,8 +56,14 @@ Predicate that checks if the given value is positive float or zero.
 ## `negFloatValidator(value)`
 Predicate that checks if the given value is positive float.
     
+## `negIntInBytesValidator(value)`
+Validate value for a negative int value stored as a string.
+    
 ## `negIntInStringValidator(value)`
 Validate value for a negative int value stored as a string.
+    
+## `negIntOrZeroInBytesValidator(value)`
+Validate value for a negative int value or zero stored as a string.
     
 ## `negIntOrZeroInStringValidator(value)`
 Validate value for a negative int value or zero stored as a string.
@@ -80,8 +89,14 @@ Predicate that checks if the given value is positive float or zero.
 ## `posFloatValidator(value)`
 Predicate that checks if the given value is positive float.
     
+## `posIntInBytesValidator(value)`
+Validate value for a positive int value stored as a string.
+    
 ## `posIntInStringValidator(value)`
 Validate value for a positive int value stored as a string.
+    
+## `posIntOrZeroInBytesValidator(value)`
+Validate value for a positive int value or zero stored as a string.
     
 ## `posIntOrZeroInStringValidator(value)`
 Validate value for a positive int value or zero stored as a string.
