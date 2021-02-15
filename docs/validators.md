@@ -164,6 +164,9 @@ Validate value for timestamps without ms part, but with TZ info.
 ## `urlToAWSValidator(value)`
 Validate if value conformns to AWS S3 URL.
     
+## `uuidInBytesValidator(value, version=4)`
+Check if value conforms to UUID.
+    
 ## `uuidValidator(value, version=4)`
 Check if value conforms to UUID.
 
