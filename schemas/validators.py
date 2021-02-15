@@ -659,3 +659,23 @@ def versionInBytesValidator(value):
     VERSION_RE = re.compile(r"[0-9]+\.[0-9]+\.[0-9]+.*")
     if not VERSION_RE.fullmatch(value):
         raise Invalid("wrong version value '{}'".format(value))
+
+
+def pathToCephInBytesValidator(value):
+    """Check if value conforms to path to Ceph."""
+    # check if the value has the expected type
+    bytesTypeValidator(value)
+
+    # use default encoding
+    value = value.decode("utf-8")
+
+    # construct regexp for path
+    PREFIX = r"archives/compressed/"
+    SELECTOR = r"[a-f]{2}/"
+    UUID = r"[a-z0-9]{8}-[a-z0-9]{4}-[a-z0-9]{4}-[a-z0-9]{4}-[a-z0-9]{12}/"
+    DATETIME = r"[0-9]{6}/[0-9]{2}/"
+    TARBALL = r"[0-9]+\.tar\.gz"
+
+    PATH_RE = re.compile(PREFIX+SELECTOR+UUID+DATETIME+TARBALL)
+    if not PATH_RE.fullmatch(value):
+        raise Invalid("wrong version value '{}'".format(value))
