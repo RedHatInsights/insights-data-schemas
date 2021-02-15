@@ -1917,6 +1917,29 @@ def test_UUIDValidatorValidator_incorrect_types(value):
         uuidValidator(value)
 
 
+@pytest.mark.parametrize("value", uuid_correct_values)
+def test_UUIDInBytesValidator_correct_values(value):
+    """Check the parsing and validating UUID values."""
+    # exception is not expected
+    uuidInBytesValidator(value.encode("utf-8"))
+
+
+@pytest.mark.parametrize("value", uuid_incorrect_values)
+def test_UUIDInBytesValidator_incorrect_values(value):
+    """Check the parsing and validating UUID values."""
+    # exception is expected
+    with pytest.raises(ValueError) as excinfo:
+        uuidInBytesValidator(value.encode("utf-8"))
+
+
+@pytest.mark.parametrize("value", not_string_type)
+def test_UUIDInBytesValidator_incorrect_types(value):
+    """Check if improper values (with wrong type) are validated."""
+    # exception is expected
+    with pytest.raises(Invalid) as excinfo:
+        uuidInBytesValidator(value)
+
+
 @pytest.mark.parametrize("value", valid_timestamps)
 def test_timestampValidator_correct_values(value):
     """Check the parsing and validating timestamps."""
