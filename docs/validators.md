@@ -11,6 +11,9 @@ Predicate that checks if the given value seems to be BLAKE2 256-bit hash.
 ## `b64IdentityValidator(identitySchema, value)`
 Validate identity encoded by base64 encoding.
     
+## `bytesTypeValidator(value)`
+Validate value for byte array type.
+    
 ## `emptyStringValidator(value)`
 Validate value for an empty string.
     
@@ -32,6 +35,9 @@ Predicate that checks if the given value is NaN.
 ## `isNotNaNValidator(value)`
 Predicate that checks if the given value is not NaN.
     
+## `keyValueValidator(value)`
+Validate if value conformns to a key used in Insights Results.
+
 ## `md5Validator(value)`
 Predicate that checks if the given value seems to be MD5 hash.
     
@@ -133,9 +139,6 @@ Validate if value conformns to AWS S3 URL.
     
 ## `uuidValidator(value, version=4)`
 Check if value conforms to UUID.
-
-## `keyValueValidator(value)`
-Validate if value conformns to a key used in Insights Results.
 
 ## `ruleFQDNValidator(value)`
 Validate if value contains FQDN (fully-qualified name).
