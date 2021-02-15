@@ -806,6 +806,41 @@ improper_id_values = (
         " | ")
 
 
+# proper versions
+version_correct_values = (
+        "4.3.2",
+        "40.3.2",
+        "4.30.2",
+        "4.3.20",
+        "1.2.0",
+        "1.2.0-ci-1234",
+        "1.2.0-whatever")
+
+# improper versions
+version_incorrect_values = (
+        "4",
+        "4.3",
+        "1.2.-ci-1234",
+        "1.2-whatever")
+
+
+# improper paths to Ceph
+path_to_ceph_incorrect_values = (
+        "archive/compressed/ff/ff32df5f-1234-4567-89ab-61ff59fb8298/202102/08/000359.tar.gz",
+        "archives/compresse/ff/ff32df5f-1234-4567-89ab-61ff59fb8298/202102/08/000359.tar.gz",
+        "archives/compressed/f/ff32df5f-1234-4567-89ab-61ff59fb8298/202102/08/000359.tar.gz",
+        "archives/compressed/ff/ff32df5-1234-4567-89ab-61ff59fb8298/202102/08/000359.tar.gz",
+        "archives/compressed/ff/ff32df5f-123-4567-89ab-61ff59fb8298/202102/08/000359.tar.gz",
+        "archives/compressed/ff/ff32df5f-1234-456-89ab-61ff59fb8298/202102/08/000359.tar.gz",
+        "archives/compressed/ff/ff32df5f-1234-4567-89a-61ff59fb8298/202102/08/000359.tar.gz",
+        "archives/compressed/ff/ff32df5f-1234-4567-89ab-61ff59fb829/202102/08/000359.tar.gz",
+        "archives/compressed/ff/ff32df5f-1234-4567-89ab-61ff59fb8298/20210/08/000359.tar.gz",
+        "archives/compressed/ff/ff32df5f-1234-4567-89ab-61ff59fb8298/202102/0/000359.tar.gz",
+        "archives/compressed/ff/ff32df5f-1234-4567-89ab-61ff59fb8298/202102/08/000359.ar.gz",
+        "archives/compressed/ff/ff32df5f-1234-4567-89ab-61ff59fb8298/202102/08/00035.tar.g",
+        )
+
+
 @pytest.mark.parametrize("value", positive_int_values+negative_int_values_and_zero)
 def test_intTypeValidator_correct_values(value):
     """Check if proper integer values are validated."""
@@ -2158,3 +2193,18 @@ def test_versionInBytesValidator_incorrect_types(value):
     # exception is expected
     with pytest.raises(Invalid) as excinfo:
         versionInBytesValidator(value)
+
+
+def test_path_to_ceph_correct_values():
+    """Check the validator for path to Ceph."""
+    path = b"archives/compressed/ff/ff32df5f-1234-4567-89ab-61ff59fb8298/202102/08/000359.tar.gz"
+    # exception is not expected
+    pathToCephInBytesValidator(path)
+
+
+@pytest.mark.parametrize("value", path_to_ceph_incorrect_values)
+def test_path_to_ceph_incorrect_values(value):
+    """Check the validator for path to Ceph."""
+    # exception is expected
+    with pytest.raises(Invalid) as excinfo:
+        pathToCephInBytesValidator(value.encode("utf-8"))
