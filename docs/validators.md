@@ -44,8 +44,14 @@ Validate if value conformns to a key used in Insights Results.
 ## `md5Validator(value)`
 Predicate that checks if the given value seems to be MD5 hash.
     
+## `negFloatInBytesValidator(value)`
+Validate value for a negative float value stored as a string.
+    
 ## `negFloatInStringValidator(value)`
 Validate value for a negative float value stored as a string.
+    
+## `negFloatOrZeroInBytesValidator(value)`
+Validate value for a negative float value or zero stored as a string.
     
 ## `negFloatOrZeroInStringValidator(value)`
 Validate value for a negative float value or zero stored as a string.
@@ -77,8 +83,14 @@ Validate value for negative integers.
 ## `notEmptyStringValidator(value)`
 Validate value for a non-empty string.
     
+## `posFloatInBytesValidator(value)`
+Validate value for a positive float value stored as a string.
+    
 ## `posFloatInStringValidator(value)`
 Validate value for a positive float value stored as a string.
+    
+## `posFloatOrZeroInBytesValidator(value)`
+Validate value for a positive float value or zero stored as a string.
     
 ## `posFloatOrZeroInStringValidator(value)`
 Validate value for a positive float value or zero stored as a string.
