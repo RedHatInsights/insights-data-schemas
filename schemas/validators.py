@@ -150,6 +150,13 @@ def stringTypeValidator(value):
         raise Invalid("string value expected, but got {t} type instead".format(t=type(value)))
 
 
+def bytesTypeValidator(value):
+    """Validate value for byte array type."""
+    # check if the given value is a byte array
+    if type(value) is not bytes:
+        raise Invalid("byte array value expected, but got {t} type instead".format(t=type(value)))
+
+
 def emptyStringValidator(value):
     """Validate value for an empty string."""
     stringTypeValidator(value)
