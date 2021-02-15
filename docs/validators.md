@@ -38,6 +38,9 @@ Predicate that checks if the given value is NaN.
 ## `isNotNaNValidator(value)`
 Predicate that checks if the given value is not NaN.
     
+## `jsonInStrValidator(value)`
+Validate if the value is JSON stored in string.
+    
 ## `keyValueValidator(value)`
 Validate if value conformns to a key used in Insights Results.
 
@@ -82,6 +85,9 @@ Validate value for negative integers.
     
 ## `notEmptyStringValidator(value)`
 Validate value for a non-empty string.
+    
+## `pathToCephInBytesValidator(value)`
+Check if value conforms to path to Ceph.
     
 ## `posFloatInBytesValidator(value)`
 Validate value for a positive float value stored as a string.
