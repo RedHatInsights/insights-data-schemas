@@ -255,6 +255,80 @@ def negFloatOrZeroInStringValidator(value):
     negFloatOrZeroValidator(x)
 
 
+def intInBytesValidator(value):
+    """Validate value for an int value stored as a string."""
+    # check if the value has the expected type
+    bytesTypeValidator(value)
+
+    # use default encoding
+    value = value.decode("utf-8")
+
+    stringTypeValidator(value)
+
+    # try to parse the string
+    x = int(value)
+
+
+def posIntInBytesValidator(value):
+    """Validate value for a positive int value stored as a string."""
+    # check if the value has the expected type
+    bytesTypeValidator(value)
+
+    # use default encoding
+    value = value.decode("utf-8")
+
+    stringTypeValidator(value)
+
+    # try to parse the string
+    x = int(value)
+    posIntValidator(x)
+
+
+def posIntOrZeroInBytesValidator(value):
+    """Validate value for a positive int value or zero stored as a string."""
+    # check if the value has the expected type
+    bytesTypeValidator(value)
+
+    # use default encoding
+    value = value.decode("utf-8")
+
+    stringTypeValidator(value)
+
+    # try to parse the string
+    x = int(value)
+    posIntOrZeroValidator(x)
+
+
+def negIntInBytesValidator(value):
+    """Validate value for a negative int value stored as a string."""
+    # check if the value has the expected type
+    bytesTypeValidator(value)
+
+    # use default encoding
+    value = value.decode("utf-8")
+
+    stringTypeValidator(value)
+
+    # try to parse the string
+    x = int(value)
+    negIntValidator(x)
+
+
+def negIntOrZeroInBytesValidator(value):
+    """Validate value for a negative int value or zero stored as a string."""
+    # check if the value has the expected type
+    bytesTypeValidator(value)
+
+    # use default encoding
+    value = value.decode("utf-8")
+
+    stringTypeValidator(value)
+
+    # try to parse the string
+    x = int(value)
+    negIntOrZeroValidator(x)
+
+
 def hexaString32Validator(value):
     """Validate value for string containign exactly 32 hexadecimal digits."""
     stringTypeValidator(value)
