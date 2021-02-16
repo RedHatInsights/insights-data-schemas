@@ -734,13 +734,10 @@ def versionInBytesValidator(value):
         raise Invalid("wrong version value '{}'".format(value))
 
 
-def pathToCephInBytesValidator(value):
+def pathToCephValidator(value):
     """Check if value conforms to path to Ceph."""
     # check if the value has the expected type
-    bytesTypeValidator(value)
-
-    # use default encoding
-    value = value.decode("utf-8")
+    stringTypeValidator(value)
 
     # construct regexp for path
     PREFIX = r"archives/compressed/"
@@ -752,3 +749,14 @@ def pathToCephInBytesValidator(value):
     PATH_RE = re.compile(PREFIX+SELECTOR+UUID+DATETIME+TARBALL)
     if not PATH_RE.fullmatch(value):
         raise Invalid("wrong path value '{}'".format(value))
+
+
+def pathToCephInBytesValidator(value):
+    """Check if value conforms to path to Ceph."""
+    # check if the value has the expected type
+    bytesTypeValidator(value)
+
+    # use default encoding
+    value = value.decode("utf-8")
+
+    pathToCephValidator(value)
