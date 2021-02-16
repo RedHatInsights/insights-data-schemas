@@ -34,6 +34,20 @@ def validation_schema():
 # verbosity level
 verbose = (True, False)
 
+# attributes to check
+attribute = (
+        "account",
+        "category",
+        "request_id",
+        "principal",
+        "service",
+        "size",
+        "metadata",
+        "url",
+        "b64_identity",
+        "timestamp",
+        )
+
 
 @pytest.fixture
 def correct_message():
@@ -96,6 +110,39 @@ def test_validate_message_wrong_account_attribute(validation_schema, verbose, co
 
     # check with different data type
     correct_message["account"] = []
+    # it should fail
+    with pytest.raises(Invalid) as excinfo:
+        validate(schema, correct_message, verbose)
+
+
+@pytest.mark.parametrize("attribute", attribute)
+@pytest.mark.parametrize("verbose", verbose)
+def test_validate_message_without_attributes(validation_schema, verbose, correct_message,
+                                             attribute):
+    """Test the validation for improper payload."""
+    del correct_message[attribute]
+    # it should fail
+    with pytest.raises(Invalid) as excinfo:
+        validate(schema, correct_message, verbose)
+
+
+@pytest.mark.parametrize("attribute", attribute)
+@pytest.mark.parametrize("verbose", verbose)
+def test_validate_message_wrong_attributes(validation_schema, verbose, correct_message, attribute):
+    """Test the validation for improper payload."""
+    correct_message[attribute] = b"foobar"
+    # it should fail
+    with pytest.raises(Invalid) as excinfo:
+        validate(schema, correct_message, verbose)
+
+    # check with number
+    correct_message[attribute] = -123456
+    # it should fail
+    with pytest.raises(Invalid) as excinfo:
+        validate(schema, correct_message, verbose)
+
+    # check with different data type
+    correct_message[attribute] = []
     # it should fail
     with pytest.raises(Invalid) as excinfo:
         validate(schema, correct_message, verbose)
