@@ -1998,6 +1998,29 @@ def test_timestampValidator_incorrect_types(value):
         timestampValidator(value)
 
 
+@pytest.mark.parametrize("value", valid_timestamps_ms_offset)
+def test_timestampValidatorOffset_correct_values(value):
+    """Check the parsing and validating timestamps."""
+    # exception is not expected
+    timestampValidatorOffset(value)
+
+
+@pytest.mark.parametrize("value", invalid_timestamps)
+def test_timestampValidatorOffset_incorrect_values(value):
+    """Check the parsing and validating timestamps."""
+    # exception is expected
+    with pytest.raises(Invalid) as excinfo:
+        timestampValidatorOffset(value)
+
+
+@pytest.mark.parametrize("value", not_string_type)
+def test_timestampValidatorOffset_incorrect_types(value):
+    """Check if improper values (with wrong type) are validated."""
+    # exception is expected
+    with pytest.raises(Invalid) as excinfo:
+        timestampValidatorOffset(value)
+
+
 @pytest.mark.parametrize("value", valid_timestamps_ms)
 def test_timestampMsValidator_correct_values(value):
     """Check the parsing and validating timestamps with milliseconds part."""
