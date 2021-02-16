@@ -18,10 +18,11 @@
 """Unit tests for platform_upload_buckit_messages module."""
 
 import pytest
+import sys
 
 from voluptuous import Invalid
 
-from platform_upload_buckit_messages import schema
+from platform_upload_buckit_messages import schema, main
 from common import validate
 
 
@@ -67,6 +68,22 @@ def correct_message():
         "b64_identity": "ewogICJpZGVudGl0eSI6IHsKICAgICJpbnRlcm5hbCI6IHsKICAgICAgIm9yZ19pZCI6ICIxMjM0NTYiLAogICAgICAiYXV0aF90aW1lIjogMAogICAgfSwKICAgICJhY2NvdW50X251bWJlciI6ICI3ODkwMDAiLAogICAgImF1dGhfdHlwZSI6ICJjZXJ0LWF1dGgiLAogICAgInN5c3RlbSI6IHsKICAgICAgImNuIjogIjEyMzQ1Njc4LWFhYWEtZWVlZS1mZmZmLTAwMDAwMDAwMDAwMCIsCiAgICAgICJjZXJ0X3R5cGUiOiAic3lzdGVtIgogICAgfSwKICAgICJ0eXBlIjogIlN5c3RlbSIKICB9LAogICJlbnRpdGxlbWVudHMiOiB7CiAgICAiaW5zaWdodHMiOiB7CiAgICAgICJpc19lbnRpdGxlZCI6IHRydWUsCiAgICAgICJpc190cmlhbCI6IGZhbHNlCiAgICB9LAogICAgImZvbyI6IHsKICAgICAgImlzX2VudGl0bGVkIjogdHJ1ZSwKICAgICAgImlzX3RyaWFsIjogdHJ1ZQogICAgfSwKICAgICJiYXIiOiB7CiAgICAgICJpc19lbnRpdGxlZCI6IGZhbHNlLAogICAgICAiaXNfdHJpYWwiOiBmYWxzZQogICAgfSwKICAgICJiYXoiOiB7CiAgICAgICJpc19lbnRpdGxlZCI6IHRydWUsCiAgICAgICJpc190cmlhbCI6IHRydWUKICAgIH0KICB9Cn0K",  # noqa E501
         "timestamp": "2020-12-09T16:17:42.822020204Z"
         }
+
+
+def test_main_help():
+    """Test the main function when -h parameter is given."""
+    sys.argv.append("-h")
+    with pytest.raises(SystemExit) as excinfo:
+        main()
+    assert excinfo.value.code == 0
+
+
+def test_main_input():
+    """Test the main function when -i parameter is given."""
+    sys.argv.append("-i test")
+    with pytest.raises(SystemExit) as excinfo:
+        main()
+    assert excinfo.value.code == 0
 
 
 @pytest.mark.parametrize("verbose", verbose)
