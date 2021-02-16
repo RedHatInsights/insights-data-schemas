@@ -191,5 +191,8 @@ Validate if value contains rule ID.
 ## `ruleIDValidator(value)`
 Validate if value contains rule ID.
 
+## `domainInBytesValidator(value)`
+Validate if value conformns to (e-mail) domain.
+
 ## `domainValidator(value)`
 Validate if value conformns to (e-mail) domain.
