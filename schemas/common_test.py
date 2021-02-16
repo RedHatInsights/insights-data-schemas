@@ -170,7 +170,7 @@ def test_try_to_validate_message_from_parquet_empty_data():
 def test_try_to_validate_message_from_parquet_wrong_data():
     """Test the function try_to_validate_message_from_parquet."""
     schema = Schema({})
-    payload = {"foo":"bar"}
+    payload = {"foo": "bar"}
 
     # it should fail
     with pytest.raises(Invalid) as excinfo:
