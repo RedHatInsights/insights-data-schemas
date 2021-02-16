@@ -18,10 +18,11 @@
 """Unit tests for ccx_ocp_results module."""
 
 import pytest
+import sys
 
 from voluptuous import Invalid
 
-from ccx_ocp_results import schema
+from ccx_ocp_results import schema, main
 from common import validate
 
 
@@ -138,6 +139,22 @@ def correct_message():
                 "pass": []
             }
       }
+
+
+def test_main_help():
+    """Test the main function when -h parameter is given."""
+    sys.argv.append("-h")
+    with pytest.raises(SystemExit) as excinfo:
+        main()
+    assert excinfo.value.code == 0
+
+
+def test_main_input():
+    """Test the main function when -i parameter is given."""
+    sys.argv.append("-i test")
+    with pytest.raises(SystemExit) as excinfo:
+        main()
+    assert excinfo.value.code == 0
 
 
 @pytest.mark.parametrize("verbose", verbose)
