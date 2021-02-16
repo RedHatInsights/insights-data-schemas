@@ -34,6 +34,23 @@ def validation_schema():
 # verbosity level
 verbose = (True, False)
 
+# attributes to check
+attribute = (
+        "OrgID",
+        "ClusterName",
+        "LastChecked",
+        "Report"
+        )
+
+# report attributes to check
+report_attribute = (
+        "system",
+        "reports",
+        "fingerprints",
+        "skips",
+        "info",
+        )
+
 
 @pytest.fixture
 def correct_message():
@@ -170,6 +187,73 @@ def test_validate_message_wrong_org_id_attribute(validation_schema, verbose, cor
 
     # check with different data type
     correct_message["OrgID"] = []
+    # it should fail
+    with pytest.raises(Invalid) as excinfo:
+        validate(schema, correct_message, verbose)
+
+
+@pytest.mark.parametrize("attribute", attribute)
+@pytest.mark.parametrize("verbose", verbose)
+def test_validate_message_without_attributes(validation_schema, verbose, correct_message,
+                                             attribute):
+    """Test the validation for improper payload."""
+    del correct_message[attribute]
+    # it should fail
+    with pytest.raises(Invalid) as excinfo:
+        validate(schema, correct_message, verbose)
+
+
+@pytest.mark.parametrize("attribute", attribute)
+@pytest.mark.parametrize("verbose", verbose)
+def test_validate_message_wrong_attributes(validation_schema, verbose, correct_message, attribute):
+    """Test the validation for improper payload."""
+    correct_message[attribute] = b"foobar"
+    # it should fail
+    with pytest.raises(Invalid) as excinfo:
+        validate(schema, correct_message, verbose)
+
+    # check with number
+    correct_message[attribute] = -123456
+    # it should fail
+    with pytest.raises(Invalid) as excinfo:
+        validate(schema, correct_message, verbose)
+
+    # check with different data type
+    correct_message[attribute] = []
+    # it should fail
+    with pytest.raises(Invalid) as excinfo:
+        validate(schema, correct_message, verbose)
+
+
+@pytest.mark.parametrize("attribute", report_attribute)
+@pytest.mark.parametrize("verbose", verbose)
+def test_validate_message_wrong_report_attributes(validation_schema, verbose, correct_message,
+                                                  attribute):
+    """Test the validation for improper payload."""
+    correct_message["Report"][attribute] = b"foobar"
+    # it should fail
+    with pytest.raises(Invalid) as excinfo:
+        validate(schema, correct_message, verbose)
+
+    # check with number
+    correct_message["Report"][attribute] = -123456
+    # it should fail
+    with pytest.raises(Invalid) as excinfo:
+        validate(schema, correct_message, verbose)
+
+    # check with different data type
+    correct_message["Report"][attribute] = None
+    # it should fail
+    with pytest.raises(Invalid) as excinfo:
+        validate(schema, correct_message, verbose)
+
+
+@pytest.mark.parametrize("attribute", report_attribute)
+@pytest.mark.parametrize("verbose", verbose)
+def test_validate_message_without_report_attributes(validation_schema, verbose, correct_message,
+                                                    attribute):
+    """Test the validation for improper payload."""
+    del correct_message["Report"][attribute]
     # it should fail
     with pytest.raises(Invalid) as excinfo:
         validate(schema, correct_message, verbose)
