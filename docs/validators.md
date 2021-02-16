@@ -89,6 +89,9 @@ Validate value for a non-empty string.
 ## `pathToCephInBytesValidator(value)`
 Check if value conforms to path to Ceph.
     
+## `pathToCephValidator(value)`
+Check if value conforms to path to Ceph.
+    
 ## `posFloatInBytesValidator(value)`
 Validate value for a positive float value stored as a string.
     
