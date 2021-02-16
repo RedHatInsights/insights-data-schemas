@@ -190,3 +190,6 @@ Validate if value contains rule ID.
 
 ## `ruleIDValidator(value)`
 Validate if value contains rule ID.
+
+## `domainValidator(value)`
+Validate if value conformns to (e-mail) domain.
