@@ -2172,6 +2172,29 @@ def test_ruleIDValueValidator_incorrect_types(value):
         ruleIDValidator(value)
 
 
+@pytest.mark.parametrize("value", proper_id_values)
+def test_ruleIDInBytesValueValidator_proper_values(value):
+    """Check if proper values are validated."""
+    # exception is not expected
+    ruleIDInBytesValidator(value.encode("utf-8"))
+
+
+@pytest.mark.parametrize("value", improper_id_values)
+def test_ruleIDInBytesValueValidator_proper_values(value):
+    """Check if impproper values are validated."""
+    # exception is expected
+    with pytest.raises(Invalid) as excinfo:
+        ruleIDInBytesValidator(value.encode("utf-8"))
+
+
+@pytest.mark.parametrize("value", not_string_type)
+def test_ruleIDInBytesValueValidator_incorrect_types(value):
+    """Check if improper values (with wrong type) are validated."""
+    # exception is expected
+    with pytest.raises(Invalid) as excinfo:
+        ruleIDInBytesValidator(value)
+
+
 @pytest.mark.parametrize("value", json_values)
 def test_jsonInStrValidatorValidator_correct_json_values(value):
     """Check if proper values JSON are validated."""
