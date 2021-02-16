@@ -18,6 +18,7 @@
 
 from os import popen
 import json
+import parquet
 from argparse import ArgumentParser
 
 from voluptuous import Invalid
@@ -116,6 +117,47 @@ def validate_multiple_messages(schema, input_file, verbose):
                 except (ValueError, Invalid) as ve:
                     invalid += 1
                     print("Validation error: " + str(ve))
+                except Exception as e:
+                    print("Other problem: " + str(e))
+                    error += 1
+
+    except IOError as e:
+        print("File-related problem: " + str(e))
+        error += 1
+
+    return {"processed": processed,
+            "valid": valid,
+            "invalid": invalid,
+            "error": error}
+
+
+def try_to_validate_message_from_parquet(schema, row, processed, verbose):
+    """Try to validate one message read from Parquet file."""
+    if verbose:
+        print("Reading message #{}".format(processed))
+    # try to validate it
+    validate(schema, row, verbose)
+
+
+def validate_parquet_file(schema, input_file, verbose):
+    """Validate multiple messages stored in input Parquet file."""
+    processed = 0
+    valid = 0
+    invalid = 0
+    error = 0
+
+    try:
+        with open(input_file, "rb") as fo:
+            # iterate over all records in the Parquet file
+            for row in parquet.DictReader(fo):
+                processed += 1
+                try:
+                    try_to_validate_message_from_parquet(schema, row, processed, verbose)
+                    valid += 1
+                except (ValueError, Invalid) as ve:
+                    invalid += 1
+                    print("Validation error: " + str(ve))
+                    print(row)
                 except Exception as e:
                     print("Other problem: " + str(e))
                     error += 1

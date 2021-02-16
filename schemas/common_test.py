@@ -29,7 +29,9 @@ from voluptuous import Invalid
 from common import read_control_code, load_json_from_file
 from common import validate_single_message
 from common import try_to_validate_message
+from common import try_to_validate_message_from_parquet
 from common import validate_multiple_messages
+from common import validate_parquet_file
 from common import print_report
 
 
@@ -156,6 +158,35 @@ def test_try_to_validate_message_invalid_data():
         try_to_validate_message(schema, payload, 1, True)
 
 
+def test_try_to_validate_message_from_parquet_empty_data():
+    """Test the function try_to_validate_message_from_parquet."""
+    schema = Schema({})
+    payload = {}
+
+    # try to validate empty message
+    try_to_validate_message_from_parquet(schema, payload, 1, True)
+
+
+def test_try_to_validate_message_from_parquet_wrong_data():
+    """Test the function try_to_validate_message_from_parquet."""
+    schema = Schema({})
+    payload = {"foo": "bar"}
+
+    # it should fail
+    with pytest.raises(Invalid) as excinfo:
+        try_to_validate_message_from_parquet(schema, payload, 1, True)
+
+
+def test_try_to_validate_message_invalid_data():
+    """Test the function try_to_validate_message."""
+    schema = Schema({})
+    payload = "{xyzzy}"
+
+    # it should fail
+    with pytest.raises(Exception) as excinfo:
+        try_to_validate_message(schema, payload, 1, True)
+
+
 def test_validate_multiple_messages_correct_file():
     """Test the function validate_multiple_messages."""
     schema = Schema({})
@@ -251,6 +282,28 @@ def test_validate_multiple_nonexistent_file():
 
     # try to validate JSON file without errors
     result = validate_multiple_messages(schema, path_to_payload, True)
+
+    # validate result
+    assert result is not None
+    assert "processed" in result
+    assert "valid" in result
+    assert "invalid" in result
+    assert "error" in result
+
+    # validate counters
+    assert result["processed"] == 0
+    assert result["valid"] == 0
+    assert result["invalid"] == 0
+    assert result["error"] == 1
+
+
+def test_validate_parquet_file_nonexistent_file():
+    """Test the function validate_parquet_file."""
+    schema = Schema({})
+    path_to_payload = "this_does_not_exists"
+
+    # try to validate Parquet file that does not exists
+    result = validate_parquet_file(schema, path_to_payload, True)
 
     # validate result
     assert result is not None
