@@ -18,10 +18,11 @@
 """Unit tests for sqs_messages module."""
 
 import pytest
+import sys
 
 from voluptuous import Invalid
 
-from sqs_messages import schema
+from sqs_messages import schema, main
 from common import validate
 
 
@@ -71,6 +72,22 @@ def correct_message():
                 "RetryAttempts": 0,
                 },
             }
+
+
+def test_main_help():
+    """Test the main function when -h parameter is given."""
+    sys.argv.append("-h")
+    with pytest.raises(SystemExit) as excinfo:
+        main()
+    assert excinfo.value.code == 0
+
+
+def test_main_input():
+    """Test the main function when -i parameter is given."""
+    sys.argv.append("-i test")
+    with pytest.raises(SystemExit) as excinfo:
+        main()
+    assert excinfo.value.code == 0
 
 
 @pytest.mark.parametrize("verbose", verbose)
