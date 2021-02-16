@@ -170,6 +170,9 @@ Validate value for timestamps without ms part, but with TZ info.
 ## `timestampValidatorOffset(value)`
 Validate value for timestamps with specified offsets.
     
+## `timestampValidatorNoZ(value)`
+Validate value for timestamps without zone info appended.
+    
 ## `urlToAWSValidator(value)`
 Validate if value conformns to AWS S3 URL.
     
