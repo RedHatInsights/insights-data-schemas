@@ -2270,3 +2270,19 @@ def test_domain_validator_wrong_input():
     # exception is expected
     with pytest.raises(Invalid) as excinfo:
         domainValidator(".")
+
+
+def test_domain_in_bytes_validator():
+    """Check the validator domainInBytesValidator."""
+    # exception is not expected
+    domainInBytesValidator(b"test.gov")
+
+
+def test_domain_in_bytes_validator_wrong_input():
+    """Check the validator domainInBytesValidator."""
+    # exception is expected
+    with pytest.raises(Invalid) as excinfo:
+        domainInBytesValidator(b"test")
+    # exception is expected
+    with pytest.raises(Invalid) as excinfo:
+        domainInBytesValidator(b".")

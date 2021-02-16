@@ -508,6 +508,16 @@ def domainValidator(value):
         raise Invalid("wrong e-mail domain:" + value)
 
 
+def domainInBytesValidator(value):
+    """Validate if value conformns to (e-mail) domain."""
+    bytesTypeValidator(value)
+
+    value = value.decode("utf-8")
+
+    stringTypeValidator(value)
+    domainValidator(value)
+
+
 def uuidValidator(value, version=4):
     """Check if value conforms to UUID."""
     # check if the value has the expected type
