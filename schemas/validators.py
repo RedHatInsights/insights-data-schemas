@@ -720,11 +720,11 @@ def pathToCephInBytesValidator(value):
 
     # construct regexp for path
     PREFIX = r"archives/compressed/"
-    SELECTOR = r"[a-f]{2}/"
-    UUID = r"[a-z0-9]{8}-[a-z0-9]{4}-[a-z0-9]{4}-[a-z0-9]{4}-[a-z0-9]{12}/"
+    SELECTOR = r"[0-9a-f]{2}/"
+    UUID = r"[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}/"
     DATETIME = r"[0-9]{6}/[0-9]{2}/"
     TARBALL = r"[0-9]+\.tar\.gz"
 
     PATH_RE = re.compile(PREFIX+SELECTOR+UUID+DATETIME+TARBALL)
     if not PATH_RE.fullmatch(value):
-        raise Invalid("wrong version value '{}'".format(value))
+        raise Invalid("wrong path value '{}'".format(value))
