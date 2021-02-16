@@ -423,6 +423,18 @@ def timestampValidatorOffset(value):
         raise Invalid("invalid datetime value {value}".format(value=value))
 
 
+def timestampValidatorNoZ(value):
+    """Validate value for timestamps."""
+    stringTypeValidator(value)
+
+    timeformat = '%Y-%m-%dT%H:%M:%S'
+    try:
+        # try to parse the input value
+        datetime.datetime.strptime(value, timeformat)
+    except ValueError:
+        raise Invalid("invalid datetime value {value}".format(value=value))
+
+
 def timestampValidatorMs(value):
     """Validate value for timestamps without ms part, but with TZ info."""
     stringTypeValidator(value)
