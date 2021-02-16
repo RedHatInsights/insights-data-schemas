@@ -2254,3 +2254,19 @@ def test_path_to_ceph_incorrect_values(value):
     # exception is expected
     with pytest.raises(Invalid) as excinfo:
         pathToCephInBytesValidator(value.encode("utf-8"))
+
+
+def test_domain_validator():
+    """Check the validator domainValidator."""
+    # exception is not expected
+    domainValidator("test.gov")
+
+
+def test_domain_validator_wrong_input():
+    """Check the validator domainValidator."""
+    # exception is expected
+    with pytest.raises(Invalid) as excinfo:
+        domainValidator("test")
+    # exception is expected
+    with pytest.raises(Invalid) as excinfo:
+        domainValidator(".")
