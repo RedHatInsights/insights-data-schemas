@@ -185,5 +185,8 @@ Validate if value contains FQDN (fully-qualified name).
 ## `ruleFQDNValidator(value)`
 Validate if value contains FQDN (fully-qualified name).
 
+## `ruleIDInBytesValidator(value)`
+Validate if value contains rule ID.
+
 ## `ruleIDValidator(value)`
 Validate if value contains rule ID.

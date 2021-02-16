@@ -469,6 +469,21 @@ def ruleIDValidator(value):
         raise Invalid("wrong FQDN '{}'".format(value))
 
 
+def ruleIDInBytesValidator(value):
+    """Validate if value contains rule ID."""
+    # check if the value has the expected type
+    bytesTypeValidator(value)
+
+    # use default encoding
+    value = value.decode("utf-8")
+
+    stringTypeValidator(value)
+
+    FQDN_VALUE_RE = re.compile(r"[A-Za-z0-9_]+([_][A-Za-z0-9_]+)+\|[A-Z0-9_]+([_][A-Z0-9_]+)+")
+    if not FQDN_VALUE_RE.fullmatch(value):
+        raise Invalid("wrong FQDN '{}'".format(value))
+
+
 def urlToAWSValidator(value):
     """Validate if value conformns to AWS S3 URL."""
     stringTypeValidator(value)
