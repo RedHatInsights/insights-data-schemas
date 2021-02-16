@@ -445,6 +445,21 @@ def ruleFQDNValidator(value):
         raise Invalid("wrong FQDN '{}'".format(value))
 
 
+def ruleFQDNInBytesValidator(value):
+    """Validate if value contains FQDN (fully-qualified name)."""
+    # check if the value has the expected type
+    bytesTypeValidator(value)
+
+    # use default encoding
+    value = value.decode("utf-8")
+
+    stringTypeValidator(value)
+
+    FQDN_VALUE_RE = re.compile(r"([a-z0-9_]+[.])+[a-z0-9_]+")
+    if not FQDN_VALUE_RE.fullmatch(value):
+        raise Invalid("wrong FQDN '{}'".format(value))
+
+
 def ruleIDValidator(value):
     """Validate if value contains rule ID."""
     stringTypeValidator(value)

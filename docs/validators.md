@@ -179,6 +179,9 @@ Check if value conforms to UUID.
 ## `versionInBytesValidator(value)`
 Check if value conforms to version.
 
+## `ruleFQDNInBytesValidator(value)`
+Validate if value contains FQDN (fully-qualified name).
+
 ## `ruleFQDNValidator(value)`
 Validate if value contains FQDN (fully-qualified name).
 
