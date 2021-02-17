@@ -57,6 +57,7 @@ Common function used by validators.upload.buckit topic.</p>
     <div class='code'>
       <div class="highlight"><pre><span class="kn">from</span> <span class="nn">os</span> <span class="kn">import</span> <span class="n">popen</span>
 <span class="kn">import</span> <span class="nn">json</span>
+<span class="kn">import</span> <span class="nn">parquet</span>
 <span class="kn">from</span> <span class="nn">argparse</span> <span class="kn">import</span> <span class="n">ArgumentParser</span>
 
 <span class="kn">from</span> <span class="nn">voluptuous</span> <span class="kn">import</span> <span class="n">Invalid</span></pre></div>
@@ -346,10 +347,10 @@ and fill in the object named <code>args</code>.</p>
       <div class='octowrap'>
         <a class='octothorpe' href='#section-21'>#</a>
       </div>
-      <p>Display report about number of passes and failures.</p>
+      <p>Try to validate one message read from Parquet file.</p>
     </div>
     <div class='code'>
-      <div class="highlight"><pre><span class="k">def</span> <span class="nf">print_report</span><span class="p">(</span><span class="n">report</span><span class="p">,</span> <span class="n">nocolors</span><span class="p">):</span></pre></div>
+      <div class="highlight"><pre><span class="k">def</span> <span class="nf">try_to_validate_message_from_parquet</span><span class="p">(</span><span class="n">schema</span><span class="p">,</span> <span class="n">row</span><span class="p">,</span> <span class="n">processed</span><span class="p">,</span> <span class="n">verbose</span><span class="p">):</span></pre></div>
     </div>
   </div>
   <div class='clearall'></div>
@@ -357,6 +358,105 @@ and fill in the object named <code>args</code>.</p>
     <div class='docs'>
       <div class='octowrap'>
         <a class='octothorpe' href='#section-22'>#</a>
+      </div>
+      
+    </div>
+    <div class='code'>
+      <div class="highlight"><pre>    <span class="k">if</span> <span class="n">verbose</span><span class="p">:</span>
+        <span class="k">print</span><span class="p">(</span><span class="s2">&quot;Reading message #{}&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">processed</span><span class="p">))</span></pre></div>
+    </div>
+  </div>
+  <div class='clearall'></div>
+  <div class='section' id='section-23'>
+    <div class='docs'>
+      <div class='octowrap'>
+        <a class='octothorpe' href='#section-23'>#</a>
+      </div>
+      <p>try to validate it</p>
+    </div>
+    <div class='code'>
+      <div class="highlight"><pre>    <span class="n">validate</span><span class="p">(</span><span class="n">schema</span><span class="p">,</span> <span class="n">row</span><span class="p">,</span> <span class="n">verbose</span><span class="p">)</span></pre></div>
+    </div>
+  </div>
+  <div class='clearall'></div>
+  <div class='section' id='section-24'>
+    <div class='docs'>
+      <div class='octowrap'>
+        <a class='octothorpe' href='#section-24'>#</a>
+      </div>
+      <p>Validate multiple messages stored in input Parquet file.</p>
+    </div>
+    <div class='code'>
+      <div class="highlight"><pre><span class="k">def</span> <span class="nf">validate_parquet_file</span><span class="p">(</span><span class="n">schema</span><span class="p">,</span> <span class="n">input_file</span><span class="p">,</span> <span class="n">verbose</span><span class="p">):</span></pre></div>
+    </div>
+  </div>
+  <div class='clearall'></div>
+  <div class='section' id='section-25'>
+    <div class='docs'>
+      <div class='octowrap'>
+        <a class='octothorpe' href='#section-25'>#</a>
+      </div>
+      
+    </div>
+    <div class='code'>
+      <div class="highlight"><pre>    <span class="n">processed</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="n">valid</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="n">invalid</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="n">error</span> <span class="o">=</span> <span class="mi">0</span>
+
+    <span class="k">try</span><span class="p">:</span>
+        <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">input_file</span><span class="p">,</span> <span class="s2">&quot;rb&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">fo</span><span class="p">:</span></pre></div>
+    </div>
+  </div>
+  <div class='clearall'></div>
+  <div class='section' id='section-26'>
+    <div class='docs'>
+      <div class='octowrap'>
+        <a class='octothorpe' href='#section-26'>#</a>
+      </div>
+      <p>iterate over all records in the Parquet file</p>
+    </div>
+    <div class='code'>
+      <div class="highlight"><pre>            <span class="k">for</span> <span class="n">row</span> <span class="ow">in</span> <span class="n">parquet</span><span class="o">.</span><span class="n">DictReader</span><span class="p">(</span><span class="n">fo</span><span class="p">):</span>
+                <span class="n">processed</span> <span class="o">+=</span> <span class="mi">1</span>
+                <span class="k">try</span><span class="p">:</span>
+                    <span class="n">try_to_validate_message_from_parquet</span><span class="p">(</span><span class="n">schema</span><span class="p">,</span> <span class="n">row</span><span class="p">,</span> <span class="n">processed</span><span class="p">,</span> <span class="n">verbose</span><span class="p">)</span>
+                    <span class="n">valid</span> <span class="o">+=</span> <span class="mi">1</span>
+                <span class="k">except</span> <span class="p">(</span><span class="ne">ValueError</span><span class="p">,</span> <span class="n">Invalid</span><span class="p">)</span> <span class="k">as</span> <span class="n">ve</span><span class="p">:</span>
+                    <span class="n">invalid</span> <span class="o">+=</span> <span class="mi">1</span>
+                    <span class="k">print</span><span class="p">(</span><span class="s2">&quot;Validation error: &quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">ve</span><span class="p">))</span>
+                    <span class="k">print</span><span class="p">(</span><span class="n">row</span><span class="p">)</span>
+                <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+                    <span class="k">print</span><span class="p">(</span><span class="s2">&quot;Other problem: &quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">e</span><span class="p">))</span>
+                    <span class="n">error</span> <span class="o">+=</span> <span class="mi">1</span>
+
+    <span class="k">except</span> <span class="ne">IOError</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+        <span class="k">print</span><span class="p">(</span><span class="s2">&quot;File-related problem: &quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">e</span><span class="p">))</span>
+        <span class="n">error</span> <span class="o">+=</span> <span class="mi">1</span>
+
+    <span class="k">return</span> <span class="p">{</span><span class="s2">&quot;processed&quot;</span><span class="p">:</span> <span class="n">processed</span><span class="p">,</span>
+            <span class="s2">&quot;valid&quot;</span><span class="p">:</span> <span class="n">valid</span><span class="p">,</span>
+            <span class="s2">&quot;invalid&quot;</span><span class="p">:</span> <span class="n">invalid</span><span class="p">,</span>
+            <span class="s2">&quot;error&quot;</span><span class="p">:</span> <span class="n">error</span><span class="p">}</span></pre></div>
+    </div>
+  </div>
+  <div class='clearall'></div>
+  <div class='section' id='section-27'>
+    <div class='docs'>
+      <div class='octowrap'>
+        <a class='octothorpe' href='#section-27'>#</a>
+      </div>
+      <p>Display report about number of passes and failures.</p>
+    </div>
+    <div class='code'>
+      <div class="highlight"><pre><span class="k">def</span> <span class="nf">print_report</span><span class="p">(</span><span class="n">report</span><span class="p">,</span> <span class="n">nocolors</span><span class="p">):</span></pre></div>
+    </div>
+  </div>
+  <div class='clearall'></div>
+  <div class='section' id='section-28'>
+    <div class='docs'>
+      <div class='octowrap'>
+        <a class='octothorpe' href='#section-28'>#</a>
       </div>
       <p>First of all, we need to setup colors to be displayed on terminal. Colors
 are displayed by using terminal escape control codes. When color output
@@ -369,10 +469,10 @@ output instead of real color escape codes.</p>
     </div>
   </div>
   <div class='clearall'></div>
-  <div class='section' id='section-23'>
+  <div class='section' id='section-29'>
     <div class='docs'>
       <div class='octowrap'>
-        <a class='octothorpe' href='#section-23'>#</a>
+        <a class='octothorpe' href='#section-29'>#</a>
       </div>
       <p>If colors are enabled by command line parameter, use control sequence
 returned by <code>tput</code> command.</p>
