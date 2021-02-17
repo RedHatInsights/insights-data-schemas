@@ -263,6 +263,7 @@ def intInBytesValidator(value):
     # use default encoding
     value = value.decode("utf-8")
 
+    # check new type
     stringTypeValidator(value)
 
     # try to parse the string
@@ -277,6 +278,7 @@ def posIntInBytesValidator(value):
     # use default encoding
     value = value.decode("utf-8")
 
+    # check new type
     stringTypeValidator(value)
 
     # try to parse the string
@@ -292,6 +294,7 @@ def posIntOrZeroInBytesValidator(value):
     # use default encoding
     value = value.decode("utf-8")
 
+    # check new type
     stringTypeValidator(value)
 
     # try to parse the string
@@ -307,6 +310,7 @@ def negIntInBytesValidator(value):
     # use default encoding
     value = value.decode("utf-8")
 
+    # check new type
     stringTypeValidator(value)
 
     # try to parse the string
@@ -322,6 +326,7 @@ def negIntOrZeroInBytesValidator(value):
     # use default encoding
     value = value.decode("utf-8")
 
+    # check new type
     stringTypeValidator(value)
 
     # try to parse the string
@@ -337,6 +342,7 @@ def posFloatInBytesValidator(value):
     # use default encoding
     value = value.decode("utf-8")
 
+    # check new type
     stringTypeValidator(value)
 
     # try to parse the string
@@ -352,6 +358,7 @@ def posFloatOrZeroInBytesValidator(value):
     # use default encoding
     value = value.decode("utf-8")
 
+    # check new type
     stringTypeValidator(value)
 
     # try to parse the string
@@ -367,6 +374,7 @@ def negFloatInBytesValidator(value):
     # use default encoding
     value = value.decode("utf-8")
 
+    # check new type
     stringTypeValidator(value)
 
     # try to parse the string
@@ -382,6 +390,7 @@ def negFloatOrZeroInBytesValidator(value):
     # use default encoding
     value = value.decode("utf-8")
 
+    # check new type
     stringTypeValidator(value)
 
     # try to parse the string
@@ -393,6 +402,8 @@ def hexaString32Validator(value):
     """Validate value for string containign exactly 32 hexadecimal digits."""
     stringTypeValidator(value)
 
+    if len(value) == 0:
+        raise Invalid("string is empty".format(len(value)))
     if len(value) != 32:
         raise Invalid("wrong number of digits: {}".format(len(value)))
     if not all(c in string.hexdigits for c in value):
@@ -455,7 +466,7 @@ def keyValueValidator(value):
     """Validate if value conformns to a key used in Insights Results."""
     stringTypeValidator(value)
 
-    KEY_VALUE_RE = re.compile(r"[A-Z]+([_][A-Z0-9]+)+")
+    KEY_VALUE_RE = re.compile(r"[A-Z0-9]+([_][A-Z0-9]+)+")
     if not KEY_VALUE_RE.fullmatch(value):
         raise Invalid("wrong key value '{}'".format(value))
 
@@ -464,7 +475,7 @@ def ruleFQDNValidator(value):
     """Validate if value contains FQDN (fully-qualified name)."""
     stringTypeValidator(value)
 
-    FQDN_VALUE_RE = re.compile(r"([a-z0-9_]+[.])+[a-z0-9_]+")
+    FQDN_VALUE_RE = re.compile(r"([a-zA-Z0-9_]+[.])+[a-z0-9_]+")
     if not FQDN_VALUE_RE.fullmatch(value):
         raise Invalid("wrong FQDN '{}'".format(value))
 
@@ -488,7 +499,7 @@ def ruleIDValidator(value):
     """Validate if value contains rule ID."""
     stringTypeValidator(value)
 
-    FQDN_VALUE_RE = re.compile(r"[a-z0-9_]+([_][a-z0-9_]+)+\|[A-Z0-9_]+([_][A-Z0-9_]+)+")
+    FQDN_VALUE_RE = re.compile(r"[a-zA-Z0-9_]+([_][a-z0-9_]+)+\|[A-Z0-9_]+([_][A-Z0-9_]+)+")
     if not FQDN_VALUE_RE.fullmatch(value):
         raise Invalid("wrong FQDN '{}'".format(value))
 
