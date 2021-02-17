@@ -2,14 +2,14 @@
 <html>
 <head>
   <meta http-equiv="content-type" content="text/html;charset=utf-8">
-  <title>platform_upload_buckit_messages_test.py</title>
+  <title>sqs_messages_test.py</title>
   <link rel="stylesheet" href="pycco.css">
 </head>
 <body>
 <div id='container'>
   <div id="background"></div>
   <div class='section'>
-    <div class='docs'><h1>platform_upload_buckit_messages_test.py</h1></div>
+    <div class='docs'><h1>sqs_messages_test.py</h1></div>
   </div>
   <div class='clearall'>
   <div class='section' id='section-0'>
@@ -29,7 +29,7 @@
       <div class='octowrap'>
         <a class='octothorpe' href='#section-1'>#</a>
       </div>
-      <p>Copyright © 2020, 2021 Pavel Tisnovsky</p>
+      <p>Copyright © 2021 Pavel Tisnovsky</p>
 <p>Licensed under the Apache License, Version 2.0 (the &ldquo;License&rdquo;);
 you may not use this file except in compliance with the License.
 You may obtain a copy of the License at</p>
@@ -40,7 +40,7 @@ distributed under the License is distributed on an &ldquo;AS IS&rdquo; BASIS,
 WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 See the License for the specific language governing permissions and
 limitations under the License.
-Unit tests for platform_upload_buckit_messages module.</p>
+Unit tests for sqs_messages module.</p>
     </div>
     <div class='code'>
       <div class="highlight"><pre></pre></div>
@@ -60,7 +60,7 @@ Unit tests for platform_upload_buckit_messages module.</p>
 
 <span class="kn">from</span> <span class="nn">voluptuous</span> <span class="kn">import</span> <span class="n">Invalid</span>
 
-<span class="kn">from</span> <span class="nn">platform_upload_buckit_messages</span> <span class="kn">import</span> <span class="n">schema</span><span class="p">,</span> <span class="n">main</span>
+<span class="kn">from</span> <span class="nn">sqs_messages</span> <span class="kn">import</span> <span class="n">schema</span><span class="p">,</span> <span class="n">main</span>
 <span class="kn">from</span> <span class="nn">common</span> <span class="kn">import</span> <span class="n">validate</span></pre></div>
     </div>
   </div>
@@ -111,16 +111,8 @@ Unit tests for platform_upload_buckit_messages module.</p>
     </div>
     <div class='code'>
       <div class="highlight"><pre><span class="n">attribute</span> <span class="o">=</span> <span class="p">(</span>
-        <span class="s2">&quot;account&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;category&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;request_id&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;principal&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;service&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;size&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;metadata&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;url&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;b64_identity&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;timestamp&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;ResponseMetadata&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;Messages&quot;</span>
         <span class="p">)</span></pre></div>
     </div>
   </div>
@@ -147,20 +139,32 @@ Unit tests for platform_upload_buckit_messages module.</p>
     </div>
     <div class='code'>
       <div class="highlight"><pre>    <span class="k">return</span> <span class="p">{</span>
-        <span class="s2">&quot;account&quot;</span><span class="p">:</span> <span class="s2">&quot;12345678&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;category&quot;</span><span class="p">:</span> <span class="s2">&quot;test&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;metadata&quot;</span><span class="p">:</span> <span class="p">{</span>
-            <span class="s2">&quot;reporter&quot;</span><span class="p">:</span> <span class="s2">&quot;&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;stale_timestamp&quot;</span><span class="p">:</span> <span class="s2">&quot;0001-01-01T00:00:00Z&quot;</span>
-            <span class="p">},</span>
-        <span class="s2">&quot;request_id&quot;</span><span class="p">:</span> <span class="s2">&quot;1234567890abcdef1234567890abcdef&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;principal&quot;</span><span class="p">:</span> <span class="s2">&quot;87654321&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;service&quot;</span><span class="p">:</span> <span class="s2">&quot;openshift&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;size&quot;</span><span class="p">:</span> <span class="mi">123456</span><span class="p">,</span>
-        <span class="s2">&quot;url&quot;</span><span class="p">:</span> <span class="s2">&quot;https://hostname.s3.amazonaws.com/first-part?X-Amz-Algorithm=AWS4-HMAC-SHA256&amp;X-Amz-Credential=credential-info&amp;X-Amz-Date=creation-date&amp;X-Amz-Expires=expiration-time&amp;X-Amz-SignedHeaders=host&amp;X-Amz-Signature=signature&quot;</span><span class="p">,</span>  <span class="c1"># noqa E501</span>
-        <span class="s2">&quot;b64_identity&quot;</span><span class="p">:</span> <span class="s2">&quot;ewogICJpZGVudGl0eSI6IHsKICAgICJpbnRlcm5hbCI6IHsKICAgICAgIm9yZ19pZCI6ICIxMjM0NTYiLAogICAgICAiYXV0aF90aW1lIjogMAogICAgfSwKICAgICJhY2NvdW50X251bWJlciI6ICI3ODkwMDAiLAogICAgImF1dGhfdHlwZSI6ICJjZXJ0LWF1dGgiLAogICAgInN5c3RlbSI6IHsKICAgICAgImNuIjogIjEyMzQ1Njc4LWFhYWEtZWVlZS1mZmZmLTAwMDAwMDAwMDAwMCIsCiAgICAgICJjZXJ0X3R5cGUiOiAic3lzdGVtIgogICAgfSwKICAgICJ0eXBlIjogIlN5c3RlbSIKICB9LAogICJlbnRpdGxlbWVudHMiOiB7CiAgICAiaW5zaWdodHMiOiB7CiAgICAgICJpc19lbnRpdGxlZCI6IHRydWUsCiAgICAgICJpc190cmlhbCI6IGZhbHNlCiAgICB9LAogICAgImZvbyI6IHsKICAgICAgImlzX2VudGl0bGVkIjogdHJ1ZSwKICAgICAgImlzX3RyaWFsIjogdHJ1ZQogICAgfSwKICAgICJiYXIiOiB7CiAgICAgICJpc19lbnRpdGxlZCI6IGZhbHNlLAogICAgICAiaXNfdHJpYWwiOiBmYWxzZQogICAgfSwKICAgICJiYXoiOiB7CiAgICAgICJpc19lbnRpdGxlZCI6IHRydWUsCiAgICAgICJpc190cmlhbCI6IHRydWUKICAgIH0KICB9Cn0K&quot;</span><span class="p">,</span>  <span class="c1"># noqa E501</span>
-        <span class="s2">&quot;timestamp&quot;</span><span class="p">:</span> <span class="s2">&quot;2020-12-09T16:17:42.822020204Z&quot;</span>
-        <span class="p">}</span></pre></div>
+            <span class="s2">&quot;Messages&quot;</span><span class="p">:</span> <span class="p">[</span>
+                <span class="p">{</span>
+                    <span class="s2">&quot;MessageId&quot;</span><span class="p">:</span> <span class="s2">&quot;abe528f6-18a9-45a9-9871-8391ccb5c7d7&quot;</span><span class="p">,</span>
+                    <span class="s2">&quot;ReceiptHandle&quot;</span><span class="p">:</span> <span class="s2">&quot;123&quot;</span><span class="p">,</span>
+                    <span class="s2">&quot;MD5OfBody&quot;</span><span class="p">:</span> <span class="s2">&quot;905bbf7ea802c6043fbc0e81cafe7e5f&quot;</span><span class="p">,</span>
+                    <span class="s2">&quot;Body&quot;</span><span class="p">:</span> <span class="s1">&#39;{&quot;Records&quot;: [{&quot;s3&quot;: {&quot;object&quot;: {&quot;key&quot;: &quot;7307752/4e696069-edf5-44dd-9f05-fcca2d14cdf1/20200609125740-113ebefe3cdd4a62b9d0e094213bf9e9&quot;,&quot;size&quot;: 11805,&quot;eTag&quot;: &quot;ef140efa70e9efe79fdd71e5909713bb&quot;,&quot;sequencer&quot;: &quot;005EDF87444DDF7525&quot;}}}]}&#39;</span><span class="p">,</span>  <span class="c1"># noqa: E501</span>
+                    <span class="s2">&quot;Attributes&quot;</span><span class="p">:</span> <span class="p">{</span>
+                        <span class="s2">&quot;SenderId&quot;</span><span class="p">:</span> <span class="s2">&quot;321123&quot;</span><span class="p">,</span>
+                        <span class="s2">&quot;ApproximateFirstReceiveTimestamp&quot;</span><span class="p">:</span> <span class="s2">&quot;1591707477622&quot;</span><span class="p">,</span>
+                        <span class="s2">&quot;ApproximateReceiveCount&quot;</span><span class="p">:</span> <span class="s2">&quot;1&quot;</span><span class="p">,</span>
+                        <span class="s2">&quot;SentTimestamp&quot;</span><span class="p">:</span> <span class="s2">&quot;1591707468964&quot;</span><span class="p">,</span>
+                        <span class="p">},</span>
+                    <span class="p">}</span>
+                <span class="p">],</span>
+            <span class="s2">&quot;ResponseMetadata&quot;</span><span class="p">:</span> <span class="p">{</span>
+                <span class="s2">&quot;RequestId&quot;</span><span class="p">:</span> <span class="s2">&quot;aeb60670-75fd-5378-a1d3-5129fc68d330&quot;</span><span class="p">,</span>
+                <span class="s2">&quot;HTTPStatusCode&quot;</span><span class="p">:</span> <span class="mi">200</span><span class="p">,</span>
+                <span class="s2">&quot;HTTPHeaders&quot;</span><span class="p">:</span> <span class="p">{</span>
+                    <span class="s2">&quot;x-amzn-requestid&quot;</span><span class="p">:</span> <span class="s2">&quot;aeb60670-75fd-5378-a1d3-5129fc68d330&quot;</span><span class="p">,</span>
+                    <span class="s2">&quot;date&quot;</span><span class="p">:</span> <span class="s2">&quot;Tue, 09 Jun 2020 12:57:57 GMT&quot;</span><span class="p">,</span>
+                    <span class="s2">&quot;content-type&quot;</span><span class="p">:</span> <span class="s2">&quot;text/xml&quot;</span><span class="p">,</span>
+                    <span class="s2">&quot;content-length&quot;</span><span class="p">:</span> <span class="s2">&quot;22437&quot;</span><span class="p">,</span>
+                    <span class="p">},</span>
+                <span class="s2">&quot;RetryAttempts&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+                <span class="p">},</span>
+            <span class="p">}</span></pre></div>
     </div>
   </div>
   <div class='clearall'></div>
@@ -278,7 +282,9 @@ Unit tests for platform_upload_buckit_messages module.</p>
     </div>
     <div class='code'>
       <div class="highlight"><pre><span class="nd">@pytest.mark.parametrize</span><span class="p">(</span><span class="s2">&quot;verbose&quot;</span><span class="p">,</span> <span class="n">verbose</span><span class="p">)</span>
-<span class="k">def</span> <span class="nf">test_validate_message_without_account_attribute</span><span class="p">(</span><span class="n">validation_schema</span><span class="p">,</span> <span class="n">verbose</span><span class="p">,</span> <span class="n">correct_message</span><span class="p">):</span></pre></div>
+<span class="k">def</span> <span class="nf">test_validate_message_without_response_metadata_attribute</span><span class="p">(</span><span class="n">validation_schema</span><span class="p">,</span>
+                                                              <span class="n">verbose</span><span class="p">,</span>
+                                                              <span class="n">correct_message</span><span class="p">):</span></pre></div>
     </div>
   </div>
   <div class='clearall'></div>
@@ -290,7 +296,7 @@ Unit tests for platform_upload_buckit_messages module.</p>
       
     </div>
     <div class='code'>
-      <div class="highlight"><pre>    <span class="k">del</span> <span class="n">correct_message</span><span class="p">[</span><span class="s2">&quot;account&quot;</span><span class="p">]</span></pre></div>
+      <div class="highlight"><pre>    <span class="k">del</span> <span class="n">correct_message</span><span class="p">[</span><span class="s2">&quot;ResponseMetadata&quot;</span><span class="p">]</span></pre></div>
     </div>
   </div>
   <div class='clearall'></div>
@@ -316,7 +322,9 @@ Unit tests for platform_upload_buckit_messages module.</p>
     </div>
     <div class='code'>
       <div class="highlight"><pre><span class="nd">@pytest.mark.parametrize</span><span class="p">(</span><span class="s2">&quot;verbose&quot;</span><span class="p">,</span> <span class="n">verbose</span><span class="p">)</span>
-<span class="k">def</span> <span class="nf">test_validate_message_wrong_account_attribute</span><span class="p">(</span><span class="n">validation_schema</span><span class="p">,</span> <span class="n">verbose</span><span class="p">,</span> <span class="n">correct_message</span><span class="p">):</span></pre></div>
+<span class="k">def</span> <span class="nf">test_validate_message_wrong_response_metadata_attribute</span><span class="p">(</span><span class="n">validation_schema</span><span class="p">,</span>
+                                                            <span class="n">verbose</span><span class="p">,</span>
+                                                            <span class="n">correct_message</span><span class="p">):</span></pre></div>
     </div>
   </div>
   <div class='clearall'></div>
@@ -328,7 +336,7 @@ Unit tests for platform_upload_buckit_messages module.</p>
       <p>check with string not representing number</p>
     </div>
     <div class='code'>
-      <div class="highlight"><pre>    <span class="n">correct_message</span><span class="p">[</span><span class="s2">&quot;account&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;foobar&quot;</span></pre></div>
+      <div class="highlight"><pre>    <span class="n">correct_message</span><span class="p">[</span><span class="s2">&quot;ResponseMetadata&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;foobar&quot;</span></pre></div>
     </div>
   </div>
   <div class='clearall'></div>
@@ -353,7 +361,7 @@ Unit tests for platform_upload_buckit_messages module.</p>
       <p>check with number</p>
     </div>
     <div class='code'>
-      <div class="highlight"><pre>    <span class="n">correct_message</span><span class="p">[</span><span class="s2">&quot;account&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="mi">123456</span></pre></div>
+      <div class="highlight"><pre>    <span class="n">correct_message</span><span class="p">[</span><span class="s2">&quot;ResponseMetadata&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="mi">123456</span></pre></div>
     </div>
   </div>
   <div class='clearall'></div>
@@ -378,7 +386,7 @@ Unit tests for platform_upload_buckit_messages module.</p>
       <p>check with different data type</p>
     </div>
     <div class='code'>
-      <div class="highlight"><pre>    <span class="n">correct_message</span><span class="p">[</span><span class="s2">&quot;account&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="p">[]</span></pre></div>
+      <div class="highlight"><pre>    <span class="n">correct_message</span><span class="p">[</span><span class="s2">&quot;ResponseMetadata&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="p">[]</span></pre></div>
     </div>
   </div>
   <div class='clearall'></div>
@@ -400,13 +408,10 @@ Unit tests for platform_upload_buckit_messages module.</p>
       <div class='octowrap'>
         <a class='octothorpe' href='#section-27'>#</a>
       </div>
-      <p>Test the validation for improper payload.</p>
+      <p>check with different data type</p>
     </div>
     <div class='code'>
-      <div class="highlight"><pre><span class="nd">@pytest.mark.parametrize</span><span class="p">(</span><span class="s2">&quot;attribute&quot;</span><span class="p">,</span> <span class="n">attribute</span><span class="p">)</span>
-<span class="nd">@pytest.mark.parametrize</span><span class="p">(</span><span class="s2">&quot;verbose&quot;</span><span class="p">,</span> <span class="n">verbose</span><span class="p">)</span>
-<span class="k">def</span> <span class="nf">test_validate_message_without_attributes</span><span class="p">(</span><span class="n">validation_schema</span><span class="p">,</span> <span class="n">verbose</span><span class="p">,</span> <span class="n">correct_message</span><span class="p">,</span>
-                                             <span class="n">attribute</span><span class="p">):</span></pre></div>
+      <div class="highlight"><pre>    <span class="n">correct_message</span><span class="p">[</span><span class="s2">&quot;ResponseMetadata&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="p">{}</span></pre></div>
     </div>
   </div>
   <div class='clearall'></div>
@@ -414,18 +419,6 @@ Unit tests for platform_upload_buckit_messages module.</p>
     <div class='docs'>
       <div class='octowrap'>
         <a class='octothorpe' href='#section-28'>#</a>
-      </div>
-      
-    </div>
-    <div class='code'>
-      <div class="highlight"><pre>    <span class="k">del</span> <span class="n">correct_message</span><span class="p">[</span><span class="n">attribute</span><span class="p">]</span></pre></div>
-    </div>
-  </div>
-  <div class='clearall'></div>
-  <div class='section' id='section-29'>
-    <div class='docs'>
-      <div class='octowrap'>
-        <a class='octothorpe' href='#section-29'>#</a>
       </div>
       <p>it should fail</p>
     </div>
@@ -435,10 +428,10 @@ Unit tests for platform_upload_buckit_messages module.</p>
     </div>
   </div>
   <div class='clearall'></div>
-  <div class='section' id='section-30'>
+  <div class='section' id='section-29'>
     <div class='docs'>
       <div class='octowrap'>
-        <a class='octothorpe' href='#section-30'>#</a>
+        <a class='octothorpe' href='#section-29'>#</a>
       </div>
       <p>Test the validation for improper payload.</p>
     </div>
@@ -449,10 +442,10 @@ Unit tests for platform_upload_buckit_messages module.</p>
     </div>
   </div>
   <div class='clearall'></div>
-  <div class='section' id='section-31'>
+  <div class='section' id='section-30'>
     <div class='docs'>
       <div class='octowrap'>
-        <a class='octothorpe' href='#section-31'>#</a>
+        <a class='octothorpe' href='#section-30'>#</a>
       </div>
       
     </div>
@@ -461,10 +454,10 @@ Unit tests for platform_upload_buckit_messages module.</p>
     </div>
   </div>
   <div class='clearall'></div>
-  <div class='section' id='section-32'>
+  <div class='section' id='section-31'>
     <div class='docs'>
       <div class='octowrap'>
-        <a class='octothorpe' href='#section-32'>#</a>
+        <a class='octothorpe' href='#section-31'>#</a>
       </div>
       <p>it should fail</p>
     </div>
@@ -474,10 +467,10 @@ Unit tests for platform_upload_buckit_messages module.</p>
     </div>
   </div>
   <div class='clearall'></div>
-  <div class='section' id='section-33'>
+  <div class='section' id='section-32'>
     <div class='docs'>
       <div class='octowrap'>
-        <a class='octothorpe' href='#section-33'>#</a>
+        <a class='octothorpe' href='#section-32'>#</a>
       </div>
       <p>check with number</p>
     </div>
@@ -486,10 +479,10 @@ Unit tests for platform_upload_buckit_messages module.</p>
     </div>
   </div>
   <div class='clearall'></div>
-  <div class='section' id='section-34'>
+  <div class='section' id='section-33'>
     <div class='docs'>
       <div class='octowrap'>
-        <a class='octothorpe' href='#section-34'>#</a>
+        <a class='octothorpe' href='#section-33'>#</a>
       </div>
       <p>it should fail</p>
     </div>
@@ -499,22 +492,22 @@ Unit tests for platform_upload_buckit_messages module.</p>
     </div>
   </div>
   <div class='clearall'></div>
-  <div class='section' id='section-35'>
+  <div class='section' id='section-34'>
     <div class='docs'>
       <div class='octowrap'>
-        <a class='octothorpe' href='#section-35'>#</a>
+        <a class='octothorpe' href='#section-34'>#</a>
       </div>
       <p>check with different data type</p>
     </div>
     <div class='code'>
-      <div class="highlight"><pre>    <span class="n">correct_message</span><span class="p">[</span><span class="n">attribute</span><span class="p">]</span> <span class="o">=</span> <span class="p">[]</span></pre></div>
+      <div class="highlight"><pre>    <span class="n">correct_message</span><span class="p">[</span><span class="n">attribute</span><span class="p">]</span> <span class="o">=</span> <span class="bp">None</span></pre></div>
     </div>
   </div>
   <div class='clearall'></div>
-  <div class='section' id='section-36'>
+  <div class='section' id='section-35'>
     <div class='docs'>
       <div class='octowrap'>
-        <a class='octothorpe' href='#section-36'>#</a>
+        <a class='octothorpe' href='#section-35'>#</a>
       </div>
       <p>it should fail</p>
     </div>
