@@ -26,7 +26,8 @@ from validators import *
 
 # proper positive integers
 positive_int_values = (1, 2, 3, 127, 128, 255, 256,
-                       65535, 65536, 4294967295, 4294967296,
+                       32767, 32768, 65535, 65536,
+                       4294967295, 4294967296,
                        18446744073709551615, 18446744073709551616)
 
 # proper positive integers and a zero
@@ -37,17 +38,18 @@ not_positive_int_values = (0, -1, -65535)
 
 # proper negative integers
 negative_int_values = (-1, -2, -3, -127, -128, -255, -256,
-                       -65535, -65536, -4294967295, -4294967296,
+                       -32767, -32768, -65535, -65536,
+                       -4294967295, -4294967296,
                        -18446744073709551615, -18446744073709551616)
 
 # proper negative integers and a zero
 negative_int_values_and_zero = negative_int_values + (0, )
 
 # improper negative integers
-not_negative_int_values = (0, 1, 65535)
+not_negative_int_values = (0, 1, 2, 255, 256, 32767, 65535)
 
 # improper integers
-not_integer_type = ("", "0", "1", "-1", True, False, 3.14)
+not_integer_type = ("", "0", "1", "-1", True, False, 3.14, (), [], None)
 
 # positive float values
 positive_float_values = (1.0, 3.14, 1e10, 1e100, 1e-10, 1e-100)
@@ -68,7 +70,7 @@ not_negative_float_values = (0.0, 1.0, 3.14, 1e10, 1e100, 1e-10, 1e-100)
 negative_float_values_and_zero = negative_float_values + (0.0, )
 
 # improper floats
-not_float_type = ("", "0", "1", "-1", True, False)
+not_float_type = ("", "0", "1", "-1", True, False, (), [], None)
 
 # proper string values
 string_values = ("", " ", "non-empty", "ěščř")
@@ -81,7 +83,8 @@ not_string_type = (0, 3.14, True, False, None, 1+2j)
 
 # proper positive integers stored in string
 positive_int_values_in_string = ("1", "2", "3", "127", "128", "255", "256",
-                                 "65535", "65536", "4294967295", "4294967296",
+                                 "32767", "32768", "65535", "65536",
+                                 "4294967295", "4294967296",
                                  "18446744073709551615", "18446744073709551616")
 
 # proper positive integers and a zero stored in string
@@ -92,7 +95,8 @@ not_positive_int_values_in_string = ("0", "-1", "-65535")
 
 # proper negative integers stored in string
 negative_int_values_in_string = ("-1", "-2", "-3", "-127", "-128", "-255", "-256",
-                                 "-65535", "-65536", "-4294967295", "-4294967296",
+                                 "-32767", "-32768", "-65535", "-65536",
+                                 "-4294967295", "-4294967296",
                                  "-18446744073709551615", "-18446744073709551616")
 
 # proper negative integers and a zero stored in string
@@ -146,7 +150,13 @@ hexa32_strings = (
         "0f0f0f0f0f0f0f0f0f0f0f0f0f0f0f0f",
         "0F0F0F0F0F0F0F0F0F0F0F0F0F0F0F0F",
         "0123456789abcdef0123456789abcdef",
+        "0123456789ABCDEF0123456789abcdef",
+        "0123456789abcdef0123456789ABCDEF",
         "0123456789ABCDEF0123456789ABCDEF",
+        "123456789abcdef0123456789abcdef0",
+        "123456789ABCDEF0123456789abcdef0",
+        "123456789abcdef0123456789ABCDEF0",
+        "123456789ABCDEF0123456789ABCDEF0",
         )
 
 
@@ -158,6 +168,22 @@ not_hexa32_strings = (
         "zzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzz",
         "ZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZ",
         "0000000000000000000000000000000",
+        "x0000000000000000000000000000000",
+        "1x111111111111111111111111111111",
+        "22x22222222222222222222222222222",
+        "333x3333333333333333333333333333",
+        "4444x444444444444444444444444444",
+        "55555x55555555555555555555555555",
+        "666666x6666666666666666666666666",
+        "7777777x777777777777777777777777",
+        "88888888x88888888888888888888888",
+        "999999999x9999999999999999999999",
+        "aaaaaaaaaaxaaaaaaaaaaaaaaaaaaaaa",
+        "bbbbbbbbbbbxbbbbbbbbbbbbbbbbbbbb",
+        "ccccccccccccxccccccccccccccccccc",
+        "dddddddddddddxdddddddddddddddddd",
+        "eeeeeeeeeeeeeexeeeeeeeeeeeeeeeee",
+        "fffffffffffffffxffffffffffffffff",
         # shorter by one character
         "fffffffffffffffffffffffffffffff",
         "FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF",
@@ -648,6 +674,88 @@ valid_timestamps_ms = (
         "2059-07-25T11:00:54.000000",  # UNIX time: 2826352854
         )
 
+# valid timestamps with millisecond part + offset part
+valid_timestamps_ms_offset = (
+        "1984-12-30T14:25:20.000000+00:00",  # UNIX time: 473261120
+        "1996-12-16T22:31:16.000000+00:00",  # UNIX time: 850771876
+        "1978-01-06T07:40:52.000000+00:00",  # UNIX time: 252916852
+        "2100-11-10T08:33:25.000000+00:00",  # UNIX time: 4129515205
+        "2078-04-07T09:06:33.000000+00:00",  # UNIX time: 3416544393
+        "2068-06-20T18:16:09.000000+00:00",  # UNIX time: 3107438169
+        "2033-02-20T22:52:28.000000+00:00",  # UNIX time: 1992549148
+        "2042-10-05T21:08:33.000000+00:00",  # UNIX time: 2296152513
+        "2066-08-12T15:38:23.000000+00:00",  # UNIX time: 3048849503
+        "2053-04-28T06:20:58.000000+00:00",  # UNIX time: 2629430458
+        "2098-03-30T10:53:09.000000+00:00",  # UNIX time: 4047011589
+        "2038-08-14T07:19:02.000000+00:00",  # UNIX time: 2165375942
+        "1976-11-12T08:45:42.000000+00:00",  # UNIX time: 216632742
+        "2089-02-22T21:32:02.000000+00:00",  # UNIX time: 3759942722
+        "2065-10-22T19:40:59.000000+00:00",  # UNIX time: 3023462459
+        "2091-11-24T10:00:05.000000+00:00",  # UNIX time: 3846733205
+        "2062-08-08T15:40:04.000000+00:00",  # UNIX time: 2922273604
+        "2102-02-14T17:50:30.000000+00:00",  # UNIX time: 4169379030
+        "2069-11-07T18:03:41.000000+00:00",  # UNIX time: 3151069421
+        "1999-09-29T14:24:30.000000+00:00",  # UNIX time: 938607870
+        "2043-10-03T02:57:39.000000+00:00",  # UNIX time: 2327450259
+        "2042-08-03T00:26:33.000000+00:00",  # UNIX time: 2290634793
+        "1995-04-15T06:48:08.000000+00:00",  # UNIX time: 797921288
+        "2096-03-13T04:10:53.000000+00:00",  # UNIX time: 3982446653
+        "2058-02-24T02:02:49.000000+00:00",  # UNIX time: 2781738169
+        "2091-08-13T23:53:56.000000+00:00",  # UNIX time: 3837884036
+        "2042-01-07T23:58:07.000000+00:00",  # UNIX time: 2272748287
+        "2007-03-12T09:31:21.000000+00:00",  # UNIX time: 1173688281
+        "2003-05-08T18:07:30.000000+00:00",  # UNIX time: 1052410050
+        "2059-07-25T11:00:54.000000+00:00",  # UNIX time: 2826352854
+        )
+
+# valid timestamps
+valid_timestamps_no_z = (
+        "2022-08-11T10:09:21",  # UNIX time: 1660205361
+        "2004-08-20T15:53:38",  # UNIX time: 1093010018
+        "2031-01-06T04:30:45",  # UNIX time: 1925436645
+        "2011-08-02T13:28:26",  # UNIX time: 1312284506
+        "1988-03-17T21:36:02",  # UNIX time: 574634162
+        "2000-04-27T13:06:50",  # UNIX time: 956833610
+        "2042-11-19T15:57:19",  # UNIX time: 2300021839
+        "2013-01-09T14:42:55",  # UNIX time: 1357738975
+        "2049-06-30T16:45:37",  # UNIX time: 2508680737
+        "2099-01-26T15:21:12",  # UNIX time: 4073120472
+        "1986-03-25T02:45:21",  # UNIX time: 512099121
+        "2071-04-23T07:35:16",  # UNIX time: 3196996516
+        "1973-07-23T14:10:16",  # UNIX time: 112281016
+        "2018-10-17T16:08:10",  # UNIX time: 1539785290
+        "2049-12-04T01:00:07",  # UNIX time: 2522188807
+        "2044-02-21T03:39:34",  # UNIX time: 2339635174
+        "2047-06-04T02:52:34",  # UNIX time: 2443225954
+        "2104-12-18T08:43:41",  # UNIX time: 4259029421
+        "2029-06-27T18:32:34",  # UNIX time: 1877272354
+        "2083-06-25T19:56:38",  # UNIX time: 3581175398
+        "2080-11-12T18:59:35",  # UNIX time: 3498659975
+        "2046-10-02T01:00:31",  # UNIX time: 2422051231
+        "2045-11-03T03:28:21",  # UNIX time: 2393288901
+        "2035-07-29T01:20:52",  # UNIX time: 2069277652
+        "1984-02-09T14:13:16",  # UNIX time: 445180396
+        "2061-08-07T05:42:26",  # UNIX time: 2890615346
+        "2056-01-24T00:54:51",  # UNIX time: 2715897291
+        "1994-08-24T04:39:19",  # UNIX time: 777695959
+        "2063-07-18T08:44:44",  # UNIX time: 2951970284
+        "2026-03-31T09:43:43",  # UNIX time: 1774943023
+        )
+
+# invalid timestamps
+invalid_timestamps_no_z = (
+        "",                       # empty
+        "2022-08-11",             # just date
+        "10:09:21",               # just time
+        "2022-08-11 10:09:21Z",   # no TZ separator
+        "99999-03-31T09:43:43Z",  # wrong year
+        "2026-999-31T09:43:43Z",  # wrong month
+        "2026-99-391T09:43:43Z",  # wrong day
+        "2026-03-31T99:43:43Z",   # wrong hour
+        "2026-03-31T09:99:43Z",   # wrong minute
+        "2026-03-31T09:43:99Z",   # wrong second
+        )
+
 # invalid timestamps with millisecond part
 invalid_timestamps_ms = (
         "",                             # empty
@@ -743,7 +851,8 @@ json_values = (
 not_json_values = (
         " ",
         "A",
-        "ěščřžýáíé"
+        "ěščřžýáíé",
+        None
         )
 
 # proper key values
@@ -781,6 +890,9 @@ improper_fqdn_values = (
         "AB_",
         "_BC",
         "_",
+        "__",
+        ".",
+        "..",
         "a.",
         "aa.",
         ".b",
