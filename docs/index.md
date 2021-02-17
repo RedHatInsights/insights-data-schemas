@@ -34,3 +34,7 @@ layout: default
 - [parquet_output_thanos_info_test.py](packages/parquet_output_thanos_info_test.html)
 - [sqs_messages.py](packages/sqs_messages.html)
 - [sqs_messages_test.py](packages/sqs_messages_test.html)
+
+## Additional info
+
+- [Coverage report](htmlcov/index.html)
