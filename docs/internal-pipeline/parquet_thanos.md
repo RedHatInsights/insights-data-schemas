@@ -92,7 +92,7 @@ An example of UUID:
 
 ## Possible enhancements
 
-Thanos will be decomission by DataHub team probably in Q2 2021, so any possible enhancements might be a waste of time.
+Thanos will be decomissioned by DataHub team probably in Q2 2021, so any possible enhancements might be a waste of time.
 
 - The Thanos part of parquet-factory currently works by making queries to Thanos for 1 hour time windows (to generate hourly parquet files easily), however, the execution waits for ALL the queries to finish before dumping the data from memory to parquet files. For example, we want to generate data for 24 hours back, the parquet-factory queries Thanos for data for 24-23, 23-22, etc., after we have data for all of the time windows, the parquet files generation starts. The requests to Thanos also don't have a retry mechanism implemented, so if one query times out, the whole execution fails.
 
