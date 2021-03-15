@@ -538,7 +538,7 @@ def domainValidator(value):
     """Validate if value conformns to (e-mail) domain."""
     stringTypeValidator(value)
 
-    DOMAIN_RE = re.compile(r"((?!-)[A-Za-z0-9-]{1,63}(?<!-)\.)+[A-Za-z]{2,6}")
+    DOMAIN_RE = re.compile(r"((?!-)[A-Za-z0-9-]{1,63}(?<!-)\.)+[A-Za-z]{2,10}")
     if not DOMAIN_RE.fullmatch(value):
         raise Invalid("wrong e-mail domain:" + value)
 
