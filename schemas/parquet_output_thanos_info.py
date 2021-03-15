@@ -30,6 +30,14 @@ from common import read_control_code, cli_arguments
 from common import validate_parquet_file
 from common import print_report
 
+# column with information regarding support type of cluster
+supportSchema = Schema(
+        Any(b"None",
+            b"Eval",
+            b"Standard",
+            b"Premium",
+            b"Self-Support",
+            ))
 
 # the whole schema for messages produced by Parquet factory into cluster_thanos_info.parquetfiles.
 schema = Schema({
@@ -38,6 +46,7 @@ schema = Schema({
         # Required("ebs_account"): Any(posIntInBytesValidator, b""), # TODO: check with authors
         Required("email_domain"): domainInBytesValidator,
         # Required("managed"): bytesTypeValidator,
+        Required("support"): supportSchema,
         Required("collected_at"): datetime.datetime,
         })
 

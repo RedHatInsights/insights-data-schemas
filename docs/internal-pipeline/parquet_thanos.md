@@ -65,15 +65,18 @@ An example of UUID:
 * `_id` (string) - Cluster ID, contains UUID with cluster name
 * `email_domain` (string)
 * `managed` (bool)
+* `support` (string) - indicates level of paid cluster support
 
 An example:
 
 ```
-{_id="4976be4c-1111-460b-a4cf-e22ed1d96923", email_domain="us.ibm.com", managed="false"}
+{_id="4976be4c-1111-460b-a4cf-e22ed1d96923", email_domain="us.ibm.com", managed="false", support="Premium"}
 ```
 
 ---
 **NOTE**
+
+`support` is one of None, Eval, Standard, Premium, Self-Support.
 
 `_id/ClusterName` uses its canonical textual representation: the 16 octets of a
 UUID are represented as 32 hexadecimal (base-16) digits, displayed in five
@@ -104,12 +107,16 @@ Thanos will be decomissioned by DataHub team probably in Q2 2021, so any possibl
 `parquet-tools show cluster_thanos_info.parquet --head 4`
 
 ```
-+--------------------------------------+---------------+--------------------+-----------+---------------------+
-| cluster_id                           |   ebs_account | email_domain       | managed   | collected_at        |
-|--------------------------------------+---------------+--------------------+-----------+---------------------|
-| 07c82637-1111-46d4-b741-d2f8bb189050 |     b'123456' | bkfs.com           | False     | 2021-02-12 08:00:00 |
-| 2ef7ff7e-1111-41fd-8e67-763ba7ca68b5 |    b'1234565' | us.ibm.com         | False     | 2021-02-12 08:00:00 |
-| b603b714-1111-4210-a73d-47fa0d1fa2f5 |    b'1234565' | us.ibm.com         | False     | 2021-02-12 08:00:00 |
-| 35028b19-1111-422a-bc4c-ec164163b86e |    b'1234567' | redhat.com         | False     | 2021-02-12 08:00:00 |
-+--------------------------------------+---------------+--------------------+-----------+---------------------+
++--------------------------------------+---------------+-------------------+-----------+--------------+---------------------+
+| cluster_id                           |   ebs_account | email_domain      | managed   | support      | collected_at        |
+|--------------------------------------+---------------+-------------------+-----------+--------------+---------------------|
+| 12345678-ec5b-4552-9e2d-76c7bc4dee8f |    b'1234567' | us.ibm.com        | False     | None         | 2021-03-14 02:59:00 |
+| 12345678-ef92-4ee2-84c9-478f99b76fdb |    b'1234500' | customer1.com     | False     | Self-Support | 2021-03-14 02:59:00 |
+| 12345678-c145-4b12-850b-56a9de766d9c |    b'1234567' | us.ibm.com        | False     | None         | 2021-03-14 02:59:00 |
+| 12345678-6d6f-490d-a6e2-0e01fbbb962d |    b'1234600' | customer2.com     | False     | None         | 2021-03-14 02:59:00 |
+| 12345678-bde1-4e51-84e7-378030599471 |    b'1234700' | customer3.com     | False     | Premium      | 2021-03-14 02:59:00 |
+| 12345678-f0c3-4b44-80d2-ed6b5fc6c95f |    b'1234567' | us.ibm.com        | False     | Eval         | 2021-03-14 02:59:00 |
+| 12345678-8eb8-4d85-828d-ce940f1b9778 |    b'1234800' | us.ibm.com        | False     | Eval         | 2021-03-14 02:59:00 |
+| 12345678-8169-4a66-8c17-ce3a15eb81d3 |     b'123000' | customer4.co      | False     | Premium      | 2021-03-14 02:59:00 |
++--------------------------------------+---------------+-------------------+-----------+--------------+---------------------+
 ```
