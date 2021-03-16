@@ -26,6 +26,8 @@ pyparsing==2.4.7
     # via packaging
 pytest==6.2.2
     # via -r requirements.in
+python-snappy==0.6.0
+    # via -r requirements.in
 thriftpy2==0.4.14
     # via parquet
 toml==0.10.2

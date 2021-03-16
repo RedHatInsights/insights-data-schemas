@@ -171,6 +171,7 @@ archives/compressed/0a/0aaaaaaa-bbbb-cccc-dddd-ffffffffffff/202102/08/003201.tar
 * `ebs_account` (byte array) account number
 * `email_domain` (byte array) an e-mail domain
 * `managed` (bool) flag whether the cluster is managed or not
+* `support` (byte array) specifies the support level of a cluster
 * `collected_at` (timestamp) timestamp of report represented with millisecond precision
 
 
@@ -201,6 +202,10 @@ An e-mail domain, for example: "redhat.com"
 #### `managed` (bool) attribute
 
 Boolean flag containing info if the cluster is managed or not.
+
+#### `support` attribute
+
+Specifies the level of (customer) support for this cluster.
 
 #### `collected_at` attribute
 
@@ -267,23 +272,24 @@ internally)
 ### Content of `cluster_thanos_info` table
 
 ```
-+--------------------------------------+---------------+--------------+-----------+---------------------+
-| cluster_id                           | ebs_account   | email_domain | managed   | collected_at        |
-|--------------------------------------+---------------+--------------+-----------+---------------------|
-| 00000000-0000-0000-0000-000000000000 | 1234567       | foo.bar.com  | False     | 2021-02-08 01:00:00 |
-| 11111111-1111-1111-1111-111111111111 | 2345678       | bar.cz       | False     | 2021-02-08 01:00:00 |
-| 22222222-2222-2222-2222-222222222222 | 3456789       | xyzzy.org    | True      | 2021-02-08 01:00:00 |
-| 33333333-3333-3333-3333-333333333333 | 4567890       | foo.bar.com  | False     | 2021-02-08 01:00:00 |
-| 44444444-4444-4444-4444-444444444444 | 5678901       | bar.cz       | False     | 2021-02-08 01:00:00 |
-| 55555555-5555-5555-5555-555555555555 | 6789012       | xyzzy.org    | False     | 2021-02-08 01:00:00 |
-+--------------------------------------+---------------+--------------+-----------+---------------------+
++--------------------------------------+---------------+-------------------+-----------+--------------+---------------------+
+| cluster_id                           |   ebs_account | email_domain      | managed   | support      | collected_at        |
+|--------------------------------------+---------------+-------------------+-----------+--------------+---------------------|
+| 12345678-ec5b-4552-9e2d-76c7bc4dee8f |    b'1234567' | us.ibm.com        | False     | None         | 2021-03-14 02:59:00 |
+| 12345678-ef92-4ee2-84c9-478f99b76fdb |    b'1234500' | customer1.com     | False     | Self-Support | 2021-03-14 02:59:00 |
+| 12345678-c145-4b12-850b-56a9de766d9c |    b'1234567' | us.ibm.com        | False     | None         | 2021-03-14 02:59:00 |
+| 12345678-6d6f-490d-a6e2-0e01fbbb962d |    b'1234600' | customer2.com     | False     | None         | 2021-03-14 02:59:00 |
+| 12345678-bde1-4e51-84e7-378030599471 |    b'1234700' | customer3.com     | False     | Premium      | 2021-03-14 02:59:00 |
+| 12345678-f0c3-4b44-80d2-ed6b5fc6c95f |    b'1234567' | us.ibm.com        | False     | Eval         | 2021-03-14 02:59:00 |
+| 12345678-8eb8-4d85-828d-ce940f1b9778 |    b'1234800' | us.ibm.com        | False     | Eval         | 2021-03-14 02:59:00 |
+| 12345678-8169-4a66-8c17-ce3a15eb81d3 |     b'123000' | customer4.co      | False     | Premium      | 2021-03-14 02:59:00 |
++--------------------------------------+---------------+-------------------+-----------+--------------+---------------------+
+
 ```
 
 ---
 **NOTE**
 
-`cluster_id` is mocked, these clusters are not real.
-`ebs_account` is mocked as well
-`email_domain` is mocked too
+`cluster_id`, `ebs_account`, `email_domain` are mocked.
 
 ---

@@ -42,6 +42,7 @@ attribute = (
         "cluster_id",
         "ebs_account",
         "email_domain",
+        "support",
         "collected_at"
         )
 
@@ -53,6 +54,7 @@ def correct_message():
             "cluster_id": b"123e4567-e89b-12d3-a456-426614174000",
             "ebs_account": b"123456",
             "email_domain": b"test.gov",
+            "support": b"Premium",
             "collected_at": datetime.now(),
         }
 
