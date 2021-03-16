@@ -16,6 +16,9 @@ coverage:
 coverage-report:
 	pytest -v -p no:cacheprovider --cov schemas/ --cov-report=html
 
+code-style:
+	python3 tools/run_pycodestyle.py
+
 documentation:
 	pydoc3 schemas/validators.py > docs/validators.txt
 
