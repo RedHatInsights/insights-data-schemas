@@ -41,7 +41,8 @@ platformSchema = Schema(
             b"None",
             b"Libvirt",
             b"oVirt",
-            b"GCP"))
+            b"GCP",
+            b"KubeVirt"))
 
 
 # the whole schema for messages produced by Parquet factory into cluster_info.parquet files."""
