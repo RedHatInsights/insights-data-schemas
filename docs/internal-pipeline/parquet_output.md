@@ -213,6 +213,63 @@ Timestamp of report represented with millisecond precision, for example
 "2021-02-08 00:22:19" (this is the display format, the precision is higher
 internally)
 
+### Format of `operator_condition` table
+
+* `cluster_id` (byte array) cluster ID represented as UUID
+* `operator` (byte array) specifies which is the reporting operator
+* `type` (byte array) indicates the type of status reported by the operator
+* `status` (bool) flag whether the reported operator is active or not
+* `reason` (byte array) specifies the main reason that the operator is reporting
+* `raw_message` (byte array) is the whole error/information message reported by the operator
+
+#### `cluster_id` attribute
+
+`cluster_id` uses its canonical textual representation: the 16 octets of a
+UUID are represented as 32 hexadecimal (base-16) digits, displayed in five
+groups separated by hyphens, in the form 8-4-4-4-12 for a total of 36
+characters (32 hexadecimal characters and 4 hyphens). For more information
+please look at
+[https://en.wikipedia.org/wiki/Universally_unique_identifier](https://en.wikipedia.org/wiki/Universally_unique_identifier).
+
+An example of UUID:
+
+```
+3ba9b042-b8b8-4714-98e9-17915c2eeb95
+```
+
+#### `operator` attribute
+
+Name of the operator reporting its condition.
+
+Some examples of operators that can be received:
+
+* `authentication`
+* `kube-apiserver`
+* `monitoring`
+* `network`
+
+#### `type` attribute
+
+Type of the condition that is being reported by the operator. It will be a byte
+array from the following set of expected values:
+
+* `Available`
+* `Degraded`
+* `Progressing`
+* `Upgradeable`
+* `Failing`
+
+#### `status` attribute
+
+Boolean flag that specifies the status of the given type reported by the operator.
+
+#### `reason` attribute
+
+A byte array containing a brief explanation about the operator condition status change.
+
+#### `raw_message` attribute
+
+A byte array containing the full description of the condition status change.
 
 ## Possible enhancements
 
@@ -227,15 +284,15 @@ internally)
 ### Content of `cluster_info` table
 
 ```
-+--------------------------------------+-------------------+------------+---------------------+-------------------+-------------------+-------------------------------------------------------------------------------------+
++--------------------------------------|-------------------|------------|---------------------|-------------------|-------------------|-------------------------------------------------------------------------------------+
 | cluster_id                           | cluster_version   | platform   | collected_at        | desired_version   | initial_version   | archive_path                                                                        |
-|--------------------------------------+-------------------+------------+---------------------+-------------------+-------------------+-------------------------------------------------------------------------------------|
+|--------------------------------------|-------------------|------------|---------------------|-------------------|-------------------|-------------------------------------------------------------------------------------|
 | 1e1ec4a5-1234-4f6c-838d-4e1c19300787 | 4.6.16            | None       | 2021-03-18 11:20:21 | 4.6.16            | 4.6.16            | archives/compressed/1e/1e1ec4a5-1234-4f6c-838d-4e1c19300787/202103/18/112021.tar.gz |
 | 5e6538de-1234-4740-abbe-93afdef885a7 | 4.7.0             | None       | 2021-03-18 11:54:37 | 4.7.0             | 4.7.0             | archives/compressed/5e/5e6538de-1234-4740-abbe-93afdef885a7/202103/18/115437.tar.gz |
 | e9ae142e-1234-4c49-a937-80f57a7abb52 | 4.6.16            | None       | 2021-03-18 11:04:22 | 4.6.16            | 4.6.16            | archives/compressed/e9/e9ae142e-1234-4c49-a937-80f57a7abb52/202103/18/110422.tar.gz |
 | d8757ed6-1234-4860-8065-983f838e581e | 4.6.17            | None       | 2021-03-18 11:13:50 | 4.6.17            | 4.6.17            | archives/compressed/d8/d8757ed6-1234-4860-8065-983f838e581e/202103/18/111350.tar.gz |
 | 735c7c4d-1234-438f-a494-225f664c72a4 | 4.6.16            | VSphere    | 2021-03-18 11:38:46 | 4.6.16            | 4.3.28            | archives/compressed/73/735c7c4d-1234-438f-a494-225f664c72a4/202103/18/113846.tar.gz |
-+--------------------------------------+-------------------+------------+---------------------+-------------------+-------------------+-------------------------------------------------------------------------------------+
++--------------------------------------|-------------------|------------|---------------------|-------------------|-------------------|-------------------------------------------------------------------------------------+
 ```
 ---
 **NOTE**
@@ -247,13 +304,13 @@ internally)
 ### Content of `rule_hits` table
 
 ```
-+--------------------------------------+-------------------------------------------+---------------------+-------------------------------------------------------------------------------------+
++--------------------------------------|-------------------------------------------|---------------------|-------------------------------------------------------------------------------------+
 | cluster_id                           | rule_id                                   | collected_at        | archive_path                                                                        |
-|--------------------------------------+-------------------------------------------+---------------------+-------------------------------------------------------------------------------------|
+|--------------------------------------|-------------------------------------------|---------------------|-------------------------------------------------------------------------------------|
 | 00000000-0000-0000-0000-000000000000 | pods_check_containers|POD_CONTAINER_ISSUE | 2021-02-08 00:59:34 | archives/compressed/00/00000000-0000-0000-0000-000000000000/202102/08/005934.tar.gz |
 | 11111111-1111-1111-1111-111111111111 | operators_check|OPERATOR_ISSUE            | 2021-02-08 00:59:34 | archives/compressed/11/11111111-1111-1111-1111-111111111111/202102/08/005934.tar.gz |
 | 22222222-2222-2222-2222-222222222222 | pods_check|POD_ISSUE                      | 2021-02-08 00:59:34 | archives/compressed/22/22222222-2222-2222-2222-222222222222/202102/08/005934.tar.gz |
-+--------------------------------------+-------------------------------------------+---------------------+-------------------------------------------------------------------------------------+
++--------------------------------------|-------------------------------------------|---------------------|-------------------------------------------------------------------------------------+
 ```
 
 ---
@@ -266,9 +323,9 @@ internally)
 ### Content of `cluster_thanos_info` table
 
 ```
-+--------------------------------------+---------------+-------------------+-----------+--------------+---------------------+
++--------------------------------------|---------------|-------------------|-----------|--------------|---------------------+
 | cluster_id                           |   ebs_account | email_domain      | managed   | support      | collected_at        |
-|--------------------------------------+---------------+-------------------+-----------+--------------+---------------------|
+|--------------------------------------|---------------|-------------------|-----------|--------------|---------------------|
 | 12345678-ec5b-4552-9e2d-76c7bc4dee8f |    b'1234567' | us.ibm.com        | False     | None         | 2021-03-18 07:59:00 |
 | 12345678-ef92-4ee2-84c9-478f99b76fdb |    b'1234500' | customer1.com     | False     | Self-Support | 2021-03-18 07:59:00 |
 | 12345678-c145-4b12-850b-56a9de766d9c |    b'1234567' | us.ibm.com        | False     | None         | 2021-03-18 07:59:00 |
@@ -277,7 +334,7 @@ internally)
 | 12345678-f0c3-4b44-80d2-ed6b5fc6c95f |    b'1234567' | us.ibm.com        | False     | Eval         | 2021-03-18 07:59:00 |
 | 12345678-8eb8-4d85-828d-ce940f1b9778 |    b'1234800' | us.ibm.com        | False     | Eval         | 2021-03-18 07:59:00 |
 | 12345678-8169-4a66-8c17-ce3a15eb81d3 |     b'123000' | customer4.co      | False     | Premium      | 2021-03-18 07:59:00 |
-+--------------------------------------+---------------+-------------------+-----------+--------------+---------------------+
++--------------------------------------|---------------|-------------------|-----------|--------------|---------------------+
 
 ```
 
@@ -285,5 +342,24 @@ internally)
 **NOTE**
 
 `cluster_id`, `ebs_account`, `email_domain` are mocked.
+
+---
+
+### Content of `operator_condition` table
+
+```
++--------------------------------------|----------------|-------------|----------|-----------------------------------------------------------------------------------------------|---------------------------------------------------------------------------------------------+
+| cluster_id                           | operator       | type        | status   | reason                                                                                        | raw_message                                                                                 |
+|--------------------------------------|----------------|-------------|----------|-----------------------------------------------------------------------------------------------|---------------------------------------------------------------------------------------------|
+| 12345678-acc8-4439-9393-c12140c20033 | authentication | Progressing | True     | _OAuthServerDeploymentNotReady                                                                | Progressing: not all deployment replicas are ready                                          |
+| 12345678-acc8-4439-9393-c12140c20033 | dns            | Progressing | True     | Reconciling                                                                                   | At least 1 DNS DaemonSet is progressing.                                                    |
+| 12345678-acc8-4439-9393-c12140c20033 | kube-apiserver | Progressing | True     | NodeInstaller                                                                                 | NodeInstallerProgressing: 3 nodes are at revision 47; 0 nodes have achieved new revision 55 |
++--------------------------------------|----------------|-------------|----------|-----------------------------------------------------------------------------------------------|---------------------------------------------------------------------------------------------+
+```
+
+---
+**NOTE**
+
+`cluster_id` is mocked, these clusters are not real.
 
 ---
