@@ -43,11 +43,12 @@ typeSchema = Schema(
 schema = Schema({
         Required("cluster_id"): uuidInBytesValidator,
         Required("operator"): notEmptyBytesTypeValidator,
-        Required("type"): typeSchema,
+        Required("condition_type"): typeSchema,
         # TODO: boolean not detected
-        # Required("status"): boolTypeValidator,
+        # Required("condition_status"): boolTypeValidator,
         Required("reason"): bytesTypeValidator,
         Required("raw_message"): bytesTypeValidator,
+        Required("archive_path"): pathToCephInBytesValidator,
         })
 
 
