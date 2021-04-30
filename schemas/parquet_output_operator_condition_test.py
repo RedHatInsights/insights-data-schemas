@@ -41,10 +41,11 @@ verbose = (True, False)
 attribute = (
         "cluster_id",
         "operator",
-        "type",
-        # "status",
+        "condition_type",
+        # "condition_status",
         "reason",
-        "raw_message")
+        "raw_message",
+        "archive_path")
 
 
 @pytest.fixture
@@ -53,10 +54,12 @@ def correct_message():
     return {
             "cluster_id": b"123e4567-e89b-12d3-a456-426614174000",
             "operator": b"authentication",
-            "type": b"Available",
-            # "status": True,
+            "condition_type": b"Available",
+            # "condition_status": True,
             "reason": b"A very good reason",
-            "raw_message": b"This is the raw message for the report"
+            "raw_message": b"This is the raw message for the report",
+            "archive_path":
+            b"archives/compressed/00/00000000-0000-0000-0000-000000000000/202102/08/002219.tar.gz"
         }
 
 

@@ -217,10 +217,11 @@ internally)
 
 * `cluster_id` (byte array) cluster ID represented as UUID
 * `operator` (byte array) specifies which is the reporting operator
-* `type` (byte array) indicates the type of status reported by the operator
-* `status` (bool) flag whether the reported operator is active or not
+* `condition_type` (byte array) indicates the type of status reported by the operator
+* `condition_status` (bool) flag whether the reported operator is active or not
 * `reason` (byte array) specifies the main reason that the operator is reporting
 * `raw_message` (byte array) is the whole error/information message reported by the operator
+* `archive_path` (byte array) path to the object stored in Ceph
 
 #### `cluster_id` attribute
 
@@ -248,7 +249,7 @@ Some examples of operators that can be received:
 * `monitoring`
 * `network`
 
-#### `type` attribute
+#### `condition_type` attribute
 
 Type of the condition that is being reported by the operator. It will be a byte
 array from the following set of expected values:
@@ -259,7 +260,7 @@ array from the following set of expected values:
 * `Upgradeable`
 * `Failing`
 
-#### `status` attribute
+#### `condition_status` attribute
 
 Boolean flag that specifies the status of the given type reported by the operator.
 
@@ -270,6 +271,22 @@ A byte array containing a brief explanation about the operator condition status 
 #### `raw_message` attribute
 
 A byte array containing the full description of the condition status change.
+
+#### `archive_path` attribute
+
+This attribute contains path to object stored in Ceph. It must be real path
+with chunks splitted by slash character. The format of path is:
+
+```
+archives/compressed/{PREFIX}/{CLUSTER_ID}/{YEAR+MONTH}/{DAY}/{ID}.tar.gz |
+```
+
+An example of path:
+
+```
+archives/compressed/0a/0aaaaaaa-bbbb-cccc-dddd-ffffffffffff/202102/08/003201.tar.gz |
+```
+
 
 ## Possible enhancements
 
@@ -348,13 +365,13 @@ A byte array containing the full description of the condition status change.
 ### Content of `operator_condition` table
 
 ```
-+--------------------------------------|----------------|-------------|----------|-----------------------------------------------------------------------------------------------|---------------------------------------------------------------------------------------------+
-| cluster_id                           | operator       | type        | status   | reason                                                                                        | raw_message                                                                                 |
-|--------------------------------------|----------------|-------------|----------|-----------------------------------------------------------------------------------------------|---------------------------------------------------------------------------------------------|
-| 12345678-acc8-4439-9393-c12140c20033 | authentication | Progressing | True     | _OAuthServerDeploymentNotReady                                                                | Progressing: not all deployment replicas are ready                                          |
-| 12345678-acc8-4439-9393-c12140c20033 | dns            | Progressing | True     | Reconciling                                                                                   | At least 1 DNS DaemonSet is progressing.                                                    |
-| 12345678-acc8-4439-9393-c12140c20033 | kube-apiserver | Progressing | True     | NodeInstaller                                                                                 | NodeInstallerProgressing: 3 nodes are at revision 47; 0 nodes have achieved new revision 55 |
-+--------------------------------------|----------------|-------------|----------|-----------------------------------------------------------------------------------------------|---------------------------------------------------------------------------------------------+
++--------------------------------------|----------------|------------------|--------------------|------------------------------------|----------------------------------------------------------------------------------------------------------|-------------------------------------------------------------------------------------+
+| cluster_id                           | operator       | condition_type   | condition_status   | reason                             | raw_message                                                                                 | archive_path                                                                        |
+|--------------------------------------|----------------|------------------|--------------------|------------------------------------|----------------------------------------------------------------------------------------------------------|-------------------------------------------------------------------------------------|
+| 12345678-acc8-4439-9393-c12140c20033 | authentication | Progressing      | True       | _OAuthServerDeploymentNotReady             | Progressing: not all deployment replicas are ready                                          | archives/compressed/12/12345678-acc8-4439-9393-c12140c20033/202104/28/074816.tar.gz |
+| 12345678-acc8-4439-9393-c12140c20033 | dns            | Progressing | True     | Reconciling                                       | At least 1 DNS DaemonSet is progressing.                                                    | archives/compressed/12/12345678-acc8-4439-9393-c12140c20033/202104/28/074816.tar.gz |
+| 12345678-acc8-4439-9393-c12140c20033 | kube-apiserver | Progressing | True     | NodeInstaller                                     | NodeInstallerProgressing: 3 nodes are at revision 47; 0 nodes have achieved new revision 55 | archives/compressed/12/12345678-acc8-4439-9393-c12140c20033/202104/28/074816.tar.gz |
++--------------------------------------|----------------|-------------|----------|---------------------------------------------------|---------------------------------------------------------------------------------------------+
 ```
 
 ---
