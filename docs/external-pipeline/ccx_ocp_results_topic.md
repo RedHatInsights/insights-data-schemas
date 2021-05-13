@@ -7,7 +7,7 @@ layout: default
 
 ## Schema version
 
-1 (unofficial)
+2 (unofficial)
 
 ## Description
 
