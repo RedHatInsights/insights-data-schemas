@@ -22,6 +22,8 @@ code-style:
 documentation:
 	pydoc3 schemas/validators.py > docs/validators.txt
 
+before_commit: code-style unit_tests coverage
+
 cli_tests:	platform_upload_buckit_messages_tests
 
 platform_upload_buckit_messages_tests:
