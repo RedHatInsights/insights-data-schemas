@@ -793,3 +793,16 @@ def pathToCephInBytesValidator(value):
     value = value.decode("utf-8")
 
     pathToCephValidator(value)
+
+
+def jsonInBytesValidator(value):
+    """Validate if the value is JSON stored in string."""
+    # input must be a byte array
+    bytesTypeValidator(value)
+
+    value = value.decode("utf-8")
+
+    # try to parse into JSON
+    decoded = json.loads(value)
+
+    assert decoded is not None

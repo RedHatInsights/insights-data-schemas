@@ -213,7 +213,7 @@ Timestamp of report represented with millisecond precision, for example
 "2021-02-08 00:22:19" (this is the display format, the precision is higher
 internally)
 
-### Format of `operator_condition` table
+### Format of `failing_operator_conditions` table
 
 * `cluster_id` (byte array) cluster ID represented as UUID
 * `operator` (byte array) specifies which is the reporting operator
@@ -286,6 +286,101 @@ An example of path:
 ```
 archives/compressed/0a/0aaaaaaa-bbbb-cccc-dddd-ffffffffffff/202102/08/003201.tar.gz |
 ```
+
+
+
+
+
+### Format of `alerts` table
+
+* `cluster_id` (byte array) cluster ID represented as UUID
+* `name` (byte array) specifies the name of the reported alert
+* `state` (byte array) indicates the state of the alert (firing/pending/...)
+* `severity` (byte array) indicates the severeness of the alert
+* `labels` (byte array) JSON containing the alerts labels - necessary additional information
+* `archive_path` (byte array) path to the object stored in Ceph
+
+#### `cluster_id` attribute
+
+`cluster_id` uses its canonical textual representation: the 16 octets of a
+UUID are represented as 32 hexadecimal (base-16) digits, displayed in five
+groups separated by hyphens, in the form 8-4-4-4-12 for a total of 36
+characters (32 hexadecimal characters and 4 hyphens). For more information
+please look at
+[https://en.wikipedia.org/wiki/Universally_unique_identifier](https://en.wikipedia.org/wiki/Universally_unique_identifier).
+
+An example of UUID:
+
+```
+3ba9b042-b8b8-4714-98e9-17915c2eeb95
+```
+
+#### `name` attribute
+
+Name of the alert being reported.
+
+Some examples of alerts:
+
+* `Watchdog`
+* `APIRemovedInNextReleaseInUse`
+* `KubePodCrashLooping`
+* `KubeAPIErrorBudgetBurn`
+* `ClusterOperatorDegraded`
+
+#### `state` attribute
+
+Indicates whether the alert is pending or firing.
+
+Examples:
+
+* `pending`
+* `firing`
+
+#### `severity` attribute
+
+Indicates how severe the alert is. Indicates the seriousness of the alert.
+
+Examples:
+
+* `warning`
+* `critical`
+* `alert`
+* `info`
+
+#### `labels` attribute
+
+A JSON encoded string/byte array containing necessary information for the alert about the cluster.
+
+Examples:
+
+* `{"prometheus":"openshift-monitoring/k8s","prometheus_replica":"prometheus-k8s-0"`
+* `{"group":"apiextensions.k8s.io","prometheus":"openshift-monitoring/k8s","prometheus_replica":"prometheus-k8s-0","resource":"customresourcedefinitions","version":"v1beta1"}`
+
+#### `archive_path` attribute
+
+This attribute contains path to object stored in Ceph. It must be real path
+with chunks splitted by slash character. The format of path is:
+
+```
+archives/compressed/{PREFIX}/{CLUSTER_ID}/{YEAR+MONTH}/{DAY}/{ID}.tar.gz |
+```
+
+An example of path:
+
+```
+archives/compressed/0a/0aaaaaaa-bbbb-cccc-dddd-ffffffffffff/202102/08/003201.tar.gz |
+```
+
+
+
+
+
+
+
+
+
+
+
 
 
 ## Possible enhancements
@@ -362,7 +457,7 @@ archives/compressed/0a/0aaaaaaa-bbbb-cccc-dddd-ffffffffffff/202102/08/003201.tar
 
 ---
 
-### Content of `operator_condition` table
+### Content of `failing_operator_conditions` table
 
 ```
 +--------------------------------------|----------------|------------------|--------------------|------------------------------------|----------------------------------------------------------------------------------------------------------|-------------------------------------------------------------------------------------+
@@ -372,6 +467,28 @@ archives/compressed/0a/0aaaaaaa-bbbb-cccc-dddd-ffffffffffff/202102/08/003201.tar
 | 12345678-acc8-4439-9393-c12140c20033 | dns            | Progressing | True     | Reconciling                                       | At least 1 DNS DaemonSet is progressing.                                                    | archives/compressed/12/12345678-acc8-4439-9393-c12140c20033/202104/28/074816.tar.gz |
 | 12345678-acc8-4439-9393-c12140c20033 | kube-apiserver | Progressing | True     | NodeInstaller                                     | NodeInstallerProgressing: 3 nodes are at revision 47; 0 nodes have achieved new revision 55 | archives/compressed/12/12345678-acc8-4439-9393-c12140c20033/202104/28/074816.tar.gz |
 +--------------------------------------|----------------|-------------|----------|---------------------------------------------------|---------------------------------------------------------------------------------------------+
+```
+
+---
+**NOTE**
+
+`cluster_id` is mocked, these clusters are not real.
+
+---
+
+
+### Content of `alerts` table
+
+```
++--------------------------------------+---------------------------------+---------+------------+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------+-------------------------------------------------------------------------------------+
+| cluster_id                           | name                            | state   | severity   | labels                                                                                                                                                                      | archive_path                                                                        |
+|--------------------------------------+---------------------------------+---------+------------+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------+-------------------------------------------------------------------------------------|
+| a60d4af8-1234-418d-8fc0-bd1c73b97c6e | Watchdog                        | firing  | none       | {"prometheus":"openshift-monitoring/k8s","prometheus_replica":"prometheus-k8s-0"}                                                                                           | archives/compressed/a6/a60d4af8-1234-418d-8fc0-bd1c73b97c6e/202105/13/113513.tar.gz |
+| a60d4af8-1234-418d-8fc0-bd1c73b97c6e | APIRemovedInNextReleaseInUse    | pending | info       | {"group":"rbac.authorization.k8s.io","prometheus":"openshift-monitoring/k8s","prometheus_replica":"prometheus-k8s-0","resource":"roles","version":"v1beta1"}                | archives/compressed/a6/a60d4af8-1234-418d-8fc0-bd1c73b97c6e/202105/13/113513.tar.gz |
+| a60d4af8-1234-418d-8fc0-bd1c73b97c6e | APIRemovedInNextReleaseInUse    | pending | info       | {"group":"apiextensions.k8s.io","prometheus":"openshift-monitoring/k8s","prometheus_replica":"prometheus-k8s-0","resource":"customresourcedefinitions","version":"v1beta1"} | archives/compressed/a6/a60d4af8-1234-418d-8fc0-bd1c73b97c6e/202105/13/113513.tar.gz |
+| a60d4af8-1234-418d-8fc0-bd1c73b97c6e | APIRemovedInNextReleaseInUse    | pending | info       | {"group":"rbac.authorization.k8s.io","prometheus":"openshift-monitoring/k8s","prometheus_replica":"prometheus-k8s-0","resource":"rolebindings","version":"v1beta1"}         | archives/compressed/a6/a60d4af8-1234-418d-8fc0-bd1c73b97c6e/202105/13/113513.tar.gz |
+| a60d4af8-1234-418d-8fc0-bd1c73b97c6e | APIRemovedInNextEUSReleaseInUse | pending | info       | {"group":"apiextensions.k8s.io","prometheus":"openshift-monitoring/k8s","prometheus_replica":"prometheus-k8s-0","resource":"customresourcedefinitions","version":"v1beta1"} | archives/compressed/a6/a60d4af8-1234-418d-8fc0-bd1c73b97c6e/202105/13/113513.tar.gz |
++--------------------------------------+---------------------------------+---------+------------+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------+-------------------------------------------------------------------------------------+
 ```
 
 ---
