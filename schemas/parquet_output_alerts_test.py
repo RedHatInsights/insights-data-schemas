@@ -42,6 +42,7 @@ attribute = (
     "archive_path"
 )
 
+
 @pytest.fixture
 def correct_message():
     """Provide correct message to be tested."""
@@ -50,8 +51,10 @@ def correct_message():
         "name": b"Watchdog",
         "state": b"firing",
         "severity": b"critical",
-        "labels": b"{\"prometheus\":\"openshift-monitoring/k8s\",\"prometheus_replica\":\"prometheus-k8s-0\"}",
-        "archive_path": b"archives/compressed/00/00000000-0000-0000-0000-000000000000/202102/08/002219.tar.gz"
+        "labels":
+        b"{\"prometheus\":\"openshift-monitoring/k8s\",\"prometheus_replica\":\"prometheus-0\"}",
+        "archive_path":
+        b"archives/compressed/00/00000000-0000-0000-0000-000000000000/202102/08/002219.tar.gz"
     }
 
 
@@ -85,6 +88,7 @@ def test_validate_correct_message(validation_schema, verbose, correct_message):
     # it should not fail
     validate(schema, correct_message, verbose)
 
+
 @pytest.mark.parametrize("verbose", verbose)
 def test_validate_message_without_cluster_id_attribute(validation_schema, verbose, correct_message):
     """Test the validation for improper payload."""
@@ -107,7 +111,8 @@ def test_validate_message_without_attributes(validation_schema, verbose, correct
 
 @pytest.mark.parametrize("attribute", attribute)
 @pytest.mark.parametrize("verbose", verbose)
-def test_validate_message_wrong_attributes(validation_schema, verbose, correct_message, attribute):
+def test_validate_message_wrong_attributes(validation_schema, verbose, correct_message,
+                                           attribute):
     """Test the validation for improper payload."""
 
     # check with number
