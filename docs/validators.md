@@ -11,6 +11,9 @@ Predicate that checks if the given value seems to be BLAKE2 256-bit hash.
 ## `b64IdentityValidator(identitySchema, value)`
 Validate identity encoded by base64 encoding.
 
+## `boolTypeValidator(value)`
+Validate value for bool type
+
 ## `bytesTypeValidator(value)`
 Validate value for byte array type.
 
@@ -19,6 +22,9 @@ Validate if value conformns to (e-mail) domain.
 
 ## `domainValidator(value)`
 Validate if value conformns to (e-mail) domain.
+
+## `emptyBytesTypeValidator(value)`
+Validate value for an empty byte array.
 
 ## `emptyStringValidator(value)`
 Validate value for an empty string.
@@ -43,6 +49,9 @@ Predicate that checks if the given value is NaN.
 
 ## `isNotNaNValidator(value)`
 Predicate that checks if the given value is not NaN.
+
+## `jsonInBytesValidator(value)`
+Validate if the value is JSON stored in string.
 
 ## `jsonInStrValidator(value)`
 Validate if the value is JSON stored in string.
@@ -88,6 +97,9 @@ Validate value for negative integers or zeroes.
 
 ## `negIntValidator(value)`
 Validate value for negative integers.
+
+## `notEmptyBytesTypeValidator(value)`
+Validate value for an empty byte array.
 
 ## `notEmptyStringValidator(value)`
 Validate value for a non-empty string.
