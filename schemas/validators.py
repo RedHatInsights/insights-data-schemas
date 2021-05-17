@@ -445,7 +445,7 @@ def timestampValidator(value):
 
 
 def timestampValidatorOffset(value):
-    """Validate value for timestamps."""
+    """Validate value for timestamps with specified offsets."""
     stringTypeValidator(value)
 
     timeformat = '%Y-%m-%dT%H:%M:%S.%f+00:00'
@@ -457,7 +457,7 @@ def timestampValidatorOffset(value):
 
 
 def timestampValidatorNoZ(value):
-    """Validate value for timestamps."""
+    """Validate value for timestamps without zone info appended."""
     stringTypeValidator(value)
 
     timeformat = '%Y-%m-%dT%H:%M:%S'
