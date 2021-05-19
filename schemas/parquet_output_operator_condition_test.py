@@ -45,7 +45,9 @@ attribute = (
         # "condition_status",
         "reason",
         "raw_message",
-        "archive_path")
+        "archive_path",
+        "latest_transition_time",
+        "reported_at")
 
 
 @pytest.fixture
@@ -59,7 +61,9 @@ def correct_message():
             "reason": b"A very good reason",
             "raw_message": b"This is the raw message for the report",
             "archive_path":
-            b"archives/compressed/00/00000000-0000-0000-0000-000000000000/202102/08/002219.tar.gz"
+            b"archives/compressed/00/00000000-0000-0000-0000-000000000000/202102/08/002219.tar.gz",
+            "latest_transition_time": datetime.now(),
+            "reported_at": datetime.now(),
         }
 
 

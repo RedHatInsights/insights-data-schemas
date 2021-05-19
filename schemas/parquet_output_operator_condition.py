@@ -49,6 +49,8 @@ schema = Schema({
         Required("reason"): bytesTypeValidator,
         Required("raw_message"): bytesTypeValidator,
         Required("archive_path"): pathToCephInBytesValidator,
+        Required("latest_transition_time"): datetime.datetime,
+        Required("reported_at"): datetime.datetime,
         })
 
 
