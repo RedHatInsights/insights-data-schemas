@@ -101,7 +101,7 @@ by the external data pipeline:
 The attribute `b64_identity` contains another JSON encoded by BASE64 encoding.
 User and organization identities are stored here along with other attributes.
 That embedded JSON must contain at least `identity` object with account number
-(stored as string, not an integer), auth_type and `internal` object.  Internal
+(stored as string, not an integer), auth_type and `internal` object. `internal`
 object is important as it contains `org_id` (also stored as a string).
 
 ## Required attributes
