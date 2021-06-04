@@ -44,6 +44,7 @@ attribute = (
         "platform",
         "collected_at",
         "desired_version",
+        "network_type",
         "archive_path",
         "initial_version"
         )
@@ -58,6 +59,7 @@ def correct_message():
             "platform": b"AWS",
             "collected_at": datetime.now(),
             "desired_version": b"2.3.4",
+            "network_type": b"OpenshiftSDN",
             "archive_path":
             b"archives/compressed/00/00000000-0000-0000-0000-000000000000/202102/08/002219.tar.gz",
             "initial_version": b"1.2.3"
@@ -119,8 +121,8 @@ def test_validate_message_without_attributes(validation_schema, verbose, correct
 @pytest.mark.parametrize("verbose", verbose)
 def test_validate_message_wrong_attributes(validation_schema, verbose, correct_message, attribute):
     """Test the validation for improper payload."""
-    # check with string not representing number
-    correct_message[attribute] = b"foobar"
+    # check with an empty string
+    correct_message[attribute] = b""
     # it should fail
     with pytest.raises(Invalid) as excinfo:
         validate(schema, correct_message, verbose)
