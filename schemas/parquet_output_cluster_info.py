@@ -52,6 +52,7 @@ schema = Schema({
         Required("platform"): platformSchema,
         Required("collected_at"): datetime.datetime,
         Required("desired_version"): versionInBytesValidator,
+        Required("network_type"): notEmptyBytesTypeValidator,
         Required("archive_path"): pathToCephInBytesValidator,
         Required("initial_version"): versionInBytesValidator,
         })

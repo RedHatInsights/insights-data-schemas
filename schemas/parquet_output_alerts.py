@@ -51,7 +51,7 @@ severitySchema = Schema(
     )
 )
 
-# the whole schema for messages produced by Parquet factory into cluster_info.parquet files."""
+# the whole schema for messages produced by Parquet factory into alerts.parquet files."""
 schema = Schema({
         Required("cluster_id"): uuidInBytesValidator,
         Required("name"): notEmptyBytesTypeValidator,
