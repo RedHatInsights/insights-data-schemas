@@ -316,7 +316,9 @@ internally)
 * `name` (byte array) specifies the name of the reported alert
 * `state` (byte array) indicates the state of the alert (firing/pending/...)
 * `severity` (byte array) indicates the severeness of the alert
-* `labels` (byte array) JSON containing the alerts labels - necessary additional information
+* `namespace` (byte array) is the namespace the cluster belongs to, if any
+* `job` (byte array) is the name of the job during which the alert triggered, if any
+* `labels` (byte array) JSON containing the alert's labels - necessary additional information
 * `archive_path` (byte array) path to the object stored in Ceph
 
 #### `cluster_id` attribute
@@ -365,6 +367,27 @@ Examples:
 * `critical`
 * `alert`
 * `info`
+
+#### `namespace` attribute
+
+This is the name of the namespace to which the cluster belongs to, if it belongs to any - the field may be empty.
+The value is extracted from the labels attribute.
+
+Examples:
+
+* `openshift-logging`
+* `openshift-kube-controller-manager`
+* `openshift-cluster-version`
+
+#### `job` attribute
+
+Name of the job during which the alert triggered, if any. The field may be empty.
+The value is extracted from the labels attribute.
+
+Examples:
+
+* `kube-state-metrics`
+* `cluster-version-operator`
 
 #### `labels` attribute
 
@@ -499,15 +522,15 @@ archives/compressed/0a/0aaaaaaa-bbbb-cccc-dddd-ffffffffffff/202102/08/003201.tar
 ### Content of `alerts` table
 
 ```
-+--------------------------------------|---------------------------------|---------|------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------|-------------------------------------------------------------------------------------+
-| cluster_id                           | name                            | state   | severity   | labels                                                                                                                                                                      | archive_path                                                                        |
-|--------------------------------------|---------------------------------|---------|------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------|-------------------------------------------------------------------------------------|
-| a60d4af8-1234-418d-8fc0-bd1c73b97c6e | Watchdog                        | firing  | none       | {"prometheus":"openshift-monitoring/k8s","prometheus_replica":"prometheus-k8s-0"}                                                                                           | archives/compressed/a6/a60d4af8-1234-418d-8fc0-bd1c73b97c6e/202105/13/113513.tar.gz |
-| a60d4af8-1234-418d-8fc0-bd1c73b97c6e | APIRemovedInNextReleaseInUse    | pending | info       | {"group":"rbac.authorization.k8s.io","prometheus":"openshift-monitoring/k8s","prometheus_replica":"prometheus-k8s-0","resource":"roles","version":"v1beta1"}                | archives/compressed/a6/a60d4af8-1234-418d-8fc0-bd1c73b97c6e/202105/13/113513.tar.gz |
-| a60d4af8-1234-418d-8fc0-bd1c73b97c6e | APIRemovedInNextReleaseInUse    | pending | info       | {"group":"apiextensions.k8s.io","prometheus":"openshift-monitoring/k8s","prometheus_replica":"prometheus-k8s-0","resource":"customresourcedefinitions","version":"v1beta1"} | archives/compressed/a6/a60d4af8-1234-418d-8fc0-bd1c73b97c6e/202105/13/113513.tar.gz |
-| a60d4af8-1234-418d-8fc0-bd1c73b97c6e | APIRemovedInNextReleaseInUse    | pending | info       | {"group":"rbac.authorization.k8s.io","prometheus":"openshift-monitoring/k8s","prometheus_replica":"prometheus-k8s-0","resource":"rolebindings","version":"v1beta1"}         | archives/compressed/a6/a60d4af8-1234-418d-8fc0-bd1c73b97c6e/202105/13/113513.tar.gz |
-| a60d4af8-1234-418d-8fc0-bd1c73b97c6e | APIRemovedInNextEUSReleaseInUse | pending | info       | {"group":"apiextensions.k8s.io","prometheus":"openshift-monitoring/k8s","prometheus_replica":"prometheus-k8s-0","resource":"customresourcedefinitions","version":"v1beta1"} | archives/compressed/a6/a60d4af8-1234-418d-8fc0-bd1c73b97c6e/202105/13/113513.tar.gz |
-+--------------------------------------|---------------------------------|---------|------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------|-------------------------------------------------------------------------------------+
++--------------------------------------+------------------------------------+---------+------------+--------------------------+---------------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+-------------------------------------------------------------------------------------+
+| cluster_id                           | name                               | state   | severity   | namespace                | job           | labels                                                                                                                                                                                                         | archive_path                                                                        |
+|--------------------------------------+------------------------------------+---------+------------+--------------------------+---------------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+-------------------------------------------------------------------------------------|
+| ba4d2939-1234-5678-af75-0d323c6a4a91 | Watchdog                           | firing  | none       |                          |               | {"prometheus":"openshift-monitoring/k8s","prometheus_replica":"prometheus-k8s-0"}                                                                                                                              | archives/compressed/ba/ba4d2939-1234-5678-af75-0d323c6a4a91/202106/05/122357.tar.gz |
+| ba4d2939-1234-5678-af75-0d323c6a4a91 | NodeClockNotSynchronising          | firing  | warning    | openshift-monitoring     | node-exporter | {"container":"kube-rbac-proxy","endpoint":"https","instance":"sno00534","pod":"node-exporter-w9zgp","prometheus":"openshift-monitoring/k8s","prometheus_replica":"prometheus-k8s-0","service":"node-exporter"} | archives/compressed/ba/ba4d2939-1234-5678-af75-0d323c6a4a91/202106/05/122357.tar.gz |
+| ba4d2939-1234-5678-af75-0d323c6a4a91 | PodDisruptionBudgetAtLimit         | firing  | warning    | openshift-ovn-kubernetes |               | {"poddisruptionbudget":"ovn-raft-quorum-guard","prometheus":"openshift-monitoring/k8s","prometheus_replica":"prometheus-k8s-0"}                                                                                | archives/compressed/ba/ba4d2939-1234-5678-af75-0d323c6a4a91/202106/05/122357.tar.gz |
+| ba4d2939-1234-5678-af75-0d323c6a4a91 | AlertmanagerReceiversNotConfigured | firing  | warning    |                          |               | {"prometheus":"openshift-monitoring/k8s","prometheus_replica":"prometheus-k8s-0"}                                                                                                                              | archives/compressed/ba/ba4d2939-1234-5678-af75-0d323c6a4a91/202106/05/122357.tar.gz |
++--------------------------------------+------------------------------------+---------+------------+--------------------------+---------------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+-------------------------------------------------------------------------------------+
+
 ```
 
 ---
