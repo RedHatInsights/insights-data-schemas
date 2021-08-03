@@ -47,7 +47,8 @@ severitySchema = Schema(
         b"critical",
         b"high",
         b"info",
-        b"alert"
+        b"alert",
+        b"error",
     )
 )
 
@@ -57,6 +58,8 @@ schema = Schema({
         Required("name"): notEmptyBytesTypeValidator,
         Required("state"): stateSchema,
         Required("severity"): severitySchema,
+        Required("namespace"): bytesTypeValidator,
+        Required("job"): bytesTypeValidator,
         Required("labels"): jsonInBytesValidator,
         Required("archive_path"): pathToCephInBytesValidator,
         })
