@@ -412,6 +412,8 @@ archives/compressed/0a/0aaaaaaa-bbbb-cccc-dddd-ffffffffffff/202102/08/003201.tar
 * `cluster_id` (byte array) cluster ID represented as UUID
 * `name` (byte array) specifies the name of the reported gatherer
 * `duration_in_ms` (int) time in milliseconds that the gatherer was running
+* `archive_path` (byte array) path to the object stored in Ceph
+* `collected_at` (timestamp) timestamp of report represented with millisecond precision
 
 #### `cluster_id` attribute
 
@@ -444,10 +446,26 @@ clusterconfig.GatherPodDisruptionBudgets
 This attribute indicates the time (in milliseconds) that took to the Insights
 Operator to run this gathering function.
 
+#### `archive_path` attribute
 
+This attribute contains path to object stored in Ceph. It must be real path
+with chunks splitted by slash character. The format of path is:
 
+```
+archives/compressed/{PREFIX}/{CLUSTER_ID}/{YEAR+MONTH}/{DAY}/{ID}.tar.gz |
+```
 
+An example of path:
 
+```
+archives/compressed/0a/0aaaaaaa-bbbb-cccc-dddd-ffffffffffff/202102/08/003201.tar.gz |
+```
+
+#### `collected_at` attribute
+
+Timestamp of report represented with millisecond precision, for example
+"2021-02-08 00:22:19" (this is the display format, the precision is higher
+internally)
 
 
 

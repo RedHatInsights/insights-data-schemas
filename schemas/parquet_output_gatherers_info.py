@@ -28,6 +28,8 @@ schema = Schema({
     Required("cluster_id"): uuidInBytesValidator,
     Required("name"): notEmptyBytesTypeValidator,
     Required("duration_in_ms"): intTypeValidator,
+    Required("archive_path"): pathToCephInBytesValidator,
+    Required("collected_at"): datetime.datetime,
 })
 
 

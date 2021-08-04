@@ -15,9 +15,10 @@
 """Unit tests for ccx_ocp_results module."""
 
 
-import pytest
 import sys
+from datetime import datetime
 
+import pytest
 from voluptuous import Invalid
 
 from parquet_output_gatherers_info import schema, main
@@ -39,6 +40,8 @@ attribute = (
     "cluster_id",
     "name",
     "duration_in_ms",
+    "archive_path",
+    "collected_at"
 )
 
 
@@ -49,6 +52,8 @@ def correct_message():
         "cluster_id": b"123e4567-e89b-12d3-a456-426614174000",
         "name": b"clusterconfig.GatherPodDisruptionBudgets",
         "duration_in_ms": 45,
+        "archive_path": b"archives/compressed/00/00000000-0000-0000-0000-000000000000/202102/08/002219.tar.gz",
+        "collected_at": datetime.now(),
     }
 
 
