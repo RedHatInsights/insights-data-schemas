@@ -37,7 +37,7 @@ stateSchema = Schema(
 )
 
 # column with information about the severity of the alert
-# yes, "" and "none" are real valid values .....
+# currently not used because new values keep popping up...
 severitySchema = Schema(
     Any(
         b"",
@@ -47,7 +47,12 @@ severitySchema = Schema(
         b"critical",
         b"high",
         b"info",
-        b"alert"
+        b"alert",
+        b"error",
+        b"fatal",
+        b"disaster",
+        b"1",
+        b"2"
     )
 )
 
@@ -56,7 +61,9 @@ schema = Schema({
         Required("cluster_id"): uuidInBytesValidator,
         Required("name"): notEmptyBytesTypeValidator,
         Required("state"): stateSchema,
-        Required("severity"): severitySchema,
+        Required("severity"): bytesTypeValidator,
+        Required("namespace"): bytesTypeValidator,
+        Required("job"): bytesTypeValidator,
         Required("labels"): jsonInBytesValidator,
         Required("archive_path"): pathToCephInBytesValidator,
         })
