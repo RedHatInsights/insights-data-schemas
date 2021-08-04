@@ -51,7 +51,7 @@ def correct_message():
         "name": b"Watchdog",
         "state": b"firing",
         "severity": b"critical",
-        "namespace": b"testing_namespace",
+        "namespace": b"openshift-monitoring",
         "job": b"",
         "labels":
         b"{\"prometheus\":\"openshift-monitoring/k8s\",\"prometheus_replica\":\"prometheus-0\"}",
