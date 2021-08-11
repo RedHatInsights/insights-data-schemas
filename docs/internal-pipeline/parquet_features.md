@@ -96,7 +96,11 @@ An example of UUID:
 ## Format of the `report` node
 
 `report` node is represented as a list (or rather an array) of zero or more
-items. Each item has the following attributes:
+items. These items represent the result of the execution of each rule configured
+in the "feature extraction service", so their format will depend on the defined
+for each rule.
+
+Each item has the following attributes:
 
 * `metadata` (dictionary)
 * `schema` (dictionary)
@@ -165,6 +169,197 @@ example schema with three fields mentioned before):
     "last_transition_time": "2021-01-20T01:03:29"
   }
 ]
+```
+
+## Current rules schemas
+
+
+### `cluster_info` result schema
+
+```JSON
+{
+  "version": "1.0",
+  "fields": [
+    {
+      "name": "cluster_id",
+      "type": "String"
+    },
+    {
+      "name": "platform",
+      "type": "String"
+    },
+    {
+      "name": "network_type",
+      "type": "String"
+    },
+    {
+      "name": "channel",
+      "type": "String"
+    },
+    {
+      "name": "initial_version",
+      "type": "String"
+    },
+    {
+      "name": "current_version",
+      "type": "String"
+    },
+    {
+      "name": "desired_version",
+      "type": "String"
+    },
+    {
+      "name": "installed_at",
+      "type": "DateTime"
+    },
+    {
+      "name": "failing_since",
+      "type": "DateTime"
+    },
+    {
+      "name": "upgrading_since",
+      "type": "DateTime"
+    },
+    {
+      "name": "last_y_upgrade_at",
+      "type": "DateTime"
+    },
+    {
+      "name": "last_z_upgrade_at",
+      "type": "DateTime"
+    },
+    {
+      "name": "analysis_time",
+      "type": "DateTime"
+    },
+    {
+      "name": "path",
+      "type": "String"
+    }
+  ]
+}
+```
+
+### `foc` result schema
+
+```JSON
+{
+  "version": "1.0",
+  "fields": [
+    {
+      "name": "cluster_id",
+      "type": "String"
+    },
+    {
+      "name": "operator",
+      "type": "String"
+    },
+    {
+      "name": "type",
+      "type": "String"
+    },
+    {
+      "name": "status",
+      "type": "Boolean"
+    },
+    {
+      "name": "last_transition_time",
+      "type": "DateTime"
+    },
+    {
+      "name": "reason",
+      "type": "String"
+    },
+    {
+      "name": "message",
+      "type": "String"
+    },
+    {
+      "name": "analysis_time",
+      "type": "DateTime"
+    },
+    {
+      "name": "path",
+      "type": "String"
+    }
+  ]
+}
+```
+
+### `alerts` result schema
+
+```JSON
+{
+  "version": "1.0",
+  "fields": [
+    {
+      "name": "cluster_id",
+      "type": "String"
+    },
+    {
+      "name": "name",
+      "type": "String"
+    },
+    {
+      "name": "state",
+      "type": "String"
+    },
+    {
+      "name": "severity",
+      "type": "String"
+    },
+    {
+      "name": "labels",
+      "type": "Object"
+    },
+    {
+      "name": "value",
+      "type": "Float"
+    },
+    {
+      "name": "last_transition_time",
+      "type": "DateTime"
+    },
+    {
+      "name": "analysis_time",
+      "type": "DateTime"
+    },
+    {
+      "name": "path",
+      "type": "String"
+    }
+  ]
+}
+```
+
+### `gatherers` result schema
+
+```JSON
+{
+  "version": "1.0",
+  "fields": [
+    {
+      "name": "cluster_id",
+      "type": "String"
+    },
+    {
+      "name": "name",
+      "type": "String"
+    },
+    {
+      "name": "duration_in_ms",
+      "type": "Integer"
+    },
+    {
+      "name": "analysis_time",
+      "type": "DateTime"
+    },
+    {
+      "name": "path",
+      "type": "String"
+    }
+  ]
+}
 ```
 
 ## Possible enhancements
