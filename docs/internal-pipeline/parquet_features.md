@@ -98,7 +98,7 @@ An example of UUID:
 `report` node is represented as a list (or rather an array) of zero or more
 items. These items represent the result of the execution of each rule configured
 in the "feature extraction service", so their format will depend on the defined
-for each rule.
+one for each rule.
 
 Each item has the following attributes:
 
