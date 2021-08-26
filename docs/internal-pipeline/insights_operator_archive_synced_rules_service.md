@@ -27,8 +27,8 @@ Messages consumed from `ccx-XXX-insights-operator-archive-synced` topic (where
 Archive Sync Service for each object stored into Ceph. These messages have very
 simple format consisting of just three attributes:
 
-* target_apth
-* s3_path
+* path
+* original_path
 * metadata
 
 
@@ -36,12 +36,12 @@ simple format consisting of just three attributes:
 
 Messages are stored in JSON format and have to contain three attributes:
 
-* `target_path` (string with path)
-* `s3_path` (string with path)
+* `path` (string with path)
+* `original_path` (string with path)
 * `metadata` (dictionary)
 
 
-### `target_path` attribute
+### `path` attribute
 
 This attribute contains path to object stored in Ceph. It must be real path
 with chunks splitted by slash character.
@@ -53,7 +53,7 @@ archives/compressed/$ORG_ID/$CLUSTER_ID/$YEAR$MONTH/$DAY/$TIME.tar.gz
 ```
 
 
-### `s3_path` attribute
+### `original_path` attribute
 
 This attribute contains path to object stored in AWS S3. It must be real path
 with chunks splitted by slash character.
