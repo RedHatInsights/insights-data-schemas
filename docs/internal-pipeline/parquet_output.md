@@ -48,6 +48,7 @@ structures). For more information please look at
 * `desired_version` (byte array) desired cluster version represented as string
 * `initial_version` (byte array) initial cluster version represented as string
 * `network_type` (byte array) the type of network used by the cluster represented as string
+* `channel` (byte array) cluster's upgrade channel
 * `archive_path` (byte array) path to the object stored in Ceph
 
 
@@ -101,6 +102,10 @@ Initial cluster version represented as string, for example "4.5.24" or even
 
 This column represent the type of network used by the cluster. Some well-known
 values are "OpenshiftSDN", "NCP" or "Kuryr".
+
+#### `channel` attribute
+
+This column represent the cluster's upgrade channel, for example "stable-4.7".
 
 #### `archive_path` attribute
 
@@ -491,15 +496,15 @@ internally)
 ### Content of `cluster_info` table
 
 ```
-+--------------------------------------|-------------------|------------|---------------------|-------------------|-------------------|------------------|-------------------------------------------------------------------------------------+
-| cluster_id                           | cluster_version   | platform   | collected_at        | desired_version   | initial_version   | network_type     | archive_path                                                                        |
-|--------------------------------------|-------------------|------------|---------------------|-------------------|-------------------|----------------------|---------------------------------------------------------------------------------|
-| 1e1ec4a5-1234-4f6c-838d-4e1c19300787 | 4.6.16            | None       | 2021-03-18 11:20:21 | 4.6.16            | 4.6.16            | OpenshiftSDN     | archives/compressed/1e/1e1ec4a5-1234-4f6c-838d-4e1c19300787/202103/18/112021.tar.gz |
-| 5e6538de-1234-4740-abbe-93afdef885a7 | 4.7.0             | None       | 2021-03-18 11:54:37 | 4.7.0             | 4.7.0             | Kurir            | archives/compressed/5e/5e6538de-1234-4740-abbe-93afdef885a7/202103/18/115437.tar.gz |
-| e9ae142e-1234-4c49-a937-80f57a7abb52 | 4.6.16            | None       | 2021-03-18 11:04:22 | 4.6.16            | 4.6.16            | NCP              | archives/compressed/e9/e9ae142e-1234-4c49-a937-80f57a7abb52/202103/18/110422.tar.gz |
-| d8757ed6-1234-4860-8065-983f838e581e | 4.6.17            | None       | 2021-03-18 11:13:50 | 4.6.17            | 4.6.17            | OpenshiftSDN     | archives/compressed/d8/d8757ed6-1234-4860-8065-983f838e581e/202103/18/111350.tar.gz |
-| 735c7c4d-1234-438f-a494-225f664c72a4 | 4.6.16            | VSphere    | 2021-03-18 11:38:46 | 4.6.16            | 4.3.28            | OpenshiftSDN     | archives/compressed/73/735c7c4d-1234-438f-a494-225f664c72a4/202103/18/113846.tar.gz |
-+--------------------------------------|-------------------|------------|---------------------|-------------------|-------------------|------------------|-------------------------------------------------------------------------------------+
++--------------------------------------|-------------------|------------|---------------------|-------------------|-------------------|------------------|---------------|-------------------------------------------------------------------------------------+
+| cluster_id                           | cluster_version   | platform   | collected_at        | desired_version   | initial_version   | network_type     | channel       | archive_path                                                                        |
+|--------------------------------------|-------------------|------------|---------------------|-------------------|-------------------|------------------|---------------|-------------------------------------------------------------------------------------|
+| 1e1ec4a5-1234-4f6c-838d-4e1c19300787 | 4.6.16            | None       | 2021-03-18 11:20:21 | 4.6.16            | 4.6.16            | OpenshiftSDN     | stable-4.6    | archives/compressed/1e/1e1ec4a5-1234-4f6c-838d-4e1c19300787/202103/18/112021.tar.gz |
+| 5e6538de-1234-4740-abbe-93afdef885a7 | 4.7.0             | None       | 2021-03-18 11:54:37 | 4.7.0             | 4.7.0             | Kurir            | candidate-4.7 | archives/compressed/5e/5e6538de-1234-4740-abbe-93afdef885a7/202103/18/115437.tar.gz |
+| e9ae142e-1234-4c49-a937-80f57a7abb52 | 4.6.16            | None       | 2021-03-18 11:04:22 | 4.6.16            | 4.6.16            | NCP              | fast-4.6      | archives/compressed/e9/e9ae142e-1234-4c49-a937-80f57a7abb52/202103/18/110422.tar.gz |
+| d8757ed6-1234-4860-8065-983f838e581e | 4.6.17            | None       | 2021-03-18 11:13:50 | 4.6.17            | 4.6.17            | OpenshiftSDN     | stable-4.6    | archives/compressed/d8/d8757ed6-1234-4860-8065-983f838e581e/202103/18/111350.tar.gz |
+| 735c7c4d-1234-438f-a494-225f664c72a4 | 4.6.16            | VSphere    | 2021-03-18 11:38:46 | 4.6.16            | 4.3.28            | OpenshiftSDN     | stable-4.3    | archives/compressed/73/735c7c4d-1234-438f-a494-225f664c72a4/202103/18/113846.tar.gz |
++--------------------------------------|-------------------|------------|---------------------|-------------------|-------------------|------------------|---------------|-------------------------------------------------------------------------------------+
 ```
 ---
 **NOTE**
