@@ -12,9 +12,6 @@ addons:
 # Pycodestyle part
 # needed to work correctly with Python 3 shebang
 env: SKIP_INTERPRETER=true
-before_install:
-  - git clone https://github.com/TravisToolbox/pycodestyle.git
-install:
-  - ./pycodestyle/install.sh
 script:
-  - ./pycodestyle/scan.sh
+  - pip install pycodestyle
+  - make code-style
