@@ -367,6 +367,107 @@ example schema with three fields mentioned before):
 }
 ```
 
+### `workload_info_images` result schema
+
+```JSON
+{
+  "version": "1.0",
+  "fields": [
+    {
+      "name": "cluster_id",
+      "type": "String"
+    },
+    {
+      "name": "image_id",
+      "type": "String"
+    },
+    {
+      "name": "layers",
+      "type": "List"
+    },
+    {
+      "name": "first_command",
+      "type": "String"
+    },
+    {
+      "name": "first_arg",
+      "type": "String"
+    },
+  ],
+}
+```
+
+The field `"layers"` contains a list of strings, which represent each layer identifier
+contained in the current image.
+
+### `workload_info_namespaces` result schema
+
+```JSON
+{
+  "version": "1.0",
+  "fields": [
+      {
+        "name": "cluster_id",
+        "type": "String"
+      },
+      {
+        "name": "namespace",
+        "type": "String"
+      },
+      {
+        "name": "shapes",
+        "type": "List"
+      }
+  ]
+}
+```
+
+The `"shapes"` list contains a list of JSON objects with the following schema:
+
+```JSON
+{
+  "fields": [
+    {
+      "name": "containers",
+      "type": "List"
+    },
+    {
+      "name": "initContainers",
+      "type": "List"
+    },
+    {
+      "name": "shapeInstances",
+      "type": "Integer"
+    },
+    {
+      "name": "restartAlways",
+      "type": "Bool"
+    }
+  ]
+}
+```
+
+Where the `"containers"` and `"initContainers"` lists contain a list of another JSON objects with the following schema:
+
+```JSON
+{
+  "fields": [
+    {
+      "name": "imageID",
+      "type": "String"
+    },
+    {
+      "name": "firstArg",
+      "type": "String"
+    },
+    {
+      "name": "firstCommand",
+      "type": "String"
+    }
+  ]
+}
+```
+
 ## Possible enhancements
 
 Version (positive integer) should be included in messages as a new JSON
