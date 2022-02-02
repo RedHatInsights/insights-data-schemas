@@ -383,7 +383,7 @@ example schema with three fields mentioned before):
     },
     {
       "name": "layers",
-      "type": "list"
+      "type": "List"
     },
     {
       "name": "first_command",
