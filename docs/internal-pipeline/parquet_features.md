@@ -197,6 +197,10 @@ example schema with three fields mentioned before):
       "type": "Integer"
     },    
     {
+      "name": "networks",
+      "type": "Object"
+    },       
+    {
       "name": "channel",
       "type": "String"
     },
