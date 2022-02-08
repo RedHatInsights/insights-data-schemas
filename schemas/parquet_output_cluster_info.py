@@ -54,6 +54,7 @@ schema = Schema({
         Required("desired_version"): versionInBytesValidator,
         Required("network_type"): notEmptyBytesTypeValidator,
         Required("channel"): notEmptyBytesTypeValidator,
+        Required("network_mtu"): posIntOrZeroValidator,
         Required("archive_path"): pathToCephInBytesValidator,
         Required("initial_version"): versionInBytesValidator,
         })

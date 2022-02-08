@@ -46,6 +46,7 @@ attribute = (
         "desired_version",
         "network_type",
         "channel",
+        "network_mtu",
         "archive_path",
         "initial_version"
         )
@@ -62,6 +63,7 @@ def correct_message():
             "desired_version": b"2.3.4",
             "network_type": b"OpenshiftSDN",
             "channel": b"stable-4.7",
+            "network_mtu": 1450,
             "archive_path":
             b"archives/compressed/00/00000000-0000-0000-0000-000000000000/202102/08/002219.tar.gz",
             "initial_version": b"1.2.3"

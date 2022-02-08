@@ -198,6 +198,10 @@ example schema with three fields mentioned before):
       "type": "String"
     },
     {
+      "name": "network_mtu",
+      "type": "Integer"
+    },    
+    {
       "name": "channel",
       "type": "String"
     },
