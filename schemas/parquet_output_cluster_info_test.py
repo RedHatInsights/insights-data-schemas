@@ -47,6 +47,9 @@ attribute = (
         "network_type",
         "channel",
         "network_mtu",
+        "network_kind",
+        "network_size",
+        "network_host_prefix",
         "archive_path",
         "initial_version"
         )
@@ -64,6 +67,9 @@ def correct_message():
             "network_type": b"OpenshiftSDN",
             "channel": b"stable-4.7",
             "network_mtu": 1450,
+            "network_kind": "service",
+            "network_size": "/16",
+            "network_host_prefix": 23,
             "archive_path":
             b"archives/compressed/00/00000000-0000-0000-0000-000000000000/202102/08/002219.tar.gz",
             "initial_version": b"1.2.3"

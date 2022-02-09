@@ -52,6 +52,9 @@ structures). For more information please look at
 * `network_type` (byte array) the type of network used by the cluster represented as string
 * `channel` (byte array) cluster's upgrade channel
 * `network_mtu` (uint32) the network's MTU size used by the cluster represented as uint32
+* `network_kind` (string) whether the network is a service or a cluster
+* `network_size` (string) the size of the network, extracted from the mask
+* `network_host_prefix` (uint8) the network host prefix
 * `archive_path` (byte array) path to the object stored in Ceph
 
 
@@ -114,6 +117,22 @@ This column represent the cluster's upgrade channel, for example "stable-4.7".
 
 This column represent the network's MTU size used by the cluster. It is expressed
 in bytes. For example, a MTU of size 1500 bytes is saved as 1500.
+
+#### `network_kind` attribute
+
+More than one per `cluster_id`. This is the type of networks the cluster has. It can be 
+`service` or `cluster` and is gathered both from `spec.serviceNetwork` and `spec.clusterNetwork`.
+
+#### `network_size` attribute
+
+More than one per `cluster_id`. This is the size of each network in the cluster. It
+is extracted directly from the network mask. For example a "172.30.0.0/16" mask would
+have a "/16" size. The size is padded with zeros too "172.30.0.0/4" would have "/04".
+
+#### `network_host_prefix` attribute
+
+More than one per `cluster_id`. This is the value of `spec.clusterNetwork.hostPrefix`.
+It is 0 if the network is of kind `service`.
 
 #### `archive_path` attribute
 
@@ -707,13 +726,13 @@ internally)
 ### Content of `cluster_info` table
 
 ```
-| cluster_id                           | cluster_version | platform | collected_at        | desired_version | initial_version | network_type | channel       | network_mtu | archive_path                                                                        |
-| ------------------------------------ | --------------- | -------- | ------------------- | --------------- | --------------- | ------------ | ------------- | ----------- | ----------------------------------------------------------------------------------- |
-| 1e1ec4a5-1234-4f6c-838d-4e1c19300787 | 4.6.16          | None     | 2021-03-18 11:20:21 | 4.6.16          | 4.6.16          | OpenshiftSDN | stable-4.6    | 296         | archives/compressed/1e/1e1ec4a5-1234-4f6c-838d-4e1c19300787/202103/18/112021.tar.gz |
-| 5e6538de-1234-4740-abbe-93afdef885a7 | 4.7.0           | None     | 2021-03-18 11:54:37 | 4.7.0           | 4.7.0           | Kurir        | candidate-4.7 | 1492        | archives/compressed/5e/5e6538de-1234-4740-abbe-93afdef885a7/202103/18/115437.tar.gz |
-| e9ae142e-1234-4c49-a937-80f57a7abb52 | 4.6.16          | None     | 2021-03-18 11:04:22 | 4.6.16          | 4.6.16          | NCP          | fast-4.6      | 1500        | archives/compressed/e9/e9ae142e-1234-4c49-a937-80f57a7abb52/202103/18/110422.tar.gz |
-| d8757ed6-1234-4860-8065-983f838e581e | 4.6.17          | None     | 2021-03-18 11:13:50 | 4.6.17          | 4.6.17          | OpenshiftSDN | stable-4.6    | 17914       | archives/compressed/d8/d8757ed6-1234-4860-8065-983f838e581e/202103/18/111350.tar.gz |
-| 735c7c4d-1234-438f-a494-225f664c72a4 | 4.6.16          | VSphere  | 2021-03-18 11:38:46 | 4.6.16          | 4.3.28          | OpenshiftSDN | stable-4.3    | 65535       | archives/compressed/73/735c7c4d-1234-438f-a494-225f664c72a4/202103/18/113846.tar.gz |
+| cluster_id                           | cluster_version | platform | collected_at        | desired_version | initial_version | network_type | channel       | network_mtu | network_kind | network_size | network_host_prefix | archive_path                                                                        |
+| ------------------------------------ | --------------- | -------- | ------------------- | --------------- | --------------- | ------------ | ------------- | ----------- | ------------ | ------------ | ------------------- | ----------------------------------------------------------------------------------- |
+| 1e1ec4a5-1234-4f6c-838d-4e1c19300787 | 4.6.16          | None     | 2021-03-18 11:20:21 | 4.6.16          | 4.6.16          | OpenshiftSDN | stable-4.6    | 296         | service      | /23          | 0                   | archives/compressed/1e/1e1ec4a5-1234-4f6c-838d-4e1c19300787/202103/18/112021.tar.gz |
+| 5e6538de-1234-4740-abbe-93afdef885a7 | 4.7.0           | None     | 2021-03-18 11:54:37 | 4.7.0           | 4.7.0           | Kurir        | candidate-4.7 | 1492        | service      | /12          | 0                   | archives/compressed/5e/5e6538de-1234-4740-abbe-93afdef885a7/202103/18/115437.tar.gz |
+| e9ae142e-1234-4c49-a937-80f57a7abb52 | 4.6.16          | None     | 2021-03-18 11:04:22 | 4.6.16          | 4.6.16          | NCP          | fast-4.6      | 1500        | service      | /08          | 0                   | archives/compressed/e9/e9ae142e-1234-4c49-a937-80f57a7abb52/202103/18/110422.tar.gz |
+| d8757ed6-1234-4860-8065-983f838e581e | 4.6.17          | None     | 2021-03-18 11:13:50 | 4.6.17          | 4.6.17          | OpenshiftSDN | stable-4.6    | 17914       | service      | /32          | 0                   | archives/compressed/d8/d8757ed6-1234-4860-8065-983f838e581e/202103/18/111350.tar.gz |
+| 735c7c4d-1234-438f-a494-225f664c72a4 | 4.6.16          | VSphere  | 2021-03-18 11:38:46 | 4.6.16          | 4.3.28          | OpenshiftSDN | stable-4.3    | 65535       | cluster      | /16          | 23                  | archives/compressed/73/735c7c4d-1234-438f-a494-225f664c72a4/202103/18/113846.tar.gz |
 ```
 ---
 **NOTE**

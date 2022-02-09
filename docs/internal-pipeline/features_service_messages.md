@@ -200,7 +200,11 @@ example schema with three fields mentioned before):
     {
       "name": "network_mtu",
       "type": "Integer"
-    },    
+    },
+    {
+      "name": "networks",
+      "type": "Object"
+    },     
     {
       "name": "channel",
       "type": "String"
