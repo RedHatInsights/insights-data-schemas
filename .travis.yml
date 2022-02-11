@@ -15,6 +15,7 @@ env: SKIP_INTERPRETER=true
 install:
   - pip install pycodestyle
   - pip install pytest-cov
+  - pip install -r requirements.txt
 script:
   - make code-style
   - pytest -v --cov=schemas/
