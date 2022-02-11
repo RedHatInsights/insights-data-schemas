@@ -15,7 +15,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-"""Validator for messages produced by Parquet factory into cluster_thanos_info.parquet files."""
+"""Validator for messages produced by Parquet factory into rule_hits.parquet files."""
 
 import sys
 
