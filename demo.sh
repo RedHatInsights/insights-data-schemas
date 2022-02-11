@@ -77,11 +77,3 @@ echo "${RED}./parquet_output_rule_hits.py -i rule_hist.parquet${NC}"
 ./parquet_output_rule_hits.py -i ../data/rule_hits-0.parquet
 read
 
-
-clear
-echo "${BLACK_BG}${WHITE}Checking Parquet file cluster_thanos_info${NC}"
-echo "-----------------------------------------"
-read
-echo "${RED}./parquet_output_thanos_info.py -i cluster_thanos_info.parquet${NC}"
-./parquet_output_thanos_info.py -i ../data/cluster_thanos_info.parquet
-read
