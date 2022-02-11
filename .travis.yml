@@ -12,6 +12,9 @@ addons:
 # Pycodestyle part
 # needed to work correctly with Python 3 shebang
 env: SKIP_INTERPRETER=true
-script:
+install:
   - pip install pycodestyle
+  - pip install pytest-cov
+script:
   - make code-style
+  - pytest -v --cov=schemas/
