@@ -15,7 +15,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-"""Validator for messages produced by Parquet factory into cluster_thanos_info.parquet files."""
+"""Validator for messages produced by Parquet factory into rule_hits.parquet files."""
 
 import sys
 
@@ -31,7 +31,7 @@ from common import validate_parquet_file
 from common import print_report
 
 
-# the whole schema for messages produced by Parquet factory into cluster_thanos_info.parquet files.
+# the whole schema for messages produced by Parquet factory into rule_hits.parquet files.
 schema = Schema({
         Required("cluster_id"): uuidInBytesValidator,
         Required("rule_id"): ruleIDInBytesValidator,

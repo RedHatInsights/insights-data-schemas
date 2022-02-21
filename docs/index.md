@@ -30,8 +30,6 @@ layout: default
 - [parquet_output_cluster_info_test.py](packages/parquet_output_cluster_info_test.html)
 - [parquet_output_rule_hits.py](packages/parquet_output_rule_hits.html)
 - [parquet_output_rule_hits_test.py](packages/parquet_output_rule_hits_test.html)
-- [parquet_output_thanos_info.py](packages/parquet_output_thanos_info.html)
-- [parquet_output_thanos_info_test.py](packages/parquet_output_thanos_info_test.html)
 - [sqs_messages.py](packages/sqs_messages.html)
 - [sqs_messages_test.py](packages/sqs_messages_test.html)
 

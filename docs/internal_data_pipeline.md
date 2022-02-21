@@ -43,7 +43,7 @@ Parquet Factory is a program that can read data from several data sources,
 aggregate the data received from them and generate a set of Parquet files with
 the aggregated data, storing them in a selected S3 or Ceph bucket. It is used
 to generate different data aggregations in the CCX Internal Data Pipeline,
-reading data from Kafka topics and Thanos service.
+reading data from Kafka topics.
 
 ### Architecture diagram
 
@@ -61,7 +61,6 @@ reading data from Kafka topics and Thanos service.
     <area shape="rect" coords="110, 877,  155, 912"   title="Messages produced by Rules service" alt="internal-pipeline/rules_service_messages.html" href="internal-pipeline/rules_service_messages.html">
     <area shape="rect" coords="355, 877,  400, 912"   title="Messages produced by Features service" alt="internal-pipeline/features_service_messages.html" href="internal-pipeline/features_service_messages.html">
     <area shape="rect" coords="110, 1020, 155, 1055"  title="Messages consumed from `ccx-XXX-insights-operator-archive-rules-results` topic" alt="internal-pipeline/parquet_rules_results.html" href="internal-pipeline/parquet_rules_results.html">
-    <area shape="rect" coords="227, 1008, 272, 1043"  title="Data consumed from Thanos" alt="internal-pipeline/parquet_thanos.html" href="internal-pipeline/parquet_thanos.html">
     <area shape="rect" coords="355, 1020, 400, 1055"  title="Messages consumed from `ccx-XXX-insights-operator-archive-features` topic" alt="internal-pipeline/parquet_features.html" href="internal-pipeline/parquet_features.html">
     <area shape="rect" coords="229, 1115, 274, 1150"  title="Generated parquet files" alt="internal-pipeline/parquet_output.html" href="internal-pipeline/parquet_output.html">
 </map>
@@ -82,7 +81,6 @@ reading data from Kafka topics and Thanos service.
 1. [Messages produced by Rules service](internal-pipeline/rules_service_messages.md)
 1. [Messages produced by Features service](internal-pipeline/features_service_messages.md)
 1. [Messages consumed from `ccx-XXX-insights-operator-archive-rules-results` topic](internal-pipeline/parquet_rules_results.md)
-1. [Data consumed from Thanos](internal-pipeline/parquet_thanos.md)
 1. [Messages consumed from `ccx-XXX-insights-operator-archive-features` topic](internal-pipeline/parquet_features.md)
 1. [Generated parquet files](internal-pipeline/parquet_output.md)
 
@@ -92,17 +90,15 @@ Parquet Factory is a program that can read data from several data sources,
 aggregate the data received from them and generate a set of Parquet files with
 the aggregated data, storing them in a S3 bucket. It is used to generate
 different data aggregations in the CCX Internal Data Pipeline, reading data
-from Kafka topics and Thanos service.
+from Kafka topics.
 
 <img src="images/parquet-factory.png" alt="Parquet factory" usemap="#parquet-factory">
 <map name="parquet-factory">
     <area shape="rect" coords="130, 34, 170, 64"   title="Messages consumed from ccx-XXX-insights-operator-archive-rules-results topic" alt="Messages consumed from ccx-XXX-insights-operator-archive-rules-results topic" href="internal-pipeline/parquet_rules_results.html">
     <area shape="rect" coords="130, 212, 170, 242" title="Messages consumed from ccx-XXX-insights-operator-archive-features topic" alt="Messages consumed from ccx-XXX-insights-operator-archive-features topic" href="internal-pipeline/parquet_features.html">
-    <area shape="rect" coords="295, 83, 335, 114"  title="Data consumed from Thanos" alt="Data consumed from Thanos" href="internal-pipeline/parquet_thanos.html">
     <area shape="rect" coords="389, 165, 429, 195" title="Generated parquet files" alt="Generated parquet files" href="internal-pipeline/parquet_output.html">
 </map>
 
 1. [Messages consumed from `ccx-XXX-insights-operator-archive-rules-results` topic](internal-pipeline/parquet_rules_results.md)
-1. [Messages consumed from `ccx-XXX-insights-operator-archive-features` topic](internal-pipeline/parquet_features.md)
-1. [Data consumed from Thanos](internal-pipeline/parquet_thanos.md)
-1. [Generated parquet files](internal-pipeline/parquet_output.md)
+2. [Messages consumed from `ccx-XXX-insights-operator-archive-features` topic](internal-pipeline/parquet_features.md)
+3. [Generated parquet files](internal-pipeline/parquet_output.md)

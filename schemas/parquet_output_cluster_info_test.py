@@ -39,41 +39,41 @@ verbose = (True, False)
 
 # attributes
 attribute = (
-        "cluster_id",
-        "cluster_version",
-        "platform",
-        "collected_at",
-        "desired_version",
-        "network_type",
-        "channel",
-        "network_mtu",
-        "network_kind",
-        "network_size",
-        "network_host_prefix",
-        "archive_path",
-        "initial_version"
-        )
+    "cluster_id",
+    "cluster_version",
+    "platform",
+    "collected_at",
+    "desired_version",
+    "network_type",
+    "channel",
+    "network_mtu",
+    "network_kind",
+    "network_size",
+    "network_host_prefix",
+    "archive_path",
+    "initial_version"
+)
 
 
 @pytest.fixture
 def correct_message():
     """Provide correct message to be tested."""
     return {
-            "cluster_id": b"123e4567-e89b-12d3-a456-426614174000",
-            "cluster_version": b"1.2.3",
-            "platform": b"AWS",
-            "collected_at": datetime.now(),
-            "desired_version": b"2.3.4",
-            "network_type": b"OpenshiftSDN",
-            "channel": b"stable-4.7",
-            "network_mtu": 1450,
-            "network_kind": "service",
-            "network_size": "/16",
-            "network_host_prefix": 23,
-            "archive_path":
+        "cluster_id": b"123e4567-e89b-12d3-a456-426614174000",
+        "cluster_version": b"1.2.3",
+        "platform": b"AWS",
+        "collected_at": datetime.now(),
+        "desired_version": b"2.3.4",
+        "network_type": b"OpenshiftSDN",
+        "channel": b"stable-4.7",
+        "network_mtu": 1450,
+        "network_kind": b"service",
+        "network_size": b"/16",
+        "network_host_prefix": 23,
+        "archive_path":
             b"archives/compressed/00/00000000-0000-0000-0000-000000000000/202102/08/002219.tar.gz",
             "initial_version": b"1.2.3"
-        }
+    }
 
 
 def test_main_help():
@@ -137,8 +137,12 @@ def test_validate_message_wrong_attributes(validation_schema, verbose, correct_m
     with pytest.raises(Invalid) as excinfo:
         validate(schema, correct_message, verbose)
 
-    # check with number
-    correct_message[attribute] = 123456
+    if type(correct_message[attribute]) != int:
+        # check with number
+        correct_message[attribute] = 123456
+    if type(correct_message[attribute]) == int:
+        # check with string
+        correct_message[attribute] = "invalid"
     # it should fail
     with pytest.raises(Invalid) as excinfo:
         validate(schema, correct_message, verbose)
