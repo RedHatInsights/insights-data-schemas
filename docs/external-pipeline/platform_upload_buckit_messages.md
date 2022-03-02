@@ -85,7 +85,12 @@ by the external data pipeline:
   "category": "test",
   "metadata": {
     "reporter": "",
-    "stale_timestamp": "0001-01-01T00:00:00Z"
+    "stale_timestamp": "0001-01-01T00:00:00Z",
+    "custom_metadata": {
+      "ccx_metadata": {
+        "gathering_time": "2022-03-02T00:01:02Z"
+      }
+    }
   },
   "request_id": "b44bfb83b8b0e4a7aad8b64b43879846",
   "principal": 9,
@@ -143,6 +148,25 @@ Optional JSON structure with additional flags with entitlements:
   "is_trial": false
 }
 ```
+
+* `metadata` (object)
+
+Optional JSON structure with additional metadata sent by Insights and,
+optinally, from the archive uploader.
+
+```json
+"reporter": "ingress",
+"stale_timestamp": "2022-03-02T11:53:00Z",
+"custom_metadata": {
+  "ccx_metadata": {
+    "gathering_time": "2022-03-02T11:50:15Z"
+  }
+}
+```
+
+The `custom_metadata` will contain a JSON object too. In case that it contains
+the `ccx_metadata` key, it will be used by the external data pipeline for
+further processing.
 
 ## Examples
 
