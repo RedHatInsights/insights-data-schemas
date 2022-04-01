@@ -830,6 +830,65 @@ An example of path:
 archives/compressed/0a/0aaaaaaa-bbbb-cccc-dddd-ffffffffffff/202102/08/003201.tar.gz |
 ```
 
+### Format of `conditional_update_risks` table
+
+* `cluster_id` (byte array) cluster ID represented as UUID
+* `current_version` (byte array) cluster version represented as string
+* `release` (byte array) available update version
+* `risk` (byte array) name of the risk for the conditional update
+* `collected_at` (timestamp) timestamp of report represented with millisecond precision
+* `archive_path` (byte array) path to the object stored in Ceph
+
+#### `cluster_id` attribute
+
+`cluster_id` uses its canonical textual representation: the 16 octets of a
+UUID are represented as 32 hexadecimal (base-16) digits, displayed in five
+groups separated by hyphens, in the form 8-4-4-4-12 for a total of 36
+characters (32 hexadecimal characters and 4 hyphens). For more information
+please look at
+[https://en.wikipedia.org/wiki/Universally_unique_identifier](https://en.wikipedia.org/wiki/Universally_unique_identifier).
+
+An example of UUID:
+
+```
+3ba9b042-b8b8-4714-98e9-17915c2eeb95
+```
+
+#### `current_version` attribute
+
+Current cluster version represented as string, for example "4.5.24" or even
+"4.6.0-0.ci.test-2020-12-01-123456-ci-xx-yyyyyyy"
+
+
+#### `release` attribute
+
+Available update version, for example "4.10.0-fc.4".
+
+#### `risk` attribute
+
+Name of the risk for the conditional update, for example "AlibabaStorageDriverDemo".
+
+#### `collected_at` attribute
+
+Timestamp of report represented with millisecond precision, for example
+"2021-02-08 00:22:19" (this is the display format, the precision is higher
+internally)
+
+#### `archive_path` attribute
+
+This attribute contains path to object stored in Ceph. It must be real path
+with chunks splitted by slash character. The format of path is:
+
+```
+archives/compressed/{PREFIX}/{CLUSTER_ID}/{YEAR+MONTH}/{DAY}/{ID}.tar.gz |
+```
+
+An example of path:
+
+```
+archives/compressed/0a/0aaaaaaa-bbbb-cccc-dddd-ffffffffffff/202102/08/003201.tar.gz |
+```
+
 ## Possible enhancements
 
 * Version (positive integer) should be included in the generated Parquet files
