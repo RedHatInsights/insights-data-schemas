@@ -48,6 +48,7 @@ attribute = (
     "archive_path",
 )
 
+
 @pytest.fixture
 def correct_message():
     """Provide correct message to be tested."""
