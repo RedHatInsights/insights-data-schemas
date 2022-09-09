@@ -49,7 +49,7 @@ reading data from Kafka topics.
 
 <img src="images/internal-data-pipeline-architecture.png" alt="Internal data pipeline" usemap="#internal-pipeline">
 <map name="internal-pipeline">
-    <area shape="rect" coords="110, 298,  155, 333"   title="Incoming messages in `platform.upload.buckit`" alt="internal-pipeline/platform_upload_buckit_messages.html" href="internal-pipeline/platform_upload_buckit_messages.html">
+    <area shape="rect" coords="110, 298,  155, 333"   title="Incoming messages in `platform.upload.announce`" alt="internal-pipeline/platform.upload.announce_messages.html" href="internal-pipeline/platform.upload.announce_messages.html">
     <area shape="rect" coords="110, 430,  155, 465"   title="Incoming messages from SQS" alt="internal-pipeline/incoming_sqs_messages.html" href="internal-pipeline/incoming_sqs_messages.html">
     <area shape="rect" coords="110, 540,  155, 575"   title="Messages produced by SQS listener" alt="internal-pipeline/sqs_listener_messages.html" href="internal-pipeline/sqs_listener_messages.html">
     <area shape="rect" coords="139, 579,  184, 614"   title="Messages consumed from `ccx-XXX-insights-operator-archive-new` topic" alt="internal-pipeline/insights_operator_archive_new.html" href="internal-pipeline/insights_operator_archive_new.html">
@@ -69,7 +69,7 @@ reading data from Kafka topics.
 
 ### Data format descriptions
 
-1. [Incoming messages in `platform.upload.buckit`](internal-pipeline/platform_upload_buckit_messages.md)
+1. [Incoming messages in `platform.upload.announce`](internal-pipeline/platform.upload.announce_messages.md)
 1. [Incoming messages from SQS](internal-pipeline/incoming_sqs_messages.md)
 1. [Messages produced by SQS listener](internal-pipeline/sqs_listener_messages.md)
 1. [Messages consumed from `ccx-XXX-insights-operator-archive-new` topic](internal-pipeline/insights_operator_archive_new.md)

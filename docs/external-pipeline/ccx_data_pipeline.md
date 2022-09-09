@@ -121,11 +121,11 @@ An example of timestamp with the zone designator:
 
 - `OrgID`: retrieved from the incoming JSON, codified inside the `b64_identity`
   value. It is extracted from `identity-internal-org_id` path of keys. Please look
-  at the document [Incoming messages in `platform.upload.buckit`](platform_upload_buckit_messages.md)
+  at the document [Incoming messages in `platform.upload.announce`](platform.upload.announce_messages.md)
   for more information about messages containing `OrgID` among other info.
 - `AccountNumber`: retrieved from the incoming JSON, codified inside the `b64_identity`
   value. It is extracted from `identity-account_number` path of keys. Please look
-  at the document [Incoming messages in `platform.upload.buckit`](platform_upload_buckit_messages.md)
+  at the document [Incoming messages in `platform.upload.announce`](platform.upload.announce_messages.md)
   for more information about messages containing `AccountNumber` among other info.
 - `ClusterName`: the cluster name is retrieved from the downloaded archive. When
   the download successes and the archive is extracted prior to its processing by

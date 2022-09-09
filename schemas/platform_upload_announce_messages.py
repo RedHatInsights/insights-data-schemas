@@ -15,7 +15,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-"""Validator for messages stored in platform.upload.buckit topic."""
+"""Validator for messages stored in platform.upload.announce topic."""
 
 import sys
 
@@ -49,7 +49,7 @@ identitySchema = Schema(
                 }, extra=ALLOW_EXTRA)}, extra=ALLOW_EXTRA)
 
 
-# Schema for messages consumed from platform_upload_buckit Kafka topic
+# Schema for messages consumed from platform.upload.announce Kafka topic
 schema = Schema(
         {
             Required("account"): intInStringValidator,

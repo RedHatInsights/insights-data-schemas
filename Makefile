@@ -24,7 +24,7 @@ documentation:
 
 before_commit: code-style unit_tests coverage
 
-cli_tests:	platform_upload_buckit_messages_tests
+cli_tests:	platform_upload_announce_messages_tests
 
-platform_upload_buckit_messages_tests:
-	${SCHEMA_DIR}/platform_upload_buckit_messages.py -i ${DATA_DIR}/platform_upload_buckit/correct.json
+platform_upload_announce_messages_tests:
+	${SCHEMA_DIR}/platform_upload_announce_messages.py -i ${DATA_DIR}/platform_upload_announce/correct.json

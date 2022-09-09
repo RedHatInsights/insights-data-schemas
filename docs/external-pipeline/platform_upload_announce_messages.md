@@ -3,7 +3,7 @@ layout: default
 ---
 \[[Front page](../index.md)\] \[[External data pipeline](../external_data_pipeline.md)\]
 
-# Format of the received Kafka records from `platform.upload.buckit` topic
+# Format of the received Kafka records from `platform.upload.announce` topic
 
 ## Schema version
 
@@ -11,7 +11,7 @@ layout: default
 
 ## Description
 
-The records (messages) received from `platform.upload.buckit` that are encoded
+The records (messages) received from `platform.upload.announce` that are encoded
 using JSON format. It consists of an object with various attributes.
 
 Every time a new record is sent by Kafka to the subscribed topic, the
