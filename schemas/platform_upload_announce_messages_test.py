@@ -15,14 +15,14 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-"""Unit tests for platform_upload_buckit_messages module."""
+"""Unit tests for platform.upload.announce_messages module."""
 
 import pytest
 import sys
 
 from voluptuous import Invalid
 
-from platform_upload_buckit_messages import schema, main
+from platform_upload_announce_messages import schema, main
 from common import validate
 
 

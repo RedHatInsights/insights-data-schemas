@@ -22,7 +22,7 @@ UI, OpenShift console, etc.
 
 <img src="images/external-data-pipeline.png" alt="External data pipeline" usemap="#external-data-pipeline">
 <map name="external-data-pipeline">
-    <area shape="rect" coords="249, 155, 334, 212" title="Incoming messages in platform.upload.buckit" alt="Incoming messages in platform.upload.buckit" href="external-pipeline/platform_upload_buckit_messages.html">
+    <area shape="rect" coords="249, 155, 334, 212" title="Incoming messages in platform.upload.announce" alt="Incoming messages in platform.upload.announce" href="external-pipeline/platform.upload.announce_messages.html">
     <area shape="rect" coords="361,  46, 446, 103" title="Raw data stored in S3 bucket" alt="Raw data stored in S3 bucket" href="external-pipeline/raw_data_S3_bucket.html">
     <area shape="rect" coords="496, 162, 581, 219" title="Data produced by OCP rules engine" alt="Data produced by OCP rules engine" href="external-pipeline/ccx_data_pipeline.html">
     <area shape="rect" coords="496, 346, 581, 403" title="Messages consumed from ccx.ocp.results topic" alt="Data consumed from ccx.ocp.results topic" href="external-pipeline/ccx_ocp_results_topic.html">
@@ -32,7 +32,7 @@ UI, OpenShift console, etc.
 
 ### Data format descriptions
 
-1. [Incoming messages in `platform.upload.buckit`](external-pipeline/platform_upload_buckit_messages.md)
+1. [Incoming messages in `platform.upload.announce`](external-pipeline/platform.upload.announce_messages.md)
 1. [Raw data stored in S3 bucket](external-pipeline/raw_data_S3_bucket.md)
 1. [Data produced by OCP rules engine](external-pipeline/ccx_data_pipeline.md)
 1. [Messages consumed from `ccx.ocp.results` topic](external-pipeline/ccx_ocp_results_topic.md)
