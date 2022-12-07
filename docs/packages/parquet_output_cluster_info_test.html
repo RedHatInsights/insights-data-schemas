@@ -113,13 +113,20 @@ Unit tests for parquet_output_cluster_info module.</p>
     </div>
     <div class='code'>
       <div class="highlight"><pre><span class="n">attribute</span> <span class="o">=</span> <span class="p">(</span>
-        <span class="s2">&quot;cluster_id&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;cluster_version&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;platform&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;collected_at&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;desired_version&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;archive_path&quot;</span><span class="p">,</span>
-        <span class="p">)</span></pre></div>
+    <span class="s2">&quot;cluster_id&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;cluster_version&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;platform&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;collected_at&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;desired_version&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;network_type&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;channel&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;network_mtu&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;network_kind&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;network_size&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;network_host_prefix&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;archive_path&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;initial_version&quot;</span>
+<span class="p">)</span></pre></div>
     </div>
   </div>
   <div class='clearall'></div>
@@ -145,14 +152,21 @@ Unit tests for parquet_output_cluster_info module.</p>
     </div>
     <div class='code'>
       <div class="highlight"><pre>    <span class="k">return</span> <span class="p">{</span>
-            <span class="s2">&quot;cluster_id&quot;</span><span class="p">:</span> <span class="sa">b</span><span class="s2">&quot;123e4567-e89b-12d3-a456-426614174000&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;cluster_version&quot;</span><span class="p">:</span> <span class="sa">b</span><span class="s2">&quot;1.2.3&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;platform&quot;</span><span class="p">:</span> <span class="sa">b</span><span class="s2">&quot;AWS&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;collected_at&quot;</span><span class="p">:</span> <span class="n">datetime</span><span class="o">.</span><span class="n">now</span><span class="p">(),</span>
-            <span class="s2">&quot;desired_version&quot;</span><span class="p">:</span> <span class="sa">b</span><span class="s2">&quot;2.3.4&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;archive_path&quot;</span><span class="p">:</span>
-            <span class="sa">b</span><span class="s2">&quot;archives/compressed/00/00000000-0000-0000-0000-000000000000/202102/08/002219.tar.gz&quot;</span>
-        <span class="p">}</span></pre></div>
+        <span class="s2">&quot;cluster_id&quot;</span><span class="p">:</span> <span class="sa">b</span><span class="s2">&quot;123e4567-e89b-12d3-a456-426614174000&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;cluster_version&quot;</span><span class="p">:</span> <span class="sa">b</span><span class="s2">&quot;1.2.3&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;platform&quot;</span><span class="p">:</span> <span class="sa">b</span><span class="s2">&quot;AWS&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;collected_at&quot;</span><span class="p">:</span> <span class="n">datetime</span><span class="o">.</span><span class="n">now</span><span class="p">(),</span>
+        <span class="s2">&quot;desired_version&quot;</span><span class="p">:</span> <span class="sa">b</span><span class="s2">&quot;2.3.4&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;network_type&quot;</span><span class="p">:</span> <span class="sa">b</span><span class="s2">&quot;OpenshiftSDN&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;channel&quot;</span><span class="p">:</span> <span class="sa">b</span><span class="s2">&quot;stable-4.7&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;network_mtu&quot;</span><span class="p">:</span> <span class="mi">1450</span><span class="p">,</span>
+        <span class="s2">&quot;network_kind&quot;</span><span class="p">:</span> <span class="sa">b</span><span class="s2">&quot;service&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;network_size&quot;</span><span class="p">:</span> <span class="sa">b</span><span class="s2">&quot;/16&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;network_host_prefix&quot;</span><span class="p">:</span> <span class="mi">23</span><span class="p">,</span>
+        <span class="s2">&quot;archive_path&quot;</span><span class="p">:</span>
+            <span class="sa">b</span><span class="s2">&quot;archives/compressed/00/00000000-0000-0000-0000-000000000000/202102/08/002219.tar.gz&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;initial_version&quot;</span><span class="p">:</span> <span class="sa">b</span><span class="s2">&quot;1.2.3&quot;</span>
+    <span class="p">}</span></pre></div>
     </div>
   </div>
   <div class='clearall'></div>
@@ -358,10 +372,10 @@ Unit tests for parquet_output_cluster_info module.</p>
       <div class='octowrap'>
         <a class='octothorpe' href='#section-24'>#</a>
       </div>
-      <p>check with string not representing number</p>
+      <p>check with an empty bytes</p>
     </div>
     <div class='code'>
-      <div class="highlight"><pre>    <span class="n">correct_message</span><span class="p">[</span><span class="n">attribute</span><span class="p">]</span> <span class="o">=</span> <span class="sa">b</span><span class="s2">&quot;foobar&quot;</span></pre></div>
+      <div class="highlight"><pre>    <span class="n">correct_message</span><span class="p">[</span><span class="n">attribute</span><span class="p">]</span> <span class="o">=</span> <span class="sa">b</span><span class="s2">&quot;&quot;</span></pre></div>
     </div>
   </div>
   <div class='clearall'></div>
@@ -374,7 +388,9 @@ Unit tests for parquet_output_cluster_info module.</p>
     </div>
     <div class='code'>
       <div class="highlight"><pre>    <span class="k">with</span> <span class="n">pytest</span><span class="o">.</span><span class="n">raises</span><span class="p">(</span><span class="n">Invalid</span><span class="p">)</span> <span class="k">as</span> <span class="n">excinfo</span><span class="p">:</span>
-        <span class="n">validate</span><span class="p">(</span><span class="n">schema</span><span class="p">,</span> <span class="n">correct_message</span><span class="p">,</span> <span class="n">verbose</span><span class="p">)</span></pre></div>
+        <span class="n">validate</span><span class="p">(</span><span class="n">schema</span><span class="p">,</span> <span class="n">correct_message</span><span class="p">,</span> <span class="n">verbose</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="nb">type</span><span class="p">(</span><span class="n">correct_message</span><span class="p">[</span><span class="n">attribute</span><span class="p">])</span> <span class="o">!=</span> <span class="nb">int</span><span class="p">:</span></pre></div>
     </div>
   </div>
   <div class='clearall'></div>
@@ -386,7 +402,8 @@ Unit tests for parquet_output_cluster_info module.</p>
       <p>check with number</p>
     </div>
     <div class='code'>
-      <div class="highlight"><pre>    <span class="n">correct_message</span><span class="p">[</span><span class="n">attribute</span><span class="p">]</span> <span class="o">=</span> <span class="mi">123456</span></pre></div>
+      <div class="highlight"><pre>        <span class="n">correct_message</span><span class="p">[</span><span class="n">attribute</span><span class="p">]</span> <span class="o">=</span> <span class="mi">123456</span>
+    <span class="k">if</span> <span class="nb">type</span><span class="p">(</span><span class="n">correct_message</span><span class="p">[</span><span class="n">attribute</span><span class="p">])</span> <span class="o">==</span> <span class="nb">int</span><span class="p">:</span></pre></div>
     </div>
   </div>
   <div class='clearall'></div>
@@ -394,6 +411,18 @@ Unit tests for parquet_output_cluster_info module.</p>
     <div class='docs'>
       <div class='octowrap'>
         <a class='octothorpe' href='#section-27'>#</a>
+      </div>
+      <p>check with string</p>
+    </div>
+    <div class='code'>
+      <div class="highlight"><pre>        <span class="n">correct_message</span><span class="p">[</span><span class="n">attribute</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;invalid&quot;</span></pre></div>
+    </div>
+  </div>
+  <div class='clearall'></div>
+  <div class='section' id='section-28'>
+    <div class='docs'>
+      <div class='octowrap'>
+        <a class='octothorpe' href='#section-28'>#</a>
       </div>
       <p>it should fail</p>
     </div>
@@ -403,10 +432,10 @@ Unit tests for parquet_output_cluster_info module.</p>
     </div>
   </div>
   <div class='clearall'></div>
-  <div class='section' id='section-28'>
+  <div class='section' id='section-29'>
     <div class='docs'>
       <div class='octowrap'>
-        <a class='octothorpe' href='#section-28'>#</a>
+        <a class='octothorpe' href='#section-29'>#</a>
       </div>
       <p>check with different data type</p>
     </div>
@@ -415,10 +444,10 @@ Unit tests for parquet_output_cluster_info module.</p>
     </div>
   </div>
   <div class='clearall'></div>
-  <div class='section' id='section-29'>
+  <div class='section' id='section-30'>
     <div class='docs'>
       <div class='octowrap'>
-        <a class='octothorpe' href='#section-29'>#</a>
+        <a class='octothorpe' href='#section-30'>#</a>
       </div>
       <p>it should fail</p>
     </div>

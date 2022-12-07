@@ -87,7 +87,8 @@ Validator for messages produced by Parquet factory into cluster_info.parquet fil
             <span class="sa">b</span><span class="s2">&quot;None&quot;</span><span class="p">,</span>
             <span class="sa">b</span><span class="s2">&quot;Libvirt&quot;</span><span class="p">,</span>
             <span class="sa">b</span><span class="s2">&quot;oVirt&quot;</span><span class="p">,</span>
-            <span class="sa">b</span><span class="s2">&quot;GCP&quot;</span><span class="p">))</span>
+            <span class="sa">b</span><span class="s2">&quot;GCP&quot;</span><span class="p">,</span>
+            <span class="sa">b</span><span class="s2">&quot;KubeVirt&quot;</span><span class="p">))</span>
 
 
 <span class="c1"># the whole schema for messages produced by Parquet factory into cluster_info.parquet files.&quot;&quot;&quot;</span>
@@ -97,7 +98,14 @@ Validator for messages produced by Parquet factory into cluster_info.parquet fil
         <span class="n">Required</span><span class="p">(</span><span class="s2">&quot;platform&quot;</span><span class="p">):</span> <span class="n">platformSchema</span><span class="p">,</span>
         <span class="n">Required</span><span class="p">(</span><span class="s2">&quot;collected_at&quot;</span><span class="p">):</span> <span class="n">datetime</span><span class="o">.</span><span class="n">datetime</span><span class="p">,</span>
         <span class="n">Required</span><span class="p">(</span><span class="s2">&quot;desired_version&quot;</span><span class="p">):</span> <span class="n">versionInBytesValidator</span><span class="p">,</span>
+        <span class="n">Required</span><span class="p">(</span><span class="s2">&quot;network_type&quot;</span><span class="p">):</span> <span class="n">notEmptyBytesTypeValidator</span><span class="p">,</span>
+        <span class="n">Required</span><span class="p">(</span><span class="s2">&quot;channel&quot;</span><span class="p">):</span> <span class="n">notEmptyBytesTypeValidator</span><span class="p">,</span>
+        <span class="n">Required</span><span class="p">(</span><span class="s2">&quot;network_mtu&quot;</span><span class="p">):</span> <span class="n">posIntOrZeroValidator</span><span class="p">,</span>
+        <span class="n">Required</span><span class="p">(</span><span class="s2">&quot;network_kind&quot;</span><span class="p">):</span> <span class="n">notEmptyBytesTypeValidator</span><span class="p">,</span>
+        <span class="n">Required</span><span class="p">(</span><span class="s2">&quot;network_size&quot;</span><span class="p">):</span> <span class="n">notEmptyBytesTypeValidator</span><span class="p">,</span>
+        <span class="n">Required</span><span class="p">(</span><span class="s2">&quot;network_host_prefix&quot;</span><span class="p">):</span> <span class="n">posIntOrZeroValidator</span><span class="p">,</span>
         <span class="n">Required</span><span class="p">(</span><span class="s2">&quot;archive_path&quot;</span><span class="p">):</span> <span class="n">pathToCephInBytesValidator</span><span class="p">,</span>
+        <span class="n">Required</span><span class="p">(</span><span class="s2">&quot;initial_version&quot;</span><span class="p">):</span> <span class="n">versionInBytesValidator</span><span class="p">,</span>
         <span class="p">})</span></pre></div>
     </div>
   </div>
