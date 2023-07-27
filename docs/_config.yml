@@ -19,5 +19,6 @@ exclude:
   - Gemfile
   - Gemfile.lock
   - vendor/
+  - sources.tmpl.md
 
 theme: jekyll-theme-leap-day

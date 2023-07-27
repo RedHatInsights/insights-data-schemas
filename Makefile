@@ -1,7 +1,11 @@
-.PHONY: tests
+SHELL := /bin/bash
+
+.PHONY: default tests unit_tests coverage coverage-report code-style documentation before_commit cli_tests platform_upload_announce_messages_tests pycco 
 
 SCHEMA_DIR=schemas
 DATA_DIR=data
+SOURCES:=$(shell find ${SCHEMA_DIR} -name '*.py')
+DOCFILES:=$(addprefix docs/packages/, $(addsuffix .html, $(basename ${SOURCES})))
 
 default: tests
 
@@ -28,3 +32,12 @@ cli_tests:	platform_upload_announce_messages_tests
 
 platform_upload_announce_messages_tests:
 	${SCHEMA_DIR}/platform_upload_announce_messages.py -i ${DATA_DIR}/platform_upload_announce/correct.json
+
+pycco: ${DOCFILES} docs/sources.md
+
+docs/packages/%.html: %.py
+	mkdir -p $(dir $@)
+	pycco -l python -d $(dir $@) $^
+
+docs/sources.md: docs/sources.tmpl.md ${DOCFILES}
+	./gen_sources_md.sh
