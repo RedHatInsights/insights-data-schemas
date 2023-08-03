@@ -14,16 +14,13 @@
 
 """Validator for messages produced by Parquet factory into available_updates.parquet files."""
 
-import sys
 
 from voluptuous import Schema
-from voluptuous import Required, Optional
-from voluptuous import Any
-from voluptuous import ALLOW_EXTRA
+from voluptuous import Required
 
 from validators import *
 
-from common import read_control_code, cli_arguments
+from common import cli_arguments
 from common import validate_parquet_file
 from common import print_report
 
