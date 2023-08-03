@@ -26,9 +26,7 @@ import base64
 import math
 from uuid import UUID
 
-from voluptuous import Schema
 from voluptuous import Invalid
-from voluptuous import Required
 
 
 def intTypeValidator(value):
@@ -425,7 +423,7 @@ def hexaString32Validator(value):
     stringTypeValidator(value)
 
     if len(value) == 0:
-        raise Invalid("string is empty".format(len(value)))
+        raise Invalid("string is empty")
     if len(value) != 32:
         raise Invalid("wrong number of digits: {}".format(len(value)))
     if not all(c in string.hexdigits for c in value):

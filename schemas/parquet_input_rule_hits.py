@@ -17,7 +17,6 @@
 
 """Validator for messages consumed from ccx-XXX-insights-operator-archive-rules-results topic."""
 
-import sys
 
 from voluptuous import Schema
 from voluptuous import Required, Optional
@@ -26,7 +25,7 @@ from voluptuous import ALLOW_EXTRA
 
 from validators import *
 
-from common import read_control_code, cli_arguments, load_json_from_file
+from common import cli_arguments
 from common import validate_single_message, validate_multiple_messages
 from common import print_report
 
