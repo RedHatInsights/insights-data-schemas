@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 # vim: set fileencoding=utf-8
 
-# Copyright © 2021 Pavel Tisnovsky
+# Copyright © 2021, 2022, 2023 Pavel Tisnovsky
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -22,7 +22,10 @@ from voluptuous import Schema
 from voluptuous import Required
 from voluptuous import Any
 
-from validators import *
+import datetime
+
+from validators import posIntOrZeroValidator, pathToCephInBytesValidator
+from validators import uuidInBytesValidator, versionInBytesValidator, notEmptyBytesTypeValidator
 
 from common import cli_arguments
 from common import validate_parquet_file
