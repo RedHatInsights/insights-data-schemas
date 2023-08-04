@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 # vim: set fileencoding=utf-8
 
-# Copyright © 2020, 2011  Pavel Tisnovsky
+# Copyright © 2020, 2011, 2022, 2023  Pavel Tisnovsky
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -21,8 +21,58 @@ import pytest
 
 from voluptuous import Invalid
 
-from validators import *
+import math
 
+# validators for numbers
+from validators import intTypeValidator
+from validators import posIntValidator, posIntOrZeroValidator
+from validators import negIntValidator, negIntOrZeroValidator
+from validators import floatTypeValidator
+from validators import posFloatValidator, posFloatOrZeroValidator
+from validators import negFloatValidator, negFloatOrZeroValidator
+from validators import isNaNValidator, isNotNaNValidator
+
+# validators for numbers represented as strings
+from validators import stringTypeValidator, emptyStringValidator, notEmptyStringValidator
+from validators import intInStringValidator
+from validators import posIntInStringValidator, posIntOrZeroInStringValidator
+from validators import negIntInStringValidator, negIntOrZeroInStringValidator
+from validators import posFloatInStringValidator, posFloatOrZeroInStringValidator
+from validators import negFloatInStringValidator, negFloatOrZeroInStringValidator
+from validators import hexaString32Validator
+
+# validators for numbers represented as bytes or byte arrays
+from validators import intInBytesValidator
+from validators import posIntInBytesValidator, posIntOrZeroInBytesValidator
+from validators import negIntInBytesValidator, negIntOrZeroInBytesValidator
+from validators import posFloatInBytesValidator, posFloatOrZeroInBytesValidator
+from validators import negFloatInBytesValidator, negFloatOrZeroInBytesValidator
+
+# validators for various hash values
+from validators import sha1Validator, sha224Validator, sha256Validator, sha384Validator
+from validators import sha512Validator
+from validators import sha3_224Validator, sha3_256Validator, sha3_384Validator
+from validators import sha3_512Validator
+from validators import shake128Validator, shake256Validator, BLAKE2Validator, md5Validator
+
+# validators for ID representations
+from validators import uuidValidator, uuidInBytesValidator, b64IdentityValidator
+
+# validators for timestamps and durations
+from validators import timestampValidator, timestampValidatorOffset
+from validators import timestampValidatorMs, timestampValidatorNoZ
+
+# validators related to rule selectors
+from validators import ruleIDValidator, ruleIDInBytesValidator
+from validators import ruleFQDNValidator, ruleFQDNInBytesValidator
+
+# validators for specific URLs and paths
+from validators import domainValidator, domainInBytesValidator
+from validators import urlToAWSValidator, pathToCephInBytesValidator
+
+# other validators
+from validators import jsonInStrValidator
+from validators import keyValueValidator, versionInBytesValidator
 
 # proper positive integers
 positive_int_values = (1, 2, 3, 127, 128, 255, 256,
@@ -901,11 +951,11 @@ improper_fqdn_values = (
 
 # proper ID values
 proper_id_values = (
-        "a|b",
-        "9|10",
-        "a_b|c",
-        "a_b|c1",
-        "a1_b|c_d1")
+        "aa_a|B_B",
+        "a1_b|C_Z",
+        "a_000|A_000",
+        "a_b_c_d|A_B_C_D",
+        "foo_bar_baz|FOO_BAR_BAZ")
 
 # improper ID values
 improper_id_values = (
@@ -1126,13 +1176,6 @@ def test_PosFloatOrZeroValidator_wrong_types(value):
     # exception is expected
     with pytest.raises(Invalid) as excinfo:
         posFloatOrZeroValidator(value)
-
-
-def test_PosFloatOrZeroValidator_nan():
-    """Check if NaN is not validated."""
-    # exception is expected
-    with pytest.raises(Invalid) as excinfo:
-        posFloatOrZeroValidator(math.nan)
 
 
 def test_PosFloatOrZeroValidator_nan():
@@ -1574,7 +1617,7 @@ def test_posIntOrZeroInBytesValidator_incorrect_values(value):
 
 
 @pytest.mark.parametrize("value", not_string_type)
-def test_posIntInOrZeroStringValidator_incorrect_types(value):
+def test_posIntInOrZeroBytesValidator_incorrect_types(value):
     """Check if improper values (with wrong type) are validated."""
     # exception is expected
     with pytest.raises(Invalid) as excinfo:
@@ -1620,7 +1663,7 @@ def test_negIntOrZeroInBytesValidator_incorrect_values(value):
 
 
 @pytest.mark.parametrize("value", not_string_type)
-def test_negIntInOrZeroStringValidator_incorrect_types(value):
+def test_negIntInOrZeroBytesValidator_incorrect_types(value):
     """Check if improper values (with wrong type) are validated."""
     # exception is expected
     with pytest.raises(Invalid) as excinfo:
@@ -1666,7 +1709,7 @@ def test_posFloatOrZeroInBytesValidator_incorrect_values(value):
 
 
 @pytest.mark.parametrize("value", not_string_type)
-def test_posFloatInOrZeroStringValidator_incorrect_types(value):
+def test_posFloatInOrZeroBytesValidator_incorrect_types(value):
     """Check if improper values (with wrong type) are validated."""
     # exception is expected
     with pytest.raises(Invalid) as excinfo:
@@ -2246,7 +2289,7 @@ def test_keyValueValidator_proper_values(value):
 
 
 @pytest.mark.parametrize("value", not_key_values)
-def test_keyValueValidator_proper_values(value):
+def test_keyValueValidator_improper_values(value):
     """Check if impproper values are validated."""
     # exception is expected
     with pytest.raises(Invalid) as excinfo:
@@ -2269,7 +2312,7 @@ def test_ruleFQDNValueValidator_proper_values(value):
 
 
 @pytest.mark.parametrize("value", improper_fqdn_values)
-def test_ruleFQDNValueValidator_proper_values(value):
+def test_ruleFQDNValueValidator_improper_values(value):
     """Check if impproper values are validated."""
     # exception is expected
     with pytest.raises(Invalid) as excinfo:
@@ -2292,7 +2335,7 @@ def test_ruleFQDNInBytesValueValidator_proper_values(value):
 
 
 @pytest.mark.parametrize("value", improper_fqdn_values)
-def test_ruleFQDNInBytesValueValidator_proper_values(value):
+def test_ruleFQDNInBytesValueValidator_improper_values(value):
     """Check if impproper values are validated."""
     # exception is expected
     with pytest.raises(Invalid) as excinfo:
@@ -2315,7 +2358,7 @@ def test_ruleIDValueValidator_proper_values(value):
 
 
 @pytest.mark.parametrize("value", improper_id_values)
-def test_ruleIDValueValidator_proper_values(value):
+def test_ruleIDValueValidator_improper_values(value):
     """Check if impproper values are validated."""
     # exception is expected
     with pytest.raises(Invalid) as excinfo:
@@ -2338,7 +2381,7 @@ def test_ruleIDInBytesValueValidator_proper_values(value):
 
 
 @pytest.mark.parametrize("value", improper_id_values)
-def test_ruleIDInBytesValueValidator_proper_values(value):
+def test_ruleIDInBytesValueValidator_improper_values(value):
     """Check if impproper values are validated."""
     # exception is expected
     with pytest.raises(Invalid) as excinfo:
