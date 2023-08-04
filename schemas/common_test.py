@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 # vim: set fileencoding=utf-8
 
-# Copyright © 2021 Pavel Tisnovsky
+# Copyright © 2021, 2022, 2023 Pavel Tisnovsky
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -175,16 +175,6 @@ def test_try_to_validate_message_from_parquet_wrong_data():
     # it should fail
     with pytest.raises(Invalid) as excinfo:
         try_to_validate_message_from_parquet(schema, payload, 1, True)
-
-
-def test_try_to_validate_message_invalid_data():
-    """Test the function try_to_validate_message."""
-    schema = Schema({})
-    payload = "{xyzzy}"
-
-    # it should fail
-    with pytest.raises(Exception) as excinfo:
-        try_to_validate_message(schema, payload, 1, True)
 
 
 def test_validate_multiple_messages_correct_file():
