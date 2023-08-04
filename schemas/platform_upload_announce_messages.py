@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 # vim: set fileencoding=utf-8
 
-# Copyright © 2020, 2021 Pavel Tisnovsky
+# Copyright © 2020, 2021, 2022, 2023 Pavel Tisnovsky
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -22,7 +22,9 @@ from voluptuous import Schema
 from voluptuous import Required
 from voluptuous import ALLOW_EXTRA
 
-from validators import *
+from validators import uuidValidator, intInStringValidator, notEmptyStringValidator
+from validators import posIntValidator, timestampValidator, timestampValidatorMs
+from validators import hexaString32Validator, urlToAWSValidator, b64IdentityValidator
 
 from common import cli_arguments
 from common import validate_single_message, validate_multiple_messages
