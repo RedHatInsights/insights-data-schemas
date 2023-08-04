@@ -74,8 +74,6 @@ from validators import urlToAWSValidator, pathToCephInBytesValidator
 from validators import jsonInStrValidator
 from validators import keyValueValidator, versionInBytesValidator
 
-
-
 # proper positive integers
 positive_int_values = (1, 2, 3, 127, 128, 255, 256,
                        32767, 32768, 65535, 65536,
