@@ -953,11 +953,11 @@ improper_fqdn_values = (
 
 # proper ID values
 proper_id_values = (
-        "a|b",
-        "9|10",
-        "a_b|c",
-        "a_b|c1",
-        "a1_b|c_d1")
+        "aa_a|B_B",
+        "a1_b|C_Z",
+        "a_000|A_000",
+        "a_b_c_d|A_B_C_D",
+        "foo_bar_baz|FOO_BAR_BAZ")
 
 # improper ID values
 improper_id_values = (
