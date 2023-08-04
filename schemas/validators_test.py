@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 # vim: set fileencoding=utf-8
 
-# Copyright © 2020, 2011  Pavel Tisnovsky
+# Copyright © 2020, 2011, 2022, 2023  Pavel Tisnovsky
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -21,7 +21,59 @@ import pytest
 
 from voluptuous import Invalid
 
-from validators import *
+import math
+
+# validators for numbers
+from validators import intTypeValidator
+from validators import posIntValidator, posIntOrZeroValidator
+from validators import negIntValidator, negIntOrZeroValidator
+from validators import floatTypeValidator
+from validators import posFloatValidator, posFloatOrZeroValidator
+from validators import negFloatValidator, negFloatOrZeroValidator
+from validators import isNaNValidator, isNotNaNValidator
+
+# validators for numbers represented as strings
+from validators import stringTypeValidator, emptyStringValidator, notEmptyStringValidator
+from validators import intInStringValidator
+from validators import posIntInStringValidator, posIntOrZeroInStringValidator
+from validators import negIntInStringValidator, negIntOrZeroInStringValidator
+from validators import posFloatInStringValidator, posFloatOrZeroInStringValidator
+from validators import negFloatInStringValidator, negFloatOrZeroInStringValidator
+from validators import hexaString32Validator
+
+# validators for numbers represented as bytes or byte arrays
+from validators import intInBytesValidator
+from validators import posIntInBytesValidator, posIntOrZeroInBytesValidator
+from validators import negIntInBytesValidator, negIntOrZeroInBytesValidator
+from validators import posFloatInBytesValidator, posFloatOrZeroInBytesValidator
+from validators import negFloatInBytesValidator, negFloatOrZeroInBytesValidator
+
+# validators for various hash values
+from validators import sha1Validator, sha224Validator, sha256Validator, sha384Validator
+from validators import sha512Validator
+from validators import sha3_224Validator, sha3_256Validator, sha3_384Validator
+from validators import sha3_512Validator
+from validators import shake128Validator, shake256Validator, BLAKE2Validator, md5Validator
+
+# validators for ID representations
+from validators import uuidValidator, uuidInBytesValidator, b64IdentityValidator
+
+# validators for timestamps and durations
+from validators import timestampValidator, timestampValidatorOffset
+from validators import timestampValidatorMs, timestampValidatorNoZ
+
+# validators related to rule selectors
+from validators import ruleIDValidator, ruleIDInBytesValidator
+from validators import ruleFQDNValidator, ruleFQDNInBytesValidator
+
+# validators for specific URLs and paths
+from validators import domainValidator, domainInBytesValidator
+from validators import urlToAWSValidator, pathToCephInBytesValidator
+
+# other validators
+from validators import jsonInStrValidator
+from validators import keyValueValidator, versionInBytesValidator
+
 
 
 # proper positive integers
