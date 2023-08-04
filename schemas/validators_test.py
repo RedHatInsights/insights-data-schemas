@@ -1187,13 +1187,6 @@ def test_PosFloatOrZeroValidator_nan():
         posFloatOrZeroValidator(math.nan)
 
 
-def test_PosFloatOrZeroValidator_nan():
-    """Check if NaN is not validated."""
-    # exception is expected
-    with pytest.raises(Invalid) as excinfo:
-        posFloatOrZeroValidator(math.nan)
-
-
 @pytest.mark.parametrize("value", negative_float_values)
 def test_negFloatValidator_correct_values(value):
     """Check if proper negative float values are validated."""
@@ -1626,7 +1619,7 @@ def test_posIntOrZeroInBytesValidator_incorrect_values(value):
 
 
 @pytest.mark.parametrize("value", not_string_type)
-def test_posIntInOrZeroStringValidator_incorrect_types(value):
+def test_posIntInOrZeroBytesValidator_incorrect_types(value):
     """Check if improper values (with wrong type) are validated."""
     # exception is expected
     with pytest.raises(Invalid) as excinfo:
@@ -1672,7 +1665,7 @@ def test_negIntOrZeroInBytesValidator_incorrect_values(value):
 
 
 @pytest.mark.parametrize("value", not_string_type)
-def test_negIntInOrZeroStringValidator_incorrect_types(value):
+def test_negIntInOrZeroBytesValidator_incorrect_types(value):
     """Check if improper values (with wrong type) are validated."""
     # exception is expected
     with pytest.raises(Invalid) as excinfo:
@@ -1718,7 +1711,7 @@ def test_posFloatOrZeroInBytesValidator_incorrect_values(value):
 
 
 @pytest.mark.parametrize("value", not_string_type)
-def test_posFloatInOrZeroStringValidator_incorrect_types(value):
+def test_posFloatInOrZeroBytesValidator_incorrect_types(value):
     """Check if improper values (with wrong type) are validated."""
     # exception is expected
     with pytest.raises(Invalid) as excinfo:
@@ -2298,7 +2291,7 @@ def test_keyValueValidator_proper_values(value):
 
 
 @pytest.mark.parametrize("value", not_key_values)
-def test_keyValueValidator_proper_values(value):
+def test_keyValueValidator_improper_values(value):
     """Check if impproper values are validated."""
     # exception is expected
     with pytest.raises(Invalid) as excinfo:
@@ -2321,7 +2314,7 @@ def test_ruleFQDNValueValidator_proper_values(value):
 
 
 @pytest.mark.parametrize("value", improper_fqdn_values)
-def test_ruleFQDNValueValidator_proper_values(value):
+def test_ruleFQDNValueValidator_improper_values(value):
     """Check if impproper values are validated."""
     # exception is expected
     with pytest.raises(Invalid) as excinfo:
@@ -2344,7 +2337,7 @@ def test_ruleFQDNInBytesValueValidator_proper_values(value):
 
 
 @pytest.mark.parametrize("value", improper_fqdn_values)
-def test_ruleFQDNInBytesValueValidator_proper_values(value):
+def test_ruleFQDNInBytesValueValidator_improper_values(value):
     """Check if impproper values are validated."""
     # exception is expected
     with pytest.raises(Invalid) as excinfo:
@@ -2367,7 +2360,7 @@ def test_ruleIDValueValidator_proper_values(value):
 
 
 @pytest.mark.parametrize("value", improper_id_values)
-def test_ruleIDValueValidator_proper_values(value):
+def test_ruleIDValueValidator_improper_values(value):
     """Check if impproper values are validated."""
     # exception is expected
     with pytest.raises(Invalid) as excinfo:
@@ -2390,7 +2383,7 @@ def test_ruleIDInBytesValueValidator_proper_values(value):
 
 
 @pytest.mark.parametrize("value", improper_id_values)
-def test_ruleIDInBytesValueValidator_proper_values(value):
+def test_ruleIDInBytesValueValidator_improper_values(value):
     """Check if impproper values are validated."""
     # exception is expected
     with pytest.raises(Invalid) as excinfo:
