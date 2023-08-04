@@ -24,7 +24,7 @@ from voluptuous import Any
 from voluptuous import ALLOW_EXTRA
 
 from validators import uuidValidator, posIntInStringValidator, posFloatInStringValidator
-from validarors import pathToCephValidator, timestampValidatorNoZ
+from validators import pathToCephValidator, timestampValidatorNoZ
 
 from common import cli_arguments
 from common import validate_single_message, validate_multiple_messages
