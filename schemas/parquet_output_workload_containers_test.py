@@ -122,7 +122,6 @@ def test_validate_message_without_attributes(validation_schema, verbose, correct
 def test_validate_message_wrong_attributes(validation_schema, verbose, correct_message,
                                            attribute):
     """Test the validation for improper payload."""
-
     # check with different data type
     correct_message[attribute] = None
     # it should fail

@@ -1,5 +1,7 @@
 # noqa: E501
 
+"""Typical messages send via SQS."""
+
 SQS_NO_MESSAGES_RESPONSE = {
     "ResponseMetadata": {
         "RequestId": "84f68448-82ed-521d-98a2-d3110aff12a1",

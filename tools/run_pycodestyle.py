@@ -22,6 +22,7 @@ import pycodestyle
 
 
 def main():
+    """Entry point to this tool."""
     files = list(Path(".").rglob("*.py"))
     print("Files to check:")
     print("\n".join(str(f) for f in files))
