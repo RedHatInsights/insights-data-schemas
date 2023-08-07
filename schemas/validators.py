@@ -172,7 +172,7 @@ def bytesTypeValidator(value):
 
 
 def boolTypeValidator(value):
-    """Validate value for bool type"""
+    """Validate value for bool type."""
     if type(value) is not bool:
         raise Invalid("bool value expected, but got {t} type instead".format(t=type(value)))
 
