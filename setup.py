@@ -1,3 +1,4 @@
+"""Configuration used for building, distributing, and installing this module using the Distutils."""
 from setuptools import setup
 
 setup(
