@@ -12,7 +12,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-"""Validator for messages produced by Parquet factory into conditional_update_risks.parquet files."""
+"""Validator for messages produced by Parquet factory into conditional_update_risks.parquet files."""  # noqa E501
 
 
 from voluptuous import Schema
