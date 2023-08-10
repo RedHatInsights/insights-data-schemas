@@ -121,12 +121,14 @@ def test_validate_message_wrong_attributes(validation_schema, verbose, correct_m
     with pytest.raises(Invalid) as excinfo:
         validate(schema, correct_message, verbose)
 
-    if type(correct_message[attribute]) is not int:
+    # make sure the attribute type will be incorrect by changing its value
+    if not isinstance(correct_message[attribute], int):
         # check with number
         correct_message[attribute] = 123456
-    if type(correct_message[attribute]) is int:
+    elif isinstance(correct_message[attribute], int):
         # check with string
         correct_message[attribute] = "invalid"
+
     # it should fail
     with pytest.raises(Invalid) as excinfo:
         validate(schema, correct_message, verbose)
