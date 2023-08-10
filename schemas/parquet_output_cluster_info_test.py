@@ -131,12 +131,6 @@ def test_validate_message_without_attributes(validation_schema, verbose, correct
 @pytest.mark.parametrize("verbose", verbose)
 def test_validate_message_wrong_attributes(validation_schema, verbose, correct_message, attribute):
     """Test the validation for improper payload."""
-    # check with an empty bytes
-    correct_message[attribute] = b""
-    # it should fail
-    with pytest.raises(Invalid) as excinfo:
-        validate(schema, correct_message, verbose)
-
     # make sure the attribute type will be incorrect by changing its value
     if not isinstance(correct_message[attribute], int):
         # check with number
@@ -145,6 +139,12 @@ def test_validate_message_wrong_attributes(validation_schema, verbose, correct_m
         # check with string
         correct_message[attribute] = "invalid"
 
+    # it should fail
+    with pytest.raises(Invalid) as excinfo:
+        validate(schema, correct_message, verbose)
+
+    # check with an empty bytes
+    correct_message[attribute] = b""
     # it should fail
     with pytest.raises(Invalid) as excinfo:
         validate(schema, correct_message, verbose)
