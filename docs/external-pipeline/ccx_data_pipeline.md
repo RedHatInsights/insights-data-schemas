@@ -25,7 +25,7 @@ Other relevant information about `ccx_data_pipeline` can be found on address
 
 ## Required attributes
 
-Data produced by `ccx_data_pipeline` is in JSON format with the following four
+Data produced by `ccx_data_pipeline` is in JSON format with the following five
 top-level required attributes:
 
 * `OrgID` (positive integer with organization ID)
@@ -146,14 +146,16 @@ got executed and found the issue it was looking for) by the cluster, where each
 rule is represented as a dictionary containing identifying information about
 the rule itself (actually __hit__ rules are stored in `reports` attribute).
 
-`Report` node is represented as a standard JSON dictionary with following four required attributes:
+`Report` node is represented as a standard JSON dictionary with following five required attributes:
 
 * `system`: additional information about the cluster
 * `reports`: list of rules that detect any problem on given cluster
-* `skips`: list of rules that have been skipped because not all required information was available on checked cluster
 * `pass`: list of rules that passes all conditions (i.e. rules without any problem/issue detected)
 * `info`: list of rules that return info messages only 
 * `fingerprints`: ?
+
+Optionally, it can contain a `skips` attribute, which contains a list of rules that have been
+skipped because not all required information was available on checked cluster.
 
 ### Format of `system` attribute in `Report` node
 
@@ -234,7 +236,7 @@ TBD (not used in external data pipeline)
 
 ### Minimal structure of `Report` node
 
-`Report` node can contains attributes with empty values. Its minimal structure ca look like:
+`Report` node can contain attributes with empty values. Its minimal structure can look like:
 
 ```json
 {
@@ -245,12 +247,17 @@ TBD (not used in external data pipeline)
         },
         "reports": [],
         "fingerprints": [],
-        "skips": [],
         "info": [],
         "pass": []
     }
 }
 ```
+
+In the external data pipeline, if any of these attributes is missing, the report will be
+considered malformed, and will not be processed nor stored by the [db-writer](
+https://redhatinsights.github.io/insights-results-aggregator/architecture.html), the
+component responsible for storing the reports' data so that we can serve the relevant
+recommendations via REST APIs.
 
 ## Examples
 
