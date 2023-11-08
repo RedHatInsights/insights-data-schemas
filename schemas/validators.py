@@ -33,7 +33,7 @@ def intTypeValidator(value):
     """Validate value for any integer."""
     # check if the given value is an integer
     if type(value) is not int:  # noqa E721
-        raise Invalid("integer expected, but invalid value type {v}".format(v=value))
+        raise Invalid(f"integer expected, but invalid value type {value}")
 
 
 def posIntValidator(value):
@@ -41,7 +41,7 @@ def posIntValidator(value):
     # check if the given value is integer greater than zero
     intTypeValidator(value)
     if value <= 0:
-        raise Invalid("positive integer value expected, but got {v} instead".format(v=value))
+        raise Invalid(f"positive integer value expected, but got {value} instead")
 
 
 def posIntOrZeroValidator(value):
@@ -49,7 +49,7 @@ def posIntOrZeroValidator(value):
     # check if the given value is integer greater than or equal to zero
     intTypeValidator(value)
     if value < 0:
-        raise Invalid("positive integer or 0 value expected, but got {v} instead".format(v=value))
+        raise Invalid(f"positive integer or 0 value expected, but got {value} instead")
 
 
 def negIntValidator(value):
@@ -57,7 +57,7 @@ def negIntValidator(value):
     # check if the given value is integer less than zero
     intTypeValidator(value)
     if value >= 0:
-        raise Invalid("negative integer value expected, but got {v} instead".format(v=value))
+        raise Invalid(f"negative integer value expected, but got {value} instead")
 
 
 def negIntOrZeroValidator(value):
@@ -65,14 +65,14 @@ def negIntOrZeroValidator(value):
     # check if the given value is integer less than or equal zero
     intTypeValidator(value)
     if value > 0:
-        raise Invalid("negative integer or 0 value expected, but got {v} instead".format(v=value))
+        raise Invalid(f"negative integer or 0 value expected, but got {value} instead")
 
 
 def floatTypeValidator(value):
     """Validate value for any float."""
     # check if the given value is a float
     if type(value) is not float:  # noqa E721
-        raise Invalid("invalid value type {value}".format(value=value))
+        raise Invalid(f"invalid value type {value}")
 
 
 def posFloatValidator(value):
@@ -84,7 +84,7 @@ def posFloatValidator(value):
     isNotNaNValidator(value)
 
     if value <= 0.0:
-        raise Invalid("invalid value {value}, positive float expected".format(value=value))
+        raise Invalid(f"invalid value {value}, positive float expected")
 
 
 def posFloatOrZeroValidator(value):
@@ -96,7 +96,7 @@ def posFloatOrZeroValidator(value):
     isNotNaNValidator(value)
 
     if value < 0.0:
-        raise Invalid("invalid value {value}, positive float or zero expected".format(value=value))
+        raise Invalid(f"invalid value {value}, positive float or zero expected")
 
 
 def negFloatValidator(value):
@@ -108,7 +108,7 @@ def negFloatValidator(value):
     isNotNaNValidator(value)
 
     if value >= 0.0:
-        raise Invalid("invalid value {value}, negative float expected".format(value=value))
+        raise Invalid(f"invalid value {value}, negative float expected")
 
 
 def negFloatOrZeroValidator(value):
@@ -120,7 +120,7 @@ def negFloatOrZeroValidator(value):
     isNotNaNValidator(value)
 
     if value > 0.0:
-        raise Invalid("invalid value {value}, negative float or zero expected".format(value=value))
+        raise Invalid(f"invalid value {value}, negative float or zero expected")
 
 
 def isNaNValidator(value):
@@ -129,7 +129,7 @@ def isNaNValidator(value):
     floatTypeValidator(value)
 
     if not math.isnan(value):
-        raise Invalid("invalid value {value}, NaN expected".format(value=value))
+        raise Invalid(f"invalid value {value}, NaN expected")
 
 
 def isNotNaNValidator(value):
@@ -138,14 +138,14 @@ def isNotNaNValidator(value):
     floatTypeValidator(value)
 
     if math.isnan(value):
-        raise Invalid("invalid value {value}, NaN is not expected".format(value=value))
+        raise Invalid(f"invalid value {value}, NaN is not expected")
 
 
 def stringTypeValidator(value):
     """Validate value for string type."""
     # check if the given value is a string
     if type(value) is not str:  # noqa E721
-        raise Invalid("string value expected, but got {t} type instead".format(t=type(value)))
+        raise Invalid(f"string value expected, but got {type(value)} type instead")
 
 
 def emptyBytesTypeValidator(value):
@@ -168,13 +168,13 @@ def bytesTypeValidator(value):
     """Validate value for byte array type."""
     # check if the given value is a byte array
     if type(value) is not bytes:  # noqa E721
-        raise Invalid("byte array value expected, but got {t} type instead".format(t=type(value)))
+        raise Invalid(f"byte array value expected, but got {type(value)} type instead")
 
 
 def boolTypeValidator(value):
     """Validate value for bool type."""
     if type(value) is not bool:  # noqa E721
-        raise Invalid("bool value expected, but got {t} type instead".format(t=type(value)))
+        raise Invalid(f"bool value expected, but got {type(value)} type instead")
 
 
 def emptyStringValidator(value):
@@ -425,9 +425,9 @@ def hexaString32Validator(value):
     if len(value) == 0:
         raise Invalid("string is empty")
     if len(value) != 32:
-        raise Invalid("wrong number of digits: {}".format(len(value)))
+        raise Invalid(f"wrong number of digits: {len(value)}")
     if not all(c in string.hexdigits for c in value):
-        raise Invalid("non-hexadecimal char detected in: {}".format(value))
+        raise Invalid(f"non-hexadecimal char detected in: {value}")
 
 
 def timestampValidator(value):
@@ -439,7 +439,7 @@ def timestampValidator(value):
         # try to parse the input value
         datetime.datetime.strptime(value, timeformat)
     except ValueError:
-        raise Invalid("invalid datetime value {value}".format(value=value))
+        raise Invalid(f"invalid datetime value {value}")
 
 
 def timestampValidatorOffset(value):
@@ -451,7 +451,7 @@ def timestampValidatorOffset(value):
         # try to parse the input value
         datetime.datetime.strptime(value, timeformat)
     except ValueError:
-        raise Invalid("invalid datetime value {value}".format(value=value))
+        raise Invalid(f"invalid datetime value {value}")
 
 
 def timestampValidatorNoZ(value):
@@ -463,7 +463,7 @@ def timestampValidatorNoZ(value):
         # try to parse the input value
         datetime.datetime.strptime(value, timeformat)
     except ValueError:
-        raise Invalid("invalid datetime value {value}".format(value=value))
+        raise Invalid(f"invalid datetime value {value}")
 
 
 def timestampValidatorMs(value):
@@ -479,7 +479,7 @@ def timestampValidatorMs(value):
         # try to parse the input value
         datetime.datetime.strptime(value, timeformat)
     except ValueError:
-        raise Invalid("invalid datetime value {value}".format(value=value))
+        raise Invalid(f"invalid datetime value {value}")
 
 
 def keyValueValidator(value):
@@ -488,7 +488,7 @@ def keyValueValidator(value):
 
     KEY_VALUE_RE = re.compile(r"[A-Z0-9]+([_][A-Z0-9]+)+")
     if not KEY_VALUE_RE.fullmatch(value):
-        raise Invalid("wrong key value '{}'".format(value))
+        raise Invalid(f"wrong key value '{value}'")
 
 
 def ruleFQDNValidator(value):
@@ -497,7 +497,7 @@ def ruleFQDNValidator(value):
 
     FQDN_VALUE_RE = re.compile(r"([a-zA-Z0-9_]+[.])+[a-z0-9_]+")
     if not FQDN_VALUE_RE.fullmatch(value):
-        raise Invalid("wrong FQDN '{}'".format(value))
+        raise Invalid(f"wrong FQDN '{value}'")
 
 
 def ruleFQDNInBytesValidator(value):
@@ -512,7 +512,7 @@ def ruleFQDNInBytesValidator(value):
 
     FQDN_VALUE_RE = re.compile(r"([a-z0-9_]+[.])+[a-z0-9_]+")
     if not FQDN_VALUE_RE.fullmatch(value):
-        raise Invalid("wrong FQDN '{}'".format(value))
+        raise Invalid(f"wrong FQDN '{value}'")
 
 
 def ruleIDValidator(value):
@@ -521,7 +521,7 @@ def ruleIDValidator(value):
 
     FQDN_VALUE_RE = re.compile(r"[a-zA-Z0-9_]+([_][a-z0-9_]+)+\|[A-Z0-9_]+([_][A-Z0-9_]+)+")
     if not FQDN_VALUE_RE.fullmatch(value):
-        raise Invalid("wrong FQDN '{}'".format(value))
+        raise Invalid(f"wrong FQDN '{value}'")
 
 
 def ruleIDInBytesValidator(value):
@@ -536,7 +536,7 @@ def ruleIDInBytesValidator(value):
 
     FQDN_VALUE_RE = re.compile(r"[A-Za-z0-9_]+([_][A-Za-z0-9_]+)+\|[A-Z0-9_]+([_][A-Z0-9_]+)+")
     if not FQDN_VALUE_RE.fullmatch(value):
-        raise Invalid("wrong FQDN '{}'".format(value))
+        raise Invalid(f"wrong FQDN '{value}'")
 
 
 def urlToAWSValidator(value):
@@ -603,7 +603,7 @@ def md5Validator(value):
 
     # MD5 hash has 32 hexadecimal characters
     if not re.fullmatch(r"^[a-f0-9]{32}$", value):
-        raise Invalid("the value '{value}' does not seem to be MD5 hash".format(value=value))
+        raise Invalid(f"the value '{value}' does not seem to be MD5 hash")
 
 
 def sha1Validator(value):
@@ -613,7 +613,7 @@ def sha1Validator(value):
 
     # SHA-1 hash has 40 hexadecimal characters
     if not re.fullmatch(r"^[a-f0-9]{40}$", value):
-        raise Invalid("the value '{value}' does not seem to be SHA1 hash".format(value=value))
+        raise Invalid(f"the value '{value}' does not seem to be SHA1 hash")
 
 
 def sha224Validator(value):
@@ -623,7 +623,7 @@ def sha224Validator(value):
 
     # SHA-224 hash has 56 hexadecimal characters
     if not re.fullmatch(r"^[a-fA-F0-9]{56}$", value):
-        raise Invalid("the value '{value}' does not seem to be SHA224 hash".format(value=value))
+        raise Invalid(f"the value '{value}' does not seem to be SHA224 hash")
 
 
 def sha256Validator(value):
@@ -633,7 +633,7 @@ def sha256Validator(value):
 
     # SHA-256 hash has 64 hexadecimal characters
     if not re.fullmatch(r"^[a-fA-F0-9]{64}$", value):
-        raise Invalid("the value '{value}' does not seem to be SHA256 hash".format(value=value))
+        raise Invalid(f"the value '{value}' does not seem to be SHA256 hash")
 
 
 def sha384Validator(value):
@@ -643,7 +643,7 @@ def sha384Validator(value):
 
     # SHA-384 hash has 64 hexadecimal characters
     if not re.fullmatch(r"^[a-fA-F0-9]{96}$", value):
-        raise Invalid("the value '{value}' does not seem to be SHA384 hash".format(value=value))
+        raise Invalid(f"the value '{value}' does not seem to be SHA384 hash")
 
 
 def sha512Validator(value):
@@ -653,7 +653,7 @@ def sha512Validator(value):
 
     # SHA-512 hash has 128 hexadecimal characters
     if not re.fullmatch(r"^[a-fA-F0-9]{128}$", value):
-        raise Invalid("the value '{value}' does not seem to be SHA512 hash".format(value=value))
+        raise Invalid(f"the value '{value}' does not seem to be SHA512 hash")
 
 
 def sha3_224Validator(value):
@@ -663,7 +663,7 @@ def sha3_224Validator(value):
 
     # SHA-3 224 hash has 56 hexadecimal characters
     if not re.fullmatch(r"^[a-fA-F0-9]{56}$", value):
-        raise Invalid("the value '{value}' does not seem to be SHA-3 224 hash".format(value=value))
+        raise Invalid(f"the value '{value}' does not seem to be SHA-3 224 hash")
 
 
 def sha3_256Validator(value):
@@ -673,7 +673,7 @@ def sha3_256Validator(value):
 
     # SHA-3 256 hash has 64 hexadecimal characters
     if not re.fullmatch(r"^[a-fA-F0-9]{64}$", value):
-        raise Invalid("the value '{value}' does not seem to be SHA-3 256 hash".format(value=value))
+        raise Invalid(f"the value '{value}' does not seem to be SHA-3 256 hash")
 
 
 def sha3_384Validator(value):
@@ -683,7 +683,7 @@ def sha3_384Validator(value):
 
     # SHA-3 384 hash has 64 hexadecimal characters
     if not re.fullmatch(r"^[a-fA-F0-9]{96}$", value):
-        raise Invalid("the value '{value}' does not seem to be SHA-3 384 hash".format(value=value))
+        raise Invalid(f"the value '{value}' does not seem to be SHA-3 384 hash")
 
 
 def sha3_512Validator(value):
@@ -693,7 +693,7 @@ def sha3_512Validator(value):
 
     # SHA-3 512 hash has 128 hexadecimal characters
     if not re.fullmatch(r"^[a-fA-F0-9]{128}$", value):
-        raise Invalid("the value '{value}' does not seem to be SHA-3 512 hash".format(value=value))
+        raise Invalid(f"the value '{value}' does not seem to be SHA-3 512 hash")
 
 
 def shake128Validator(value):
@@ -703,7 +703,7 @@ def shake128Validator(value):
 
     # SHAKE128 256-bit hash has 64 hexadecimal characters
     if not re.fullmatch(r"^[a-fA-F0-9]{64}$", value):
-        raise Invalid("the value '{v}' does not seem to be SHAKE128 256-bit hash".format(v=value))
+        raise Invalid(f"the value '{value}' does not seem to be SHAKE128 256-bit hash")
 
 
 def shake256Validator(value):
@@ -713,7 +713,7 @@ def shake256Validator(value):
 
     # SHAKE256 256-bit hash has 64 hexadecimal characters
     if not re.fullmatch(r"^[a-fA-F0-9]{64}$", value):
-        raise Invalid("the value '{v}' does not seem to be SHAKE256 256-bit hash".format(v=value))
+        raise Invalid(f"the value '{value}' does not seem to be SHAKE256 256-bit hash")
 
 
 def BLAKE2Validator(value):
@@ -723,7 +723,7 @@ def BLAKE2Validator(value):
 
     # BLAKE2 256-bit hash has 128 hexadecimal characters
     if not re.fullmatch(r"^[a-fA-F0-9]{128}$", value):
-        raise Invalid("the value '{v}' does not seem to be BLAKE2 256-bit hash".format(v=value))
+        raise Invalid(f"the value '{value}' does not seem to be BLAKE2 256-bit hash")
 
 
 def b64IdentityValidator(identitySchema, value):
@@ -762,7 +762,7 @@ def versionInBytesValidator(value):
 
     VERSION_RE = re.compile(r"[0-9]+\.[0-9]+\.[0-9]+.*")
     if not VERSION_RE.fullmatch(value):
-        raise Invalid("wrong version value '{}'".format(value))
+        raise Invalid(f"wrong version value '{value}'")
 
 
 def pathToCephValidator(value):
@@ -779,7 +779,7 @@ def pathToCephValidator(value):
 
     PATH_RE = re.compile(PREFIX+SELECTOR+UUID+DATETIME+TARBALL)
     if not PATH_RE.fullmatch(value):
-        raise Invalid("wrong path value '{}'".format(value))
+        raise Invalid(f"wrong path value '{value}'")
 
 
 def pathToCephInBytesValidator(value):
