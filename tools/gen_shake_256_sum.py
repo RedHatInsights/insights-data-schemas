@@ -31,4 +31,4 @@ with open("input.txt", "r") as fin:
         input_string = input_string.replace("\t", "<Tab>")
 
         # generate output
-        print('    "{}",  # "{}"'.format(shake_256_sum.hexdigest(32), input_string))
+        print(f'    "{shake_256_sum.hexdigest(32)}",  # "{input_string}"')
