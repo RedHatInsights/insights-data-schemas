@@ -121,7 +121,7 @@ def validate_multiple_messages(schema, input_file, verbose):
                     print("Other problem: " + str(e))
                     error += 1
 
-    except IOError as e:
+    except OSError as e:
         print("File-related problem: " + str(e))
         error += 1
 
@@ -162,7 +162,7 @@ def validate_parquet_file(schema, input_file, verbose):
                     print("Other problem: " + str(e))
                     error += 1
 
-    except IOError as e:
+    except OSError as e:
         print("File-related problem: " + str(e))
         error += 1
 
