@@ -31,4 +31,4 @@ with open("input.txt", "r") as fin:
         input_string = input_string.replace("\t", "<Tab>")
 
         # generate output
-        print('    "{}",  # "{}"'.format(blake_2.hexdigest(), input_string))
+        print(f'    "{blake_2.hexdigest()}",  # "{input_string}"')
