@@ -29,4 +29,4 @@ for i in range(30):
     dt_as_string = datetime.datetime.strftime(dt, timeformat)
 
     # generate output
-    print('    "{}",  # UNIX time: {}'.format(dt_as_string, unix_time))
+    print(f'    "{dt_as_string}",  # UNIX time: {unix_time}')
