@@ -92,7 +92,7 @@ def validate_single_message(schema, input_file, verbose):
 def try_to_validate_message(schema, line, processed, verbose):
     """Try to validate one message represented by string."""
     if verbose:
-        print("Reading message #{}".format(processed))
+        print(f"Reading message #{processed}")
     # load the payload from string
     payload = json.loads(line)
     # and try to validate it
@@ -134,7 +134,7 @@ def validate_multiple_messages(schema, input_file, verbose):
 def try_to_validate_message_from_parquet(schema, row, processed, verbose):
     """Try to validate one message read from Parquet file."""
     if verbose:
-        print("Reading message #{}".format(processed))
+        print(f"Reading message #{processed}")
     # try to validate it
     validate(schema, row, verbose)
 
@@ -203,8 +203,8 @@ def print_report(report, nocolors):
 
     if report["error"] == 0:
         if report["processed"] == report["valid"]:
-            print("{}[OK]{}: all messages have proper format".format(green_background, no_color))
+            print(f"{green_background}[OK]{no_color}: all messages have proper format")
         else:
-            print("{}[WARN]{}: invalid messages detected".format(magenta_background, no_color))
+            print(f"{magenta_background}[WARN]{no_color}: invalid messages detected")
     else:
-        print("{}[FAIL]{}: invalid JSON(s) detected".format(red_background, no_color))
+        print(f"{red_background}[FAIL]{no_color}: invalid JSON(s) detected")

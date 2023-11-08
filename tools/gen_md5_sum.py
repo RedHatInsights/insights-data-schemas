@@ -31,4 +31,4 @@ with open("input.txt", "r") as fin:
         input_string = input_string.replace("\t", "<Tab>")
 
         # generate output
-        print('    "{}",  # "{}"'.format(md5.hexdigest(), input_string))
+        print(f'    "{md5.hexdigest()}",  # "{input_string}"')

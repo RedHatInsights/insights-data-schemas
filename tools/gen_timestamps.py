@@ -27,4 +27,4 @@ for i in range(30):
     dt_as_string = str(dt).replace(" ", "T")+"Z"
 
     # generate output
-    print('    "{}",  # UNIX time: {}'.format(dt_as_string, unix_time))
+    print(f'    "{dt_as_string}",  # UNIX time: {unix_time}')

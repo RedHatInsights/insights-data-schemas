@@ -23,4 +23,4 @@ for i in range(20):
     generated_id = uuid.uuid4()
 
     # generate output
-    print('    "{}",'.format(generated_id))
+    print(f'    "{generated_id}",')

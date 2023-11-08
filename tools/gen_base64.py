@@ -30,4 +30,4 @@ with open("input.txt", "r") as fin:
         input_string = input_string.replace("\t", "<Tab>")
 
         # generate output
-        print('    "{}",  # "{}"'.format(encoded, input_string))
+        print(f'    "{encoded}",  # "{input_string}"')
