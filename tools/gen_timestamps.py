@@ -19,7 +19,7 @@
 import datetime
 import random
 
-for i in range(30):
+for _i in range(30):
     # unix time value
     unix_time = random.randint(0, 2**32-1)
 
