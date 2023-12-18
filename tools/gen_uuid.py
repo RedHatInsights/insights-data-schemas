@@ -18,7 +18,7 @@
 
 import uuid
 
-for i in range(20):
+for _i in range(20):
     # truly random UUID
     generated_id = uuid.uuid4()
 

@@ -21,7 +21,7 @@ import random
 
 timeformat = '%Y-%m-%dT%H:%M:%S.%f'
 
-for i in range(30):
+for _i in range(30):
     # unix time value
     unix_time = random.randint(0, 2**32-1)
 
