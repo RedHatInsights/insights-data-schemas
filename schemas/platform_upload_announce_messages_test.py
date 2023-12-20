@@ -17,13 +17,12 @@
 
 """Unit tests for platform.upload.announce_messages module."""
 
-import pytest
 import sys
 
-from voluptuous import Invalid
-
-from platform_upload_announce_messages import schema, main
+import pytest
 from common import validate
+from platform_upload_announce_messages import main, schema
+from voluptuous import Invalid
 
 
 @pytest.fixture

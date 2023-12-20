@@ -18,18 +18,19 @@
 """Validator for messages stored in platform.upload.announce topic."""
 
 
-from voluptuous import Schema
-from voluptuous import Required
-from voluptuous import ALLOW_EXTRA
-
-from validators import uuidValidator, intInStringValidator, notEmptyStringValidator
-from validators import posIntValidator, timestampValidator, timestampValidatorMs
-from validators import hexaString32Validator, urlToAWSValidator, b64IdentityValidator
-
-from common import cli_arguments
-from common import validate_single_message, validate_multiple_messages
-from common import print_report
-
+from common import cli_arguments, print_report, validate_multiple_messages, validate_single_message
+from validators import (
+    b64IdentityValidator,
+    hexaString32Validator,
+    intInStringValidator,
+    notEmptyStringValidator,
+    posIntValidator,
+    timestampValidator,
+    timestampValidatorMs,
+    urlToAWSValidator,
+    uuidValidator,
+)
+from voluptuous import ALLOW_EXTRA, Required, Schema
 
 identitySchema = Schema(
         {

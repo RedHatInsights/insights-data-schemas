@@ -14,18 +14,17 @@
 
 """Validator for messages produced by Parquet factory into alerts.parquet files."""
 
-from voluptuous import Schema
-from voluptuous import Required
-
 import datetime
 
-from validators import uuidInBytesValidator, notEmptyBytesTypeValidator, posIntOrZeroValidator
-from validators import bytesTypeValidator, pathToCephInBytesValidator
-
-from common import cli_arguments
-from common import validate_parquet_file
-from common import print_report
-
+from common import cli_arguments, print_report, validate_parquet_file
+from validators import (
+    bytesTypeValidator,
+    notEmptyBytesTypeValidator,
+    pathToCephInBytesValidator,
+    posIntOrZeroValidator,
+    uuidInBytesValidator,
+)
+from voluptuous import Required, Schema
 
 schema = Schema({
     Required("cluster_id"): uuidInBytesValidator,

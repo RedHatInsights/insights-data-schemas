@@ -17,17 +17,16 @@
 
 """Validator for messages stored in ccx.ocp.results topic."""
 
-from voluptuous import Schema
-from voluptuous import Required, Optional
-from voluptuous import Any
-from voluptuous import ALLOW_EXTRA
-
-from validators import keyValueValidator, uuidValidator, posIntValidator, timestampValidatorMs
-from validators import ruleIDValidator, ruleFQDNValidator
-
-from common import cli_arguments
-from common import validate_single_message, validate_multiple_messages
-from common import print_report
+from common import cli_arguments, print_report, validate_multiple_messages, validate_single_message
+from validators import (
+    keyValueValidator,
+    posIntValidator,
+    ruleFQDNValidator,
+    ruleIDValidator,
+    timestampValidatorMs,
+    uuidValidator,
+)
+from voluptuous import ALLOW_EXTRA, Any, Optional, Required, Schema
 
 # Schema for report "details" node
 reportDetailsSchema = Schema(

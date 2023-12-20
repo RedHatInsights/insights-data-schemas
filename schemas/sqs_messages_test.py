@@ -17,13 +17,12 @@
 
 """Unit tests for sqs_messages module."""
 
-import pytest
 import sys
 
-from voluptuous import Invalid
-
-from sqs_messages import schema, main
+import pytest
 from common import validate
+from sqs_messages import main, schema
+from voluptuous import Invalid
 
 
 @pytest.fixture

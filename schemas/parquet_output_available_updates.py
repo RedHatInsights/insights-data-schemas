@@ -15,15 +15,11 @@
 """Validator for messages produced by Parquet factory into available_updates.parquet files."""
 
 
-from voluptuous import Schema
-from voluptuous import Required
-
 import datetime
-from validators import uuidInBytesValidator, versionInBytesValidator, pathToCephInBytesValidator
 
-from common import cli_arguments
-from common import validate_parquet_file
-from common import print_report
+from common import cli_arguments, print_report, validate_parquet_file
+from validators import pathToCephInBytesValidator, uuidInBytesValidator, versionInBytesValidator
+from voluptuous import Required, Schema
 
 # the whole schema for messages produced by Parquet factory into alerts.parquet files."""
 schema = Schema({
