@@ -144,7 +144,7 @@ def test_try_to_validate_message_wrong_data():
     payload = "{\"foo\":\"bar\"}"
 
     # it should fail
-    with pytest.raises(Invalid) as excinfo:
+    with pytest.raises(Invalid):
         try_to_validate_message(schema, payload, 1, True)
 
 
@@ -154,7 +154,7 @@ def test_try_to_validate_message_invalid_data():
     payload = "{xyzzy}"
 
     # it should fail
-    with pytest.raises(Exception) as excinfo:
+    with pytest.raises(Exception):
         try_to_validate_message(schema, payload, 1, True)
 
 
@@ -173,7 +173,7 @@ def test_try_to_validate_message_from_parquet_wrong_data():
     payload = {"foo": "bar"}
 
     # it should fail
-    with pytest.raises(Invalid) as excinfo:
+    with pytest.raises(Invalid):
         try_to_validate_message_from_parquet(schema, payload, 1, True)
 
 

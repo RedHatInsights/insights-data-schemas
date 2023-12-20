@@ -142,7 +142,7 @@ def test_main_input():
 def test_validate_no_payload(validation_schema, verbose):
     """Test the validation for improper (no) payload."""
     # it should fail
-    with pytest.raises(ValueError) as excinfo:
+    with pytest.raises(ValueError):
         validate(schema, None, verbose)
 
 
@@ -160,7 +160,7 @@ def test_validate_message_without_attributes(validation_schema, verbose, correct
     """Test the validation for improper payload."""
     del correct_message[attribute]
     # it should fail
-    with pytest.raises(Invalid) as excinfo:
+    with pytest.raises(Invalid):
         validate(schema, correct_message, verbose)
 
 
@@ -170,19 +170,19 @@ def test_validate_message_wrong_attributes(validation_schema, verbose, correct_m
     """Test the validation for improper payload."""
     correct_message[attribute] = b"foobar"
     # it should fail
-    with pytest.raises(Invalid) as excinfo:
+    with pytest.raises(Invalid):
         validate(schema, correct_message, verbose)
 
     # check with number
     correct_message[attribute] = None
     # it should fail
-    with pytest.raises(Invalid) as excinfo:
+    with pytest.raises(Invalid):
         validate(schema, correct_message, verbose)
 
     # check with different data type
     correct_message[attribute] = False
     # it should fail
-    with pytest.raises(Invalid) as excinfo:
+    with pytest.raises(Invalid):
         validate(schema, correct_message, verbose)
 
 
@@ -193,19 +193,19 @@ def test_validate_message_wrong_report_attributes(validation_schema, verbose, co
     """Test the validation for improper payload."""
     correct_message["report"][attribute] = b"foobar"
     # it should fail
-    with pytest.raises(Invalid) as excinfo:
+    with pytest.raises(Invalid):
         validate(schema, correct_message, verbose)
 
     # check with number
     correct_message["report"][attribute] = -123456
     # it should fail
-    with pytest.raises(Invalid) as excinfo:
+    with pytest.raises(Invalid):
         validate(schema, correct_message, verbose)
 
     # check with different data type
     correct_message["report"][attribute] = None
     # it should fail
-    with pytest.raises(Invalid) as excinfo:
+    with pytest.raises(Invalid):
         validate(schema, correct_message, verbose)
 
 
@@ -216,5 +216,5 @@ def test_validate_message_without_report_attributes(validation_schema, verbose, 
     """Test the validation for improper payload."""
     del correct_message["report"][attribute]
     # it should fail
-    with pytest.raises(Invalid) as excinfo:
+    with pytest.raises(Invalid):
         validate(schema, correct_message, verbose)

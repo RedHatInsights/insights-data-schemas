@@ -200,7 +200,7 @@ def intInStringValidator(value):
     stringTypeValidator(value)
 
     # try to parse the string
-    x = int(value)
+    int(value)
 
 
 def posIntInStringValidator(value):
@@ -287,7 +287,7 @@ def intInBytesValidator(value):
     stringTypeValidator(value)
 
     # try to parse the string
-    x = int(value)
+    int(value)
 
 
 def posIntInBytesValidator(value):
