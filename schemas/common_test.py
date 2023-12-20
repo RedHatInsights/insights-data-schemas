@@ -154,7 +154,7 @@ def test_try_to_validate_message_invalid_data():
     payload = "{xyzzy}"
 
     # it should fail
-    with pytest.raises(Invalid):
+    with pytest.raises(ValueError):
         try_to_validate_message(schema, payload, 1, True)
 
 

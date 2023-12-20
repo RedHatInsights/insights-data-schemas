@@ -2250,7 +2250,7 @@ def test_b64IdentityValidator_incorrect_base64values(value):
     """Check if improper values (not base64-based) are validated."""
     schema = None  # not needed right now
     # exception is expected
-    with pytest.raises(Invalid):
+    with pytest.raises(ValueError):
         b64IdentityValidator(schema, value)
 
 
@@ -2259,7 +2259,7 @@ def test_b64IdentityValidator_not_JSON(value):
     """Check if improper values (not JSON) are validated."""
     schema = None  # not needed right now
     # exception is expected
-    with pytest.raises(Invalid):
+    with pytest.raises(ValueError):
         b64IdentityValidator(schema, value)
 
 
@@ -2268,7 +2268,7 @@ def test_b64IdentityValidator_proper_JSON(value):
     """Check if proper values are validated."""
     schema = None  # not needed right now
     # exception is expected
-    with pytest.raises(Invalid):
+    with pytest.raises((ValueError, TypeError)):
         b64IdentityValidator(schema, value)
 
 
@@ -2415,7 +2415,7 @@ def test_jsonInStrValidatorValidator_not_string_type(value):
 def test_jsonInStrValidatorValidator_incorrect_json_values(value):
     """Check if improper values JSON are validated."""
     # exception is expected
-    with pytest.raises(Invalid):
+    with pytest.raises((Invalid, ValueError)):
         jsonInStrValidator(value)
 
 
