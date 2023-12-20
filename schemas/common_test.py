@@ -141,7 +141,7 @@ def test_try_to_validate_message_empty_data():
 def test_try_to_validate_message_wrong_data():
     """Test the function try_to_validate_message."""
     schema = Schema({})
-    payload = "{\"foo\":\"bar\"}"
+    payload = '{"foo":"bar"}'
 
     # it should fail
     with pytest.raises(Invalid):

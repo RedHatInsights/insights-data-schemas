@@ -53,7 +53,7 @@ def correct_message():
         "namespace": b"openshift-monitoring",
         "job": b"",
         "labels":
-        b"{\"prometheus\":\"openshift-monitoring/k8s\",\"prometheus_replica\":\"prometheus-0\"}",
+        b'{"prometheus":"openshift-monitoring/k8s","prometheus_replica":"prometheus-0"}',
         "archive_path":
         b"archives/compressed/00/00000000-0000-0000-0000-000000000000/202102/08/002219.tar.gz"
     }

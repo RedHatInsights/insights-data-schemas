@@ -19,7 +19,7 @@
 import datetime
 import random
 
-timeformat = '%Y-%m-%dT%H:%M:%S.%f'
+timeformat = "%Y-%m-%dT%H:%M:%S.%f"
 
 for _i in range(30):
     # unix time value
