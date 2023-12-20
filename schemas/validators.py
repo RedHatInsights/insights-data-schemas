@@ -434,7 +434,7 @@ def timestampValidator(value):
     """Validate value for timestamps."""
     stringTypeValidator(value)
 
-    timeformat = '%Y-%m-%dT%H:%M:%SZ'
+    timeformat = "%Y-%m-%dT%H:%M:%SZ"
     try:
         # try to parse the input value
         datetime.datetime.strptime(value, timeformat)
@@ -446,7 +446,7 @@ def timestampValidatorOffset(value):
     """Validate value for timestamps with specified offsets."""
     stringTypeValidator(value)
 
-    timeformat = '%Y-%m-%dT%H:%M:%S.%f+00:00'
+    timeformat = "%Y-%m-%dT%H:%M:%S.%f+00:00"
     try:
         # try to parse the input value
         datetime.datetime.strptime(value, timeformat)
@@ -458,7 +458,7 @@ def timestampValidatorNoZ(value):
     """Validate value for timestamps without zone info appended."""
     stringTypeValidator(value)
 
-    timeformat = '%Y-%m-%dT%H:%M:%S'
+    timeformat = "%Y-%m-%dT%H:%M:%S"
     try:
         # try to parse the input value
         datetime.datetime.strptime(value, timeformat)
@@ -470,7 +470,7 @@ def timestampValidatorMs(value):
     """Validate value for timestamps without ms part, but with TZ info."""
     stringTypeValidator(value)
 
-    timeformat = '%Y-%m-%dT%H:%M:%S.%f'
+    timeformat = "%Y-%m-%dT%H:%M:%S.%f"
     try:
         # the following timestamp can't be parsed directly by Python
         # "2020-12-09T16:17:42.822020204Z"
@@ -732,7 +732,7 @@ def b64IdentityValidator(identitySchema, value):
     stringTypeValidator(value)
 
     # decode from BASE64 encoding
-    value = base64.b64decode(value).decode('utf-8')
+    value = base64.b64decode(value).decode("utf-8")
 
     # parse JSON
     identity = json.loads(value)

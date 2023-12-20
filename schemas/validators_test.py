@@ -919,7 +919,7 @@ base64_values_json = (
 # proper JSON values
 json_values = (
         "{}",
-        "{\"a\":\"b\"}"
+        '{"a":"b"}'
         )
 
 # not a proper JSON values
