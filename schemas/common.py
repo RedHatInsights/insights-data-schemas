@@ -16,11 +16,11 @@
 
 """Common function used by validators.upload.buckit topic."""
 
-from os import popen
 import json
-import parquet
 from argparse import ArgumentParser
+from os import popen
 
+import parquet
 from voluptuous import Invalid
 
 

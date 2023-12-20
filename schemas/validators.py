@@ -18,12 +18,12 @@
 """Set of custom validators (predicates) used in data schemes."""
 
 
-import datetime
-import string
-import re
-import json
 import base64
+import datetime
+import json
 import math
+import re
+import string
 from uuid import UUID
 
 from voluptuous import Invalid

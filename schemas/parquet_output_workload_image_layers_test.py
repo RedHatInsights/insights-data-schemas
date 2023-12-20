@@ -19,10 +19,9 @@ import sys
 from datetime import datetime
 
 import pytest
-from voluptuous import Invalid
-
-from parquet_output_workload_image_layers import schema, main
 from common import validate
+from parquet_output_workload_image_layers import main, schema
+from voluptuous import Invalid
 
 
 @pytest.fixture

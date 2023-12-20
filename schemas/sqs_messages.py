@@ -18,15 +18,16 @@
 """Validator for messages consumed from SQS."""
 
 
-from voluptuous import Schema
-from voluptuous import Required, Optional
-
-from validators import uuidValidator, jsonInStrValidator, md5Validator
-from validators import posIntValidator, posIntOrZeroValidator, posIntInStringValidator
-
-from common import cli_arguments
-from common import validate_single_message, validate_multiple_messages
-from common import print_report
+from common import cli_arguments, print_report, validate_multiple_messages, validate_single_message
+from validators import (
+    jsonInStrValidator,
+    md5Validator,
+    posIntInStringValidator,
+    posIntOrZeroValidator,
+    posIntValidator,
+    uuidValidator,
+)
+from voluptuous import Optional, Required, Schema
 
 # Schema for HTTP headers data structure
 httpHeadersSchema = Schema(

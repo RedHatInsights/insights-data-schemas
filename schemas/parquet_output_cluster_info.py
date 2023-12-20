@@ -18,19 +18,17 @@
 """Validator for messages produced by Parquet factory into cluster_info.parquet files."""
 
 
-from voluptuous import Schema
-from voluptuous import Required
-from voluptuous import Any
-
 import datetime
 
-from validators import posIntOrZeroValidator, pathToCephInBytesValidator
-from validators import uuidInBytesValidator, versionInBytesValidator, notEmptyBytesTypeValidator
-
-from common import cli_arguments
-from common import validate_parquet_file
-from common import print_report
-
+from common import cli_arguments, print_report, validate_parquet_file
+from validators import (
+    notEmptyBytesTypeValidator,
+    pathToCephInBytesValidator,
+    posIntOrZeroValidator,
+    uuidInBytesValidator,
+    versionInBytesValidator,
+)
+from voluptuous import Any, Required, Schema
 
 # column with information about platform
 platformSchema = Schema(

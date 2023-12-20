@@ -17,22 +17,22 @@
 
 """Unit tests for common module."""
 
-import pytest
 import contextlib
 import io
-
 from os import path
 
-from voluptuous import Schema
-from voluptuous import Invalid
-
-from common import read_control_code, load_json_from_file
-from common import validate_single_message
-from common import try_to_validate_message
-from common import try_to_validate_message_from_parquet
-from common import validate_multiple_messages
-from common import validate_parquet_file
-from common import print_report
+import pytest
+from common import (
+    load_json_from_file,
+    print_report,
+    read_control_code,
+    try_to_validate_message,
+    try_to_validate_message_from_parquet,
+    validate_multiple_messages,
+    validate_parquet_file,
+    validate_single_message,
+)
+from voluptuous import Invalid, Schema
 
 
 def test_read_control_code():

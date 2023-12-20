@@ -17,15 +17,13 @@
 
 """Unit tests for parquet_output_cluster_info module."""
 
-import pytest
 import sys
-
 from datetime import datetime
 
-from voluptuous import Invalid
-
-from parquet_output_operator_condition import schema, main
+import pytest
 from common import validate
+from parquet_output_operator_condition import main, schema
+from voluptuous import Invalid
 
 
 @pytest.fixture

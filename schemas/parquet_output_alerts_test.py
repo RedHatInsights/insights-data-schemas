@@ -14,13 +14,12 @@
 
 """Unit tests for ccx_ocp_results module."""
 
-import pytest
 import sys
 
-from voluptuous import Invalid
-
-from parquet_output_alerts import schema, main
+import pytest
 from common import validate
+from parquet_output_alerts import main, schema
+from voluptuous import Invalid
 
 
 @pytest.fixture

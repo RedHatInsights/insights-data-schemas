@@ -18,18 +18,17 @@
 """Validator for messages consumed from ccx-XXX-insights-operator-archive-rules-results topic."""
 
 
-from voluptuous import Schema
-from voluptuous import Required, Optional
-from voluptuous import Any
-from voluptuous import ALLOW_EXTRA
-
-from validators import uuidValidator, posIntInStringValidator
-from validators import keyValueValidator, ruleIDValidator, ruleFQDNValidator
-from validators import pathToCephValidator, timestampValidatorOffset
-
-from common import cli_arguments
-from common import validate_single_message, validate_multiple_messages
-from common import print_report
+from common import cli_arguments, print_report, validate_multiple_messages, validate_single_message
+from validators import (
+    keyValueValidator,
+    pathToCephValidator,
+    posIntInStringValidator,
+    ruleFQDNValidator,
+    ruleIDValidator,
+    timestampValidatorOffset,
+    uuidValidator,
+)
+from voluptuous import ALLOW_EXTRA, Any, Optional, Required, Schema
 
 # Schema for metadata sub-node
 metadataSchema = Schema({

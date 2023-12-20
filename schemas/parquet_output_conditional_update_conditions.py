@@ -15,18 +15,16 @@
 """Validator for messages produced by Parquet factory into available_updates.parquet files."""
 
 
-from voluptuous import Schema
-from voluptuous import Required
-from voluptuous import Any
-
 import datetime
 
-from validators import uuidInBytesValidator, versionInBytesValidator, notEmptyBytesTypeValidator
-from validators import pathToCephInBytesValidator
-
-from common import cli_arguments
-from common import validate_parquet_file
-from common import print_report
+from common import cli_arguments, print_report, validate_parquet_file
+from validators import (
+    notEmptyBytesTypeValidator,
+    pathToCephInBytesValidator,
+    uuidInBytesValidator,
+    versionInBytesValidator,
+)
+from voluptuous import Any, Required, Schema
 
 # available values of the recommended column
 recommendedSchema = Schema(
