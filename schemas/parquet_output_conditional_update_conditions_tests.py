@@ -84,7 +84,7 @@ def test_main_input():
 def test_validate_no_payload(validation_schema, verbose):
     """Test the validation for improper (no) payload."""
     # it should fail
-    with pytest.raises(ValueError) as excinfo:
+    with pytest.raises(ValueError):
         validate(schema, None, verbose)
 
 
@@ -100,7 +100,7 @@ def test_validate_message_without_cluster_id_attribute(validation_schema, verbos
     """Test the validation for improper payload."""
     del correct_message["cluster_id"]
     # it should fail
-    with pytest.raises(Invalid) as excinfo:
+    with pytest.raises(Invalid):
         validate(schema, correct_message, verbose)
 
 
@@ -111,7 +111,7 @@ def test_validate_message_without_attributes(validation_schema, verbose, correct
     """Test the validation for improper payload."""
     del correct_message[attribute]
     # it should fail
-    with pytest.raises(Invalid) as excinfo:
+    with pytest.raises(Invalid):
         validate(schema, correct_message, verbose)
 
 
@@ -128,17 +128,17 @@ def test_validate_message_wrong_attributes(validation_schema, verbose, correct_m
         correct_message[attribute] = "invalid"
 
     # it should fail
-    with pytest.raises(Invalid) as excinfo:
+    with pytest.raises(Invalid):
         validate(schema, correct_message, verbose)
 
     # check with an empty bytes
     correct_message[attribute] = b""
     # it should fail
-    with pytest.raises(Invalid) as excinfo:
+    with pytest.raises(Invalid):
         validate(schema, correct_message, verbose)
 
     # check with different data type
     correct_message[attribute] = []
     # it should fail
-    with pytest.raises(Invalid) as excinfo:
+    with pytest.raises(Invalid):
         validate(schema, correct_message, verbose)

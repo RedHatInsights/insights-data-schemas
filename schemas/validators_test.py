@@ -1021,7 +1021,7 @@ def test_intTypeValidator_incorrect_values(value):
 def test_posIntValidator_correct_values(value):
     """Check if inproper positive integer values are validated."""
     # exception is expected
-    with pytest.raises(Invalid) as excinfo:
+    with pytest.raises(Invalid):
         intTypeValidator(value)
 
 
@@ -1029,7 +1029,7 @@ def test_posIntValidator_correct_values(value):
 def test_posIntValidator_wrong_values(value):
     """Check if improper positive integer values are not validated."""
     # exception is expected
-    with pytest.raises(Invalid) as excinfo:
+    with pytest.raises(Invalid):
         posIntValidator(value)
 
 
@@ -1037,7 +1037,7 @@ def test_posIntValidator_wrong_values(value):
 def test_posIntValidator_wrong_types(value):
     """Check if improper types are not validated."""
     # exception is expected
-    with pytest.raises(Invalid) as excinfo:
+    with pytest.raises(Invalid):
         posIntValidator(value)
 
 
@@ -1052,7 +1052,7 @@ def test_posIntOrZeroValidator_correct_values(value):
 def test_posIntOrZeroValidator_wrong_values(value):
     """Check if improper positive integer values are not validated."""
     # exception is expected
-    with pytest.raises(Invalid) as excinfo:
+    with pytest.raises(Invalid):
         posIntOrZeroValidator(value)
 
 
@@ -1060,7 +1060,7 @@ def test_posIntOrZeroValidator_wrong_values(value):
 def test_posIntOrZeroValidator_wrong_types(value):
     """Check if improper types are not validated."""
     # exception is expected
-    with pytest.raises(Invalid) as excinfo:
+    with pytest.raises(Invalid):
         posIntOrZeroValidator(value)
 
 
@@ -1075,7 +1075,7 @@ def test_negIntValidator_correct_values(value):
 def test_negIntValidator_wrong_values(value):
     """Check if improper negative integer values are not validated."""
     # exception is expected
-    with pytest.raises(Invalid) as excinfo:
+    with pytest.raises(Invalid):
         negIntValidator(value)
 
 
@@ -1083,7 +1083,7 @@ def test_negIntValidator_wrong_values(value):
 def test_negIntValidator_wrong_types(value):
     """Check if improper types are not validated."""
     # exception is expected
-    with pytest.raises(Invalid) as excinfo:
+    with pytest.raises(Invalid):
         negIntValidator(value)
 
 
@@ -1098,7 +1098,7 @@ def test_negIntOrZeroValidator_correct_values(value):
 def test_negIntOrZeroValidator_wrong_values(value):
     """Check if improper negative integer values are not validated."""
     # exception is expected
-    with pytest.raises(Invalid) as excinfo:
+    with pytest.raises(Invalid):
         negIntOrZeroValidator(value)
 
 
@@ -1106,7 +1106,7 @@ def test_negIntOrZeroValidator_wrong_values(value):
 def test_negIntOrZeroValidator_wrong_types(value):
     """Check if improper types are not validated."""
     # exception is expected
-    with pytest.raises(Invalid) as excinfo:
+    with pytest.raises(Invalid):
         negIntOrZeroValidator(value)
 
 
@@ -1121,7 +1121,7 @@ def test_floatTypeValidator_correct_values(value):
 def test_floatTypeValidator_incorrect_values(value):
     """Check if improper float values are validated."""
     # exception is expected
-    with pytest.raises(Invalid) as excinfo:
+    with pytest.raises(Invalid):
         floatTypeValidator(value)
 
 
@@ -1136,7 +1136,7 @@ def test_posFloatValidator_correct_values(value):
 def test_posFloatValidator_wrong_values(value):
     """Check if improper positive float values are not validated."""
     # exception is expected
-    with pytest.raises(Invalid) as excinfo:
+    with pytest.raises(Invalid):
         posFloatValidator(value)
 
 
@@ -1144,14 +1144,14 @@ def test_posFloatValidator_wrong_values(value):
 def test_PosFloatValidator_wrong_types(value):
     """Check if improper types are not validated."""
     # exception is expected
-    with pytest.raises(Invalid) as excinfo:
+    with pytest.raises(Invalid):
         posFloatValidator(value)
 
 
 def test_PosFloatValidator_nan():
     """Check if NaN is not validated."""
     # exception is expected
-    with pytest.raises(Invalid) as excinfo:
+    with pytest.raises(Invalid):
         posFloatValidator(math.nan)
 
 
@@ -1166,7 +1166,7 @@ def test_posFloatOrZeroValidator_correct_values(value):
 def test_PosFloatOrZeroValidator_wrong_values(value):
     """Check if improper positive float values are not validated."""
     # exception is expected
-    with pytest.raises(Invalid) as excinfo:
+    with pytest.raises(Invalid):
         posFloatOrZeroValidator(value)
 
 
@@ -1174,14 +1174,14 @@ def test_PosFloatOrZeroValidator_wrong_values(value):
 def test_PosFloatOrZeroValidator_wrong_types(value):
     """Check if improper types are not validated."""
     # exception is expected
-    with pytest.raises(Invalid) as excinfo:
+    with pytest.raises(Invalid):
         posFloatOrZeroValidator(value)
 
 
 def test_PosFloatOrZeroValidator_nan():
     """Check if NaN is not validated."""
     # exception is expected
-    with pytest.raises(Invalid) as excinfo:
+    with pytest.raises(Invalid):
         posFloatOrZeroValidator(math.nan)
 
 
@@ -1196,7 +1196,7 @@ def test_negFloatValidator_correct_values(value):
 def test_negFloatValidator_wrong_values(value):
     """Check if improper negative float values are not validated."""
     # exception is expected
-    with pytest.raises(Invalid) as excinfo:
+    with pytest.raises(Invalid):
         negFloatValidator(value)
 
 
@@ -1204,14 +1204,14 @@ def test_negFloatValidator_wrong_values(value):
 def test_negFloatValidator_wrong_types(value):
     """Check if improper types are not validated."""
     # exception is expected
-    with pytest.raises(Invalid) as excinfo:
+    with pytest.raises(Invalid):
         negFloatValidator(value)
 
 
 def test_NegFloatValidator_nan():
     """Check if NaN is not validated."""
     # exception is expected
-    with pytest.raises(Invalid) as excinfo:
+    with pytest.raises(Invalid):
         negFloatValidator(math.nan)
 
 
@@ -1226,7 +1226,7 @@ def test_negFloatOrZeroValidator_correct_values(value):
 def test_negFloatOrZeroValidator_wrong_values(value):
     """Check if improper negative float values are not validated."""
     # exception is expected
-    with pytest.raises(Invalid) as excinfo:
+    with pytest.raises(Invalid):
         negFloatOrZeroValidator(value)
 
 
@@ -1234,14 +1234,14 @@ def test_negFloatOrZeroValidator_wrong_values(value):
 def test_negFloatOrZeroValidator_wrong_types(value):
     """Check if improper types are not validated."""
     # exception is expected
-    with pytest.raises(Invalid) as excinfo:
+    with pytest.raises(Invalid):
         negFloatOrZeroValidator(value)
 
 
 def test_NegFloatOrZeroValidator_nan():
     """Check if NaN is not validated."""
     # exception is expected
-    with pytest.raises(Invalid) as excinfo:
+    with pytest.raises(Invalid):
         negFloatOrZeroValidator(math.nan)
 
 
@@ -1255,7 +1255,7 @@ def test_isNaNValidator():
 def test_isNaNValidator_wrong_values(value):
     """Check if NaN value is validated properly."""
     # exception is expected
-    with pytest.raises(Invalid) as excinfo:
+    with pytest.raises(Invalid):
         isNaNValidator(value)
 
 
@@ -1263,14 +1263,14 @@ def test_isNaNValidator_wrong_values(value):
 def test_isNaNValidator_wrong_types(value):
     """Check if NaN value is validated properly."""
     # exception is expected
-    with pytest.raises(Invalid) as excinfo:
+    with pytest.raises(Invalid):
         isNaNValidator(value)
 
 
 def test_isNotNaNValidator():
     """Check if NaN value is validated properly."""
     # exception is expected
-    with pytest.raises(Invalid) as excinfo:
+    with pytest.raises(Invalid):
         isNotNaNValidator(math.nan)
 
 
@@ -1285,7 +1285,7 @@ def test_isNotNaNValidator_wrong_values(value):
 def test_isNotNaNValidator_wrong_types(value):
     """Check if NaN value is validated properly."""
     # exception is expected
-    with pytest.raises(Invalid) as excinfo:
+    with pytest.raises(Invalid):
         isNotNaNValidator(value)
 
 
@@ -1300,7 +1300,7 @@ def test_stringTypeValidator_correct_values(value):
 def test_stringTypeValidator_incorrect_values(value):
     """Check if improper values (with wrong type) are validated."""
     # exception is expected
-    with pytest.raises(Invalid) as excinfo:
+    with pytest.raises(Invalid):
         stringTypeValidator(value)
 
 
@@ -1314,7 +1314,7 @@ def test_emptyStringValidator_correct_value():
 def test_emptyStringValidator_correct_values(value):
     """Check if improper empty string values are validated."""
     # exception is expected
-    with pytest.raises(Invalid) as excinfo:
+    with pytest.raises(Invalid):
         emptyStringValidator(value)
 
 
@@ -1322,7 +1322,7 @@ def test_emptyStringValidator_correct_values(value):
 def test_emptyStringValidator_incorrect_types(value):
     """Check if improper values (with wrong type) are validated."""
     # exception is expected
-    with pytest.raises(Invalid) as excinfo:
+    with pytest.raises(Invalid):
         emptyStringValidator(value)
 
 
@@ -1336,7 +1336,7 @@ def test_notEmptyStringValidator_correct_values(value):
 def test_notEmptyStringValidator_incorrect_value():
     """Check if improper non empty string values are validated."""
     # exception is expected
-    with pytest.raises(Invalid) as excinfo:
+    with pytest.raises(Invalid):
         notEmptyStringValidator("")
 
 
@@ -1344,7 +1344,7 @@ def test_notEmptyStringValidator_incorrect_value():
 def test_notEmptyStringValidator_incorrect_types(value):
     """Check if improper values (with wrong type) are validated."""
     # exception is expected
-    with pytest.raises(Invalid) as excinfo:
+    with pytest.raises(Invalid):
         notEmptyStringValidator(value)
 
 
@@ -1359,7 +1359,7 @@ def test_intInStringValidator_correct_values(value):
 def test_intInStringValidator_incorrect_values(value):
     """Check the parsing and validating integers stored in string."""
     # exception is expected
-    with pytest.raises(ValueError) as excinfo:
+    with pytest.raises(ValueError):
         intInStringValidator(value)
 
 
@@ -1367,7 +1367,7 @@ def test_intInStringValidator_incorrect_values(value):
 def test_intInStringValidator_incorrect_types(value):
     """Check if improper values (with wrong type) are validated."""
     # exception is expected
-    with pytest.raises(Invalid) as excinfo:
+    with pytest.raises(Invalid):
         intInStringValidator(value)
 
 
@@ -1382,7 +1382,7 @@ def test_posIntInStringValidator_correct_values(value):
 def test_posIntInStringValidator_incorrect_values(value):
     """Check the parsing and validating positive integers stored in string."""
     # exception is expected
-    with pytest.raises(Invalid) as excinfo:
+    with pytest.raises(Invalid):
         posIntInStringValidator(value)
 
 
@@ -1390,7 +1390,7 @@ def test_posIntInStringValidator_incorrect_values(value):
 def test_posIntInStringValidator_incorrect_types(value):
     """Check if improper values (with wrong type) are validated."""
     # exception is expected
-    with pytest.raises(Invalid) as excinfo:
+    with pytest.raises(Invalid):
         posIntInStringValidator(value)
 
 
@@ -1405,7 +1405,7 @@ def test_posIntOrZeroInStringValidator_correct_values(value):
 def test_posIntOrZeroInStringValidator_incorrect_values(value):
     """Check the parsing and validating positive integers or a zero stored in string."""
     # exception is expected
-    with pytest.raises(Invalid) as excinfo:
+    with pytest.raises(Invalid):
         posIntInStringValidator(value)
 
 
@@ -1413,7 +1413,7 @@ def test_posIntOrZeroInStringValidator_incorrect_values(value):
 def test_posIntInOrZeroStringValidator_incorrect_types(value):
     """Check if improper values (with wrong type) are validated."""
     # exception is expected
-    with pytest.raises(Invalid) as excinfo:
+    with pytest.raises(Invalid):
         posIntOrZeroInStringValidator(value)
 
 
@@ -1428,7 +1428,7 @@ def test_negIntInStringValidator_correct_values(value):
 def test_negIntInStringValidator_incorrect_values(value):
     """Check the parsing and validating negative integers stored in string."""
     # exception is expected
-    with pytest.raises(Invalid) as excinfo:
+    with pytest.raises(Invalid):
         negIntInStringValidator(value)
 
 
@@ -1436,7 +1436,7 @@ def test_negIntInStringValidator_incorrect_values(value):
 def test_negIntInStringValidator_incorrect_types(value):
     """Check if improper values (with wrong type) are validated."""
     # exception is expected
-    with pytest.raises(Invalid) as excinfo:
+    with pytest.raises(Invalid):
         negIntInStringValidator(value)
 
 
@@ -1451,7 +1451,7 @@ def test_negIntOrZeroInStringValidator_correct_values(value):
 def test_negIntOrZeroInStringValidator_incorrect_values(value):
     """Check the parsing and validating negative integers or a zero stored in string."""
     # exception is expected
-    with pytest.raises(Invalid) as excinfo:
+    with pytest.raises(Invalid):
         negIntInStringValidator(value)
 
 
@@ -1459,7 +1459,7 @@ def test_negIntOrZeroInStringValidator_incorrect_values(value):
 def test_negIntInOrZeroStringValidator_incorrect_types(value):
     """Check if improper values (with wrong type) are validated."""
     # exception is expected
-    with pytest.raises(Invalid) as excinfo:
+    with pytest.raises(Invalid):
         negIntOrZeroInStringValidator(value)
 
 
@@ -1474,7 +1474,7 @@ def test_posFloatInStringValidator_correct_values(value):
 def test_posFloatInStringValidator_incorrect_values(value):
     """Check the parsing and validating positive floats stored in string."""
     # exception is expected
-    with pytest.raises(Invalid) as excinfo:
+    with pytest.raises(Invalid):
         posFloatInStringValidator(value)
 
 
@@ -1482,7 +1482,7 @@ def test_posFloatInStringValidator_incorrect_values(value):
 def test_posFloatInStringValidator_incorrect_types(value):
     """Check if improper values (with wrong type) are validated."""
     # exception is expected
-    with pytest.raises(Invalid) as excinfo:
+    with pytest.raises(Invalid):
         posFloatInStringValidator(value)
 
 
@@ -1497,7 +1497,7 @@ def test_posFloatOrZeroInStringValidator_correct_values(value):
 def test_posFloatOrZeroInStringValidator_incorrect_values(value):
     """Check the parsing and validating positive floats or a zero stored in string."""
     # exception is expected
-    with pytest.raises(Invalid) as excinfo:
+    with pytest.raises(Invalid):
         posFloatInStringValidator(value)
 
 
@@ -1505,7 +1505,7 @@ def test_posFloatOrZeroInStringValidator_incorrect_values(value):
 def test_posFloatInOrZeroStringValidator_incorrect_types(value):
     """Check if improper values (with wrong type) are validated."""
     # exception is expected
-    with pytest.raises(Invalid) as excinfo:
+    with pytest.raises(Invalid):
         posFloatOrZeroInStringValidator(value)
 
 
@@ -1520,7 +1520,7 @@ def test_negFloatInStringValidator_correct_values(value):
 def test_negFloatInStringValidator_incorrect_values(value):
     """Check the parsing and validating negative floats stored in string."""
     # exception is expected
-    with pytest.raises(Invalid) as excinfo:
+    with pytest.raises(Invalid):
         negFloatInStringValidator(value)
 
 
@@ -1528,7 +1528,7 @@ def test_negFloatInStringValidator_incorrect_values(value):
 def test_negFloatInStringValidator_incorrect_types(value):
     """Check if improper values (with wrong type) are validated."""
     # exception is expected
-    with pytest.raises(Invalid) as excinfo:
+    with pytest.raises(Invalid):
         negFloatInStringValidator(value)
 
 
@@ -1543,7 +1543,7 @@ def test_negFloatOrZeroInStringValidator_correct_values(value):
 def test_negFloatOrZeroInStringValidator_incorrect_values(value):
     """Check the parsing and validating negative floats or a zero stored in string."""
     # exception is expected
-    with pytest.raises(Invalid) as excinfo:
+    with pytest.raises(Invalid):
         negFloatInStringValidator(value)
 
 
@@ -1551,7 +1551,7 @@ def test_negFloatOrZeroInStringValidator_incorrect_values(value):
 def test_negFloatInOrZeroStringValidator_incorrect_types(value):
     """Check if improper values (with wrong type) are validated."""
     # exception is expected
-    with pytest.raises(Invalid) as excinfo:
+    with pytest.raises(Invalid):
         negFloatOrZeroInStringValidator(value)
 
 
@@ -1566,7 +1566,7 @@ def test_intInBytesValidator_correct_values(value):
 def test_intInBytesValidator_incorrect_values(value):
     """Check the parsing and validating integers stored in string."""
     # exception is expected
-    with pytest.raises(ValueError) as excinfo:
+    with pytest.raises(ValueError):
         intInBytesValidator(value.encode("utf-8"))
 
 
@@ -1574,7 +1574,7 @@ def test_intInBytesValidator_incorrect_values(value):
 def test_intInBytesValidator_incorrect_types(value):
     """Check if improper values (with wrong type) are validated."""
     # exception is expected
-    with pytest.raises(Invalid) as excinfo:
+    with pytest.raises(Invalid):
         intInBytesValidator(value)
 
 
@@ -1589,7 +1589,7 @@ def test_posIntInBytesValidator_correct_values(value):
 def test_posIntInBytesValidator_incorrect_values(value):
     """Check the parsing and validating positive integers stored in string."""
     # exception is expected
-    with pytest.raises(Invalid) as excinfo:
+    with pytest.raises(Invalid):
         posIntInBytesValidator(value.encode("utf-8"))
 
 
@@ -1597,7 +1597,7 @@ def test_posIntInBytesValidator_incorrect_values(value):
 def test_posIntInBytesValidator_incorrect_types(value):
     """Check if improper values (with wrong type) are validated."""
     # exception is expected
-    with pytest.raises(Invalid) as excinfo:
+    with pytest.raises(Invalid):
         posIntInBytesValidator(value)
 
 
@@ -1612,7 +1612,7 @@ def test_posIntOrZeroInBytesValidator_correct_values(value):
 def test_posIntOrZeroInBytesValidator_incorrect_values(value):
     """Check the parsing and validating positive integers or a zero stored in string."""
     # exception is expected
-    with pytest.raises(Invalid) as excinfo:
+    with pytest.raises(Invalid):
         posIntInBytesValidator(value.encode("utf-8"))
 
 
@@ -1620,7 +1620,7 @@ def test_posIntOrZeroInBytesValidator_incorrect_values(value):
 def test_posIntInOrZeroBytesValidator_incorrect_types(value):
     """Check if improper values (with wrong type) are validated."""
     # exception is expected
-    with pytest.raises(Invalid) as excinfo:
+    with pytest.raises(Invalid):
         posIntOrZeroInBytesValidator(value)
 
 
@@ -1635,7 +1635,7 @@ def test_negIntInBytesValidator_correct_values(value):
 def test_negIntInBytesValidator_incorrect_values(value):
     """Check the parsing and validating negative integers stored in string."""
     # exception is expected
-    with pytest.raises(Invalid) as excinfo:
+    with pytest.raises(Invalid):
         negIntInBytesValidator(value.encode("utf-8"))
 
 
@@ -1643,7 +1643,7 @@ def test_negIntInBytesValidator_incorrect_values(value):
 def test_negIntInBytesValidator_incorrect_types(value):
     """Check if improper values (with wrong type) are validated."""
     # exception is expected
-    with pytest.raises(Invalid) as excinfo:
+    with pytest.raises(Invalid):
         negIntInBytesValidator(value)
 
 
@@ -1658,7 +1658,7 @@ def test_negIntOrZeroInBytesValidator_correct_values(value):
 def test_negIntOrZeroInBytesValidator_incorrect_values(value):
     """Check the parsing and validating negative integers or a zero stored in string."""
     # exception is expected
-    with pytest.raises(Invalid) as excinfo:
+    with pytest.raises(Invalid):
         negIntInBytesValidator(value.encode("utf-8"))
 
 
@@ -1666,7 +1666,7 @@ def test_negIntOrZeroInBytesValidator_incorrect_values(value):
 def test_negIntInOrZeroBytesValidator_incorrect_types(value):
     """Check if improper values (with wrong type) are validated."""
     # exception is expected
-    with pytest.raises(Invalid) as excinfo:
+    with pytest.raises(Invalid):
         negIntOrZeroInBytesValidator(value)
 
 
@@ -1681,7 +1681,7 @@ def test_posFloatInBytesValidator_correct_values(value):
 def test_posFloatInBytesValidator_incorrect_values(value):
     """Check the parsing and validating positive floats stored in string."""
     # exception is expected
-    with pytest.raises(Invalid) as excinfo:
+    with pytest.raises(Invalid):
         posFloatInBytesValidator(value.encode("utf-8"))
 
 
@@ -1689,7 +1689,7 @@ def test_posFloatInBytesValidator_incorrect_values(value):
 def test_posFloatInBytesValidator_incorrect_types(value):
     """Check if improper values (with wrong type) are validated."""
     # exception is expected
-    with pytest.raises(Invalid) as excinfo:
+    with pytest.raises(Invalid):
         posFloatInBytesValidator(value)
 
 
@@ -1704,7 +1704,7 @@ def test_posFloatOrZeroInBytesValidator_correct_values(value):
 def test_posFloatOrZeroInBytesValidator_incorrect_values(value):
     """Check the parsing and validating positive floats or a zero stored in string."""
     # exception is expected
-    with pytest.raises(Invalid) as excinfo:
+    with pytest.raises(Invalid):
         posFloatInBytesValidator(value.encode("utf-8"))
 
 
@@ -1712,7 +1712,7 @@ def test_posFloatOrZeroInBytesValidator_incorrect_values(value):
 def test_posFloatInOrZeroBytesValidator_incorrect_types(value):
     """Check if improper values (with wrong type) are validated."""
     # exception is expected
-    with pytest.raises(Invalid) as excinfo:
+    with pytest.raises(Invalid):
         posFloatOrZeroInBytesValidator(value)
 
 
@@ -1727,7 +1727,7 @@ def test_negFloatInBytesValidator_correct_values(value):
 def test_negFloatInBytesValidator_incorrect_values(value):
     """Check the parsing and validating negative floats stored in string."""
     # exception is expected
-    with pytest.raises(Invalid) as excinfo:
+    with pytest.raises(Invalid):
         negFloatInBytesValidator(value.encode("utf-8"))
 
 
@@ -1735,7 +1735,7 @@ def test_negFloatInBytesValidator_incorrect_values(value):
 def test_negFloatInBytesValidator_incorrect_types(value):
     """Check if improper values (with wrong type) are validated."""
     # exception is expected
-    with pytest.raises(Invalid) as excinfo:
+    with pytest.raises(Invalid):
         negFloatInBytesValidator(value)
 
 
@@ -1750,7 +1750,7 @@ def test_negFloatOrZeroInBytesValidator_correct_values(value):
 def test_negFloatOrZeroInBytesValidator_incorrect_values(value):
     """Check the parsing and validating negative floats or a zero stored in string."""
     # exception is expected
-    with pytest.raises(Invalid) as excinfo:
+    with pytest.raises(Invalid):
         negFloatInBytesValidator(value.encode("utf-8"))
 
 
@@ -1758,7 +1758,7 @@ def test_negFloatOrZeroInBytesValidator_incorrect_values(value):
 def test_negFloatInOrZeroInBytesValidator_incorrect_types(value):
     """Check if improper values (with wrong type) are validated."""
     # exception is expected
-    with pytest.raises(Invalid) as excinfo:
+    with pytest.raises(Invalid):
         negFloatOrZeroInBytesValidator(value)
 
 
@@ -1773,7 +1773,7 @@ def test_hexaString32Validator_correct_values(value):
 def test_hexaString32Validator_incorrect_values(value):
     """Check the parsing and validating strings with 32 hexa characters."""
     # exception is expected
-    with pytest.raises(Invalid) as excinfo:
+    with pytest.raises(Invalid):
         hexaString32Validator(value)
 
 
@@ -1781,7 +1781,7 @@ def test_hexaString32Validator_incorrect_values(value):
 def test_hexaString32Validator_incorrect_types(value):
     """Check if improper values (with wrong type) are validated."""
     # exception is expected
-    with pytest.raises(Invalid) as excinfo:
+    with pytest.raises(Invalid):
         hexaString32Validator(value)
 
 
@@ -1796,7 +1796,7 @@ def test_sha1Validator_correct_values(value):
 def test_sha1Validator_incorrect_values(value):
     """Check the parsing and validating SHA1 sums."""
     # exception is expected
-    with pytest.raises(Invalid) as excinfo:
+    with pytest.raises(Invalid):
         sha1Validator(value)
 
 
@@ -1804,7 +1804,7 @@ def test_sha1Validator_incorrect_values(value):
 def test_sha1ValidatorValidator_incorrect_types(value):
     """Check if improper values (with wrong type) are validated."""
     # exception is expected
-    with pytest.raises(Invalid) as excinfo:
+    with pytest.raises(Invalid):
         sha1Validator(value)
 
 
@@ -1819,7 +1819,7 @@ def test_sha224Validator_correct_values(value):
 def test_sha224Validator_incorrect_values(value):
     """Check the parsing and validating SHA224 sums."""
     # exception is expected
-    with pytest.raises(Invalid) as excinfo:
+    with pytest.raises(Invalid):
         sha224Validator(value)
 
 
@@ -1827,7 +1827,7 @@ def test_sha224Validator_incorrect_values(value):
 def test_sha224ValidatorValidator_incorrect_types(value):
     """Check if improper values (with wrong type) are validated."""
     # exception is expected
-    with pytest.raises(Invalid) as excinfo:
+    with pytest.raises(Invalid):
         sha224Validator(value)
 
 
@@ -1842,7 +1842,7 @@ def test_sha256Validator_correct_values(value):
 def test_sha256Validator_incorrect_values(value):
     """Check the parsing and validating SHA256 sums."""
     # exception is expected
-    with pytest.raises(Invalid) as excinfo:
+    with pytest.raises(Invalid):
         sha256Validator(value)
 
 
@@ -1850,7 +1850,7 @@ def test_sha256Validator_incorrect_values(value):
 def test_sha256ValidatorValidator_incorrect_types(value):
     """Check if improper values (with wrong type) are validated."""
     # exception is expected
-    with pytest.raises(Invalid) as excinfo:
+    with pytest.raises(Invalid):
         sha256Validator(value)
 
 
@@ -1865,7 +1865,7 @@ def test_sha384Validator_correct_values(value):
 def test_sha384Validator_incorrect_values(value):
     """Check the parsing and validating SHA384 sums."""
     # exception is expected
-    with pytest.raises(Invalid) as excinfo:
+    with pytest.raises(Invalid):
         sha384Validator(value)
 
 
@@ -1873,7 +1873,7 @@ def test_sha384Validator_incorrect_values(value):
 def test_sha384ValidatorValidator_incorrect_types(value):
     """Check if improper values (with wrong type) are validated."""
     # exception is expected
-    with pytest.raises(Invalid) as excinfo:
+    with pytest.raises(Invalid):
         sha384Validator(value)
 
 
@@ -1888,7 +1888,7 @@ def test_sha512Validator_correct_values(value):
 def test_sha512Validator_incorrect_values(value):
     """Check the parsing and validating SHA512 sums."""
     # exception is expected
-    with pytest.raises(Invalid) as excinfo:
+    with pytest.raises(Invalid):
         sha512Validator(value)
 
 
@@ -1896,7 +1896,7 @@ def test_sha512Validator_incorrect_values(value):
 def test_sha512ValidatorValidator_incorrect_types(value):
     """Check if improper values (with wrong type) are validated."""
     # exception is expected
-    with pytest.raises(Invalid) as excinfo:
+    with pytest.raises(Invalid):
         sha512Validator(value)
 
 
@@ -1911,7 +1911,7 @@ def test_sha3_224Validator_correct_values(value):
 def test_sha3_224Validator_incorrect_values(value):
     """Check the parsing and validating SHA-3 224 sums."""
     # exception is expected
-    with pytest.raises(Invalid) as excinfo:
+    with pytest.raises(Invalid):
         sha3_224Validator(value)
 
 
@@ -1919,7 +1919,7 @@ def test_sha3_224Validator_incorrect_values(value):
 def test_sha3_224ValidatorValidator_incorrect_types(value):
     """Check if improper values (with wrong type) are validated."""
     # exception is expected
-    with pytest.raises(Invalid) as excinfo:
+    with pytest.raises(Invalid):
         sha3_224Validator(value)
 
 
@@ -1934,7 +1934,7 @@ def test_sha3_256Validator_correct_values(value):
 def test_sha3_256Validator_incorrect_values(value):
     """Check the parsing and validating SHA-3 256 sums."""
     # exception is expected
-    with pytest.raises(Invalid) as excinfo:
+    with pytest.raises(Invalid):
         sha3_256Validator(value)
 
 
@@ -1942,7 +1942,7 @@ def test_sha3_256Validator_incorrect_values(value):
 def test_sha3_256ValidatorValidator_incorrect_types(value):
     """Check if improper values (with wrong type) are validated."""
     # exception is expected
-    with pytest.raises(Invalid) as excinfo:
+    with pytest.raises(Invalid):
         sha3_256Validator(value)
 
 
@@ -1957,7 +1957,7 @@ def test_sha3_384Validator_correct_values(value):
 def test_sha3_384Validator_incorrect_values(value):
     """Check the parsing and validating SHA-3 384 sums."""
     # exception is expected
-    with pytest.raises(Invalid) as excinfo:
+    with pytest.raises(Invalid):
         sha3_384Validator(value)
 
 
@@ -1965,7 +1965,7 @@ def test_sha3_384Validator_incorrect_values(value):
 def test_sha3_384ValidatorValidator_incorrect_types(value):
     """Check if improper values (with wrong type) are validated."""
     # exception is expected
-    with pytest.raises(Invalid) as excinfo:
+    with pytest.raises(Invalid):
         sha3_384Validator(value)
 
 
@@ -1980,7 +1980,7 @@ def test_sha3_512Validator_correct_values(value):
 def test_sha3_512Validator_incorrect_values(value):
     """Check the parsing and validating SHA-3 512 sums."""
     # exception is expected
-    with pytest.raises(Invalid) as excinfo:
+    with pytest.raises(Invalid):
         sha3_512Validator(value)
 
 
@@ -1988,7 +1988,7 @@ def test_sha3_512Validator_incorrect_values(value):
 def test_sha3_512ValidatorValidator_incorrect_types(value):
     """Check if improper values (with wrong type) are validated."""
     # exception is expected
-    with pytest.raises(Invalid) as excinfo:
+    with pytest.raises(Invalid):
         sha3_512Validator(value)
 
 
@@ -2003,7 +2003,7 @@ def test_shake128Validator_correct_values(value):
 def test_shake128Validator_incorrect_values(value):
     """Check the parsing and validating shake128 sums."""
     # exception is expected
-    with pytest.raises(Invalid) as excinfo:
+    with pytest.raises(Invalid):
         shake128Validator(value)
 
 
@@ -2011,7 +2011,7 @@ def test_shake128Validator_incorrect_values(value):
 def test_shake128ValidatorValidator_incorrect_types(value):
     """Check if improper values (with wrong type) are validated."""
     # exception is expected
-    with pytest.raises(Invalid) as excinfo:
+    with pytest.raises(Invalid):
         shake128Validator(value)
 
 
@@ -2026,7 +2026,7 @@ def test_shake256Validator_correct_values(value):
 def test_shake256Validator_incorrect_values(value):
     """Check the parsing and validating shake256 sums."""
     # exception is expected
-    with pytest.raises(Invalid) as excinfo:
+    with pytest.raises(Invalid):
         shake256Validator(value)
 
 
@@ -2034,7 +2034,7 @@ def test_shake256Validator_incorrect_values(value):
 def test_shake256ValidatorValidator_incorrect_types(value):
     """Check if improper values (with wrong type) are validated."""
     # exception is expected
-    with pytest.raises(Invalid) as excinfo:
+    with pytest.raises(Invalid):
         shake256Validator(value)
 
 
@@ -2049,7 +2049,7 @@ def test_BLAKE2Validator_correct_values(value):
 def test_BLAKE2Validator_incorrect_values(value):
     """Check the parsing and validating BLAKE2 sums."""
     # exception is expected
-    with pytest.raises(Invalid) as excinfo:
+    with pytest.raises(Invalid):
         BLAKE2Validator(value)
 
 
@@ -2057,7 +2057,7 @@ def test_BLAKE2Validator_incorrect_values(value):
 def test_BLAKE2ValidatorValidator_incorrect_types(value):
     """Check if improper values (with wrong type) are validated."""
     # exception is expected
-    with pytest.raises(Invalid) as excinfo:
+    with pytest.raises(Invalid):
         BLAKE2Validator(value)
 
 
@@ -2072,7 +2072,7 @@ def test_md5Validator_correct_values(value):
 def test_md5Validator_incorrect_values(value):
     """Check the parsing and validating MD5 sums."""
     # exception is expected
-    with pytest.raises(Invalid) as excinfo:
+    with pytest.raises(Invalid):
         md5Validator(value)
 
 
@@ -2080,7 +2080,7 @@ def test_md5Validator_incorrect_values(value):
 def test_md5ValidatorValidator_incorrect_types(value):
     """Check if improper values (with wrong type) are validated."""
     # exception is expected
-    with pytest.raises(Invalid) as excinfo:
+    with pytest.raises(Invalid):
         md5Validator(value)
 
 
@@ -2095,7 +2095,7 @@ def test_UUIDValidator_correct_values(value):
 def test_UUIDValidator_incorrect_values(value):
     """Check the parsing and validating UUID values."""
     # exception is expected
-    with pytest.raises(ValueError) as excinfo:
+    with pytest.raises(ValueError):
         uuidValidator(value)
 
 
@@ -2103,7 +2103,7 @@ def test_UUIDValidator_incorrect_values(value):
 def test_UUIDValidatorValidator_incorrect_types(value):
     """Check if improper values (with wrong type) are validated."""
     # exception is expected
-    with pytest.raises(Invalid) as excinfo:
+    with pytest.raises(Invalid):
         uuidValidator(value)
 
 
@@ -2118,7 +2118,7 @@ def test_UUIDInBytesValidator_correct_values(value):
 def test_UUIDInBytesValidator_incorrect_values(value):
     """Check the parsing and validating UUID values."""
     # exception is expected
-    with pytest.raises(ValueError) as excinfo:
+    with pytest.raises(ValueError):
         uuidInBytesValidator(value.encode("utf-8"))
 
 
@@ -2126,7 +2126,7 @@ def test_UUIDInBytesValidator_incorrect_values(value):
 def test_UUIDInBytesValidator_incorrect_types(value):
     """Check if improper values (with wrong type) are validated."""
     # exception is expected
-    with pytest.raises(Invalid) as excinfo:
+    with pytest.raises(Invalid):
         uuidInBytesValidator(value)
 
 
@@ -2141,7 +2141,7 @@ def test_timestampValidator_correct_values(value):
 def test_timestampValidator_incorrect_values(value):
     """Check the parsing and validating timestamps."""
     # exception is expected
-    with pytest.raises(Invalid) as excinfo:
+    with pytest.raises(Invalid):
         timestampValidator(value)
 
 
@@ -2149,7 +2149,7 @@ def test_timestampValidator_incorrect_values(value):
 def test_timestampValidator_incorrect_types(value):
     """Check if improper values (with wrong type) are validated."""
     # exception is expected
-    with pytest.raises(Invalid) as excinfo:
+    with pytest.raises(Invalid):
         timestampValidator(value)
 
 
@@ -2164,7 +2164,7 @@ def test_timestampValidatorOffset_correct_values(value):
 def test_timestampValidatorOffset_incorrect_values(value):
     """Check the parsing and validating timestamps."""
     # exception is expected
-    with pytest.raises(Invalid) as excinfo:
+    with pytest.raises(Invalid):
         timestampValidatorOffset(value)
 
 
@@ -2172,7 +2172,7 @@ def test_timestampValidatorOffset_incorrect_values(value):
 def test_timestampValidatorOffset_incorrect_types(value):
     """Check if improper values (with wrong type) are validated."""
     # exception is expected
-    with pytest.raises(Invalid) as excinfo:
+    with pytest.raises(Invalid):
         timestampValidatorOffset(value)
 
 
@@ -2187,7 +2187,7 @@ def test_timestampValidatorNoZ_correct_values(value):
 def test_timestampValidatorNoZ_incorrect_values(value):
     """Check the parsing and validating timestamps."""
     # exception is expected
-    with pytest.raises(Invalid) as excinfo:
+    with pytest.raises(Invalid):
         timestampValidatorNoZ(value)
 
 
@@ -2195,7 +2195,7 @@ def test_timestampValidatorNoZ_incorrect_values(value):
 def test_timestampValidatorNoZ_incorrect_types(value):
     """Check if improper values (with wrong type) are validated."""
     # exception is expected
-    with pytest.raises(Invalid) as excinfo:
+    with pytest.raises(Invalid):
         timestampValidatorNoZ(value)
 
 
@@ -2210,7 +2210,7 @@ def test_timestampMsValidator_correct_values(value):
 def test_timestampMsValidator_incorrect_values(value):
     """Check the parsing and validating timestamps with milliseconds part."""
     # exception is expected
-    with pytest.raises(Invalid) as excinfo:
+    with pytest.raises(Invalid):
         timestampValidatorMs(value)
 
 
@@ -2218,7 +2218,7 @@ def test_timestampMsValidator_incorrect_values(value):
 def test_timestampMsValidator_incorrect_types(value):
     """Check if improper values (with wrong type) are validated."""
     # exception is expected
-    with pytest.raises(Invalid) as excinfo:
+    with pytest.raises(Invalid):
         timestampValidatorMs(value)
 
 
@@ -2233,7 +2233,7 @@ def test_urlToAWSValidator_correct_values(value):
 def test_urlToAWSValidator_incorrect_values(value):
     """Check the parsing and validating URLs to AWS with milliseconds part."""
     # exception is expected
-    with pytest.raises(Invalid) as excinfo:
+    with pytest.raises(Invalid):
         urlToAWSValidator(value)
 
 
@@ -2241,7 +2241,7 @@ def test_urlToAWSValidator_incorrect_values(value):
 def test_urlToAWSValidator_incorrect_types(value):
     """Check if improper values (with wrong type) are validated."""
     # exception is expected
-    with pytest.raises(Invalid) as excinfo:
+    with pytest.raises(Invalid):
         urlToAWSValidator(value)
 
 
@@ -2250,7 +2250,7 @@ def test_b64IdentityValidator_incorrect_base64values(value):
     """Check if improper values (not base64-based) are validated."""
     schema = None  # not needed right now
     # exception is expected
-    with pytest.raises(Exception) as excinfo:
+    with pytest.raises(ValueError):
         b64IdentityValidator(schema, value)
 
 
@@ -2259,7 +2259,7 @@ def test_b64IdentityValidator_not_JSON(value):
     """Check if improper values (not JSON) are validated."""
     schema = None  # not needed right now
     # exception is expected
-    with pytest.raises(Exception) as excinfo:
+    with pytest.raises(ValueError):
         b64IdentityValidator(schema, value)
 
 
@@ -2268,7 +2268,7 @@ def test_b64IdentityValidator_proper_JSON(value):
     """Check if proper values are validated."""
     schema = None  # not needed right now
     # exception is expected
-    with pytest.raises(Exception) as excinfo:
+    with pytest.raises((ValueError, TypeError)):
         b64IdentityValidator(schema, value)
 
 
@@ -2277,7 +2277,7 @@ def test_b64IdentityValidator_incorrect_types(value):
     """Check if improper values (with wrong type) are validated."""
     schema = None  # not needed right now
     # exception is expected
-    with pytest.raises(Invalid) as excinfo:
+    with pytest.raises(Invalid):
         b64IdentityValidator(schema, value)
 
 
@@ -2292,7 +2292,7 @@ def test_keyValueValidator_proper_values(value):
 def test_keyValueValidator_improper_values(value):
     """Check if impproper values are validated."""
     # exception is expected
-    with pytest.raises(Invalid) as excinfo:
+    with pytest.raises(Invalid):
         keyValueValidator(value)
 
 
@@ -2300,7 +2300,7 @@ def test_keyValueValidator_improper_values(value):
 def test_keyValueValidator_incorrect_types(value):
     """Check if improper values (with wrong type) are validated."""
     # exception is expected
-    with pytest.raises(Invalid) as excinfo:
+    with pytest.raises(Invalid):
         keyValueValidator(value)
 
 
@@ -2315,7 +2315,7 @@ def test_ruleFQDNValueValidator_proper_values(value):
 def test_ruleFQDNValueValidator_improper_values(value):
     """Check if impproper values are validated."""
     # exception is expected
-    with pytest.raises(Invalid) as excinfo:
+    with pytest.raises(Invalid):
         ruleFQDNValidator(value)
 
 
@@ -2323,7 +2323,7 @@ def test_ruleFQDNValueValidator_improper_values(value):
 def test_ruleFQDNValueValidator_incorrect_types(value):
     """Check if improper values (with wrong type) are validated."""
     # exception is expected
-    with pytest.raises(Invalid) as excinfo:
+    with pytest.raises(Invalid):
         ruleFQDNValidator(value)
 
 
@@ -2338,7 +2338,7 @@ def test_ruleFQDNInBytesValueValidator_proper_values(value):
 def test_ruleFQDNInBytesValueValidator_improper_values(value):
     """Check if impproper values are validated."""
     # exception is expected
-    with pytest.raises(Invalid) as excinfo:
+    with pytest.raises(Invalid):
         ruleFQDNInBytesValidator(value.encode("utf-8"))
 
 
@@ -2346,7 +2346,7 @@ def test_ruleFQDNInBytesValueValidator_improper_values(value):
 def test_ruleFQDNInBytesValueValidator_incorrect_types(value):
     """Check if improper values (with wrong type) are validated."""
     # exception is expected
-    with pytest.raises(Invalid) as excinfo:
+    with pytest.raises(Invalid):
         ruleFQDNInBytesValidator(value)
 
 
@@ -2361,7 +2361,7 @@ def test_ruleIDValueValidator_proper_values(value):
 def test_ruleIDValueValidator_improper_values(value):
     """Check if impproper values are validated."""
     # exception is expected
-    with pytest.raises(Invalid) as excinfo:
+    with pytest.raises(Invalid):
         ruleIDValidator(value)
 
 
@@ -2369,7 +2369,7 @@ def test_ruleIDValueValidator_improper_values(value):
 def test_ruleIDValueValidator_incorrect_types(value):
     """Check if improper values (with wrong type) are validated."""
     # exception is expected
-    with pytest.raises(Invalid) as excinfo:
+    with pytest.raises(Invalid):
         ruleIDValidator(value)
 
 
@@ -2384,7 +2384,7 @@ def test_ruleIDInBytesValueValidator_proper_values(value):
 def test_ruleIDInBytesValueValidator_improper_values(value):
     """Check if impproper values are validated."""
     # exception is expected
-    with pytest.raises(Invalid) as excinfo:
+    with pytest.raises(Invalid):
         ruleIDInBytesValidator(value.encode("utf-8"))
 
 
@@ -2392,7 +2392,7 @@ def test_ruleIDInBytesValueValidator_improper_values(value):
 def test_ruleIDInBytesValueValidator_incorrect_types(value):
     """Check if improper values (with wrong type) are validated."""
     # exception is expected
-    with pytest.raises(Invalid) as excinfo:
+    with pytest.raises(Invalid):
         ruleIDInBytesValidator(value)
 
 
@@ -2407,7 +2407,7 @@ def test_jsonInStrValidatorValidator_correct_json_values(value):
 def test_jsonInStrValidatorValidator_not_string_type(value):
     """Check if improper values (with wrong type) are validated."""
     # exception is expected
-    with pytest.raises(Invalid) as excinfo:
+    with pytest.raises(Invalid):
         jsonInStrValidator(value)
 
 
@@ -2415,7 +2415,7 @@ def test_jsonInStrValidatorValidator_not_string_type(value):
 def test_jsonInStrValidatorValidator_incorrect_json_values(value):
     """Check if improper values JSON are validated."""
     # exception is expected
-    with pytest.raises(Exception) as excinfo:
+    with pytest.raises((Invalid, ValueError)):
         jsonInStrValidator(value)
 
 
@@ -2430,7 +2430,7 @@ def test_versionInBytesValidator_correct_values(value):
 def test_versionInBytesValidator_incorrect_values(value):
     """Check the parsing and validating Version values."""
     # exception is expected
-    with pytest.raises(Invalid) as excinfo:
+    with pytest.raises(Invalid):
         versionInBytesValidator(value.encode("utf-8"))
 
 
@@ -2438,7 +2438,7 @@ def test_versionInBytesValidator_incorrect_values(value):
 def test_versionInBytesValidator_incorrect_types(value):
     """Check if improper values (with wrong type) are validated."""
     # exception is expected
-    with pytest.raises(Invalid) as excinfo:
+    with pytest.raises(Invalid):
         versionInBytesValidator(value)
 
 
@@ -2453,7 +2453,7 @@ def test_path_to_ceph_correct_values():
 def test_path_to_ceph_incorrect_values(value):
     """Check the validator for path to Ceph."""
     # exception is expected
-    with pytest.raises(Invalid) as excinfo:
+    with pytest.raises(Invalid):
         pathToCephInBytesValidator(value.encode("utf-8"))
 
 
@@ -2466,10 +2466,10 @@ def test_domain_validator():
 def test_domain_validator_wrong_input():
     """Check the validator domainValidator."""
     # exception is expected
-    with pytest.raises(Invalid) as excinfo:
+    with pytest.raises(Invalid):
         domainValidator("test")
     # exception is expected
-    with pytest.raises(Invalid) as excinfo:
+    with pytest.raises(Invalid):
         domainValidator(".")
 
 
@@ -2482,8 +2482,8 @@ def test_domain_in_bytes_validator():
 def test_domain_in_bytes_validator_wrong_input():
     """Check the validator domainInBytesValidator."""
     # exception is expected
-    with pytest.raises(Invalid) as excinfo:
+    with pytest.raises(Invalid):
         domainInBytesValidator(b"test")
     # exception is expected
-    with pytest.raises(Invalid) as excinfo:
+    with pytest.raises(Invalid):
         domainInBytesValidator(b".")
