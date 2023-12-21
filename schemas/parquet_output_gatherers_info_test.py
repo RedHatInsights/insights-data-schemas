@@ -40,7 +40,7 @@ attribute = (
     "name",
     "duration_in_ms",
     "archive_path",
-    "collected_at"
+    "collected_at",
 )
 
 

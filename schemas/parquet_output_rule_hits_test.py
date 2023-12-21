@@ -52,7 +52,7 @@ def correct_message():
             "rule_id": b"pods_check|POD_ISSUE",
             "collected_at": datetime.now(),
             "archive_path":
-            b"archives/compressed/00/00000000-0000-0000-0000-000000000000/202102/08/002219.tar.gz"
+            b"archives/compressed/00/00000000-0000-0000-0000-000000000000/202102/08/002219.tar.gz",
         }
 
 

@@ -33,7 +33,7 @@ from voluptuous import ALLOW_EXTRA, Any, Optional, Required, Schema
 # Schema for metadata sub-node
 metadataSchema = Schema({
         Required("cluster_id"): uuidValidator,
-        Required("external_organization"): posIntInStringValidator
+        Required("external_organization"): posIntInStringValidator,
             })
 
 # Schema for report "details" node
@@ -119,7 +119,7 @@ passSchema = Schema(
 # Version+commit info
 versionCommitSchema = Schema({
             Required("version"): str,
-            Required("commit"): Any(str, None)
+            Required("commit"): Any(str, None),
         })
 
 # Schema for plugin_sets sub-node

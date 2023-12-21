@@ -31,7 +31,7 @@ from voluptuous import ALLOW_EXTRA, Any, Optional, Required, Schema
 # Schema for metadata sub-node
 metadataSchema = Schema({
         Required("cluster_id"): uuidValidator,
-        Required("external_organization"): posIntInStringValidator
+        Required("external_organization"): posIntInStringValidator,
             })
 
 # Schema for metadata sub-node in report sub-node

@@ -39,13 +39,13 @@ identitySchema = Schema(
                     Required("internal"): Schema(
                         {
                             Required("org_id"): intInStringValidator,
-                            "auth_time": int
+                            "auth_time": int,
                          }),
                     Required("account_number"): intInStringValidator,
                     "auth_type": str,
                     "system": Schema(
                         {"cn": uuidValidator,
-                         "cert_type": str
+                         "cert_type": str,
                          }),
                     "type": str,
                 }, extra=ALLOW_EXTRA)}, extra=ALLOW_EXTRA)
@@ -63,7 +63,7 @@ schema = Schema(
             Required("metadata"): Schema(
                 {
                     Required("reporter"): str,
-                    Required("stale_timestamp"): timestampValidator
+                    Required("stale_timestamp"): timestampValidator,
                  }),
             Required("url"): urlToAWSValidator,
             Required("b64_identity"): lambda value: b64IdentityValidator(identitySchema, value),

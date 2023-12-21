@@ -57,45 +57,45 @@ def correct_message():
             "path": "archives/compressed/aa/aaaaaaaa-bbbb-cccc-dddd-eeeeeeeeeeee/202101/20/031044.tar.gz",  # noqa E501
             "metadata": {
                 "cluster_id": "aaaaaaaa-bbbb-cccc-dddd-eeeeeeeeeeee",
-                "external_organization": "1234567890"
+                "external_organization": "1234567890",
                 },
             "report": [
                 {
                     "metadata": {
                         "feature_id": "feature_name",
-                        "component": "feature.component.identifier"
+                        "component": "feature.component.identifier",
                         },
                     "schema": {
                         "version": "1.0",
                         "fields": [
                             {
                                 "name": "cluster_id",
-                                "type": "String"
+                                "type": "String",
                                 },
                             {
                                 "name": "value",
-                                "type": "Float"
+                                "type": "Float",
                                 },
                             {
                                 "name": "last_transition_time",
-                                "type": "DateTime"
-                                }
-                            ]
+                                "type": "DateTime",
+                                },
+                            ],
                         },
                     "data": [
                         {
                             "cluster_id": "aaaaaaaa-bbbb-cccc-dddd-eeeeeeeeeeee",
                             "value": 123,
-                            "last_transition_time": "2021-01-20T01:03:27"
+                            "last_transition_time": "2021-01-20T01:03:27",
                             },
                         {
                             "cluster_id": "aaaaaaaa-bbbb-cccc-dddd-eeeeeeeeeeee",
                             "value": 0,
-                            "last_transition_time": "2021-01-20T01:03:29"
-                            }
-                        ]
-                    }
-                ]
+                            "last_transition_time": "2021-01-20T01:03:29",
+                            },
+                        ],
+                    },
+                ],
             }
 
 

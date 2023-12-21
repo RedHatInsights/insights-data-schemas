@@ -117,7 +117,7 @@ schema = Schema(
                     Required("skips"): [skipsSchema],
                     Required("info"): [infoSchema],
                     Optional("pass"): [passSchema],
-                 })
+                 }),
             })
 
 

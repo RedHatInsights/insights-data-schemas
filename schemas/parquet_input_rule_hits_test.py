@@ -60,12 +60,12 @@ def correct_message():
             "path": "archives/compressed/aa/aaaaaaaa-bbbb-cccc-dddd-eeeeeeeeeeee/202101/20/031044.tar.gz",  # noqa E501
             "metadata": {
                 "cluster_id": "aaaaaaaa-bbbb-cccc-dddd-eeeeeeeeeeee",
-                "external_organization": "1234567890"
+                "external_organization": "1234567890",
                 },
             "report": {
                 "system": {
                     "metadata": {},
-                    "hostname": None
+                    "hostname": None,
                     },
                 "reports": [
                     {
@@ -75,11 +75,11 @@ def correct_message():
                         "key": "TUTORIAL_ERROR",
                         "details": {
                             "type": "rule",
-                            "error_key": "TUTORIAL_ERROR"
+                            "error_key": "TUTORIAL_ERROR",
                             },
                         "tags": [],
-                        "links": {}
-                        }
+                        "links": {},
+                        },
                     ],
                 "fingerprints": [],
                 "skips": [
@@ -87,13 +87,13 @@ def correct_message():
                         "rule_fqdn": "ccx_rules_ocp.ocs.check_ocs_version.report",
                         "reason": "MISSING_REQUIREMENTS",
                         "details": "All: ['ccx_ocp_core.specs.must_gather_ocs.OperatorsOcsMGOCS'] Any: ",  # noqa E501
-                        "type": "skip"
+                        "type": "skip",
                         },
                     {
                         "rule_fqdn": "ccx_rules_ocp.ocs.check_pods_scc.report",
                         "reason": "MISSING_REQUIREMENTS",
                         "details": "All: ['ccx_ocp_core.specs.must_gather_ocs.PodsMGOCS'] Any: ",
-                        "type": "skip"
+                        "type": "skip",
                         },
                     ],
                 "info": [],
@@ -105,19 +105,19 @@ def correct_message():
                     "plugin_sets": {
                         "insights-core": {
                             "version": "insights-core-3.0.202-1",
-                            "commit": "placeholder"
+                            "commit": "placeholder",
                             },
                         "ccx_rules_ocp": {
                             "version": "ccx_rules_ocp-2021.2.3-1",
-                            "commit": None
+                            "commit": None,
                             },
                         "ccx_ocp_core": {
                             "version": "ccx_ocp_core-2021.2.8-1",
-                            "commit": None
-                            }
-                        }
-                    }
-                }
+                            "commit": None,
+                            },
+                        },
+                    },
+                },
             }
 
 

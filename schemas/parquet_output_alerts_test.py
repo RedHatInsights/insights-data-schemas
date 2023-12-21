@@ -38,7 +38,7 @@ attribute = (
     "state",
     "severity",
     "labels",
-    "archive_path"
+    "archive_path",
 )
 
 
@@ -55,7 +55,7 @@ def correct_message():
         "labels":
         b'{"prometheus":"openshift-monitoring/k8s","prometheus_replica":"prometheus-0"}',
         "archive_path":
-        b"archives/compressed/00/00000000-0000-0000-0000-000000000000/202102/08/002219.tar.gz"
+        b"archives/compressed/00/00000000-0000-0000-0000-000000000000/202102/08/002219.tar.gz",
     }
 
 
