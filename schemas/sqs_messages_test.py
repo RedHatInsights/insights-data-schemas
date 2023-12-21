@@ -37,7 +37,7 @@ verbose = (True, False)
 # attributes to check
 attribute = (
         "ResponseMetadata",
-        "Messages"
+        "Messages",
         )
 
 
@@ -57,7 +57,7 @@ def correct_message():
                         "ApproximateReceiveCount": "1",
                         "SentTimestamp": "1591707468964",
                         },
-                    }
+                    },
                 ],
             "ResponseMetadata": {
                 "RequestId": "aeb60670-75fd-5378-a1d3-5129fc68d330",

@@ -339,7 +339,7 @@ sha224sum_incorrect_values = (
         "d14a028c2a3a2bc9476102bb288234c415a2b01f828ea62ac5b3e42",    # shorter
         "d14a028c2a3a2bc9476102bb288234c415a2b01f828ea62ac5b3e42ff",  # longer
         "d14a028c2a3a2bc9476102bb288234c415a2b01f828ea62ac5b3e42Z",   # invalid character
-        ""                                                            # empty (obviously)
+        "",                                                            # empty (obviously)
         )
 
 # correct SHA256 sum values
@@ -365,7 +365,7 @@ sha256sum_incorrect_values = (
         "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b85",    # shorter
         "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b8555",  # longer
         "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b85Z",   # invalid character
-        ""                                                                    # empty (obviously)
+        "",                                                                    # empty (obviously)
         )
 
 # correct SHA384 sum values
@@ -391,7 +391,7 @@ sha384sum_incorrect_values = (
         "38b060a751ac96384cd9327eb1b1e36a21fdb71114be07434c0cc7bf63f6e1da274edebfe76f65fbd51ad2f14898b95",    # noqa: E501  shorter
         "38b060a751ac96384cd9327eb1b1e36a21fdb71114be07434c0cc7bf63f6e1da274edebfe76f65fbd51ad2f14898b95bb",  # noqa: E501  longer
         "38b060a751ac96384cd9327eb1b1e36a21fdb71114be07434c0cc7bf63f6e1da274edebfe76f65fbd51ad2f14898b95Z",   # noqa: E501  invalid character
-        ""                                                                                                    # noqa: E501  empty (obviously)
+        "",                                                                                                    # noqa: E501  empty (obviously)
         )
 
 # correct SHA512 sum values
@@ -417,7 +417,7 @@ sha512sum_incorrect_values = (
         "cf83e1357eefb8bdf1542850d66d8007d620e4050b5715dc83f4a921d36ce9ce47d0d13c5d85f2b0ff8318d2877eec2f63b931bd47417a81a538327af927da3",    # noqa: E501  shorter
         "cf83e1357eefb8bdf1542850d66d8007d620e4050b5715dc83f4a921d36ce9ce47d0d13c5d85f2b0ff8318d2877eec2f63b931bd47417a81a538327af927da3ee",  # noqa: E501  longer
         "cf83e1357eefb8bdf1542850d66d8007d620e4050b5715dc83f4a921d36ce9ce47d0d13c5d85f2b0ff8318d2877eec2f63b931bd47417a81a538327af927da3Z",   # noqa: E501  invalid character
-        ""                                                                                                                                    # noqa: E501  empty (obviously)
+        "",                                                                                                                                    # noqa: E501  empty (obviously)
         )
 
 # correct SHA-3 224 sum values
@@ -443,7 +443,7 @@ sha3_224sum_incorrect_values = (
         "d14a028c2a3a2bc9476102bb288234c415a2b01f828ea62ac5b3e42",    # shorter
         "d14a028c2a3a2bc9476102bb288234c415a2b01f828ea62ac5b3e42ff",  # longer
         "d14a028c2a3a2bc9476102bb288234c415a2b01f828ea62ac5b3e42Z",   # invalid character
-        ""                                                            # empty (obviously)
+        "",                                                            # empty (obviously)
         )
 
 # correct SHA-3 256 sum values
@@ -469,7 +469,7 @@ sha3_256sum_incorrect_values = (
         "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b85",    # shorter
         "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b8555",  # longer
         "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b85Z",   # invalid character
-        ""                                                                    # empty (obviously)
+        "",                                                                    # empty (obviously)
         )
 
 # correct SHA-3 384 sum values
@@ -495,7 +495,7 @@ sha3_384sum_incorrect_values = (
         "38b060a751ac96384cd9327eb1b1e36a21fdb71114be07434c0cc7bf63f6e1da274edebfe76f65fbd51ad2f14898b95",    # noqa: E501  shorter
         "38b060a751ac96384cd9327eb1b1e36a21fdb71114be07434c0cc7bf63f6e1da274edebfe76f65fbd51ad2f14898b95bb",  # noqa: E501  longer
         "38b060a751ac96384cd9327eb1b1e36a21fdb71114be07434c0cc7bf63f6e1da274edebfe76f65fbd51ad2f14898b95Z",   # noqa: E501  invalid character
-        ""                                                                                                    # noqa: E501  empty (obviously)
+        "",                                                                                                    # noqa: E501  empty (obviously)
         )
 
 # correct SHA-3 512 sum values
@@ -521,7 +521,7 @@ sha3_512sum_incorrect_values = (
         "cf83e1357eefb8bdf1542850d66d8007d620e4050b5715dc83f4a921d36ce9ce47d0d13c5d85f2b0ff8318d2877eec2f63b931bd47417a81a538327af927da3",    # noqa: E501  shorter
         "cf83e1357eefb8bdf1542850d66d8007d620e4050b5715dc83f4a921d36ce9ce47d0d13c5d85f2b0ff8318d2877eec2f63b931bd47417a81a538327af927da3ee",  # noqa: E501  longer
         "cf83e1357eefb8bdf1542850d66d8007d620e4050b5715dc83f4a921d36ce9ce47d0d13c5d85f2b0ff8318d2877eec2f63b931bd47417a81a538327af927da3Z",   # noqa: E501  invalid character
-        ""                                                                                                                                    # noqa: E501  empty (obviously)
+        "",                                                                                                                                    # noqa: E501  empty (obviously)
         )
 
 # correct SHAKE128 sum values
@@ -547,7 +547,7 @@ shake128_incorrect_values = (
         "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b85",    # shorter
         "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b8555",  # longer
         "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b85Z",   # invalid character
-        ""                                                                    # empty (obviously)
+        "",                                                                    # empty (obviously)
         )
 
 # correct SHAKE256 sum values
@@ -573,7 +573,7 @@ shake256_incorrect_values = (
         "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b85",    # shorter
         "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b8555",  # longer
         "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b85Z",   # invalid character
-        ""                                                                    # empty (obviously)
+        "",                                                                    # empty (obviously)
         )
 
 # correct BLAKE2 sum values
@@ -599,7 +599,7 @@ blake2_incorrect_values = (
         "cf83e1357eefb8bdf1542850d66d8007d620e4050b5715dc83f4a921d36ce9ce47d0d13c5d85f2b0ff8318d2877eec2f63b931bd47417a81a538327af927da3",    # noqa: E501  shorter
         "cf83e1357eefb8bdf1542850d66d8007d620e4050b5715dc83f4a921d36ce9ce47d0d13c5d85f2b0ff8318d2877eec2f63b931bd47417a81a538327af927da3ee",  # noqa: E501  longer
         "cf83e1357eefb8bdf1542850d66d8007d620e4050b5715dc83f4a921d36ce9ce47d0d13c5d85f2b0ff8318d2877eec2f63b931bd47417a81a538327af927da3Z",   # noqa: E501  invalid character
-        ""                                                                                                                                    # noqa: E501  empty (obviously)
+        "",                                                                                                                                    # noqa: E501  empty (obviously)
         )
 
 # correct MD5 sum values
@@ -625,7 +625,7 @@ md5sum_incorrect_values = (
         "d41d8cd98f00b204e9800998ecf8427",    # shorter
         "d41d8cd98f00b204e9800998ecf8427ef",  # longer
         "d41d8cd98f00b204e9800998ecf8427Z",   # "invalid character"
-        ""                                    # noqa: E501  empty (obviously)
+        "",                                    # noqa: E501  empty (obviously)
         )
 
 # correct UUID values
@@ -881,14 +881,14 @@ invalid_aws_urls = (
         "https://foo.s3.NOT-AMAZON.com/upload-service-1-abcdefghijklmnop-000144/"
         "X-Amz-Credential=BAQ2GEXO117FVBVXWDMK%2F20200520%2Fus-east-1%2Fs3%2Faws4_request&",
         "https://foo.s3.NOT-AMAZON.com/upload-service-1-abcdefghijklmnop-000144/"
-        "Z0ThU1Jyxc-000004?X-Amz-Algorithm=AWS4-HMAC-SHA256&"
+        "Z0ThU1Jyxc-000004?X-Amz-Algorithm=AWS4-HMAC-SHA256&",
         )
 
 # not a proper BASE64 values
 not_base64_values = (
         " ",
         "A",
-        "ěščřžýáíé"
+        "ěščřžýáíé",
         )
 
 # proper BASE64 values that don't contain JSONs
@@ -919,7 +919,7 @@ base64_values_json = (
 # proper JSON values
 json_values = (
         "{}",
-        '{"a":"b"}'
+        '{"a":"b"}',
         )
 
 # not a proper JSON values
@@ -927,7 +927,7 @@ not_json_values = (
         " ",
         "A",
         "ěščřžýáíé",
-        None
+        None,
         )
 
 # proper key values

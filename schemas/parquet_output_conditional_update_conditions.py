@@ -31,8 +31,8 @@ recommendedSchema = Schema(
     Any(
         b"True",
         b"False",
-        b"Unknown"
-    )
+        b"Unknown",
+    ),
 )
 
 # the whole schema for messages produced by Parquet factory into alerts.parquet files."""

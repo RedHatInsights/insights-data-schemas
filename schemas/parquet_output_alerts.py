@@ -29,8 +29,8 @@ from voluptuous import Any, Required, Schema
 stateSchema = Schema(
     Any(
         b"pending",
-        b"firing"
-    )
+        b"firing",
+    ),
 )
 
 # column with information about the severity of the alert
@@ -49,8 +49,8 @@ severitySchema = Schema(
         b"fatal",
         b"disaster",
         b"1",
-        b"2"
-    )
+        b"2",
+    ),
 )
 
 # the whole schema for messages produced by Parquet factory into alerts.parquet files."""

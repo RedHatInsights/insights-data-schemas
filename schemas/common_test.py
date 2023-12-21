@@ -315,7 +315,7 @@ def test_print_report_in_case_of_no_error():
             "processed": 2,
             "valid": 2,
             "invalid": 0,
-            "error": 0
+            "error": 0,
             }
 
     f = io.StringIO()
@@ -345,7 +345,7 @@ def test_print_report_in_case_of_invalid_data():
             "processed": 2,
             "valid": 1,
             "invalid": 1,
-            "error": 0
+            "error": 0,
             }
 
     f = io.StringIO()
@@ -375,7 +375,7 @@ def test_print_report_in_case_of_error():
             "processed": 1,
             "valid": 2,
             "invalid": 3,
-            "error": 4
+            "error": 4,
             }
 
     f = io.StringIO()
@@ -405,7 +405,7 @@ def test_print_report_use_colors():
             "processed": 2,
             "valid": 2,
             "invalid": 0,
-            "error": 0
+            "error": 0,
             }
 
     f = io.StringIO()

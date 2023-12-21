@@ -44,7 +44,7 @@ attribute = (
     "first_command",
     "first_arg",
     "archive_path",
-    "collected_at"
+    "collected_at",
 )
 
 
