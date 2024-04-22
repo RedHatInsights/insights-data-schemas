@@ -6,12 +6,11 @@ layout: default
 # Messages produced by archive-sync-service
 
 Archive Sync Service synchronizes every new archive by reading the related
-information from `ccx-XXX-insights-operator-archive-new` (where `XXX` needs to
-be replaced by environment, for example `prod`) Kafka topic, downloading the
-archive from AWS S3 and uploading it to DataHub (Ceph) bucket.
+information from `[qa|prod]-io-archive-new` Kafka topic, downloading the archive
+from AWS S3 and uploading it to Internal Ceph bucket.
 
 Information about synchronized archive and its metadata are sent to
-`ccx-XXX-insights-operator-archive-synced` Kafka topic.
+`[qa|prod]-archive-synced` Kafka topic.
 
 ## Schema version
 
@@ -19,10 +18,9 @@ Information about synchronized archive and its metadata are sent to
 
 ## Description
 
-Messages produced into `ccx-XXX-insights-operator-archive-synced` topic (where
-`XXX` needs to be replaced by environment, for example `prod`) are created by
-Archive Sync Service for each object stored into Ceph. These messages have very
-simple format consisting of just three attributes:
+Messages produced into `[qa|prod]-archive-synced` topic  are created by Archive
+Sync Service for each object stored into Ceph. These messages have very simple
+format consisting of just three attributes:
 
 * path
 * original_path
@@ -76,7 +74,7 @@ UUID are represented as 32 hexadecimal (base-16) digits, displayed in five
 groups separated by hyphens, in the form 8-4-4-4-12 for a total of 36
 characters (32 hexadecimal characters and 4 hyphens).  For more information
 please look at
-[https://en.wikipedia.org/wiki/Universally_unique_identifier](https://en.wikipedia.org/wiki/Universally_unique_identifier).
+[Universally Unique Identifier in Wikipedia][1].
 
 An example of UUID:
 
@@ -90,3 +88,5 @@ An example of UUID:
 
 It would be possible to add a schema version into generated messages in JSON
 format.
+
+[1]: https://en.wikipedia.org/wiki/Universally_unique_identifier
