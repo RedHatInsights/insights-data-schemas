@@ -3,7 +3,7 @@ layout: default
 ---
 \[[Front page](../index.md)\] \[[Internal data pipeline](../internal_data_pipeline.md)\]
 
-# Format of received Kafka messages from `ccx-XXX-insights-operator-archive-rules-results` topic
+# Format of received Kafka messages from `[qa|prod]-insights-rules-results` topic
 
 Parquet Factory is a program that can read data from several data sources,
 aggregate the data received from them and generate a set of Parquet files with
@@ -18,16 +18,15 @@ reading data from Kafka topics.
 ## Description
 
 Parquet factory reads (among other data) messages from Kafka topic named
-`ccx-XXX-insights-operator-archive-rules-results` where `XXX` needs to be
-replaced by environment (`prod` etc.). These messages are represented as a
+`[qa|prod]-insights-rules-results`. These messages are represented as a
 structured JSON format with many attributes that are described in more details
 below.
 
 ## Basic format
 
-Data consumed from `ccx-XXX-insights-operator-archive-rules-results` topic is
-in JSON format with the following three top-level required attributes (all of
-them are mandatory):
+Data consumed from `[qa|prod]-insights-rules-results` topic is in JSON format
+with the following three top-level required attributes (all of them are
+mandatory):
 
 * `path` (URL)
 * `metadata` (sub-node with two attributes described below)

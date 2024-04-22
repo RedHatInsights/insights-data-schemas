@@ -6,10 +6,10 @@ layout: default
 # Messages produced by Rules service
 
 Rules Service runs rules for all archives synced in DataHub (Ceph) bucket. It
-reads messages from `XXX-archive-synced` Kafka topic to know about incoming
+reads messages from `[qa|prod]-archive-synced` Kafka topic to know about incoming
 archives in Ceph and it will download the archive from DataHub (Ceph) bucket.
 
-The result of the applied rules is sent to `XXX-insights-rules-results` Kafka
+The result of the applied rules is sent to `[qa|prod]-insights-rules-results` Kafka
 topic.
 
 ## Schema version
@@ -19,14 +19,14 @@ topic.
 ## Description
 
 Rules service constructs messages and produces them into topic named
-`XXX-insights-rules-results` where `XXX` needs to be replaced by environment
-(`prod` etc.). These messages are represented as a structured JSON format with
-many attributes that are described in more details below.
+`[qa|prod]-insights-rules-results`. These messages are represented as a
+structured JSON format with many attributes that are described in more details
+below.
 
 ## Basic format
 
-Data produced into `XXX-insights-rules-results` topic is in JSON format with
-the following three top-level required attributes (all of them are mandatory):
+Data produced into `[qa|prod]-insights-rules-results` topic is in JSON format
+with the following three top-level required attributes (all of them are mandatory):
 
 * `path` (URL)
 * `metadata` (sub-node with two attributes described below)

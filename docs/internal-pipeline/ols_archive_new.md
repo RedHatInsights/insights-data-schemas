@@ -3,16 +3,15 @@ layout: default
 ---
 \[[Front page](../index.md)\] \[[Internal data pipeline](../internal_data_pipeline.md)\]
 
-# Messages produced by Multiplexor service and sent to `XXX-ols-archive-new` topic
+# Messages produced by Multiplexor service and sent to `[qa|prod]-ols-archive-new` topic
 
 Multiplexor Service classify every new archive by reading the related
-information from `XXX-archive-new` (where `XXX` needs to be replaced by
-environment, for example `prod`) Kafka topic, downloading the archive
+information from `[qa|prod]-archive-new` Kafka topic, downloading the archive
 from AWS S3 and checking its content to classify it and send the same message
 to different topics according to its classification.
 
 Information about Openshift Lightspeed generated archives are sent to
-`XXX-ols-archive-new`.
+`[qa|prod]-ols-archive-new`.
 
 ## Schema version
 
@@ -20,9 +19,9 @@ Information about Openshift Lightspeed generated archives are sent to
 
 ## Description
 
-Messages consumed from `XXX-io-archive-new` topic (where `XXX` needs to be replaced by
-environment, for example `prod`) are created by SQS listener for each new object created
-in S3. These messages have very simple format consisting of just three attributes:
+Messages consumed from `[qa|prod]-io-archive-new` topic are created by SQS listener
+for each new object created in S3. These messages have very simple format consisting
+of just three attributes:
 
 * cluster ID
 * path to S3 object

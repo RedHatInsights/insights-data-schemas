@@ -18,38 +18,37 @@ an internal storage.
 
 SQS listener service listens to notifications sent to AWS SQS (Simple Queue
 Service) about new files in the S3 bucket. It sends a message with S3 path of
-the file to `XXX-archive-new` (where `XXX` needs to be changed to `prod` etc.)
-Kafka topic for every new file in S3.
+the file to `[qa|prod]-archive-new` Kafka topic for every new file in S3.
 
 Multiplexor Service downloads every archive specified by the path from
-`XXX-archive-new` (where `XXX` needs to be replaced by environment, for example
-`prod`) Kafka topic, and checks if it is an Insights Operator archive or an
-Openshift Lightspeed one. Those archives will be published respectively into
-`XXX-io-archive-new` and `XXX-ols-archive-new` (where `XXX` needs to be replaced
-by the environment, for example `prod`) Kafka topics.
+`[qa|prod]-archive-new` Kafka topic, and checks if it is an Insights Operator
+archive or an Openshift Lightspeed one. Those archives will be published
+respectively into `[qa|prod]-io-archive-new` and `[qa|prod]-ols-archive-new`
+Kafka topics.
 
 Archive Sync Service synchronizes every new archive by reading the related
-information from `XXX-io-archive-new` (where `XXX` needs to be replaced by
-environment, for example `prod`) Kafka topic, downloading the archive from
-AWS S3 and uploading it to DataHub (Ceph) bucket. Information about synchronized
-archive and its metadata are sent to `XXX-archive-synced` Kafka topic.
+information from `[qa|prod]-io-archive-new` Kafka topic, downloading the archive
+from AWS S3 and uploading it to DataHub (Ceph) bucket. Information about
+synchronized archive and its metadata are sent to `[qa|prod]-archive-synced`
+Kafka topic.
 
 Archive Sync OLS Service synchorizes every new archive by reading the related
-information from `XXX-ols-archive-new` (where `XXX` needs to be replaced by
-environment, for example `prod`) Kafka topic, downloading the archive from
-AWS S3 and uploading it to DataHub (Ceph) bucket. The bucket where the Openshift
-Lightspeed archives are stored is different from the Insights Operator ones.
+information from `[qa|prod]-ols-archive-new` Kafka topic, downloading the archive
+from AWS S3 and uploading it to DataHub (Ceph) bucket. The bucket where the
+Openshift Lightspeed archives are stored is different from the Insights Operator
+ones.
 
 Rules Service runs rules for all archives synced in DataHub (Ceph) bucket. It
-reads messages from `XXX-archive-synced` Kafka topic to know about incoming archives
-in Ceph and it will download the archive from DataHub (Ceph) bucket. The result of
-the applied rules is sent to `XXX-insights-rules-results` Kafka topic.
+reads messages from `[qa|prod]-archive-synced` Kafka topic to know about incoming
+archives in Ceph and it will download the archive from DataHub (Ceph) bucket. The
+result of the applied rules is sent to `[qa|prod]-insights-rules-results` Kafka
+topic.
 
 Rules Uploader Service writes the results published in the
-`XXX-insights-rules-results` into a JSON file and uploads it to DataHub (Ceph)
-bucket.
+`[qa|prod]-insights-rules-results` into a JSON file and uploads it to DataHub
+(Ceph) bucket.
 
-Parquet Factory is a program that can read data from `XXX-insights-rules-results`
+Parquet Factory is a program that can read data from `[qa|prod]-insights-rules-results`
 Kafka topic, aggregate the data received from it and generate a set of Parquet files
 with the aggregated data, storing them in a selected S3 or Ceph bucket. It is used
 to generate different data aggregations in the CCX Internal Data Pipeline,
@@ -68,9 +67,9 @@ reading data from Kafka topics.
     <area shape="rect" coords=" 60, 795,  85, 820"    title="Raw data stored in S3 bucket" alt="internal-pipeline/raw_data_S3_bucket.html" href="internal-pipeline/raw_data_S3_bucket.html">
     <area shape="rect" coords="510, 860, 545, 890"    title="Raw data stored in S3 bucket" alt="internal-pipeline/raw_data_S3_bucket.html" href="internal-pipeline/raw_data_S3_bucket.html">
     <!-- #4 -->
-    <area shape="rect" coords="220, 710,  250, 740"   title="Messages produced by multiplexor service into XXX-io-archive-new" alt="internal-pipeline/io_archive_new.html" href="internal-pipeline/io_archive_new.html">
+    <area shape="rect" coords="220, 710,  250, 740"   title="Messages produced by multiplexor service into [qa|prod]-io-archive-new" alt="internal-pipeline/io_archive_new.html" href="internal-pipeline/io_archive_new.html">
     <!-- #5 -->
-    <area shape="rect" coords="340, 710,  370, 740"   title="Messages produced by multiplexor service into XXX-ols-archive-new" alt="internal-pipeline/ols_archive_new.html" href="internal-pipeline/ols_archive_new.html">
+    <area shape="rect" coords="340, 710,  370, 740"   title="Messages produced by multiplexor service into [qa|prod]-ols-archive-new" alt="internal-pipeline/ols_archive_new.html" href="internal-pipeline/ols_archive_new.html">
     <!-- #6 -->
     <area shape="rect" coords="120, 895,  205, 925"   title="Messages produced by archive-sync-service" alt="internal-pipeline/archive_sync_service_messages.html" href="internal-pipeline/archive_sync_service_messages.html">
     <!-- #7 -->

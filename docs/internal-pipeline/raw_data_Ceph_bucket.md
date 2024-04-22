@@ -6,11 +6,10 @@ layout: default
 # Raw data stored into Ceph bucket
 
 Archive Sync Service synchronizes every new archive by reading the related
-information from `XXX-io-archive-new` (where `XXX` needs to be replaced by
-environment, for example `prod`) Kafka topic, downloading the archive from
-AWS S3 and uploading it to DataHub (Ceph) bucket. Information about
-synchronized archive and its metadata are sent to `XXX-archive-synced` Kafka
-topic.
+information from `[qa|prod]-io-archive-new` Kafka topic, downloading the archive
+from AWS S3 and uploading it to DataHub (Ceph) bucket. Information about
+synchronized archive and its metadata are sent to `[qa|prod]-archive-synced`
+Kafka topic.
 
 ## Schema version
 

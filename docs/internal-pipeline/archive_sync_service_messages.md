@@ -6,12 +6,11 @@ layout: default
 # Messages produced by archive-sync-service
 
 Archive Sync Service synchronizes every new archive by reading the related
-information from `XXX-io-archive-new` (where `XXX` needs to be replaced by
-environment, for example `prod`) Kafka topic, downloading the archive from
-AWS S3 and uploading it to DataHub (Ceph) bucket.
+information from `[qa|prod]-io-archive-new` Kafka topic, downloading the archive
+from AWS S3 and uploading it to DataHub (Ceph) bucket.
 
 Information about synchronized archive and its metadata are sent to
-`XXX-archive-synced` Kafka topic.
+`[qa|prod]-archive-synced` Kafka topic.
 
 ## Schema version
 
@@ -19,10 +18,9 @@ Information about synchronized archive and its metadata are sent to
 
 ## Description
 
-Messages produced into `XXX-archive-synced` topic (where `XXX` needs to be replaced
-by environment, for example `prod`) are created by Archive Sync Service for each
-object stored into Ceph. These messages have very simple format consisting of just
-three attributes:
+Messages produced into `[qa|prod]-archive-synced` topic  are created by Archive
+Sync Service for each object stored into Ceph. These messages have very simple
+format consisting of just three attributes:
 
 * path
 * original_path
