@@ -5,9 +5,9 @@ layout: default
 
 # Messages produced by Rules service
 
-Rules Service runs rules for all archives synced in DataHub (Ceph) bucket. It
+Rules Service runs rules for all archives synced in Internal Ceph bucket. It
 reads messages from `[qa|prod]-archive-synced` Kafka topic to know about incoming
-archives in Ceph and it will download the archive from DataHub (Ceph) bucket.
+archives in Ceph and it will download the archive from Internal Ceph bucket.
 
 The result of the applied rules is sent to `[qa|prod]-insights-rules-results` Kafka
 topic.

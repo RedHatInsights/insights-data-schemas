@@ -7,7 +7,7 @@ layout: default
 
 Archive Sync Service synchronizes every new archive by reading the related
 information from `[qa|prod]-io-archive-new` Kafka topic, downloading the archive
-from AWS S3 and uploading it to DataHub (Ceph) bucket. Information about
+from AWS S3 and uploading it to Internal Ceph bucket. Information about
 synchronized archive and its metadata are sent to `[qa|prod]-archive-synced`
 Kafka topic.
 

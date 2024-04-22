@@ -28,19 +28,19 @@ Kafka topics.
 
 Archive Sync Service synchronizes every new archive by reading the related
 information from `[qa|prod]-io-archive-new` Kafka topic, downloading the archive
-from AWS S3 and uploading it to DataHub (Ceph) bucket. Information about
+from AWS S3 and uploading it to Internal Ceph bucket. Information about
 synchronized archive and its metadata are sent to `[qa|prod]-archive-synced`
 Kafka topic.
 
 Archive Sync OLS Service synchorizes every new archive by reading the related
 information from `[qa|prod]-ols-archive-new` Kafka topic, downloading the archive
-from AWS S3 and uploading it to DataHub (Ceph) bucket. The bucket where the
+from AWS S3 and uploading it to Internal Ceph bucket. The bucket where the
 Openshift Lightspeed archives are stored is different from the Insights Operator
 ones.
 
-Rules Service runs rules for all archives synced in DataHub (Ceph) bucket. It
+Rules Service runs rules for all archives synced in Internal Ceph bucket. It
 reads messages from `[qa|prod]-archive-synced` Kafka topic to know about incoming
-archives in Ceph and it will download the archive from DataHub (Ceph) bucket. The
+archives in Ceph and it will download the archive from Internal Ceph bucket. The
 result of the applied rules is sent to `[qa|prod]-insights-rules-results` Kafka
 topic.
 

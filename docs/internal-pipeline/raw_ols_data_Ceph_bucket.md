@@ -7,7 +7,7 @@ layout: default
 
 Archive Sync OLS Service synchronizes every new archive by reading the related
 information from `[qa|prod]-ols-archive-new` Kafka topic, downloading the
-archive from AWS S3 and uploading it to DataHub (Ceph) bucket.
+archive from AWS S3 and uploading it to Internal Ceph bucket.
 
 ## Schema version
 
