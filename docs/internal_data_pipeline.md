@@ -89,13 +89,12 @@ reading data from Kafka topics.
 Parquet Factory is a program that can read data from several data sources,
 aggregate the data received from them and generate a set of Parquet files with
 the aggregated data, storing them in a S3 bucket. It is used to generate
-different data aggregations in the CCX Internal Data Pipeline, reading data
-from Kafka topics.
+different data aggregations in the CCX Internal Data Pipeline, currently it only
+reads data from one Kafka topics.
 
 <img src="images/parquet-factory.png" alt="Parquet factory" usemap="#parquet-factory">
 <map name="parquet-factory">
-    <area shape="rect" coords="130, 34, 170, 64"   title="Messages consumed from ccx-XXX-insights-operator-archive-rules-results topic" alt="Messages consumed from ccx-XXX-insights-operator-archive-rules-results topic" href="internal-pipeline/parquet_rules_results.html">
-    <area shape="rect" coords="130, 212, 170, 242" title="Messages consumed from ccx-XXX-insights-operator-archive-features topic" alt="Messages consumed from ccx-XXX-insights-operator-archive-features topic" href="internal-pipeline/parquet_features.html">
+    <area shape="rect" coords="130, 34, 170, 64"   title="Messages consumed from [qa|prod]-insights-rules-results topic" alt="Messages consumed [qa|prod]-insights-rules-results topic" href="internal-pipeline/parquet_rules_results.html">
     <area shape="rect" coords="389, 165, 429, 195" title="Generated parquet files" alt="Generated parquet files" href="internal-pipeline/parquet_output.html">
 </map>
 
