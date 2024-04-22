@@ -3,15 +3,16 @@ layout: default
 ---
 \[[Front page](../index.md)\] \[[Internal data pipeline](../internal_data_pipeline.md)\]
 
-# Messages sent to `XXX-archive-new` topic
+# Messages produced by Multiplexor service and sent to `XXX-ols-archive-new` topic
 
-SQS listener service listens to notifications sent to AWS SQS (Simple Queue
-Service) about new files in the S3 bucket. It sends a message with S3 path of
-the file to `XXX-archive-new` (where `XXX` needs to be changed to `prod` etc.)
-Kafka topic for every new file in S3.
+Multiplexor Service classify every new archive by reading the related
+information from `XXX-archive-new` (where `XXX` needs to be replaced by
+environment, for example `prod`) Kafka topic, downloading the archive
+from AWS S3 and checking its content to classify it and send the same message
+to different topics according to its classification.
 
-As there is only one queue in SQS, we have only one SQS Listener deployed (in
-production environment) that sends notifications to 2 environments: qa and prod.
+Information about Openshift Lightspeed generated archives are sent to
+`XXX-ols-archive-new`.
 
 ## Schema version
 
@@ -19,7 +20,7 @@ production environment) that sends notifications to 2 environments: qa and prod.
 
 ## Description
 
-Messages consumed from `XXX-archive-new` topic (where `XXX` needs to be replaced by
+Messages consumed from `XXX-io-archive-new` topic (where `XXX` needs to be replaced by
 environment, for example `prod`) are created by SQS listener for each new object created
 in S3. These messages have very simple format consisting of just three attributes:
 

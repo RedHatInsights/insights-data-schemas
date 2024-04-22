@@ -7,12 +7,11 @@ layout: default
 
 SQS listener service listens to notifications sent to AWS SQS (Simple Queue
 Service) about new files in the S3 bucket. It sends a message with S3 path of
-the file to `ccx-XXX-insights-operator-archive-new` (where `XXX` needs to be
-changed to `prod` etc.) Kafka topic for every new file in S3.
+the file to `XXX-archive-new` (where `XXX` needs to be changed to `prod` etc.)
+Kafka topic for every new file in S3.
 
 As there is only one queue in SQS, we have only one SQS Listener deployed (in
-production environment) that sends notifications to 3 environments: dev, qa and
-prod.
+production environment) that sends notifications to 2 environments: qa and prod.
 
 ## Schema version
 
@@ -20,10 +19,9 @@ prod.
 
 ## Description
 
-Messages produced into `ccx-XXX-insights-operator-archive-new` topic (where
-`XXX` needs to be replaced by environment, for example `prod`) are created by
-SQS listener for each new object created in S3. These messages have very simple
-format consisting of just three attributes:
+Messages produced into `XXX-archive-new` topic (where `XXX` needs to be replaced by environment,
+for example `prod`) are created by SQS listener for each new object created in S3. These messages
+have very simple format consisting of just three attributes:
 
 * cluster ID
 * path to S3 object
