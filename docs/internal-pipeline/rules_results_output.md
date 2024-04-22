@@ -188,7 +188,7 @@ This attribute contains list of rules that passes all conditions (i.e. rules wit
 
 ### Format of `info` attribute in `Report` node
 
-TBD
+TBD (not used in internal data pipeline)
 
 ### Format of `fingerprints` attribute in `Report` node
 
